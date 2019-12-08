@@ -10,13 +10,13 @@
 
     movem.l d0-d7/a0-a6,-(a7)
 
-    moveq.l #-1,d6
+    moveq.l #-1,d3
 
     move.w #8,($ffff8a20).w              ; source x increment
     move.w #-158,($ffff8a22).w           ; source y increment
-    move.w d6,($ffff8a28).w              ; endmask1
-    move.w d6,($ffff8a2a).w              ; endmask2
-    move.w d6,($ffff8a2c).w              ; endmask3
+    move.w d3,($ffff8a28).w              ; endmask1
+    move.w d3,($ffff8a2a).w              ; endmask2
+    move.w d3,($ffff8a2c).w              ; endmask3
     move.w #8,($ffff8a2e).w              ; dest x increment
     move.w #-150,($ffff8a30).w           ; dest y increment
     move.w #$0203,($ffff8a3a).w          ; hop/op
@@ -34,6 +34,14 @@
     move.l (a0),a0 ; a0 now contains the pointer to the road graphics data offset for the current line
     move.l #gfx_data,a2
     add.l a2,a0 ; a0 now contains memory location of central source
+
+	lsr.w #5,d2 ; d2 should contain something telling us about the road position of current line
+	andi.w #$20,d2
+    tst.w d2
+    beq.s skipoffsetadd 
+    add.l #100000,a0
+
+skipoffsetadd:
 
     ext.l d1 ; d1 is the shift value for the current line
     move.l d1,d4 ; copy to d4

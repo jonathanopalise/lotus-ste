@@ -49,10 +49,10 @@ DRAW_FRAME_ROAD:
 	$00076676 : 341c                               move.w    (a4)+,d2 ; i think this is the on track position of the line relative to the car
 	$00076678 : 3c03                               move.w    d3,d6
 	$0007667a : 0642 034a                          addi.w    #$34a,d2 ; the add value is being modified by something else! this is the on track position!
-	$0007667e : 0243 fffc                          andi.w    #$fffc,d3
+	$0007667e : 0243 fffc                          andi.w    #$fffc,d3 ; strip the bottom two bits from d3
 	$00076682 : 3200                               move.w    d0,d1
 	$00076684 : d241                               add.w     d1,d1
-	$00076686 : 0643 f8e8                          addi.w    #$f8e8,d3
+	$00076686 : 0643 f8e8                          addi.w    #$f8e8,d3 ; this add value is being modified by something else!
 	$0007668a : c3c3                               muls.w    d3,d1
 	$0007668c : 4841                               swap      d1
 	$0007668e : 4441                               neg.w     d1
@@ -148,6 +148,7 @@ DRAW_NOT_START_LINE:
 	$000767a6 : 4842                               swap      d2
 	$000767a8 : 3401                               move.w    d1,d2
 	$000767aa : 4842                               swap      d2
+    ; at this point, d0 and d1 contain the two halves of the 64 bit value that we'll write to the screen
 
 DRAW_SELF_MODIFYING_SPAN:
 	$000767ac : 3c2e 0050                          move.w    $50(a6),d6 ; stash the graphics instruction into d6
