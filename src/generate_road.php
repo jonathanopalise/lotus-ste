@@ -45,22 +45,22 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
 
     $blocksOf16Pixels = array_chunk($pixelColours, 16); 
     foreach ($blocksOf16Pixels as $block) {
-        $boo = [0, 0, 0, 0, 3, 3, 3, 3, 5, 5, 5, 5, 7, 7, 7, 7];
+        //$boo = [0, 0, 0, 0, 3, 3, 3, 3, 5, 5, 5, 5, 7, 7, 7, 7];
         $outputBytes = array_merge(
             $outputBytes,
-            convertPixelColourArrayToPlanarArray($boo)
+            convertPixelColourArrayToPlanarArray($block)
         );
     }
 
     return $outputBytes;
 }
 
-$padding = 32;
+$padding = 3;
 
 $byteOffsets = [];
 $outputBytes = [];
 
-for ($actualPixelWidth = 20; $actualPixelWidth < 161; $actualPixelWidth++) {
+for ($actualPixelWidth = 100; $actualPixelWidth < 161; $actualPixelWidth++) {
     $roundedPixelWidth = (($actualPixelWidth - 1) & 0xfff0) + 16 + ($padding * 16);
 
     $textureStep = 1.0 / $actualPixelWidth;
