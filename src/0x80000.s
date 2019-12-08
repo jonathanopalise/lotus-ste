@@ -6,7 +6,7 @@
 ; outstanding questions:
 ; - how can we convert the d0 value representing the road width to a blitter road width?
  
-    ORG 524288
+    ORG $80000
 
     movem.l d0-d7/a0-a6,-(a7)
 
