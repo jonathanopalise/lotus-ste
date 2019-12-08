@@ -1,10 +1,10 @@
 <?php
 
-const COLOUR_RED = 1;
-const COLOUR_WHITE = 2;
-const COLOUR_LIGHT_ASPHALT = 3;
+const COLOUR_RED = 2;
+const COLOUR_WHITE = 6;
+const COLOUR_LIGHT_ASPHALT = 13;
 const COLOUR_DARK_ASPHALT = 4;
-const COLOUR_GRASS = 5;
+const COLOUR_GRASS = 7;
 
 function convertPixelColourArrayToPlanarArray($pixel_colours) {
 	$planar_pixels=array();
