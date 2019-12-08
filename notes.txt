@@ -1,0 +1,394 @@
+
+
+7a608 - car drawing routine
+
+755fe - updates logbase
+
+79830 - without this, scenery and opponent cars not drawn in correct order
+
+79f5e (from 798fc) - draws a car
+7989a (from 79896)
+790e6 (from 7659a) - status panel?
+7a64c (from 7659e) 
+7a676 (from 7a65c)
+78a04 (from 765a2)
+79efe (from 7983a) - draw opponent car?
+7a04a (from 79f28) - inside draw opponent car - not sure of purpose??
+7a712 (from 7a6ee) - inside some kind of drawing routine?
+78a2a (from 000765F6) ??
+
+> w 0x76e04 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1
+
+> w 0x7761a 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1
+
+> w 0x7778a 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1
+
+> w 0x777e6 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1 0x22 0xc1
+
+does this get written using self modifying code? $000777da : 4e75                               rts
+
+here's something that appears to draw the road, once per frame
+
+WHAT DO WE NEED TO KNOW?
+	- on screen centre of road (looks like d1&76690)
+	- which of the variations of road to draw (normal road, pit lane or start line, which stripe colour)
+	- the width of the road (
+
+suspected road width is written at instruction before 0x7901a
+>d 0x78fc0 for instructions in this vicinity
+w 0x78ffa 0x20 0x3c 0x00 0x00 0x09 0x86
+
+$0007658a : 6100 2be4                          bsr       $79170 ; this subroutine draws the sky
+
+
+	$00076654 : 33c5 0007 667c                     move.w    d5,$7667c ; this sets the on-track position!
+
+DRAW_FRAME_ROAD:
+	$00076672 : 361c                               move.w    (a4)+,d3 ; still no idea what this is
+	$00076674 : 301c                               move.w    (a4)+,d0 ; i think this is the width of the track at this line
+	$00076676 : 341c                               move.w    (a4)+,d2 ; i think this is the on track position of the line relative to the car
+	$00076678 : 3c03                               move.w    d3,d6
+	$0007667a : 0642 034a                          addi.w    #$34a,d2 ; the add value is being modified by something else! this is the on track position!
+	$0007667e : 0243 fffc                          andi.w    #$fffc,d3
+	$00076682 : 3200                               move.w    d0,d1
+	$00076684 : d241                               add.w     d1,d1
+	$00076686 : 0643 f8e8                          addi.w    #$f8e8,d3
+	$0007668a : c3c3                               muls.w    d3,d1
+	$0007668c : 4841                               swap      d1
+	$0007668e : 4441                               neg.w     d1
+
+	$00076690 : 0641 0090                          addi.w    #$90,d1 ; d1 is definitely on-screen centre of road
+	$00076694 : 3601                               move.w    d1,d3
+	$00076696 : e848                               lsr.w     #4,d0
+	$00076698 : 3a00                               move.w    d0,d5
+	$0007669a : 0245 fff0                          andi.w    #$fff0,d5 ; need to find out what this is
+	$0007669e : d240                               add.w     d0,d1 ; add half width of road to get right edge position
+	$000766a0 : 9640                               sub.w     d0,d3 ; sub half width of road to get left edge position
+	$000766a2 : 0806 0000                          btst      #0,d6; so could d6 be the track position of the current line?
+	$000766a6 : 6714                               beq.s     NOT_THE_PITS ; if we nop this, the whole track becomes a pit lane
+	$000766a8 : 0802 000a                          btst      #$a,d2
+	$000766ac : 6706                               beq.s     $766b4 ; if we nop this, the dotted pit lane marker becomes solid
+	$000766ae : 33c1 0007 67c8                     move.w    d1,$767c8
+	$000766b4 : 3001                               move.w    d1,d0
+	$000766b6 : 9043                               sub.w     d3,d0 ; adjust one side of road to add pits
+	$000766b8 : e448                               lsr.w     #2,d0
+	$000766ba : d240                               add.w     d0,d1
+
+NOT_THE_PITS:
+	$000766bc : 4a41                               tst.w     d1 ; this is just a normal road then, if we jumped from 766a6
+	$000766c2 : b67c 0140                          cmp.w     #$140,d3
+	$000766c6 : 6a00 012a                          bpl       $767f2 ; this segment of road should be drawn as a solid piece of ground rather than a piece of road
+	$000766d6 : 0806 0001                          btst      #1,d6
+	$000766da : 675e                               beq.s     DRAW_NOT_START_LINE ; if we nop this, the road is made up of a solid line like the start line
+
+DRAW_START_LINE:
+	$000766dc : 3c03                               move.w    d3,d6 ; start of the routine to draw a solid start line
+	$00076700 : 0246 000f                          andi.w    #$f,d6 ; bring d6 into a 0-15 range
+	$00076704 : e946                               asl.w     #4,d6 ; bring d6 into a 0-127 range, with 4 sized increments
+	$00076706 : 4bf9 0007 687e                     lea       $7687e,a5 ; looks like we have a 256 byte lookup table
+	$0007670c : dac6                               adda.w    d6,a5 ; a5 now contains an address of a 32bit value in the lookup table
+	$0007670e : 0244 000f                          andi.w    #$f,d4 ; bring d4 into a 0-15 range
+	$00076712 : e944                               asl.w     #4,d4 ; bring d4 into a 0-127 range, with 4 sized increments
+	$00076714 : 41f9 0007 697e                     lea       $7697e,a0 ; looks like a 256 byte lookup table
+	$0007671a : d0c4                               adda.w    d4,a0 ; a0 now contains an address of a 32bit value in the lookup table
+	$0007671c : b67c ffff                          cmp.w     #$ffff,d3
+	$00076720 : 6602                               bne.s     $76724
+	$00076722 : 504d                               addq.w    #8,a5
+	$00076724 : b27c ffff                          cmp.w     #$ffff,d1
+	$00076728 : 6602                               bne.s     $7672c
+	$0007672c : 72ff                               moveq     #$ff,d1
+	$0007672e : 7000                               moveq     #0,d0
+	$00076730 : 7400                               moveq     #0,d2
+	$00076732 : 3401                               move.w    d1,d2
+	$00076734 : 2602                               move.l    d2,d3
+	$00076736 : 4843                               swap      d3
+	$00076738 : 6072                               bra.s     DRAW_SELF_MODIFYING_SPAN ; call the fast line renderer below for a solid start line
+
+DRAW_NOT_START_LINE:
+	$0007673a : 3c03                               move.w    d3,d6
+	$0007673c : 3801                               move.w    d1,d4
+	$0007673e : e843                               asr.w     #4,d3
+	$00076740 : e841                               asr.w     #4,d1
+	$00076742 : 3001                               move.w    d1,d0
+	$00076744 : 9043                               sub.w     d3,d0 
+	$00076746 : e540                               asl.w     #2,d0 ; what happens here if we set d0 to 0
+	$00076748 : 4df9 0007 6c22                     lea       $76c22,a6 ; start of big self modifying road lookup routine
+	$0007674e : 2c76 0000                          movea.l   (a6,d0.w),a6 ; a6 = 76c22[d0.w]
+	$00076752 : 303c 0014                          move.w    #$14,d0 ; d0 = 20 ; changing this to other values skews the road
+	$00076756 : 9043                               sub.w     d3,d0 ; d0 -= d3
+	$00076758 : d040                               add.w     d0,d0 ; d0 += d0
+	$0007675a : d040                               add.w     d0,d0 ; d0 += d0 ; a6 = ((20 - d3) * 4)
+	$0007675c : dcc0                               adda.w    d0,a6 ; a6 is the place we jump to to draw the road
+	$0007675e : ea4a                               lsr.w     #5,d2
+	$00076760 : 0242 0020                          andi.w    #$20,d2
+	$00076764 : 0246 000f                          andi.w    #$f,d6
+	$00076768 : 8c45                               or.w      d5,d6 ; if we nop this, the left stripe becomes 1 pixel wide, d5 must be something to do with road width
+	$0007676a : ed46                               asl.w     #6,d6
+	$0007676c : dc42                               add.w     d2,d6 ; i think we can determine what colour of road to draw depending on whether d2 is zero here
+	$0007676e : 4bf9 0002 bd40                     lea       $2bd40,a5
+	$00076774 : dac6                               adda.w    d6,a5
+	$00076776 : 0244 000f                          andi.w    #$f,d4
+	$0007677a : 8845                               or.w      d5,d4 ; if we nop this, the left stripe becomes 1 pixel wide, d5 must be something to do with road width
+	$0007677c : ed44                               asl.w     #6,d4
+	$0007677e : d842                               add.w     d2,d4
+	$00076780 : 41f9 0002 bd50                     lea       $2bd50,a0
+	$00076786 : d0c4                               adda.w    d4,a0
+	$00076788 : b67c ffff                          cmp.w     #$ffff,d3
+	$0007678c : 6602                               bne.s     $76790 ; something to do with the source offset for the left side of the road 
+	$0007678e : 504d                               addq.w    #8,a5
+	$00076790 : b27c ffff                          cmp.w     #$ffff,d1
+	$00076794 : 6602                               bne.s     $76798
+	$00076798 : 72ff                               moveq     #$ff,d1
+	$0007679a : 7000                               moveq     #0,d0 ; set colour of grass
+	$0007679c : 4a42                               tst.w     d2
+	$0007679e : 6702                               beq.s     $767a2 ; if we nop this, centre section of road loses stripe
+	$000767a0 : 3001                               move.w    d1,d0
+	$000767a2 : 76ff                               moveq     #$ff,d3 
+	$000767a4 : 2400                               move.l    d0,d2
+	$000767a6 : 4842                               swap      d2
+	$000767a8 : 3401                               move.w    d1,d2
+	$000767aa : 4842                               swap      d2
+
+DRAW_SELF_MODIFYING_SPAN:
+	$000767ac : 3c2e 0050                          move.w    $50(a6),d6 ; stash the graphics instruction into d6
+	$000767b0 : 3d7c 4e75 0050                     move.w    #$4e75,$50(a6) ; overwrite the graphics instruction
+	$000767b6 : 4e96                               jsr       (a6)
+	$000767b8 : 3d46 0050                          move.w    d6,$50(a6) ; restore the graphics instruction
+
+--- END code we want to intercept?
+
+$000767f2 : 7c00                               moveq     #0,d6 ; this draws a solid block of ground on the current line
+$000767f4 : 7aff                               moveq     #$ff,d5
+$000767f6 : 22c6                               move.l    d6,(a1)+
+$000767f8 : 22c5                               move.l    d5,(a1)+
+
+...
+
+...
+$00076846 : 33fc ffff 0007 67c8                move.w    #$ffff,$767c8 ; ensures pit lane markings are drawn correctly?
+
+$00076850 : be7c 0054                          cmp.w     #$60,d7 (#60 is number of lines to be drawn)
+$00076854 : 6600 fe1c                          bne       $76672
+$00076858 : 4e75                               rts ; this appears to be called once per frame (to draw the screen?)
+
+
+there's an interesting set of unrolled instructions at: $000791d8
+
+b ($777c2).w ! ($777c2).w
+
+- there appears to be an address for each line drawn on the screen
+- presumably these addresses are modified?
+
+0x793e6 (called as part of 79170): does this draw the empty parts of the sky?
+
+
+what does 0x76850 do?
+	w 0x76853 0x54 - changes the comparison
+	this seems to adjust the number of lines to be draw
+
+trying to work out the road horizontal shifting code:
+	$00076690 : 0641 0090                          addi.w    #$90,d1
+	- i changed this to zero and it shifts the road over to the left
+what does 0x766ba do?
+	- this only gets executed when the pit lane is visible
+
+7734e - not a subroutine but looks like drawing code:
+0007734E 22c0                     MOVE.L D0,(A1)+ [0000ffff]
+00077350 22c1                     MOVE.L D1,(A1)+ [ffffffff]
+00077352 22c0                     MOVE.L D0,(A1)+ [0000ffff]
+00077354 22c1                     MOVE.L D1,(A1)+ [ffffffff]
+00077356 22c0                     MOVE.L D0,(A1)+ [0000ffff]
+00077358 22c1                     MOVE.L D1,(A1)+ [ffffffff]
+0007735A 22dd                     MOVE.L (A5)+ [0000ffff],(A1)+ [0000ffff]
+0007735C 22dd                     MOVE.L (A5)+ [fffffff8],(A1)+ [fffffff8]
+0007735E 22dd                     MOVE.L (A5)+ [07ffffff],(A1)+ [07ffffff]
+00077360 22dd                     MOVE.L (A5)+ [ffff07ff],(A1)+ [ffff07ff]
+00077362 22c2                     MOVE.L D2,(A1)+ [ffffffff]
+00077364 22c3                     MOVE.L D3,(A1)+ [ffffffff]
+
+78a02 - this is the rts of the massive unrolled loop above
+
+70640 - switch palette? seems to load address of palette register and copy words over
+
+ w 0x7659a 0x4e 0x71 0x4e 0x71
+
+physbases:
+	00 01 00 fb
+	00 01 00 01
+
+
+$00070572 : 48e7 fffe                          movem.l   d0-d7/a0-a6,-(sp)
+$00070576 : 4a79 0007 07c4                     tst.w     $707c4
+$0007057c : 6700 003a                          beq       $705b8
+
+
+$0007063a : 41f9 0007 07f6                     lea       $707f6,a0
+$00070640 : 43f8 8240                          lea       $ffff8240.w,a1
+$00070644 : 22d8                               move.l    (a0)+,(a1)+
+$00070646 : 22d8                               move.l    (a0)+,(a1)+
+$00070648 : 22d8                               move.l    (a0)+,(a1)+
+$0007064a : 22d8                               move.l    (a0)+,(a1)+
+$0007064c : 41f9 0007 07e6                     lea       $707e6,a0
+$00070652 : 22d8                               move.l    (a0)+,(a1)+
+$00070654 : 22d8                               move.l    (a0)+,(a1)+
+$00070656 : 41f9 0007 085e                     lea       $7085e,a0
+$0007065c : 22d8                               move.l    (a0)+,(a1)+
+$0007065e : 22d8                               move.l    (a0)+,(a1)+
+$00070660 : 11fc 0000 fa1b                     move.b    #0,$fffffa1b.w ; timer B control
+$00070666 : 11fc 0027 fa21                     move.b    #$27,$fffffa21.w
+$0007066c : 11fc 0008 fa1b                     move.b    #8,$fffffa1b.w
+$00070672 : 21fc 0007 0684 0120                move.l    #$70684,$0120.w
+$0007067a : 6100 026a                          bsr       $708e6
+
+
+$0007a04a : 33f9 0007 c5b6 0007 ac+            move.w    $7c5b6,$7ac20
+$0007a054 : 33f9 0007 c592 0007 ac+            move.w    $7c592,$7ac22
+$0007a05e : 247c 0000 0000                     movea.l   #0,a2
+$0007a064 : 33fc ffff 0007 a27e                move.w    #$ffff,$7a27e
+$0007a06c : 6000 00aa                          bra       $7a118
+$0007a118 : b07c 0040                          cmp.w     #$40,d0
+$0007a11c : 6400 008c                          bcc       $7a1aa
+$0007a120 : 5379 0007 ac20                     subq.w    #1,$7ac20
+$0007a126 : b079 0007 ac20                     cmp.w     $7ac20,d0
+$0007a12c : 6400 014c                          bcc       $7a27a
+
+$0007a130 : e24a                               lsr.w     #1,d2
+$0007a132 : 3602                               move.w    d2,d3
+$0007a134 : d040                               add.w     d0,d0
+$0007a136 : 3800                               move.w    d0,d4
+$0007a138 : d844                               add.w     d4,d4
+$0007a13a : d844                               add.w     d4,d4
+$0007a13c : 41f9 0002 b880                     lea       $2b880,a0
+$0007a142 : 33f0 4004 0007 ad6e                move.w    4(a0,d4.w),$7ad6e
+$0007a14a : 33f0 4006 0007 a280                move.w    6(a0,d4.w),$7a280
+$0007a152 : 3430 4008                          move.w    8(a0,d4.w),d2 ; something to do with calculating horizontal position of cars and scenery
+$0007a156 : 3a30 4000                          move.w    (a0,d4.w),d5 ; something to do with calculating horizontal position of cars and scenery
+$0007a15a : 9445                               sub.w     d5,d2
+$0007a15c : c5c3                               muls.w    d3,d2
+$0007a15e : d482                               add.l     d2,d2
+$0007a160 : 4842                               swap      d2
+$0007a162 : d445                               add.w     d5,d2
+$0007a164 : 9279 0007 ac22                     sub.w     $7ac22,d1
+$0007a16a : e741                               asl.w     #3,d1
+$0007a16c : 9242                               sub.w     d2,d1
+$0007a16e : 3430 400a                          move.w    $a(a0,d4.w),d2
+$0007a172 : 3a30 4002                          move.w    2(a0,d4.w),d5
+$0007a176 : 9445                               sub.w     d5,d2
+$0007a178 : c5c3                               muls.w    d3,d2
+$0007a17a : d482                               add.l     d2,d2
+$0007a17c : 4842                               swap      d2
+$0007a17e : d445                               add.w     d5,d2
+$0007a180 : 41f9 0003 0e40                     lea       $30e40,a0
+$0007a186 : 3830 0002                          move.w    2(a0,d0.w),d4
+$0007a18a : 3a30 0000                          move.w    (a0,d0.w),d5
+$0007a18e : 9845                               sub.w     d5,d4
+$0007a190 : c9c3                               muls.w    d3,d4
+$0007a192 : d884                               add.l     d4,d4
+$0007a194 : 4844                               swap      d4
+$0007a196 : d845                               add.w     d5,d4
+$0007a198 : d844                               add.w     d4,d4
+$0007a19a : c3c4                               muls.w    d4,d1
+$0007a19c : 4841                               swap      d1
+$0007a19e : b47c 005e                          cmp.w     #$5e,d2 ; lower clipping plane?
+$0007a1a2 : 6504                               bcs.s     $7a1a8
+
+$0007a1a8 : 6056                               bra.s     $7a200
+$0007a200 : 4a79 0007 cc74                     tst.w     $7cc74
+$0007a206 : 6b68                               bmi.s     $7a270
+$0007a208 : 670e                               beq.s     $7a218
+$0007a20a : 2279 0007 a276                     movea.l   $7a276,a1
+$0007a210 : 47f9 0007 acc6                     lea       $7acc6,a3
+$0007a216 : 600c                               bra.s     $7a224
+$0007a224 : 3c07                               move.w    d7,d6
+$0007a226 : e747                               asl.w     #3,d7
+$0007a228 : de46                               add.w     d6,d7
+$0007a22a : 3c01                               move.w    d1,d6
+$0007a22c : 4446                               neg.w     d6
+$0007a22e : 0646 0090                          addi.w    #$90,d6
+$0007a232 : e446                               asr.w     #2,d6
+$0007a234 : 4a79 0007 cc74                     tst.w     $7cc74
+$0007a23a : 6608                               bne.s     $7a244
+$0007a244 : 3839 0007 a280                     move.w    $7a280,d4
+$0007a24a : 4444                               neg.w     d4
+$0007a24c : e444                               asr.w     #2,d4
+$0007a24e : dc44                               add.w     d4,d6
+$0007a250 : e646                               asr.w     #3,d6
+$0007a252 : 4a46                               tst.w     d6
+$0007a254 : 6a02                               bpl.s     $7a258
+$0007a258 : bc7c 0008                          cmp.w     #8,d6
+$0007a25c : 6b02                               bmi.s     $7a260
+$0007a260 : 33c6 0007 a27c                     move.w    d6,$7a27c
+$0007a266 : de46                               add.w     d6,d7
+$0007a268 : 1e33 7000                          move.b    (a3,d7.w),d7
+$0007a26c : 0247 00ff                          andi.w    #$ff,d7
+$0007a270 : 6012                               bra.s     $7a284
+$0007a284 : 0641 0090                          addi.w    #$90,d1
+$0007a288 : de47                               add.w     d7,d7
+$0007a28a : de47                               add.w     d7,d7
+$0007a28c : 2049                               movea.l   a1,a0
+$0007a28e : 2070 7000                          movea.l   (a0,d7.w),a0
+$0007a292 : 3818                               move.w    (a0)+,d4
+$0007a294 : 3618                               move.w    (a0)+,d3
+$0007a296 : 33d8 0007 ad72                     move.w    (a0)+,$7ad72
+$0007a29c : 33d8 0007 a642                     move.w    (a0)+,$7a642
+$0007a2a2 : 4a79 0007 a27e                     tst.w     $7a27e
+$0007a2a8 : 6b08                               bmi.s     $7a2b2
+$0007a2b2 : 3e02                               move.w    d2,d7
+$0007a2b4 : 9443                               sub.w     d3,d2
+$0007a2b6 : 5242                               addq.w    #1,d2
+$0007a2b8 : 3a02                               move.w    d2,d5
+$0007a2ba : 3004                               move.w    d4,d0
+$0007a2bc : e240                               asr.w     #1,d0
+$0007a2be : 9240                               sub.w     d0,d1
+$0007a2c0 : 33c4 0007 abf6                     move.w    d4,$7abf6
+$0007a2c6 : 33c1 0007 abf8                     move.w    d1,$7abf8
+$0007a2cc : 33c7 0007 abfa                     move.w    d7,$7abfa
+$0007a2d2 : 3039 0007 a642                     move.w    $7a642,d0
+$0007a2d8 : e240                               asr.w     #1,d0
+$0007a2da : 9240                               sub.w     d0,d1
+
+$0007a684 : de47                               add.w     d7,d7
+$0007a686 : de47                               add.w     d7,d7
+$0007a688 : 2673 7000                          movea.l   (a3,d7.w),a3
+$0007a68c : 4ed3                               jmp       (a3)
+; possible destinations:
+- 
+
+
+
+
+
+
+
+
+
+$0007a5ee : 3018                               move.w    (a0)+,d0
+
+
+$0007a61a : d0c7                               adda.w    d7,a0
+
+
+7659a
+
+
+start line disassembly (766dc)
+------------------------------
+
+d6.w = d3.w
+d4.w = d1.w
+d3.w >>= 4 (signed)
+d1.w >>= 4 (signed)
+
+a6.l = 76c22[(d1-d3)<<2]
+
+d0.w = 0x14
+d0.w -= d3
+
+
+
+
+for each width (20 ish to 400):
+- we need a pointer to the source start of this span
+- the pointer must be the centre of the span minus 160 pixels (i.e. 80 bytes)
+- skew is assumed to be zero
+

@@ -1,0 +1,64 @@
+This file contains the contents of address 0x2b4f0 onwards at the time of drawing the road
+the role of the first two bytes is unknown
+the second and third bytes are believed to relate to the on-screen width of the road
+the fourth and fifth bytes are believed to relate to the on-track position of the current line
+
+00 00 01 2d 40 00
+00 00 01 7f 31 00
+00 00 01 b6 2a 00
+00 00 01 f5 24 00
+00 00 02 48 1e 00
+00 00 02 7d 1b 00
+00 00 02 d4 17 00
+00 00 03 0a 15 00
+00 00 03 47 13 00
+00 00 03 90 11 00
+00 00 03 e6 0f 00
+00 00 04 17 0e 00
+00 00 04 4e 0d 00
+00 00 04 8b 0c 00
+00 00 04 ce 0b 00
+00 00 05 1a 0a 00
+00 00 05 70 09 00
+00 00 05 d3 08 00
+00 00 06 0b 07 80
+00 00 06 44 07 00
+00 00 06 84 06 80
+00 00 06 c7 06 00
+00 00 07 0f 05 80
+00 00 07 63 05 00
+00 00 07 9d 04 ab
+00 00 07 d8 04 56
+00 00 08 1c 04 00
+00 00 08 66 03 ab
+00 00 08 b1 03 56
+00 00 08 fe 03 00
+00 00 09 42 02 c0
+00 00 09 86 02 80
+00 00 09 ca 02 40
+00 00 0a 18 02 00
+00 00 0a 5e 01 cd
+00 00 0a a4 01 9a
+00 00 0a eb 01 67
+00 00 0b 31 01 34
+00 00 0b 80 01 00
+00 00 0b c2 00 dc
+00 00 0c 04 00 b8
+00 00 0c 46 00 94
+00 00 0c 89 00 70
+00 00 0c cb 00 4c
+00 00 0d 0d 00 28
+00 00 0d 5c 00 00
+00 00 0d 99 ff e9
+00 00 0d d6 ff d2
+00 00 0e 13 ff bb
+00 00 0e 50 ff a4
+00 00 0e 8d ff 8d
+00 00 0e ca ff 76
+00 00 0f 07 ff 5f
+00 00 0f 44 ff 48
+00 00 0f 81 ff 31
+00 00 0f be ff 1a
+
+
+
