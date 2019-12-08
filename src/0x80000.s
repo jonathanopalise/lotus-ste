@@ -13,16 +13,17 @@
     moveq.l #-1,d6
 
     move.w #8,($ffff8a20).w              ; source x increment
-    move.w #-126,($ffff8a22).w           ; source y increment
+    move.w #-158,($ffff8a22).w           ; source y increment
     move.w d6,($ffff8a28).w              ; endmask1
     move.w d6,($ffff8a2a).w              ; endmask2
     move.w d6,($ffff8a2c).w              ; endmask3
     move.w #8,($ffff8a2e).w              ; dest x increment
-    move.w #-118,($ffff8a30).w           ; dest y increment
+    move.w #-150,($ffff8a30).w           ; dest y increment
     move.w #$0203,($ffff8a3a).w          ; hop/op
-    move.w #14,($ffff8a36).w             ; xcount
+    move.w #20,($ffff8a36).w             ; xcount
     move.w #4,($ffff8a38).w              ; ycount
     move.l #50000,($ffff8a24).w          ; set source
+    move.l gfx_data,($ffff8a24).w
     move.l a1,($ffff8a32).w              ; set destination
 
     move.l #7,d4
