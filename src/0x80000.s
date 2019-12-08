@@ -27,7 +27,14 @@
     and.l #$ff,d0 ; bring the road width value into a 0-255 range
     add.l d0,d0 
     add.l d0,d0 ; bring the road width value into a 0-1023 range with increments of 4
-    ;move.l #(4*24),d0 ;temporary for debugging; 24 is bad, 25 is ok?
+
+	lsr.w #5,d2 ; d2 should contain something telling us about the road position of current line
+	andi.w #$20,d2
+    tst.w d2
+    beq.s skipoffsetadd 
+    add.l #1024,d0
+
+skipoffsetadd:
 
     move.l #byte_offsets,a0
     add d0,a0 ; d0 is the offset to the pointer to the road width segment we want
@@ -35,13 +42,6 @@
     move.l #gfx_data,a2
     add.l a2,a0 ; a0 now contains memory location of central source
 
-	lsr.w #5,d2 ; d2 should contain something telling us about the road position of current line
-	andi.w #$20,d2
-    tst.w d2
-    beq.s skipoffsetadd 
-    add.l #100000,a0
-
-skipoffsetadd:
 
     ext.l d1 ; d1 is the shift value for the current line
     move.l d1,d4 ; copy to d4
