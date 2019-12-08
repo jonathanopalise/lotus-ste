@@ -36,6 +36,7 @@ function convertPixelColourArrayToPlanarArray($pixel_colours) {
 }
 
 function convertPixelColoursToOutputBytes(array $pixelColours) {
+
     if ((count($pixelColours) & 15) != 0) {
         throw new \RuntimeException('Output byte array size is not a multiple of 16');
     }
@@ -44,16 +45,17 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
 
     $blocksOf16Pixels = array_chunk($pixelColours, 16); 
     foreach ($blocksOf16Pixels as $block) {
+        $boo = [0, 0, 0, 0, 3, 3, 3, 3, 5, 5, 5, 5, 7, 7, 7, 7];
         $outputBytes = array_merge(
             $outputBytes,
-            convertPixelColourArrayToPlanarArray($block)
+            convertPixelColourArrayToPlanarArray($boo)
         );
     }
 
     return $outputBytes;
 }
 
-$padding = 10;
+$padding = 32;
 
 $byteOffsets = [];
 $outputBytes = [];

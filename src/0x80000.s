@@ -23,7 +23,7 @@
     move.w #20,($ffff8a36).w             ; xcount
     move.w #4,($ffff8a38).w              ; ycount
     move.l #50000,($ffff8a24).w          ; set source
-    move.l gfx_data,($ffff8a24).w
+    move.l #gfx_data,($ffff8a24).w
     move.l a1,($ffff8a32).w              ; set destination
 
     move.l #7,d4
@@ -39,5 +39,7 @@
     ; we need to patch 767ac with this instruction
     ; w 0x767ac 0x4e 0xf9 0x00 0x08 0x00 0x00
     jmp 524288
+
+    align 2
 
     include "road.s"
