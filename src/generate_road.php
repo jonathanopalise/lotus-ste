@@ -55,12 +55,14 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
     return $outputBytes;
 }
 
-$padding = 4;
+$padding = 14;
 
 $byteOffsets = [];
 $outputBytes = [];
+$actualPixelWidthFloat = 10;
 
-for ($actualPixelWidth = 40; $actualPixelWidth < 40+255; $actualPixelWidth++) {
+for ($index = 0; $index < 255; $index++) {
+    $actualPixelWidth = (int)$actualPixelWidthFloat;
     $roundedPixelWidth = (($actualPixelWidth - 1) & 0xffe0) + 32 + ($padding * 16);
     //echo("rounded pixel width: ".$roundedPixelWidth."\n");
 
@@ -99,6 +101,8 @@ for ($actualPixelWidth = 40; $actualPixelWidth < 40+255; $actualPixelWidth++) {
         $outputBytes,
         convertPixelColoursToOutputBytes($pixelColours)
     );
+
+    $actualPixelWidthFloat+=1.5;
 }
 
 echo("byte_offsets:\n");
