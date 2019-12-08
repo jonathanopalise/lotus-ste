@@ -1,4 +1,4 @@
-; - This code needs to be loaded at location 524288 on the emulated ST
+; - This code needs to be loaded at location 524288 (0x80000) on the emulated ST
 ; - The emulated ST must have 1 meg of memory
 ; - In order to call this code, we need to patch 767ac with an instruction to call it:
 ; w 0x767ac 0x4e 0xf9 0x00 0x08 0x00 0x00
@@ -39,4 +39,4 @@
     ; w 0x767ac 0x4e 0xf9 0x00 0x08 0x00 0x00
     jmp 524288
 
-
+    include "road.s"

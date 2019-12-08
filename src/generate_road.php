@@ -97,17 +97,17 @@ for ($actualPixelWidth = 20; $actualPixelWidth < 161; $actualPixelWidth++) {
 
 echo("byte_offsets:\n");
 foreach ($byteOffsets as $byteOffset) {
-    echo("dc.l " . $byteOffset . "\n");
+    echo("    dc.l " . $byteOffset . "\n");
 }
 
 echo("\n");
-/*echo("gfx_data:\n");
+echo("gfx_data:\n");
 $outputBytesChunksOf8 = array_chunk($outputBytes, 8);
 foreach ($outputBytesChunksOf8 as $chunkOf8) {
     $normalisedValues = [];
     foreach ($chunkOf8 as $byte) {
-        $normalisedValues[] = '0x' . dechex($byte>>4) . dechex($byte&15);
+        $normalisedValues[] = '$' . dechex($byte>>4) . dechex($byte&15);
     }
 
-    echo("    ". implode(",", $normalisedValues) ."\n");
-}*/
+    echo("    dc.b ". implode(",", $normalisedValues) ."\n");
+}
