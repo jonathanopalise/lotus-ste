@@ -1,6 +1,8 @@
 # Lotus STE
 
-This project is at a very early stage and currently doesn't do anything of interest to end users.
+![Screenshot of current progress](https://github.com/jonathanopalise/lotus-ste/screenshot.png)
+
+This project is at a very early stage and currently doesn't do anything of great interest to end users.
 
 Directory layout is as follows:
 
