@@ -55,13 +55,13 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
     return $outputBytes;
 }
 
-$padding = 3;
+$padding = 4;
 
 $byteOffsets = [];
 $outputBytes = [];
 
-for ($actualPixelWidth = 100; $actualPixelWidth < 161; $actualPixelWidth++) {
-    $roundedPixelWidth = (($actualPixelWidth - 1) & 0xfff0) + 16 + ($padding * 16);
+for ($actualPixelWidth = 40; $actualPixelWidth < 40+255; $actualPixelWidth++) {
+    $roundedPixelWidth = (($actualPixelWidth - 1) & 0xffe0) + 32 + ($padding * 16);
     //echo("rounded pixel width: ".$roundedPixelWidth."\n");
 
     $textureStep = 1.0 / $actualPixelWidth;

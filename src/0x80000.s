@@ -23,8 +23,15 @@
     move.w #20,($ffff8a36).w             ; xcount
     move.w #4,($ffff8a38).w              ; ycount
 
+    lsr.l #4,d0 ; bring the road width value into a 0-255 range
+    and.l #$ff,d0 ; bring the road width value into a 0-255 range
+    add.l d0,d0 
+    add.l d0,d0 ; bring the road width value into a 0-1023 range with increments of 4
+    ;move.l #(4*24),d0 ;temporary for debugging; 24 is bad, 25 is ok?
+
     move.l #byte_offsets,a0
-    move.l (a0),a0
+    add d0,a0 ; d0 is the offset to the pointer to the road width segment we want
+    move.l (a0),a0 ; a0 now contains the pointer to the road graphics data offset for the current line
     move.l #gfx_data,a2
     add.l a2,a0 ; a0 now contains memory location of central source
 
