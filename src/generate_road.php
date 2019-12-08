@@ -62,6 +62,7 @@ $outputBytes = [];
 
 for ($actualPixelWidth = 100; $actualPixelWidth < 161; $actualPixelWidth++) {
     $roundedPixelWidth = (($actualPixelWidth - 1) & 0xfff0) + 16 + ($padding * 16);
+    //echo("rounded pixel width: ".$roundedPixelWidth."\n");
 
     $textureStep = 1.0 / $actualPixelWidth;
     $texturePosition = 0;
@@ -89,7 +90,10 @@ for ($actualPixelWidth = 100; $actualPixelWidth < 161; $actualPixelWidth++) {
         $texturePosition += $textureStep;
     }
 
-    $byteOffsets[] = (count($outputBytes) + ($roundedPixelWidth / 2)) - (160/2);
+    // rounded pixel width: 160
+    // bytes width: 80 (2 pixels per byte)
+    // does count($outputBytes) need to be multiplied by 4? (long words)
+    $byteOffsets[] = (count($outputBytes) + ($roundedPixelWidth / 4)) - (160/2);
 
     $outputBytes = array_merge(
         $outputBytes,

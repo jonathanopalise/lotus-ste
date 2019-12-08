@@ -22,10 +22,16 @@
     move.w #$0203,($ffff8a3a).w          ; hop/op
     move.w #20,($ffff8a36).w             ; xcount
     move.w #4,($ffff8a38).w              ; ycount
-    move.l #gfx_data,($ffff8a24).w
+
+    move.l #byte_offsets,a0
+    move.l (a0),a0
+    move.l #gfx_data,a2
+    add.l a2,a0
+    move.l a0,($ffff8a24).w
+
     move.l a1,($ffff8a32).w              ; set destination
 
-    move.l #7,d4
+    move.l #0,d4 ; presumably skew?
     or.w #$c080,d4
     move.w d4,($ffff8a3c).w
 
