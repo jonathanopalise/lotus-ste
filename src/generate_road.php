@@ -84,13 +84,17 @@ for ($type = 0; $type <2; $type++) {
         $pixelColours = [];
 
         for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
-            if (($texturePosition > ($midpointTexturePosition + 0.485)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
-                $pixelColour = $rumbleStripColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition - 0.485))) {
-                $pixelColour = $rumbleStripColour;
-            } elseif (($texturePosition > ($midpointTexturePosition + 0.47)) && ($texturePosition < ($midpointTexturePosition + 0.48))) {
+            if (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
+                $pixelColour = $rumbleStripColour; // left rumble strip
+            } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
+                $pixelColour = $rumbleStripColour; // right rumble strip
+            } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
                 $pixelColour = $roadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.48)) && ($texturePosition < ($midpointTexturePosition - 0.47))) {
+            } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
+               $pixelColour = $roadLinesColour;
+            } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
+               $pixelColour = $roadLinesColour;
+            } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
                $pixelColour = $roadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
                 $pixelColour = $roadLinesColour;
