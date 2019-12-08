@@ -26,12 +26,20 @@
     move.l #byte_offsets,a0
     move.l (a0),a0
     move.l #gfx_data,a2
-    add.l a2,a0
-    move.l a0,($ffff8a24).w
+    add.l a2,a0 ; a0 now contains memory location of central source
 
+    ext.l d1 ; d1 is the shift value for the current line
+    move.l d1,d4 ; copy to d4
+    and.b #15,d4 ; convert to skew value
+    asr.w #1,d1
+    and.b #$f8,d1
+    sub.l d1,a0 ; d1 now contains adjusted source
+
+    move.l a0,($ffff8a24).w              ; set source address
     move.l a1,($ffff8a32).w              ; set destination
 
-    move.l #0,d4 ; presumably skew?
+    ; to generate the start offset, we need the value in d1 at pc = 0x76690
+
     or.w #$c080,d4
     move.w d4,($ffff8a3c).w
 

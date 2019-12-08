@@ -17,7 +17,7 @@ You'll also need a specific disk image of Lotus to apply the code to at runtime.
 
 Insert the above floppy image, boot the STE, start a race, and then enter the debugger. Enter the following commands to apply the patches:
 
-* `loadbin /path/to/0x76678.bin 0x767ac`
+* `loadbin /path/to/0x76678.bin 0x76690`
 * `loadbin /path/to/0x80000.bin 0x80000`
 
 All this does at the moment is replace the road with alternating strips on colours, which happens to be rendered by the STE blitter. The initial goal of the project is to replace this with a road that more closely resembles that of the Amiga version.
