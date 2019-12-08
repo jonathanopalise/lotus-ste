@@ -1,5 +1,7 @@
 # Lotus STE
 
+_Enhancements to the Atari ST version of Lotus Esprit Turbo Challenge to support STE hardware features_
+
 ![Screenshot of current progress](https://github.com/jonathanopalise/lotus-ste/blob/master/screenshot.png)
 
 This project is at a very early stage and currently doesn't do anything of great interest to end users.
@@ -22,4 +24,9 @@ Insert the above floppy image, boot the STE, start a race, and then enter the de
 * `loadbin /path/to/0x76678.bin 0x76690`
 * `loadbin /path/to/0x80000.bin 0x80000`
 
-All this does at the moment is replace the road with alternating strips on colours, which happens to be rendered by the STE blitter. The initial goal of the project is to replace this with a road that more closely resembles that of the Amiga version.
+All this does at the moment is render the road in a rather scrappy way using the Blitter. Forthcoming goals for this project are as follows:
+
+* Render the road in a visual style similar to that of the Amiga version, with performance matching the non-blitter renderer;
+* Add sampled sound effects to replace the current synthesised ones - e.g. car collisions, empty fuel etc;
+* Render trackside objects with single pixel horizontal precision (objects on the ST version are currently shifted to the nearest 16 pixel offset);
+* (Unlikely but nice to have) Render a sky gradient similar to that present on the Amiga version. 
