@@ -13,6 +13,9 @@
     addq.l #8,d6
     add.w #10,d7
 
+    ; a3 appears to be the only address register we can overwrite
+    move.l #6,a3
+
     move.w #-1,($ffff8a28).w            ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
     move.w #-1,($ffff8a2c).w            ; endmask3
