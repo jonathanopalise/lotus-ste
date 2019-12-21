@@ -2,6 +2,7 @@
 
 const COLOUR_RED = 2;
 const COLOUR_WHITE = 6;
+const COLOUR_GREY = 5;
 const COLOUR_LIGHT_ASPHALT = 13;
 const COLOUR_DARK_ASPHALT = 4;
 const COLOUR_GRASS = 7;
@@ -75,6 +76,18 @@ for ($type = 0; $type <2; $type++) {
     $actualPixelWidthFloat = 10;
     for ($index = 0; $index < 255; $index++) {
         $actualPixelWidth = (int)$actualPixelWidthFloat;
+
+        $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+        if ($roadLinesColour == COLOUR_WHITE) {
+            $computedRoadLinesColour = COLOUR_WHITE;
+
+            if ($actualPixelWidth < 60) {
+                $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+            } elseif ($actualPixelWidth < 120) {
+                $computedRoadLinesColour = COLOUR_GREY;
+            }
+        }
+
         $roundedPixelWidth = (($actualPixelWidth - 1) & 0xffe0) + 32 + ($padding * 16);
         //echo("rounded pixel width: ".$roundedPixelWidth."\n");
 
@@ -89,15 +102,15 @@ for ($type = 0; $type <2; $type++) {
             } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
                 $pixelColour = $rumbleStripColour; // right rumble strip
             } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
-                $pixelColour = $roadLinesColour;
+                $pixelColour = $computedRoadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
-               $pixelColour = $roadLinesColour;
+               $pixelColour = $computedRoadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
-               $pixelColour = $roadLinesColour;
+               $pixelColour = $computedRoadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
-               $pixelColour = $roadLinesColour;
+               $pixelColour = $computedRoadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
-                $pixelColour = $roadLinesColour;
+                $pixelColour = $computedRoadLinesColour;
             } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
                 $pixelColour = $asphaltColour;
             } else {
