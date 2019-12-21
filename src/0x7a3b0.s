@@ -20,7 +20,7 @@
     move.w d6,($ffff8a30).w             ; dest y increment
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.w #$0201,($ffff8a3a).w         ; hop/op
-    ;move.b #$00,($ffff8a3d).w           ; not sure if this is required?
+    move.b #$00,($ffff8a3d).w
 
     ; we are now free to use d7, d6 and d4 for our own purposes
     move.l #$c0,d7
@@ -32,7 +32,7 @@
     move.l a1,($ffff8a32).w             ; set destination
     move.b d7,($ffff8a3c).w             ; start
 
-    addq.l #2,a1
+    addq.l #2,a1                        ; move to next bitplane
 
     endr
 
