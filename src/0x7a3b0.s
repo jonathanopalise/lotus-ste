@@ -29,7 +29,7 @@
     ; looks like d0, d1 and d2 are also available to us
     move.b #$c0,d7
 
-    rept 4
+    rept 3
 
     move.w d3,($ffff8a38).w             ; ycount
     move.l a0,($ffff8a24).w             ; set source address
@@ -37,6 +37,28 @@
     move.b d7,($ffff8a3c).w             ; start
 
     addq.l #2,a1                        ; move to next bitplane
+
+    endr
+
+    ; fourth pass of mask doesn't need the addq at the end
+    move.w d3,($ffff8a38).w             ; ycount
+    move.l a0,($ffff8a24).w             ; set source address
+    move.l a1,($ffff8a32).w             ; set destination
+    move.b d7,($ffff8a3c).w             ; start
+
+    subq.l #6,a1
+    move.w #$0207,($ffff8a3a).w         ; hop/op
+
+    rept 4
+
+    addq.l #2,a0
+
+    move.w d3,($ffff8a38).w             ; ycount
+    move.l a0,($ffff8a24).w             ; set source address
+    move.l a1,($ffff8a32).w             ; set destination
+    move.b d7,($ffff8a3c).w             ; start
+
+    addq.l #2,a1
 
     endr
 
