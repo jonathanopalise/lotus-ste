@@ -1,4 +1,6 @@
     ORG $7a3b0
+    ; looks like we can use up to 7a494
+    ; what's normally at 7a438?
 
     ; a0 is source address
     ; a1 is destination address
@@ -9,11 +11,12 @@
     ; d7 is source bytes to skip after each line
 
     addq.l #8,d6
-    addq.l #10,d7
+    add.w #10,d7
 
     move.w #-1,($ffff8a28).w            ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
     move.w #-1,($ffff8a2c).w            ; endmask3
+
     move.w #10,($ffff8a20).w            ; source x increment
     move.w d7,($ffff8a22).w             ; source y increment
     move.w #8,($ffff8a2e).w             ; dest x increment
@@ -23,7 +26,8 @@
     move.b #$00,($ffff8a3d).w
 
     ; we are now free to use d7, d6 and d4 for our own purposes
-    move.l #$c0,d7
+    ; looks like d0, d1 and d2 are also available to us
+    move.b #$c0,d7
 
     rept 4
 
