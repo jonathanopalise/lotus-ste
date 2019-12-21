@@ -1,6 +1,6 @@
     ORG $7a3b0
 
-    ; a1 is source address
+    ; a0 is source address
     ; a1 is destination address
     ; d3 is the lines to be drawn
     ; d4 is number of 16 pixel blocks to be drawn (= 8 words)
@@ -8,8 +8,8 @@
     ; d6 is destination bytes to skip after each line
     ; d7 is source bytes to skip after each line
 
-    add.w #8,d6
-    add.w #10,d7
+    addq.l #8,d6
+    addq.l #10,d7
 
     move.w #-1,($ffff8a28).w            ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
