@@ -84,10 +84,6 @@ drawscenery:
     addq.l #8,d6                        ; convert to value suitable for blitter
     add.w #10,d7                        ; convert to value suitable for blitter
 
-    move.w #-1,($ffff8a28).w            ; endmask1
-    move.w #-1,($ffff8a2a).w            ; endmask2
-    move.w #-1,($ffff8a2c).w            ; endmask3
-
     move.w #10,($ffff8a20).w            ; source x increment
     move.w d7,($ffff8a22).w             ; source y increment
     move.w #8,($ffff8a2e).w             ; dest x increment
@@ -98,6 +94,14 @@ drawscenery:
     move.l a3,d7                        ; get desired xpos of scenery object
     and.l #$f,d7                        ; convert to skew value for blitter
     move.b d7,($ffff8a3d).w
+
+    add.l d7,d7
+    lea.l leftendmasks,a3
+    move.w (a3,d7.w),d7
+
+    move.w d7,($ffff8a28).w             ; endmask1
+    move.w #-1,($ffff8a2a).w            ; endmask2
+    move.w #-1,($ffff8a2c).w            ; endmask3
 
     ; we are now free to use d7, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
@@ -122,6 +126,28 @@ drawscenery:
     drawsceneryline
 
     rts
+
+leftendmasks:
+
+    dc.w %1111111111111111
+    dc.w %0111111111111111
+    dc.w %0011111111111111
+    dc.w %0001111111111111
+    dc.w %0000111111111111
+    dc.w %0000011111111111
+    dc.w %0000001111111111
+    dc.w %0000000111111111
+    dc.w %0000000011111111
+    dc.w %0000000001111111
+    dc.w %0000000000111111
+    dc.w %0000000000011111
+    dc.w %0000000000001111
+    dc.w %0000000000000111
+    dc.w %0000000000000011
+    dc.w %0000000000000001
+
+rightendmasks:
+
 
     align 2
 
