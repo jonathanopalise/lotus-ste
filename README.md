@@ -22,7 +22,12 @@ You'll also need a specific disk image of Lotus to apply the code to at runtime.
 Insert the above floppy image, boot the virtual STE, start a race, and then enter the debugger. Enter the following commands to apply the patches:
 
 * `loadbin /path/to/0x76690.bin 0x76690`
+* `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
+* `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
+* `loadbin /path/to/0x7a3b0.bin 0x7a3b0`
 * `loadbin /path/to/0x80000.bin 0x80000`
+
+`/path/to` in the above commands represents the directory to which `bin` files have been assembled - normally the `bin` directory within the repository.
 
 Exit the debugger to see the STE enhancements in action - currently limited to an improved Blitter-based rendering of the road that runs a little slower than the standard method.
 
