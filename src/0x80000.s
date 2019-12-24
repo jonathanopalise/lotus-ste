@@ -85,14 +85,24 @@ drawscenery:
     add.w #10,d7                        ; convert to value suitable for blitter
 
     move.w #10,($ffff8a20).w            ; source x increment
-    move.w d7,($ffff8a22).w             ; source y increment
     move.w #8,($ffff8a2e).w             ; dest x increment
-    move.w d6,($ffff8a30).w             ; dest y increment
-    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
 
     move.l a3,d0                        ; get desired xpos of scenery object
     and.l #$f,d0                        ; convert to skew value for blitter
+
+    tst.w d0
+    beq zeroskew
+
+    addq.l #1,d4                        ; add another 16 pixel block to account for skew
+    sub.w #8,d6                         ; adjust dest y increment
+    sub.w #10,d7                        ; adjust source y increment
+
+zeroskew:
+
+    move.w d7,($ffff8a22).w             ; source y increment
+    move.w d6,($ffff8a30).w             ; dest y increment
+    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.b d0,($ffff8a3d).w
 
     add.l d0,d0
@@ -101,7 +111,9 @@ drawscenery:
 
     move.w d0,($ffff8a28).w             ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
-    move.w #-1,($ffff8a2c).w            ; endmask3
+
+    not.w d0
+    move.w d0,($ffff8a2c).w            ; endmask3
 
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
@@ -145,9 +157,6 @@ leftendmasks:
     dc.w %0000000000000111
     dc.w %0000000000000011
     dc.w %0000000000000001
-
-rightendmasks:
-
 
     align 2
 
