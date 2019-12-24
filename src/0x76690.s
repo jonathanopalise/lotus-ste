@@ -1,4 +1,4 @@
-; - This code needs to be loaded at location 0x76690 on the emulated ST
+    ; Redirect to blitter-driven road drawing routine
  
     ORG $76690
 

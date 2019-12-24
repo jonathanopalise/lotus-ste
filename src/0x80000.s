@@ -74,6 +74,13 @@ drawscenery:
     ; d6 is destination bytes to skip after each line
     ; d7 is source bytes to skip after each line
 
+    macro drawsceneryline
+    move.w d3,($ffff8a38).w             ; ycount
+    move.l a0,($ffff8a24).w             ; set source address
+    move.l a1,($ffff8a32).w             ; set destination
+    move.b d7,($ffff8a3c).w             ; start
+    endm
+
     addq.l #8,d6                        ; convert to value suitable for blitter
     add.w #10,d7                        ; convert to value suitable for blitter
 
@@ -98,37 +105,21 @@ drawscenery:
     move.b #$c0,d7                      ; store blitter start instruction
 
     rept 3
-
-    move.w d3,($ffff8a38).w             ; ycount
-    move.l a0,($ffff8a24).w             ; set source address
-    move.l a1,($ffff8a32).w             ; set destination
-    move.b d7,($ffff8a3c).w             ; start
-
+    drawsceneryline
     addq.l #2,a1                        ; move to next bitplane
-
     endr
+    drawsceneryline
 
-    ; fourth pass of mask doesn't need the addq at the end
-    move.w d3,($ffff8a38).w             ; ycount
-    move.l a0,($ffff8a24).w             ; set source address
-    move.l a1,($ffff8a32).w             ; set destination
-    move.b d7,($ffff8a3c).w             ; start
-
-    subq.l #6,a1
+    subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
-    rept 4
-
-    addq.l #2,a0
-
-    move.w d3,($ffff8a38).w             ; ycount
-    move.l a0,($ffff8a24).w             ; set source address
-    move.l a1,($ffff8a32).w             ; set destination
-    move.b d7,($ffff8a3c).w             ; start
-
-    addq.l #2,a1
-
+    rept 3
+    addq.l #2,a0                        ; move source to next bitplane
+    drawsceneryline
+    addq.l #2,a1                        ; move destination to next bitplane
     endr
+    addq.l #2,a0                        ; move source to next bitplane
+    drawsceneryline
 
     rts
 
