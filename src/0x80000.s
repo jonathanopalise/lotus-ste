@@ -78,7 +78,7 @@ drawscenery:
     move.w d3,($ffff8a38).w             ; ycount
     move.l a0,($ffff8a24).w             ; set source address
     move.l a1,($ffff8a32).w             ; set destination
-    move.b d7,($ffff8a3c).w             ; start
+    move.b d0,($ffff8a3c).w             ; start
     endm
 
     addq.l #8,d6                        ; convert to value suitable for blitter
@@ -91,22 +91,22 @@ drawscenery:
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
 
-    move.l a3,d7                        ; get desired xpos of scenery object
-    and.l #$f,d7                        ; convert to skew value for blitter
-    move.b d7,($ffff8a3d).w
+    move.l a3,d0                        ; get desired xpos of scenery object
+    and.l #$f,d0                        ; convert to skew value for blitter
+    move.b d0,($ffff8a3d).w
 
-    add.l d7,d7
+    add.l d0,d0
     lea.l leftendmasks,a3
-    move.w (a3,d7.w),d7
+    move.w (a3,d0.w),d0
 
-    move.w d7,($ffff8a28).w             ; endmask1
+    move.w d0,($ffff8a28).w             ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
     move.w #-1,($ffff8a2c).w            ; endmask3
 
-    ; we are now free to use d7, d6 and d4 for our own purposes
+    ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
 
-    move.b #$c0,d7                      ; store blitter start instruction
+    move.b #$c0,d0                      ; store blitter start instruction
 
     rept 3
     drawsceneryline
