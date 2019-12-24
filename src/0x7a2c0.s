@@ -1,3 +1,6 @@
+    ; disable use of preshifted sprites for roadside scenery
+    ; always use the non-shifted sprite on a 16 pixel boundary
+
     ORG $7a2c0
 
     move.l #$7abf6,a3
