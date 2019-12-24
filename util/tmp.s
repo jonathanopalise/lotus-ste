@@ -1,1 +1,1 @@
-    move.w    #193,d1
+    and.w #$fff0,d0

@@ -1,3 +1,21 @@
+so i need to do 2 things:
+1) disable the selection of the preshifted sprites
+2) apply the skew value
+
+we need to get the skew into a3:
+- $0007a2ea : 2641                               movea.l   d1,a3
+
+22/12 12:53 something in place of the following instructions to populate a3:
+$0007a2ea : 3001                               move.w    d1,d0
+$0007a2ec : 0240 fffc                          andi.w    #$fffc,d0 ; get offset in lookup table for pr
+$0007a2f0 : 2070 0000                          movea.l   (a0,d0.w),a0 ; populate a0 with preshif
+
+is start of sprite drawing routine 0x7a096?
+
+Doing this I think disables the fetching of preshifted versions of the sprites.
+There are up to 4 preshifted versions
+- w 0x7a2e6 0x72 0x00 0x4e 0x71
+
 7a46e - appears to part of the pit lane sign drawing routine
 
 $0007a3c4 : 3018 move.w    (a0)+,d0  ; get the mask into d0 and advance the source pointer
@@ -18,8 +36,7 @@ so it seems for each 16 pixels, we have
 the mask data and image data is interleaved.
 
 looks like the destination address in the 'bra' instruction at 0x7a3c0 is modified
-to allow sprites of different widths to be rendered. presumably this also facilitates
-clipping.
+
 
 Need to get the sprites rendering as-is using the Blitter, and then worry later about skew
 
@@ -32,6 +49,149 @@ LEADING UP TO DRAW SPRITE:
 - a1 is the destination address
 - can we work out if it gets rounded to the nearest 8 or 16?
 
+$0007a096 : 33f9 0007 c5b6 0007 ac+            move.w    $7c5b6,$7ac20
+$0007a0a0 : 33f9 0007 c592 0007 ac+            move.w    $7c592,$7ac22
+$0007a0aa : 247c 0000 0000                     movea.l   #0,a2
+$0007a0b0 : 3c39 0007 cc78                     move.w    $7cc78,d6
+$0007a0b6 : 0446 0080                          subi.w    #$80,d6
+$0007a0ba : dc46                               add.w     d6,d6
+$0007a0bc : dc46                               add.w     d6,d6
+$0007a0be : 43f9 0007 024c                     lea       $7024c,a1
+$0007a0c4 : 2271 6000                          movea.l   (a1,d6.w),a1
+$0007a0c8 : 33fc ffff 0007 cc74                move.w    #$ffff,$7cc74
+$0007a0d0 : 33c1 0007 a27e                     move.w    d1,$7a27e
+$0007a0d6 : 6040                               bra.s     $7a118
+$0007a0d8 : 33f9 0007 c66c 0007 ac+            move.w    $7c66c,$7ac20
+$0007a0e2 : 33f9 0007 c648 0007 ac+            move.w    $7c648,$7ac22
+$0007a0ec : 247c 0000 4100                     movea.l   #$4100,a2
+$0007a0f2 : 3c39 0007 cc78                     move.w    $7cc78,d6
+$0007a0f8 : 0446 0080                          subi.w    #$80,d6
+$0007a0fc : dc46                               add.w     d6,d6
+$0007a0fe : dc46                               add.w     d6,d6
+$0007a100 : 43f9 0007 024c                     lea       $7024c,a1
+$0007a106 : 2271 6000                          movea.l   (a1,d6.w),a1
+$0007a10a : 33fc ffff 0007 cc74                move.w    #$ffff,$7cc74
+$0007a112 : 33c1 0007 a27e                     move.w    d1,$7a27e
+$0007a118 : b07c 0040                          cmp.w     #$40,d0
+$0007a11c : 6400 008c                          bcc       $7a1aa
+$0007a120 : 5379 0007 ac20                     subq.w    #1,$7ac20
+$0007a126 : b079 0007 ac20                     cmp.w     $7ac20,d0
+$0007a12c : 6400 014c                          bcc       $7a27a
+$0007a130 : e24a                               lsr.w     #1,d2
+$0007a132 : 3602                               move.w    d2,d3
+$0007a134 : d040                               add.w     d0,d0
+$0007a136 : 3800                               move.w    d0,d4
+$0007a138 : d844                               add.w     d4,d4
+$0007a13a : d844                               add.w     d4,d4
+$0007a13c : 41f9 0002 b880                     lea       $2b880,a0
+$0007a142 : 33f0 4004 0007 ad6e                move.w    4(a0,d4.w),$7ad6e
+$0007a14a : 33f0 4006 0007 a280                move.w    6(a0,d4.w),$7a280
+$0007a152 : 3430 4008                          move.w    8(a0,d4.w),d2
+$0007a156 : 3a30 4000                          move.w    (a0,d4.w),d5
+$0007a15a : 9445                               sub.w     d5,d2
+$0007a15c : c5c3                               muls.w    d3,d2
+$0007a15e : d482                               add.l     d2,d2
+$0007a160 : 4842                               swap      d2
+$0007a162 : d445                               add.w     d5,d2
+$0007a164 : 9279 0007 ac22                     sub.w     $7ac22,d1
+$0007a16a : e741                               asl.w     #3,d1
+$0007a16c : 9242                               sub.w     d2,d1
+$0007a16e : 3430 400a                          move.w    $a(a0,d4.w),d2
+$0007a172 : 3a30 4002                          move.w    2(a0,d4.w),d5
+$0007a176 : 9445                               sub.w     d5,d2
+$0007a178 : c5c3                               muls.w    d3,d2
+$0007a17a : d482                               add.l     d2,d2
+$0007a17c : 4842                               swap      d2
+$0007a17e : d445                               add.w     d5,d2
+$0007a180 : 41f9 0003 0e40                     lea       $30e40,a0
+$0007a186 : 3830 0002                          move.w    2(a0,d0.w),d4
+$0007a18a : 3a30 0000                          move.w    (a0,d0.w),d5
+$0007a18e : 9845                               sub.w     d5,d4
+$0007a190 : c9c3                               muls.w    d3,d4
+$0007a192 : d884                               add.l     d4,d4
+$0007a194 : 4844                               swap      d4
+$0007a196 : d845                               add.w     d5,d4
+$0007a198 : d844                               add.w     d4,d4
+$0007a19a : c3c4                               muls.w    d4,d1
+$0007a19c : 4841                               swap      d1
+$0007a19e : b47c 005e                          cmp.w     #$5e,d2
+$0007a1a2 : 6504                               bcs.s     $7a1a8
+$0007a1a4 : 343c 005e                          move.w    #$5e,d2
+$0007a1a8 : 6056                               bra.s     $7a200
+$0007a1aa : b079 0007 ac20                     cmp.w     $7ac20,d0
+$0007a1b0 : 6400 00c8                          bcc       $7a27a
+$0007a1b4 : d040                               add.w     d0,d0
+$0007a1b6 : 3400                               move.w    d0,d2
+$0007a1b8 : d442                               add.w     d2,d2
+$0007a1ba : d442                               add.w     d2,d2
+$0007a1bc : 41f9 0002 b880                     lea       $2b880,a0
+$0007a1c2 : 33f0 2004 0007 ad6e                move.w    4(a0,d2.w),$7ad6e
+$0007a1ca : 33f0 2006 0007 a280                move.w    6(a0,d2.w),$7a280
+$0007a1d2 : 9279 0007 ac22                     sub.w     $7ac22,d1
+$0007a1d8 : e741                               asl.w     #3,d1
+$0007a1da : 41f9 0002 b880                     lea       $2b880,a0
+$0007a1e0 : 9270 2000                          sub.w     (a0,d2.w),d1
+$0007a1e4 : 3430 2002                          move.w    2(a0,d2.w),d2
+$0007a1e8 : 41f9 0003 0e40                     lea       $30e40,a0
+$0007a1ee : 3830 0000                          move.w    (a0,d0.w),d4
+$0007a1f2 : d844                               add.w     d4,d4
+$0007a1f4 : c3c4                               muls.w    d4,d1
+$0007a1f6 : 4841                               swap      d1
+$0007a1f8 : b47c 005e                          cmp.w     #$5e,d2
+$0007a1fc : 6502                               bcs.s     $7a200
+$0007a1fe : 745e                               moveq     #$5e,d2
+$0007a200 : 4a79 0007 cc74                     tst.w     $7cc74
+$0007a206 : 6b68                               bmi.s     $7a270
+$0007a208 : 670e                               beq.s     $7a218
+$0007a20a : 2279 0007 a276                     movea.l   $7a276,a1
+$0007a210 : 47f9 0007 acc6                     lea       $7acc6,a3
+$0007a216 : 600c                               bra.s     $7a224
+$0007a218 : 2279 0007 a272                     movea.l   $7a272,a1
+$0007a21e : 47f9 0007 ac2c                     lea       $7ac2c,a3
+$0007a224 : 3c07                               move.w    d7,d6
+$0007a226 : e747                               asl.w     #3,d7
+$0007a228 : de46                               add.w     d6,d7
+$0007a22a : 3c01                               move.w    d1,d6
+$0007a22c : 4446                               neg.w     d6
+$0007a22e : 0646 0090                          addi.w    #$90,d6
+$0007a232 : e446                               asr.w     #2,d6
+$0007a234 : 4a79 0007 cc74                     tst.w     $7cc74
+$0007a23a : 6608                               bne.s     $7a244
+$0007a23c : 3839 0007 cc76                     move.w    $7cc76,d4
+$0007a242 : dc44                               add.w     d4,d6
+$0007a244 : 3839 0007 a280                     move.w    $7a280,d4
+$0007a24a : 4444                               neg.w     d4
+$0007a24c : e444                               asr.w     #2,d4
+$0007a24e : dc44                               add.w     d4,d6
+$0007a250 : e646                               asr.w     #3,d6
+$0007a252 : 4a46                               tst.w     d6
+$0007a254 : 6a02                               bpl.s     $7a258
+$0007a256 : 7c00                               moveq     #0,d6
+$0007a258 : bc7c 0008                          cmp.w     #8,d6
+$0007a25c : 6b02                               bmi.s     $7a260
+$0007a25e : 7c08                               moveq     #8,d6
+$0007a260 : 33c6 0007 a27c                     move.w    d6,$7a27c
+$0007a266 : de46                               add.w     d6,d7
+$0007a268 : 1e33 7000                          move.b    (a3,d7.w),d7
+$0007a26c : 0247 00ff                          andi.w    #$ff,d7
+$0007a270 : 6012                               bra.s     $7a284
+$0007a272 : 0005 f1e4                          ori.b     #$e4,d5
+$0007a276 : 0006 8508                          ori.b     #8,d6
+$0007a27a : 4e75                               rts       
+$0007a27c : 0004 0120                          ori.b     #$20,d4
+$0007a280 : 0000 0000                          ori.b     #0,d0
+$0007a284 : 0641 0090                          addi.w    #$90,d1
+$0007a288 : de47                               add.w     d7,d7
+$0007a28a : de47                               add.w     d7,d7
+$0007a28c : 2049                               movea.l   a1,a0
+$0007a28e : 2070 7000                          movea.l   (a0,d7.w),a0
+$0007a292 : 3818                               move.w    (a0)+,d4
+$0007a294 : 3618                               move.w    (a0)+,d3
+$0007a296 : 33d8 0007 ad72                     move.w    (a0)+,$7ad72
+$0007a29c : 33d8 0007 a642                     move.w    (a0)+,$7a642
+$0007a2a2 : 4a79 0007 a27e                     tst.w     $7a27e
+$0007a2a8 : 6b08                               bmi.s     $7a2b2
+$0007a2aa : 9279 0007 a642                     sub.w     $7a642,d1
 $0007a2b0 : 5341                               subq.w    #1,d1
 $0007a2b2 : 3e02                               move.w    d2,d7
 $0007a2b4 : 9443                               sub.w     d3,d2
@@ -46,18 +206,30 @@ $0007a2cc : 33c7 0007 abfa                     move.w    d7,$7abfa
 $0007a2d2 : 3039 0007 a642                     move.w    $7a642,d0
 $0007a2d8 : e240                               asr.w     #1,d0
 $0007a2da : 9240                               sub.w     d0,d1 ; this seems only to affect the xpos of the player car
+-----
+; i could do with capturing the value of d1 here to put into a3 - how?
+; current theory is that d1 is disposable but d0 must be retained
+; so can we just put #0 into d0 instead of doing all the calculations?
+; what does seem to work is this:
+;
+; $0007a2e6 : 7200                               moveq     #0,d1
+; $0007a2e8 : 4e71                               nop
+; 
+; so could we put a move.l d1,a3 at 7a2dc and move everything else down, so that the moveq
+; above goes where the nop goes?
+-----
 $0007a2dc : c279 0007 a642                     and.w     $7a642,d1 ; the value of d1 before this might be the exact xpos of the sprite
-$0007a2e2 : 3401                               move.w    d1,d2 ;
-$0007a2e4 : e842                               asr.w     #4,d2 ; after this instruction, d2 = how many 16 pixel blocks across the screen should be drawn?
+$0007a2e2 : 3401                               move.w    d1,d2 ; copy sprite xpos into d2
+$0007a2e4 : e842                               asr.w     #4,d2 ; calculate start xpos of sprite in 16 pixel blocks
 $0007a2e6 : 0241 000f                          andi.w    #$f,d1
 $0007a2ea : 3001                               move.w    d1,d0
-$0007a2ec : 0240 fffc                          andi.w    #$fffc,d0
-$0007a2f0 : 2070 0000                          movea.l   (a0,d0.w),a0
+$0007a2ec : 0240 fffc                          andi.w    #$fffc,d0 ; get offset in lookup table for preshifted sprite data
+$0007a2f0 : 2070 0000                          movea.l   (a0,d0.w),a0 ; populate a0 with preshifted sprite data address
 $0007a2f4 : 3004                               move.w    d4,d0
 $0007a2f6 : d041                               add.w     d1,d0
 $0007a2f8 : 0640 000f                          addi.w    #$f,d0
 $0007a2fc : e848                               lsr.w     #4,d0
-$0007a2fe : 3800                               move.w    d0,d4
+$0007a2fe : 3800                               move.w    d0,d4 ; d0 is used here so we need to be careful with changing or not setting it above
 $0007a300 : 3c02                               move.w    d2,d6
 $0007a302 : dc44                               add.w     d4,d6
 $0007a304 : 3204                               move.w    d4,d1
@@ -123,7 +295,7 @@ $0007a398 : e745                               asl.w     #3,d5            ; ... 
 $0007a39a : d445                               add.w     d5,d2            ; begin expression...
 $0007a39c : d442                               add.w     d2,d2            ; ...
 $0007a39e : d442                               add.w     d2,d2            ; ...
-$0007a3a0 : d4c2                               adda.w    d2,a2            ; ... d2 = (d2 * 4 [see 7a38c]) + d5 (d5 must the start of a line within logbase, so a multiple of 160)
+$0007a3a0 : d4c2                               adda.w    d2,a2            ; ... d2 = (d2 * 8 [see 7a38c]) + d5 (d5 must the start of a line within logbase, so a multiple of 160)
                                                                           ; we set d5 to 0 and everything renders at the top line of the screen
 $0007a3a2 : d5f9 0007 c504                     adda.l    $7c504,a2        ; add buffer location into a2?
 $0007a3a8 : 224a                               movea.l   a2,a1            ; transfer destination address into a2

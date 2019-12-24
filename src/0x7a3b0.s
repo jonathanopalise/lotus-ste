@@ -13,9 +13,6 @@
     addq.l #8,d6
     add.w #10,d7
 
-    ; a3 appears to be the only address register we can overwrite
-    move.l #6,a3
-
     move.w #-1,($ffff8a28).w            ; endmask1
     move.w #-1,($ffff8a2a).w            ; endmask2
     move.w #-1,($ffff8a2c).w            ; endmask3
@@ -26,7 +23,11 @@
     move.w d6,($ffff8a30).w             ; dest y increment
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.w #$0201,($ffff8a3a).w         ; hop/op
-    move.b #$00,($ffff8a3d).w
+
+    move.l a3,d7
+    and.l #$f,d7
+    ;moveq.l #15,d7
+    move.b d7,($ffff8a3d).w
 
     ; we are now free to use d7, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
