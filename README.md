@@ -21,20 +21,23 @@ You'll also need a specific disk image of Lotus to apply the code to at runtime.
 
 Insert the above floppy image, boot the virtual STE, start a race, and then enter the debugger. Enter the following commands to apply the patches:
 
-* `loadbin /path/to/0x76690.bin 0x76690`
 * `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
 * `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
-* `loadbin /path/to/0x7a3b0.bin 0x7a3b0`
+* `loadbin /path/to/0x7a312.bin 0x7a312`
+* `loadbin /path/to/0x76690.bin 0x76690`
 * `loadbin /path/to/0x80000.bin 0x80000`
 
 `/path/to` in the above commands represents the directory to which `bin` files have been assembled - normally the `bin` directory within the repository.
 
-Exit the debugger to see the STE enhancements in action - currently limited to an improved Blitter-based rendering of the road that runs a little slower than the standard method.
+Exit the debugger to see the STE enhancements in action. You should see the following changes:
+
+* The road is rendered using the Blitter and features graphical details resembling those of the Amiga version;
+* Some of the roadside scenery is rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping and masking)
 
 Possible forthcoming objectives for this project are as follows:
 
 * Render the road with visuals reminiscent on the Amiga version, with performance matching the non-blitter renderer;
 * Add sampled sound effects to replace the current synthesised ones - e.g. car collisions, empty fuel etc;
-* Render trackside objects with single pixel horizontal precision (objects on the ST version are currently shifted to the nearest 16 pixel offset);
+* Render all trackside objects with single pixel horizontal precision (objects on the ST version are currently shifted to the nearest 16 pixel offset);
 * Add further zoom levels for trackside objects;
 * (Unlikely but nice to have) Render a sky gradient similar to that present on the Amiga version. 

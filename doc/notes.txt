@@ -235,18 +235,24 @@ $0007a302 : dc44                               add.w     d4,d6
 $0007a304 : 3204                               move.w    d4,d1
 $0007a306 : 0c79 0003 0007 ad72                cmpi.w    #3,$7ad72
 $0007a30e : 6700 0186                          beq       $7a496
-$0007a312 : 4a42                               tst.w     d2
-$0007a314 : 6a16                               bpl.s     $7a32c
+
+; START HERE
+
+$0007a312 : 4a42                               tst.w     d2 ; set flags for d2
+$0007a314 : 6a16                               bpl.s     $LABEL_7a32c ; branch if d2>0
 $0007a316 : 4a46                               tst.w     d6
 $0007a318 : 6b00 0320                          bmi       $7a63a
 $0007a31c : 3002                               move.w    d2,d0
-$0007a31e : 7400                               moveq     #0,d2
+$0007a31e : 7400                               moveq     #0,d2 ; clip scenery against left (left endmask should be 0xffff)
+                                                               ; at this point, left endmask needs be to 0xffff
 $0007a320 : d840                               add.w     d0,d4
 $0007a322 : d040                               add.w     d0,d0
 $0007a324 : 90c0                               suba.w    d0,a0
 $0007a326 : d040                               add.w     d0,d0
 $0007a328 : d040                               add.w     d0,d0
 $0007a32a : 90c0                               suba.w    d0,a0
+
+LABEL_7a32c:
 $0007a32c : 4a45                               tst.w     d5 ; do we need to clip the top of the sprite?
 $0007a32e : 6a18                               bpl.s     $7a348 ; if we take the jump, no need to clip the top
 $0007a330 : 4a47                               tst.w     d7 ; is the bottom of the sprite off screen too?
@@ -260,13 +266,16 @@ $0007a340 : 90c0                               suba.w    d0,a0
 $0007a342 : d040                               add.w     d0,d0
 $0007a344 : d040                               add.w     d0,d0
 $0007a346 : 90c0                               suba.w    d0,a0
+
 $0007a348 : bc7c 0014                          cmp.w     #$14,d6
-$0007a34c : 6b10                               bmi.s     $7a35e ; something to do with clipping against right side of screen
-$0007a34e : b47c 0014                          cmp.w     #$14,d2
+$0007a34c : 6b10                               bmi.s     $LABEL_7a35e ; something to do with clipping against right side of screen
+$0007a34e : b47c 0014                          cmp.w     #$14,d2 ; does sprite need clipping on right edge?
 $0007a352 : 6a00 02e6                          bpl       $7a63a ; something to do with clipping - if sprite is entirely off screen?
 $0007a356 : 3006                               move.w    d6,d0
 $0007a358 : 0440 0014                          subi.w    #$14,d0
-$0007a35c : 9840                               sub.w     d0,d4
+$0007a35c : 9840                               sub.w     d0,d4 ; this is chopping off the sprite on the right edge
+
+LABEL_7a35e:                                   ; so at this point, right endmask needs to be 0xffff?
 $0007a35e : be79 0007 ad6e                     cmp.w     $7ad6e,d7
 $0007a364 : 630e                               bls.s     $7a374
 $0007a366 : 9e79 0007 ad6e                     sub.w     $7ad6e,d7
