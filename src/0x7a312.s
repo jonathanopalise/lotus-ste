@@ -38,6 +38,9 @@ label_7a348:
     subi.w    #$14,d0
     sub.w     d0,d4 ; this is chopping off the sprite on the right edge
 
+    ; sprite has been clipped on right edge
+    ; so endmask3 needs to be $ffff
+
 label_7a35e:
     cmp.w     $7ad6e,d7
     bls.s     label_7a374
