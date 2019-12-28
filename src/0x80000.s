@@ -1,6 +1,14 @@
 
     ORG $80000
 
+leftclipped:
+
+    dc.w 0
+
+rightclipped:
+
+    dc.w 0
+
 drawroad:
 
     movem.l d0-d4/a0-a2,-(a7)
@@ -86,15 +94,6 @@ drawscenery:
 
     move.l a3,d0                        ; get desired xpos of scenery object
     and.l #$f,d0                        ; convert to skew value for blitter
-
-    tst.w d0
-    beq zeroskew
-
-    addq.l #1,d4                        ; add another 16 pixel block to account for skew
-    sub.w #8,d6                         ; adjust dest y increment
-    sub.w #10,d7                        ; adjust source y increment
-
-zeroskew:
 
     move.w d7,($ffff8a22).w             ; source y increment
     move.w d6,($ffff8a30).w             ; dest y increment

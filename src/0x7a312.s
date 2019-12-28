@@ -2,13 +2,36 @@
 
     include symbols.inc
 
-    tst.w     d2 ; set flags for d2
-    bpl.s     label_7a32c ; branch if d2>0
-    tst.w     d6
-    bmi       label_7a63a
+    move.l a3,d0                       ; get desired xpos of scenery object
+    and.l #$f,d0                       ; convert to skew value for blitter
+
+    tst.w d0
+    beq zeroskew
+
+    move.w d2,d0
+    add.w d4,d0
+
+    cmp.w #$14,d0                      ; does sprite need clipping on right edge?
+    bpl.s zeroskew
+
+    add.w #1,d4                        ; add another 16 pixel block to account for skew
+    ;sub.w #8,d6                       ; adjust dest y increment
+    ;sub.w #10,d7                      ; adjust source y increment
+
+zeroskew:
+
+    moveq     #0,d0
+    move.w    d0,leftclipped
+    move.w    d0,rightclipped
+
+    tst.w     d2                       ; set flags for d2
+    bpl.s     label_7a32c              ; jump when no left clipping required
+    tst.w     d6                       ; bytes to skip after each line
+    bmi       nothingtodraw            ; if negative, nothing to draw
     move.w    d2,d0
-    moveq     #0,d2 ; clip scenery against left (left endmask should be 0xffff)
-                    ; at this point, left endmask needs be to 0xffff
+    moveq     #0,d2                    ; clip scenery against left (left endmask should be 0xffff)
+                                       ; at this point, left endmask needs be to 0xffff
+    move.w    #1,leftclipped
     add.w     d0,d4
     add.w     d0,d0
     suba.w    d0,a0
@@ -17,10 +40,10 @@
     suba.w    d0,a0
 
 label_7a32c:
-    tst.w     d5 ; do we need to clip the top of the sprite?
-    bpl.s     label_7a348 ; if we take the jump, no need to clip the top
-    tst.w     d7 ; is the bottom of the sprite off screen too?
-    bmi       label_7a63a
+    tst.w     d5                       ; do we need to clip the top of the sprite?
+    bpl.s     label_7a348              ; if we take the jump, no need to clip the top
+    tst.w     d7                       ; is the bottom of the sprite off screen too?
+    bmi       nothingtodraw
     move.w    d5,d0
     moveq     #0,d5
     add.w     d0,d3
@@ -33,12 +56,13 @@ label_7a32c:
 
 label_7a348:
     cmp.w     #$14,d6
-    bmi.s     label_7a35e ; something to do with clipping against right side of screen
-    cmp.w     #$14,d2 ; does sprite need clipping on right edge?
-    bpl       label_7a63a ; something to do with clipping - if sprite is entirely off screen?
+    bmi.s     label_7a35e              ; something to do with clipping against right side of screen
+    cmp.w     #$14,d2                  ; does sprite need clipping on right edge?
+    bpl       nothingtodraw            ; something to do with clipping - if sprite is entirely off screen?
     move.w    d6,d0
     subi.w    #$14,d0
-    sub.w     d0,d4 ; this is chopping off the sprite on the right edge
+    sub.w     d0,d4                    ; this is chopping off the sprite on the right edge
+    move.w    #1,rightclipped
 
     ; sprite has been clipped on right edge
     ; so endmask3 needs to be $ffff
@@ -49,7 +73,7 @@ label_7a35e:
     sub.w     $7ad6e,d7
     addq.w    #1,d7
     sub.w     d7,d3
-    bls       label_7a63a
+    bls       nothingtodraw
 
 label_7a374:
     move.w    d4,d6
@@ -79,10 +103,10 @@ label_7a374:
     adda.l    $7c504,a2        ; add buffer location into a2?
     movea.l   a2,a1            ; transfer destination address into a2
     tst.w     d4
-    beq       label_7a63a
+    beq       nothingtodraw
     
     jmp drawscenery
 
-label_7a63a:
+nothingtodraw:
 
     jmp $7a63a
