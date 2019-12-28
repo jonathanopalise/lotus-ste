@@ -8,15 +8,18 @@
     tst.w d0
     beq zeroskew
 
-    move.w d2,d0
-    add.w d4,d0
+    move.w d2,d0                       ; get starting position in blocks of 16 pixels
+    add.w d4,d0                        ; get number of 16 pixel blocks to be drawn
 
-    cmp.w #$14,d0                      ; does sprite need clipping on right edge?
-    bpl.s zeroskew
+    cmp.w #$14,d0                      ; will part of sprite be off right side if we add 16 pixels?
+    bpl.s setrightclipped              ; if yes, don't add 16 pixels to the right side
 
     add.w #1,d4                        ; add another 16 pixel block to account for skew
-    ;sub.w #8,d6                       ; adjust dest y increment
-    ;sub.w #10,d7                      ; adjust source y increment
+    bra.s zeroskew
+
+setrightclipped:
+
+    move.w    #1,rightclipped
 
 zeroskew:
 
