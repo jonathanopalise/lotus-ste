@@ -40,10 +40,10 @@ bin/0x76690.bin: src/0x76690.s src/symbols.inc
 bin/0x80000.o: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
-src/road.s: 
+src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
 
-src/symbols.inc: bin/0x80000.o
+src/symbols.inc: bin/0x80000.o src/process_symbols.php
 	echo Process symbols...
 	$(NM) bin/0x80000.o > src/symbols.txt
 	$(PHP) src/process_symbols.php > src/symbols.inc

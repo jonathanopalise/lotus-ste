@@ -1,3 +1,4 @@
 *.bin
+*.o
 src/road.s
 src/symbols.*
