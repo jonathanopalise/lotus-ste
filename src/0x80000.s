@@ -1,10 +1,6 @@
 
     ORG $80000
 
-    bra drawroad
-    align 2                            ; jmp instructions must be at 4 byte intervals regardless of their length
-    bra drawscenery
-
 drawroad:
 
     movem.l d0-d4/a0-a2,-(a7)

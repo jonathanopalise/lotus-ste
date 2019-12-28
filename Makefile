@@ -1,5 +1,5 @@
 VASM = vasmm68k_mot 
-NM = /home/jonathan/brown/bin/m68k-ataribrownest-elf-nm
+NM = m68k-ataribrownest-elf-nm
 PHP = php
 
 BIN_FILES= bin/0x76690.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x80000.bin
@@ -7,8 +7,9 @@ BIN_FILES= bin/0x76690.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0
 default: check_dependencies all
 
 check_dependencies:
-	command -v php >/dev/null 2>&1 || { echo >&2 "I require php but it's not installed.  Aborting."; exit 1; }
-	command -v vasmm68k_mot >/dev/null 2>&1 || { echo >&2 "I require vasmm68k_mot but it's not installed.  Aborting."; exit 1; }
+	command -v $(PHP) >/dev/null 2>&1 || { echo >&2 "I require $(PHP) but it's not installed.  Aborting."; exit 1; }
+	command -v $(NM) >/dev/null 2>&1 || { echo >&2 "I require $(NM) but it's not installed.  Aborting."; exit 1; }
+	command -v $(VASM) >/dev/null 2>&1 || { echo >&2 "I require $(VASM) but it's not installed.  Aborting."; exit 1; }
 
 .PHONY: clean
 
@@ -31,7 +32,7 @@ bin/0x7a2c0.bin: src/0x7a2c0.s
 bin/0x7a2dc.bin: src/0x7a2dc.s
 	$(VASM) src/0x7a2dc.s -Fbin -o bin/0x7a2dc.bin
 
-bin/0x7a312.bin: src/0x7a312.s
+bin/0x7a312.bin: src/0x7a312.s src/symbols.inc
 	$(VASM) src/0x7a312.s -Fbin -o bin/0x7a312.bin
 
 bin/0x76690.bin: src/0x76690.s src/symbols.inc

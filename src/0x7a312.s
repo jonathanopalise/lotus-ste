@@ -1,5 +1,7 @@
     ORG $7a312
 
+    include symbols.inc
+
     tst.w     d2 ; set flags for d2
     bpl.s     label_7a32c ; branch if d2>0
     tst.w     d6
@@ -79,7 +81,7 @@ label_7a374:
     tst.w     d4
     beq       label_7a63a
     
-    jmp $80004
+    jmp drawscenery
 
 label_7a63a:
 
