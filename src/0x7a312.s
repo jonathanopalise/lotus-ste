@@ -2,6 +2,10 @@
 
     include symbols.inc
 
+    moveq     #0,d0
+    move.w    d0,leftclipped
+    move.w    d0,rightclipped
+
     move.l a3,d0                       ; get desired xpos of scenery object
     and.l #$f,d0                       ; convert to skew value for blitter
 
@@ -19,13 +23,9 @@
 
 setrightclipped:
 
-    move.w    #1,rightclipped
+    move.w    #$ffff,rightclipped
 
 zeroskew:
-
-    moveq     #0,d0
-    move.w    d0,leftclipped
-    move.w    d0,rightclipped
 
     tst.w     d2                       ; set flags for d2
     bpl.s     label_7a32c              ; jump when no left clipping required
@@ -34,7 +34,7 @@ zeroskew:
     move.w    d2,d0
     moveq     #0,d2                    ; clip scenery against left (left endmask should be 0xffff)
                                        ; at this point, left endmask needs be to 0xffff
-    move.w    #1,leftclipped
+    move.w    #$ffff,leftclipped
     add.w     d0,d4
     add.w     d0,d0
     suba.w    d0,a0
@@ -65,7 +65,7 @@ label_7a348:
     move.w    d6,d0
     subi.w    #$14,d0
     sub.w     d0,d4                    ; this is chopping off the sprite on the right edge
-    move.w    #1,rightclipped
+    move.w    #$ffff,rightclipped
 
     ; sprite has been clipped on right edge
     ; so endmask3 needs to be $ffff
