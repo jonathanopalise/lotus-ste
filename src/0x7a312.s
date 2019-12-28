@@ -13,7 +13,7 @@
     beq zeroskew
 
     move.w d2,d0                       ; get starting position in blocks of 16 pixels
-    add.w d4,d0                        ; get number of 16 pixel blocks to be drawn
+    add.w d4,d0                        ; add number of 16 pixel blocks to be drawn
 
     cmp.w #$14,d0                      ; will part of sprite be off right side if we add 16 pixels?
     bpl.s setrightclipped              ; if yes, don't add 16 pixels to the right side

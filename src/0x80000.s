@@ -100,15 +100,26 @@ drawscenery:
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.b d0,($ffff8a3d).w
 
-    add.l d0,d0
-    lea.l leftendmasks,a3
-    move.w (a3,d0.w),d0
-
-    move.w d0,($ffff8a28).w             ; endmask1
+    add.l d0,d0                         ; byte offset in mask lookup table
     move.w #-1,($ffff8a2a).w            ; endmask2
 
-    not.w d0
-    move.w d0,($ffff8a2c).w            ; endmask3
+    move.w leftclipped,d1
+    bne.s nocalcendmask1
+
+    lea.l leftendmasks,a3
+    move.w (a3,d0.w),d1
+
+nocalcendmask1:
+    move.w d1,($ffff8a28).w             ; endmask1
+
+    move.w rightclipped,d1
+    bne.s nocalcendmask3
+
+    lea.l rightendmasks,a3
+    move.w (a3,d0.w),d1
+
+nocalcendmask3:
+    move.w d1,($ffff8a2c).w            ; endmask3
 
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
@@ -152,6 +163,25 @@ leftendmasks:
     dc.w %0000000000000111
     dc.w %0000000000000011
     dc.w %0000000000000001
+
+rightendmasks:
+
+    dc.w %1111111111111111
+    dc.w %1000000000000000
+    dc.w %1100000000000000
+    dc.w %1110000000000000
+    dc.w %1111000000000000
+    dc.w %1111100000000000
+    dc.w %1111110000000000
+    dc.w %1111111000000000
+    dc.w %1111111100000000
+    dc.w %1111111110000000
+    dc.w %1111111111000000
+    dc.w %1111111111100000
+    dc.w %1111111111110000
+    dc.w %1111111111111000
+    dc.w %1111111111111100
+    dc.w %1111111111111110
 
     align 2
 
