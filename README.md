@@ -13,7 +13,7 @@ Directory layout is as follows:
 * `src` - contains the core source code to generate the code for use on the ST side
 * `util` - contains utilities for use in reverse engineering efforts
 
-Run `build.sh` to generate the binary patches for use on the ST side. In order to successfully run the build process, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). The build script is designed for use only with Linux but I imagine the build process could be repurposed for Windows by means of a batch script or something similar.
+Run `make` to generate the binary patches for use on the ST side. In order to successfully run the Makefile, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). You'll also need a `m68k-ataribrownest-elf-nm` or something similar from one of the available GCC cross-assembler packages (e.g. https://bitbucket.org/ggnkua/bigbrownbuild/src/default/). The Makefile is designed for use only with Linux but I imagine it could be repurposed for Windows or Mac with some changes.
 
 In order to test the current functionality of this project, you'll need a recent build of the Hatari emulator, configured as an STE with 1 meg of memory.
 
@@ -32,7 +32,7 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 Exit the debugger to see the STE enhancements in action. You should see the following changes:
 
 * The road is rendered using the Blitter and features graphical details resembling those of the Amiga version;
-* Some of the roadside scenery is rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping and masking)
+* Some of the roadside scenery is rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping)
 
 Possible forthcoming objectives for this project are as follows:
 
