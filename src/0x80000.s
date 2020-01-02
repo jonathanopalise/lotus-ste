@@ -94,17 +94,26 @@ drawscenery:
 
     move.l a3,d0                        ; get desired xpos of scenery object
     and.l #$f,d0                        ; convert to skew value for blitter
+    move.w d0,d1
+    beq.s nonfsr                        ; if skew is zero, we can't use nfsr
 
+    cmp.w #0,rightclipped
+    bne.s nonfsr
+
+    add.w #10,d7
+    or.b #$40,d1
+
+nonfsr:
     move.w d7,($ffff8a22).w             ; source y increment
     move.w d6,($ffff8a30).w             ; dest y increment
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
-    move.b d0,($ffff8a3d).w
+    move.b d1,($ffff8a3d).w
 
     add.l d0,d0                         ; byte offset in mask lookup table
     move.w #-1,($ffff8a2a).w            ; endmask2
 
     move.w leftclipped,d1
-    bne.s nocalcendmask1
+    bne.s nocalcendmask1                ; branch if zero flag not set
 
     lea.l leftendmasks,a3
     move.w (a3,d0.w),d1
@@ -113,7 +122,7 @@ nocalcendmask1:
     move.w d1,($ffff8a28).w             ; endmask1
 
     move.w rightclipped,d1
-    bne.s nocalcendmask3
+    bne.s nocalcendmask3                ; branch if zero flag not set
 
     lea.l rightendmasks,a3
     move.w (a3,d0.w),d1
