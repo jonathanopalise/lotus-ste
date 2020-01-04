@@ -13,7 +13,7 @@ Directory layout is as follows:
 * `src` - contains the core source code to generate the code for use on the ST side
 * `util` - contains utilities for use in reverse engineering efforts
 
-Run `make` to generate the binary patches for use on the ST side. In order to successfully run the Makefile, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). You'll also need a `m68k-ataribrownest-elf-nm` or something similar from one of the available GCC cross-assembler packages (e.g. https://bitbucket.org/ggnkua/bigbrownbuild/src/default/). The Makefile is designed for use only with Linux but I imagine it could be repurposed for Windows or Mac with some changes.
+Run `make` to generate the binary patches for use on the ST side. In order to successfully run the Makefile, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). You'll also need a `m68k-ataribrownest-elf-nm` executable or something similar from one of the available GCC cross-assembler packages (e.g. https://bitbucket.org/ggnkua/bigbrownbuild/src/default/). The Makefile is designed for use only with Linux but I imagine it could be repurposed for Windows or Mac with some changes.
 
 In order to test the current functionality of this project, you'll need a recent build of the Hatari emulator, configured as an STE with 1 meg of memory.
 
@@ -24,6 +24,7 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 * `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
 * `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
 * `loadbin /path/to/0x7a312.bin 0x7a312`
+* `loadbin /path/to/0x76690.bin 0x7666c`
 * `loadbin /path/to/0x76690.bin 0x76690`
 * `loadbin /path/to/0x80000.bin 0x80000`
 

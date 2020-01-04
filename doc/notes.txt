@@ -37,6 +37,20 @@ the mask data and image data is interleaved.
 
 looks like the destination address in the 'bra' instruction at 0x7a3c0 is modified
 
+car drawing (0x7a53a) is similar but only appears to draw 3 bitplanes:
+
+$0007a604 : 3018                               move.w    (a0)+,d0
+$0007a606 : 3400                               move.w    d0,d2
+$0007a608 : 4840                               swap      d0
+$0007a60a : 3002                               move.w    d2,d0
+$0007a60c : c191                               and.l     d0,(a1)
+$0007a60e : 2218                               move.l    (a0)+,d1
+$0007a610 : 8399                               or.l      d1,(a1)+
+$0007a612 : c199                               and.l     d0,(a1)+
+$0007a614 : 3218                               move.w    (a0)+,d1
+$0007a616 : 8369 f0fc                          or.w      d1,$f0fc(a1)
+
+
 
 Need to get the sprites rendering as-is using the Blitter, and then worry later about skew
 
