@@ -9,23 +9,37 @@ rightclipped:
 
     dc.w 0
 
-drawroad:
-
-    movem.l d0-d4/a0-a2,-(a7)
-
-    moveq.l #-1,d3
-
-    ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
-
+initdrawroad:
+    ;move.l #0,a5
+    move.w d4,$76688
     move.w #8,($ffff8a20).w            ; source x increment
     move.w #-158,($ffff8a22).w         ; source y increment
-    move.w d3,($ffff8a28).w            ; endmask1
-    move.w d3,($ffff8a2a).w            ; endmask2
-    move.w d3,($ffff8a2c).w            ; endmask3
+    move.w #-1,($ffff8a28).w           ; endmask1
+    move.w #-1,($ffff8a2a).w           ; endmask2
+    move.w #-1,($ffff8a2c).w           ; endmask3
     move.w #8,($ffff8a2e).w            ; dest x increment
     move.w #-150,($ffff8a30).w         ; dest y increment
     move.w #$0203,($ffff8a3a).w        ; hop/op
     move.w #20,($ffff8a36).w           ; xcount
+    jmp $76672
+
+drawroad:
+
+    movem.l d0-d4/a0-a2,-(a7)
+
+    ;moveq.l #-1,d3
+
+    ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
+
+    ;move.w #8,($ffff8a20).w            ; source x increment
+    ;move.w #-158,($ffff8a22).w         ; source y increment
+    ;move.w d3,($ffff8a28).w            ; endmask1
+    ;move.w d3,($ffff8a2a).w            ; endmask2
+    ;move.w d3,($ffff8a2c).w            ; endmask3
+    ;move.w #8,($ffff8a2e).w            ; dest x increment
+    ;move.w #-150,($ffff8a30).w         ; dest y increment
+    ;move.w #$0203,($ffff8a3a).w        ; hop/op
+    ;move.w #20,($ffff8a36).w           ; xcount
     move.w #4,($ffff8a38).w            ; ycount
 
     lsr.l #4,d0                        ; bring the road width value into a 0-255 range
@@ -35,7 +49,7 @@ drawroad:
 
 	lsr.w #5,d2                        ; d2 should contain something telling us about the road position of current line
 	andi.w #$20,d2
-    tst.w d2
+    ;tst.w d2 ; TODO: can we get rid of this?
     beq.s skipoffsetadd 
     add.l #1024,d0
 
