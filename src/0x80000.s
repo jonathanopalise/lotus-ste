@@ -10,17 +10,20 @@ rightclipped:
     dc.w 0
 
 initdrawroad:
-    ;move.l #0,a5
+    move.l #$ffff8a20,a5
     move.w d4,$76688
-    move.w #8,($ffff8a20).w            ; source x increment
-    move.w #-158,($ffff8a22).w         ; source y increment
-    move.w #-1,($ffff8a28).w           ; endmask1
-    move.w #-1,($ffff8a2a).w           ; endmask2
-    move.w #-1,($ffff8a2c).w           ; endmask3
-    move.w #8,($ffff8a2e).w            ; dest x increment
-    move.w #-150,($ffff8a30).w         ; dest y increment
-    move.w #$0203,($ffff8a3a).w        ; hop/op
-    move.w #20,($ffff8a36).w           ; xcount
+    move.w #8,(a5)+            ; source x increment 8a20
+    move.w #-158,(a5)          ; source y increment 8a22
+    add.l #6,a5
+    move.w #-1,(a5)+           ; endmask1 8a28
+    move.w #-1,(a5)+           ; endmask2 8a2a
+    move.w #-1,(a5)+           ; endmask3 8a2c
+    move.w #8,(a5)+            ; dest x increment 8a2e
+    move.w #-150,(a5)          ; dest y increment 8x30
+    add.l #6,a5
+    move.w #20,(a5)           ; xcount 8a36
+    add.l #4,a5
+    move.w #$0203,(a5)        ; hop/op 8a3a
     jmp $76672
 
 drawroad:

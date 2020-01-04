@@ -14,17 +14,20 @@ check_dependencies:
 .PHONY: clean
 
 clean:
+	rm src/symbols.*
+	rm src/road.s
 	rm bin/*.bin
 	rm bin/*.o
-	rm bin/road.s
-	rm src/symbols.*
 
 .PHONY: all
 
 all: $(BIN_FILES)
 
-bin/0x80000.bin: src/0x80000.s
+bin/0x80000.bin: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Fbin -o bin/0x80000.bin
+
+bin/0x80000.o: src/0x80000.s src/road.s
+	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
 bin/0x7a2c0.bin: src/0x7a2c0.s
 	$(VASM) src/0x7a2c0.s -Fbin -o bin/0x7a2c0.bin
@@ -35,14 +38,11 @@ bin/0x7a2dc.bin: src/0x7a2dc.s
 bin/0x7a312.bin: src/0x7a312.s src/symbols.inc
 	$(VASM) src/0x7a312.s -Fbin -o bin/0x7a312.bin
 
-bin/0x7666c.bin: src/0x7666c.s src/0x80000.s
+bin/0x7666c.bin: src/0x7666c.s src/symbols.inc
 	$(VASM) src/0x7666c.s -Fbin -o bin/0x7666c.bin
 
-bin/0x76690.bin: src/0x76690.s src/0x80000.s
+bin/0x76690.bin: src/0x76690.s src/symbols.inc
 	$(VASM) src/0x76690.s -Fbin -o bin/0x76690.bin
-
-bin/0x80000.o: src/0x80000.s src/road.s
-	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
 src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
