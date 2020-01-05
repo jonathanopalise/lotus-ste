@@ -84,11 +84,17 @@ drawscenery:
     ; d7 is source bytes to skip after each line
 
     macro drawsceneryline
-    move.w d3,($ffff8a38).w             ; ycount
-    move.l a0,($ffff8a24).w             ; set source address
-    move.l a1,($ffff8a32).w             ; set destination
-    move.b d0,($ffff8a3c).w             ; start
+    move.w d3,(a2)             ; ycount
+    move.l a0,(a4)             ; set source address
+    move.l a1,(a5)             ; set destination
+    move.b d0,(a6)             ; start
     endm
+
+    movem.l a2-a6,-(a7)
+    move.l #$ffff8a38,a2
+    move.l #$ffff8a24,a4
+    move.l #$ffff8a32,a5
+    move.l #$ffff8a3c,a6
 
     addq.l #8,d6                        ; convert to value suitable for blitter
     add.w #10,d7                        ; convert to value suitable for blitter
@@ -156,6 +162,8 @@ nocalcendmask3:
     endr
     addq.l #2,a0                        ; move source to next bitplane
     drawsceneryline
+
+    movem.l (a7)+,a2-a6
 
     rts
 
