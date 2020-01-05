@@ -28,7 +28,7 @@ initdrawroad:
 
 drawroad:
 
-    movem.l d0-d4/a2,-(a7)
+    movem.l d0-d2/a2,-(a7)
 
     ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
 
@@ -67,7 +67,7 @@ skipoffsetadd:
     or.w #$c080,d4
     move.w d4,($ffff8a3c).w
 
-    movem.l (a7)+,d0-d4/a2
+    movem.l (a7)+,d0-d2/a2
 
     add.l #160,a1
     jmp $767bc
