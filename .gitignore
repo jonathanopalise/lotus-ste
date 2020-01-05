@@ -1,3 +1,4 @@
+*.swp
 *.bin
 *.o
 src/road.s
