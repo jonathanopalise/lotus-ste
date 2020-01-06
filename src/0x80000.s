@@ -28,8 +28,6 @@ initdrawroad:
 
 drawroad:
 
-    movem.l d0-d1,-(a7)
-
     ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
 
     move.w #4,($ffff8a38).w            ; ycount
@@ -47,10 +45,8 @@ drawroad:
 skipoffsetadd:
 
     move.l #byte_offsets,a0
-    add.l d0,a0                          ; d0 is the offset to the pointer to the road width segment we want
-    move.l (a0),a0                     ; a0 now contains the pointer to the road graphics data offset for the current line
-    ;move.l #gfx_data,a2
-    add.l #gfx_data,a0                        ; a0 now contains memory location of central source
+    move.l (a0,d0.w),a0                ; a0 now contains the pointer to the road graphics data offset for the current line
+    add.l #gfx_data,a0                 ; a0 now contains memory location of central source
 
     ext.l d1                           ; d1 is the shift value for the current line
     move.l d1,d4                       ; copy to d4
@@ -66,8 +62,6 @@ skipoffsetadd:
 
     or.w #$c080,d4
     move.w d4,($ffff8a3c).w
-
-    movem.l (a7)+,d0-d1
 
     add.l #160,a1
     jmp $767bc
