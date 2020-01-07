@@ -24,13 +24,17 @@ initdrawroad:
     move.w #20,(a5)           ; xcount 8a36
     addq.l #4,a5
     move.w #$0203,(a5)        ; hop/op 8a3a
+    move.l #$ffff8a38,a5
+    move.l #$ffff8a24,a3
+    move.l #$ffff8a32,a2
+    move.l #$ffff8a3c,a6
     jmp $76672
 
 drawroad:
 
     ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
 
-    move.w #4,($ffff8a38).w            ; ycount
+    move.w #4,(a5)                     ; ycount
 
     lsr.w #4,d0                        ; bring the road width value into a 0-255 range
     and.w #$ff,d0                      ; bring the road width value into a 0-255 range
@@ -55,13 +59,13 @@ skipoffsetadd:
     and.b #$f8,d1
     sub.l d1,a0                        ; d1 now contains adjusted source
 
-    move.l a0,($ffff8a24).w            ; set source address
-    move.l a1,($ffff8a32).w            ; set destination
+    move.l a0,(a3)            ; set source address
+    move.l a1,(a2)            ; set destination
 
     ; to generate the start offset, we need the value in d1 at pc = 0x76690
 
     or.w #$c080,d4
-    move.w d4,($ffff8a3c).w
+    move.w d4,(a6)
 
     add.l #160,a1
     jmp $7684e
@@ -78,10 +82,15 @@ drawscenery:
     ; d7 is source bytes to skip after each line
 
     macro drawsceneryline
+    inline
     move.w d3,(a2)             ; ycount
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
-    move.b d0,(a6)             ; start
+    bset.b #7,(a6)             ; start
+.1:
+    bset.b #7,(a6)             ; start
+    bne.s .1
+    einline
     endm
 
     movem.l a2-a6,-(a7)
@@ -138,7 +147,7 @@ nocalcendmask3:
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
 
-    move.b #$c0,d0                      ; store blitter start instruction
+    move.b #$80,d0                      ; store blitter start instruction
 
     rept 3
     drawsceneryline
