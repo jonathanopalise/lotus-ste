@@ -64,7 +64,7 @@ skipoffsetadd:
     move.w d4,($ffff8a3c).w
 
     add.l #160,a1
-    jmp $767bc
+    jmp $7684e
 
 drawscenery:
 
