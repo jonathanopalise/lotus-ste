@@ -9,7 +9,6 @@
     move.l a3,d0                       ; get desired xpos of scenery object
     and.l #$f,d0                       ; convert to skew value for blitter
 
-    tst.w d0
     beq zeroskew
 
     move.w d2,d0                       ; get starting position in blocks of 16 pixels

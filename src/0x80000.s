@@ -191,6 +191,7 @@ drawscenery_3bpp:
 
     move.l a3,d0                        ; get desired xpos of scenery object
     and.w #$f,d0                        ; convert to skew value for blitter
+    ;move.l #0,d0
     move.w d0,d1
     beq.s nonfsr_3bpp                        ; if skew is zero, we can't use nfsr
 
