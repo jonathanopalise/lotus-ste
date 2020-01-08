@@ -174,6 +174,85 @@ nocalcendmask3:
 
     rts
 
+drawscenery_3bpp:
+
+    movem.l a2-a6,-(a7)
+    move.l #$ffff8a38,a2
+    move.l #$ffff8a24,a4
+    move.l #$ffff8a32,a5
+    move.l #$ffff8a3c,a6
+
+    addq.l #8,d6                        ; convert to value suitable for blitter
+    add.w #8,d7                        ; convert to value suitable for blitter
+
+    move.w #8,($ffff8a20).w            ; source x increment
+    move.w #8,($ffff8a2e).w             ; dest x increment
+    move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
+
+    move.l a3,d0                        ; get desired xpos of scenery object
+    and.w #$f,d0                        ; convert to skew value for blitter
+    move.w d0,d1
+    beq.s nonfsr_3bpp                        ; if skew is zero, we can't use nfsr
+
+    cmp.w #0,rightclipped
+    bne.s nonfsr_3bpp
+
+    add.w #8,d7
+    or.b #$40,d1
+
+nonfsr_3bpp:
+    move.w d7,($ffff8a22).w             ; source y increment
+    move.w d6,($ffff8a30).w             ; dest y increment
+    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
+    move.b d1,($ffff8a3d).w
+
+    add.l d0,d0                         ; byte offset in mask lookup table
+    move.w #-1,($ffff8a2a).w            ; endmask2
+
+    move.w leftclipped,d1
+    bne.s nocalcendmask1_3bpp                ; branch if zero flag not set
+
+    lea.l leftendmasks,a3
+    move.w (a3,d0.w),d1
+
+nocalcendmask1_3bpp:
+    move.w d1,($ffff8a28).w             ; endmask1
+
+    move.w rightclipped,d1
+    bne.s nocalcendmask3_3bpp                ; branch if zero flag not set
+
+    lea.l rightendmasks,a3
+    move.w (a3,d0.w),d1
+
+nocalcendmask3_3bpp:
+    move.w d1,($ffff8a2c).w            ; endmask3
+
+    ; we are now free to use d0, d6 and d4 for our own purposes
+    ; looks like d0, d1 and d2 are also available to us
+
+    move.b #$80,d0                      ; store blitter start instruction
+
+    rept 3
+    drawsceneryline
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    drawsceneryline
+
+    subq.l #6,a1                        ; move destination back to initial bitplane
+    move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
+
+    rept 2
+    addq.l #2,a0                        ; move source to next bitplane
+    drawsceneryline
+    addq.l #2,a1                        ; move destination to next bitplane
+    endr
+    addq.l #2,a0                        ; move source to next bitplane
+    drawsceneryline
+
+    movem.l (a7)+,a2-a6
+
+    rts
+
 leftendmasks:
 
     dc.w %1111111111111111
