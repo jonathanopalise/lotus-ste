@@ -64,8 +64,12 @@ skipoffsetadd:
 
     ; to generate the start offset, we need the value in d1 at pc = 0x76690
 
-    or.w #$c080,d4
+    or.w #$8080,d4
     move.w d4,(a6)
+
+blitroad:
+    bset.b #7,(a6)             ; start
+    bne.s blitroad
 
     add.l #160,a1
     jmp $7684e
