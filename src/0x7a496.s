@@ -3,6 +3,30 @@
     include symbols.inc
 
     ; code at 0x7a496 (tst.w d2) seems to be equivalent to what we have in 7a312
+    moveq     #0,d0
+    move.w    d0,leftclipped
+    move.w    d0,rightclipped
+
+    move.l a3,d0                       ; get desired xpos of scenery object
+    and.l #$f,d0                       ; convert to skew value for blitter
+
+    beq zeroskew
+
+    move.w d2,d0                       ; get starting position in blocks of 16 pixels
+    add.w d4,d0                        ; add number of 16 pixel blocks to be drawn
+
+    cmp.w #$14,d0                      ; will part of sprite be off right side if we add 16 pixels?
+    bpl.s setrightclipped              ; if yes, don't add 16 pixels to the right side
+
+    add.w #1,d4                        ; add another 16 pixel block to account for skew
+    bra.s zeroskew
+
+setrightclipped:
+
+    move.w    #$ffff,rightclipped
+
+zeroskew:
+
 
     tst.w     d2
     bpl.s     label_7a4ae
