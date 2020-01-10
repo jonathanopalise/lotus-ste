@@ -1,1 +1,1 @@
-    and.w #$fff0,a0
+    move.l    (a3)+,(a0)+

@@ -1,11 +1,12 @@
 <?php
 
-const COLOUR_RED = 2;
+const COLOUR_RED = 2; // normally 2
 const COLOUR_WHITE = 6;
 const COLOUR_GREY = 5;
 const COLOUR_LIGHT_ASPHALT = 13;
-const COLOUR_DARK_ASPHALT = 4;
-const COLOUR_GRASS = 7;
+const COLOUR_DARK_ASPHALT = 15;
+const COLOUR_GRASS_1 = 12;
+const COLOUR_GRASS_2 = 14;
 
 function convertPixelColourArrayToPlanarArray($pixel_colours) {
 	$planar_pixels=array();
@@ -67,10 +68,12 @@ for ($type = 0; $type <2; $type++) {
         $rumbleStripColour = COLOUR_WHITE;
         $roadLinesColour = COLOUR_WHITE;
         $asphaltColour = COLOUR_LIGHT_ASPHALT;
+        $grassColour = COLOUR_GRASS_1;
     } else {
         $rumbleStripColour = COLOUR_RED;
         $roadLinesColour = COLOUR_DARK_ASPHALT;
         $asphaltColour = COLOUR_DARK_ASPHALT;
+        $grassColour = COLOUR_GRASS_2;
     }
 
     $actualPixelWidthFloat = 10;
@@ -114,7 +117,7 @@ for ($type = 0; $type <2; $type++) {
             } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
                 $pixelColour = $asphaltColour;
             } else {
-                $pixelColour = COLOUR_GRASS;
+                $pixelColour = $grassColour;
             }
 
             $pixelColours[] = $pixelColour;

@@ -417,6 +417,47 @@ suspected road width is written at instruction before 0x7901a
 >d 0x78fc0 for instructions in this vicinity
 w 0x78ffa 0x20 0x3c 0x00 0x00 0x09 0x86
 
+0x79412 draws the solid bit of the sky
+$00079412 : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$00079416 : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$0007941a : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$0007941e : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$00079422 : 51cf ffee                          dbra      d7,$79412
+
+$000795a2: this is inside the loop that draws the mountains?
+
+0x795aa: could this be the solid ground drawing?
+
+; 795c5 and 795c7 determine the pattern to be drawn in this area
+
+$000795aa : 3e2e 0064                          move.w    $64(a6),d7
+$000795ae : 6300 003e                          bls       $795ee
+$000795b2 : 322e 0062                          move.w    $62(a6),d1
+$000795b6 : d247                               add.w     d7,d1
+$000795b8 : 3001                               move.w    d1,d0
+$000795ba : e541                               asl.w     #2,d1
+$000795bc : d240                               add.w     d0,d1
+$000795be : eb41                               asl.w     #5,d1
+$000795c0 : 2846                               movea.l   d6,a4
+$000795c2 : d8c1                               adda.w    d1,a4
+$000795c4 : 7000                               moveq     #0,d0
+$000795c6 : 72ff                               moveq     #$ff,d1
+$000795c8 : 2400                               move.l    d0,d2
+$000795ca : 2800                               move.l    d0,d4
+$000795cc : 2040                               movea.l   d0,a0
+$000795ce : 2440                               movea.l   d0,a2
+$000795d0 : 2601                               move.l    d1,d3
+$000795d2 : 2a01                               move.l    d1,d5
+$000795d4 : 2241                               movea.l   d1,a1
+$000795d6 : 2641                               movea.l   d1,a3
+$000795d8 : 5347                               subq.w    #1,d7
+$000795da : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$000795de : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$000795e2 : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$000795e6 : 48e4 fcf0                          movem.l   d0-d5/a0-a3,-(a4)
+$000795ea : 51cf ffee                          dbra      d7,$795da
+
+
 $0007658a : 6100 2be4                          bsr       $79170 ; this subroutine draws the sky
 
     $0007658a : 6100 2be4                          bsr       $79170
@@ -512,6 +553,7 @@ DRAW_FRAME_ROAD:
 
 NOT_THE_PITS:
 	$000766bc : 4a41                               tst.w     d1 ; this is just a normal road then, if we jumped from 766a6
+    $000766be : 6b00 0132                          bmi       $767f2
 	$000766c2 : b67c 0140                          cmp.w     #$140,d3
 	$000766c6 : 6a00 012a                          bpl       $767f2 ; this segment of road should be drawn as a solid piece of ground rather than a piece of road
 	$000766d6 : 0806 0001                          btst      #1,d6
@@ -544,7 +586,7 @@ DRAW_NOT_START_LINE:
 	$0007673a : 3c03                               move.w    d3,d6
 	$0007673c : 3801                               move.w    d1,d4
 	$0007673e : e843                               asr.w     #4,d3
-	$00076740 : e841                               asr.w     #4,d1
+	$00076740 : e841                               asr.w     #4,d1 ; first mention of d1
 	$00076742 : 3001                               move.w    d1,d0
 	$00076744 : 9043                               sub.w     d3,d0 
 	$00076746 : e540                               asl.w     #2,d0 ; what happens here if we set d0 to 0
@@ -574,11 +616,13 @@ DRAW_NOT_START_LINE:
 	$0007678e : 504d                               addq.w    #8,a5
 	$00076790 : b27c ffff                          cmp.w     #$ffff,d1
 	$00076794 : 6602                               bne.s     $76798
-	$00076798 : 72ff                               moveq     #$ff,d1
-	$0007679a : 7000                               moveq     #0,d0 ; set colour of grass
-	$0007679c : 4a42                               tst.w     d2
-	$0007679e : 6702                               beq.s     $767a2 ; if we nop this, centre section of road loses stripe
-	$000767a0 : 3001                               move.w    d1,d0
+    $00076796 : 5048                               addq.w    #8,a0
+	$00076798 : 72ff                               moveq     #$ff,d1 ; here we set d1
+	$0007679a : 7000                               moveq     #0,d0 ; here we set d0
+	$0007679c : 4a42                               tst.w     d2 ; which colour stripe should this be?
+	$0007679e : 6702                               beq.s     SOMETHING ; if we nop this, centre section of road loses stripe
+	$000767a0 : 3001                               move.w    d1,d0 ; d0 = d1 (set low word of d0 to ff)
+SOMETHING
 	$000767a2 : 76ff                               moveq     #$ff,d3 
 	$000767a4 : 2400                               move.l    d0,d2
 	$000767a6 : 4842                               swap      d2
