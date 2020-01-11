@@ -29,6 +29,8 @@ initdrawroad:
     move.l #$ffff8a32,a2
     move.l #$ffff8a3c,a6
     moveq.l #7,d5
+    lea.l byte_offsets,a0
+    move.l a0,usp
     jmp $76672
 
 

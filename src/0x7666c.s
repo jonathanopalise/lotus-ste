@@ -22,7 +22,6 @@ label_76672:
 
     ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
 
-; 76690 starts here
     move.w #4,(a5)                     ; ycount
 
     lsr.w #4,d0                        ; bring the road width value into a 0-255 range
@@ -37,7 +36,7 @@ label_76672:
 
 skipoffsetadd:
 
-    move.l #byte_offsets,a0
+    move.l usp,a0
     move.l (a0,d0.w),a0                ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l #gfx_data,a0                 ; a0 now contains memory location of central source
 
