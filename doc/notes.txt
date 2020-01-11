@@ -7,7 +7,7 @@ we need to get the skew into a3:
 
 22/12 12:53 something in place of the following instructions to populate a3:
 $0007a2ea : 3001                               move.w    d1,d0
-$0007a2ec : 0240 fffc                          andi.w    #$fffc,d0 ; get offset in lookup table for pr
+G$0007a2ec : 0240 fffc                          andi.w    #$fffc,d0 ; get offset in lookup table for pr
 $0007a2f0 : 2070 0000                          movea.l   (a0,d0.w),a0 ; populate a0 with preshif
 
 is start of sprite drawing routine 0x7a096?
@@ -872,4 +872,16 @@ for each width (20 ish to 400):
 - we need a pointer to the source start of this span
 - the pointer must be the centre of the span minus 160 pixels (i.e. 80 bytes)
 - skew is assumed to be zero
+
+track colours:
+
+either:
+WHITE          06 0110
+GRASS_1        12 1100
+LIGHT_ASPHALT  13 1101
+
+or:
+RED            02 0010
+GRASS_2        14 1110
+DARK_ASPHALT   15 1111
 
