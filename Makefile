@@ -2,7 +2,7 @@ VASM = vasmm68k_mot
 NM = m68k-ataribrownest-elf-nm
 PHP = php
 
-BIN_FILES= bin/0x76690.bin bin/0x7666c.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin bin/0x80000.bin
+BIN_FILES= bin/0x7666c.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin bin/0x80000.bin
 
 default: check_dependencies all
 
@@ -43,9 +43,6 @@ bin/0x7a312.bin: src/0x7a312.s src/symbols.inc
 
 bin/0x7666c.bin: src/0x7666c.s src/symbols.inc
 	$(VASM) src/0x7666c.s -Fbin -o bin/0x7666c.bin
-
-bin/0x76690.bin: src/0x76690.s src/symbols.inc
-	$(VASM) src/0x76690.s -Fbin -o bin/0x76690.bin
 
 src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
