@@ -28,6 +28,7 @@ initdrawroad:
     move.l #$ffff8a24,a3
     move.l #$ffff8a32,a2
     move.l #$ffff8a3c,a6
+    moveq.l #7,d5
     jmp $76672
 
 drawroad:
@@ -68,7 +69,7 @@ skipoffsetadd:
     move.w d4,(a6)
 
 blitroad:
-    bset.b #7,(a6)             ; start
+    bset.b d5,(a6)             ; start
     bne.s blitroad
 
     add.l #160,a1
@@ -90,9 +91,9 @@ drawscenery:
     move.w d3,(a2)             ; ycount
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
-    bset.b #7,(a6)             ; start
+    bset.b d2,(a6)             ; start
 .1:
-    bset.b #7,(a6)             ; start
+    bset.b d2,(a6)             ; start
     bne.s .1
     einline
     endm
@@ -152,6 +153,7 @@ nocalcendmask3:
     ; looks like d0, d1 and d2 are also available to us
 
     move.b #$80,d0                      ; store blitter start instruction
+    moveq.l #7,d2
 
     rept 3
     drawsceneryline
@@ -232,6 +234,7 @@ nocalcendmask3_3bpp:
     ; looks like d0, d1 and d2 are also available to us
 
     move.b #$80,d0                      ; store blitter start instruction
+    moveq.l #7,d2
 
     rept 3
     drawsceneryline
