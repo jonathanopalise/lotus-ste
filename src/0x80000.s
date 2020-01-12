@@ -83,6 +83,18 @@ drawscenery:
     or.b #$40,d1
 
 nonfsr:
+
+    cmp.w #0,leftclipped
+    beq.s nofxsr
+
+    sub.w #10,d7
+    sub.w #10,a0
+    or.b #$80,d1
+
+    ; when words to draw = 4, i think we need to set endmask2 = endmask3 
+
+nofxsr:
+
     move.w d7,($ffff8a22).w             ; source y increment
     move.w d6,($ffff8a30).w             ; dest y increment
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
