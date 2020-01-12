@@ -10,7 +10,8 @@ label_76672:
     move.w    (a4)+,d3
     move.w    (a4)+,d0
     move.w    (a4)+,d2
-    move.w    d3,d6
+    ;move.w    d3,d6    ; this instruction is redudant but can't just be removed due to self modifying code
+    nop                 ; so we replace with a nop for now
     addi.w    #$191,d2
     andi.w    #$fffc,d3
     move.w    d0,d1
@@ -36,7 +37,7 @@ skipoffsetadd:
 
     move.l usp,a0
     move.l (a0,d0.w),a0                ; a0 now contains the pointer to the road graphics data offset for the current line
-    add.l #gfx_data,a0                 ; a0 now contains memory location of central source
+    add.l d6,a0                 ; a0 now contains memory location of central source
 
     ext.l d1                           ; d1 is the shift value for the current line
     move.l d1,d4                       ; copy to d4

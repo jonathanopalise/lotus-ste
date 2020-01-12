@@ -31,8 +31,9 @@ initdrawroad:
     moveq.l #7,d5
     lea.l byte_offsets,a0
     move.l a0,usp
+    lea.l gfx_data,a0
+    move.l a0,d6
     jmp $76672
-
 
 drawscenery:
 
