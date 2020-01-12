@@ -91,7 +91,23 @@ nonfsr:
     sub.w #10,a0
     or.b #$80,d1
 
-    ; when words to draw = 4, i think we need to set endmask2 = endmask3 
+    cmp.w #1,d4
+    bne.s nofxsr 
+
+    ; when words to draw = 4 and leftclipped != 0, we need to set endmask1 from rightendmasks
+    ; In the case of a one word line ENDMASK 1 is used (http://www.atari-wiki.com/index.php/Blitter_manual)
+    ; this is a special case and could do with tidying up
+
+    move.w d7,($ffff8a22).w             ; source y increment
+    move.w d6,($ffff8a30).w             ; dest y increment
+    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
+    move.b d1,($ffff8a3d).w
+
+    lea.l rightendmasks,a3
+    add.l d0,d0                         ; byte offset in mask lookup table
+    move.w (a3,d0.w),d1
+    move.w d1,($ffff8a28).w             ; endmask1
+    bra.s blitterstart
 
 nofxsr:
 
@@ -107,7 +123,7 @@ nofxsr:
     bne.s nocalcendmask1                ; branch if zero flag not set
 
     lea.l leftendmasks,a3
-    move.w (a3,d0.w),d1
+    move.w (a3,d0.w),d1                 ; fetch value of endmask1
 
 nocalcendmask1:
     move.w d1,($ffff8a28).w             ; endmask1
@@ -124,6 +140,7 @@ nocalcendmask3:
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
 
+blitterstart:
     move.b #$80,d0                      ; store blitter start instruction
     moveq.l #7,d2
 
