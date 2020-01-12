@@ -24,10 +24,8 @@ label_76672:
 
     move.w #4,(a5)                     ; ycount
 
-    lsr.w #4,d0                        ; bring the road width value into a 0-255 range
-    and.w #$ff,d0                      ; bring the road width value into a 0-255 range
-    add.w d0,d0 
-    add.w d0,d0                        ; bring the road width value into a 0-1023 range with increments of 4
+    lsr.w #2,d0                        ; bring the road width value into a 0-255 range
+    and.w #$3fc,d0                      ; bring the road width value into a 0-255 range
 
     lsr.w #5,d2                        ; d2 should contain something telling us about the road position of current line
     andi.w #$20,d2
