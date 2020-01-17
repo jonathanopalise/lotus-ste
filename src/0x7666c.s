@@ -28,12 +28,8 @@ label_76672:
     lsr.w #2,d0                        ; bring the road width value into a 0-255 range
     and.w #$3fc,d0                      ; bring the road width value into a 0-255 range
 
-    lsr.w #5,d2                        ; d2 should contain something telling us about the road position of current line
-    andi.w #$20,d2
-    beq.s skipoffsetadd 
-    add.w #1024,d0
-
-skipoffsetadd:
+    andi.w #$400,d2
+    add.w d2,d0
 
     move.l usp,a0
     move.l (a0,d0.w),a0                ; a0 now contains the pointer to the road graphics data offset for the current line
