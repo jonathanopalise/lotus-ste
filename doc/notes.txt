@@ -885,3 +885,48 @@ RED            02 0010
 GRASS_2        14 1110
 DARK_ASPHALT   15 1111
 
+- code that sets the 4 ground palette entries is at 0x70692
+- appears to read palette data from 0x70856 and write to palette entries 12 to 15:
+00070856: 02 20 01 00 03 20 00 00 05 43 04 32 03 21 02 46   . ... ...C.2.!.F
+
+$00070692 : 43f8 8258                          lea       $ffff8258.w,a1
+$00070696 : 22d8                               move.l    (a0)+,(a1)+
+$00070698 : 22d8                               move.l    (a0)+,(a1)+
+
+7c92a/7ca64 - 70856 - ffff8258
+7c926/7ca66 - 70858 - ffff825a
+7c92c/7ca68 - 7085a - ffff825c
+7c928/7ca6a - 7085c - ffff825e
+43332 - 7085e
+43334 - 70860
+43336 - 70862
+7c924 - 70864
+
+this appears to read from and write to the above addresses:
+$00074584 : 3018                               move.w    (a0)+,d0
+$00074586 : 0240 0eee                          andi.w    #$eee,d0
+$0007458a : e248                               lsr.w     #1,d0
+$0007458c : 32c0                               move.w    d0,(a1)+
+$0007458e : 4e75                               rts       
+
+source data for palette appears to be around 0x43334
+
+suspected amiga palette data found using maptapper:
+>bgrep "00400ccc01220eee" *
+GENESIS_05: 00000012
+GENESIS_07: 00000012
+GENESIS_12: 00000012
+GENESIS_1c: 00000012
+
+>bgrep "06410a0003100310" *
+GENESIS_01: 0000000a
+GENESIS_0E: 0000000a
+GENESIS_13: 0000000a
+
+- so it looks like the amiga version does the road stripes with copper rasters
+- colour 13 is the colour of the kerbs, alternates between A00 and CCC
+- colour 15 is the road lines, alternates between EEE and 310
+- colour 12 is the grass
+- colour 14 is the road colours
+
+- so it should be possible to rip the high precision colours from the amiga version manually if we can cheat through the levels

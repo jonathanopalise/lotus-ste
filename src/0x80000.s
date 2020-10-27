@@ -173,11 +173,12 @@ drawscenery_3bpp:
     move.l #$ffff8a32,a5
     move.l #$ffff8a3c,a6
 
-    addq.l #8,d6                        ; convert to value suitable for blitter
-    add.w #8,d7                        ; convert to value suitable for blitter
+    moveq.l #8,d0
+    add.l d0,d6                        ; convert to value suitable for blitter
+    add.w d0,d7                        ; convert to value suitable for blitter
 
-    move.w #8,($ffff8a20).w            ; source x increment
-    move.w #8,($ffff8a2e).w             ; dest x increment
+    move.w d0,($ffff8a20).w            ; source x increment
+    move.w d0,($ffff8a2e).w             ; dest x increment
     move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
 
     move.l a3,d0                        ; get desired xpos of scenery object
@@ -283,6 +284,17 @@ rightendmasks:
     dc.w %1111111111111000
     dc.w %1111111111111100
     dc.w %1111111111111110
+
+map_palette_data:
+
+    move.w d0,d1
+    andi.w #$eee,d0
+    lsr.w  #1,d0
+    andi.w #$111,d1
+    lsl.w  #3,d1
+    or.w d1,d0
+    move.w d0,(a1)+
+    rts
 
     align 2
 
