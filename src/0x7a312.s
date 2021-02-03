@@ -103,7 +103,7 @@ label_7a374:
     adda.w    d2,a2            ; ... d2 = (d2 * 8 [see 7a38c]) + d5 (d5 must the start of a line within logbase, so a multiple of 160)
                                                                               ; we set d5 to 0 and everything renders at the top line of the screen
     adda.l    $7c504,a2        ; add buffer location into a2?
-    movea.l   a2,a1            ; transfer destination address into a2
+    movea.l   a2,a1            ; transfer destination address into a1
     tst.w     d4
     beq       nothingtodraw
     

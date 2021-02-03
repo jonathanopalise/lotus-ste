@@ -23,7 +23,7 @@ label_76672:
 
     ; optimize blitter code: http://atari-forum.com/viewtopic.php?f=68&t=2804
 
-    move.w #4,(a5)                     ; ycount
+    move.w #1,(a5)                     ; ycount
 
     lsr.w #2,d0                        ; bring the road width value into a 0-255 range
     and.w #$3fc,d0                      ; bring the road width value into a 0-255 range
@@ -47,14 +47,31 @@ label_76672:
 
     ; to generate the start offset, we need the value in d1 at pc = 0x76690
 
-    or.w #$8080,d4
+    or.w #$c080,d4
     move.w d4,(a6)
 
-blitroad:
-    bset.b d5,(a6)             ; start
-    bne.s blitroad
+    addq.l #2,a1
+    move.w #1,(a5)                     ; ycount
+    move.l a1,(a2)            ; set destination
+    move.w d4,(a6)
 
-    add.l #160,a1
+    addq.l #2,a1
+    move.w #1,(a5)                     ; ycount
+    move.l a1,(a2)            ; set destination
+    move.w d4,(a6)
+
+    addq.l #2,a1
+    move.w #1,(a5)                     ; ycount
+    move.l a1,(a2)            ; set destination
+    move.w d4,(a6)
+
+    ;sub.l #6,a1
+
+blitroad:
+    ;bset.b d5,(a6)             ; start
+    ;bne.s blitroad
+
+    add.l #160-6,a1
     addq.w    #1,d7
     cmp.w     #$60,d7
     bne       label_76672
