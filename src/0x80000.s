@@ -48,13 +48,25 @@ drawscenery:
 
     macro drawsceneryline
     inline
-    move.w d3,(a2)             ; ycount
+    ;move.w d3,(a2)             ; ycount
+    move.w d3,d6
+    tst.w d3
+    bmi.s .2
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
-    bset.b d2,(a6)             ; start
 .1:
-    bset.b d2,(a6)             ; start
-    bne.s .1
+    move.w #1,(a2)             ; ycount
+    move.b #$c0,(a6)
+    ;add.l d7,a0 ; update source
+    ;add.l d6,a1 ; update destination
+    
+    dbra d3,.1
+    move.w d6,d3
+
+    ;bset.b d2,(a6)             ; start
+    ;bset.b d2,(a6)             ; start
+    ;bne.s .1
+.2:
     einline
     endm
 
