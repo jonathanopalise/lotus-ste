@@ -2,7 +2,7 @@ VASM = vasmm68k_mot
 NM = m68k-ataribrownest-elf-nm
 PHP = php
 
-BIN_FILES= bin/0x74586.bin bin/0x7666c.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin bin/0x80000.bin
+BIN_FILES= bin/0x70668.bin bin/0x70674.bin bin/0x70864.bin bin/0x7086e.bin bin/0x70882.bin bin/0x74586.bin bin/0x76332.bin bin/0x7666c.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin bin/0x80000.bin
 
 default: check_dependencies all
 
@@ -29,8 +29,26 @@ bin/0x80000.bin: src/0x80000.s src/road.s
 bin/0x80000.o: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
+bin/0x70668.bin: src/0x70668.s src/symbols.inc
+	$(VASM) src/0x70668.s -Fbin -o bin/0x70668.bin
+
+bin/0x70674.bin: src/0x70674.s src/symbols.inc
+	$(VASM) src/0x70674.s -Fbin -o bin/0x70674.bin
+
+bin/0x70864.bin: src/0x70864.s src/symbols.inc
+	$(VASM) src/0x70864.s -Fbin -o bin/0x70864.bin
+
+bin/0x7086e.bin: src/0x7086e.s src/symbols.inc
+	$(VASM) src/0x7086e.s -Fbin -o bin/0x7086e.bin
+
+bin/0x70882.bin: src/0x70882.s src/symbols.inc
+	$(VASM) src/0x70882.s -Fbin -o bin/0x70882.bin
+
 bin/0x74586.bin: src/0x74586.s src/symbols.inc
 	$(VASM) src/0x74586.s -Fbin -o bin/0x74586.bin
+
+bin/0x76332.bin: src/0x76332.s src/symbols.inc
+	$(VASM) src/0x76332.s -Fbin -o bin/0x76332.bin
 
 bin/0x7a2c0.bin: src/0x7a2c0.s
 	$(VASM) src/0x7a2c0.s -Fbin -o bin/0x7a2c0.bin

@@ -48,9 +48,8 @@ drawscenery:
 
     macro drawsceneryline
     inline
-    ;move.w d3,(a2)             ; ycount
     move.w d3,d6
-    tst.w d3
+    sub.w #1,d3
     bmi.s .2
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
@@ -297,6 +296,48 @@ rightendmasks:
     dc.w %1111111111111100
     dc.w %1111111111111110
 
+newtimerbtop1:
+		move.w	#$DBA,$FFFF825E.w
+		move.b	#$00,$FFFFFA1B.w
+		move.b	#$04,$FFFFFA21.w
+		move.b	#$08,$FFFFFA1B.w
+		move.l	#newtimerbtop2,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
+newtimerbtop2:
+		move.w	#$6BA,$FFFF825E.w
+		move.l	#newtimerbtop3,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
+newtimerbtop3:
+		move.w	#$EBA,$FFFF825E.w
+		move.l	#newtimerbtop4,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
+newtimerbtop4:
+		move.w	#$7BA,$FFFF825E.w
+		move.l	#newtimerbtop5,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
+newtimerbtop5:
+		move.w	#$FBA,$FFFF825E.w
+		move.l	#newtimerbtop6,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
+newtimerbtop6:
+		move.w	#$F43,$FFFF825E.w
+		move.b	#$00,$FFFFFA1B.w
+		move.b	#$08+7,$FFFFFA21.w
+		move.b	#$08,$FFFFFA1B.w
+		move.l	#$00070684,$120.w
+		bclr	#$00,$FFFFFA0F.W
+	rte
+
 map_palette_data:
 
     move.w d0,d1
@@ -311,3 +352,4 @@ map_palette_data:
     align 2
 
     include "road.s"
+
