@@ -346,20 +346,11 @@ new_routine_after_lookup:
 
 gradient_init:
 
-    ; this is the old code
-
-    move.b    #0,$fffffa1b.w
-post_vbl_timer_b_lines_instruction:
-    move.b    #$68,$fffffa21.w
-    move.b    #8,$fffffa1b.w
-post_vbl_timer_b_vector_instruction:
-    move.l    #$70790,$0120.w
-
     ; this is the new code (wip)
 
     move.w #$684,d2
     cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
-    bne.s endvbl
+    bne.s legacy
 
     move.w (solid_lines_required),d1
     move.w (gradient_y_at_screen_top),d0
@@ -412,12 +403,15 @@ lines_remaining_greater_than_3:
     move.b d4,raster_count
     move.b d2,final_bar_line_count_instruction+2 
 
-    ;move.b    #0,$fffffa1b.w
-    ;move.b    d1,$fffffa21.w ; new routine after
-    ;move.b    #8,$fffffa1b.w
-    ;move.l    new_raster_routine,$0120.w
+trigger_new_raster_routine:
+    bra.s legacy
+    move.b    #0,$fffffa1b.w
+    move.b    d1,$fffffa21.w ; new routine after
+    move.b    #8,$fffffa1b.w
+    lea.l     new_raster_routine,a0
+    move.l    a0,$0120.w
 
-    ;bra.s endvbl 
+    bra.s endvbl 
 
 lines_remaining_less_than_or_equal_to_3:
     ; special case, not yet worked out, so just use default code
@@ -427,7 +421,19 @@ solid_lines_required_greater_than_zero:
     ; $solidLinesRequired > 0
     ; special case, not yet worked out, so just use default code
 
+legacy:
+
+    ; this is the old code
+
+    move.b    #0,$fffffa1b.w
+post_vbl_timer_b_lines_instruction:
+    move.b    #$68,$fffffa21.w
+    move.b    #8,$fffffa1b.w
+post_vbl_timer_b_vector_instruction:
+    move.l    #$70790,$0120.w
+
 endvbl:
+
     jmp $7067a
 
 raster_count:
@@ -443,6 +449,7 @@ new_raster_routine:
     move.b    #4,$fffffa21.w
     move.b    #8,$fffffa1b.w
     move.l    new_raster_routine,$0120.w
+    rte
 
 final_bar:
 
@@ -451,6 +458,7 @@ final_bar_line_count_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
     move.l    #$70684,$0120.w
+    rte
 
 map_palette_data:
 
