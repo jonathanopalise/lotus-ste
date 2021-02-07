@@ -338,20 +338,27 @@ gradient_y_at_screen_top:
 solid_lines_required:
     dc.w 0
 
+new_routine_after_lookup:
+    dc.b 4
+    dc.b 3
+    dc.b 2
+    dc.b 1
+
 gradient_init:
 
-    move.b    #0,$fffffa1b.w
+    ; this is the old code
 
+    move.b    #0,$fffffa1b.w
 post_vbl_timer_b_lines_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
 post_vbl_timer_b_vector_instruction:
     move.l    #$70790,$0120.w
 
-    jmp $7067a
+    ; this is the new code (wip)
 
     move.w #$684,d2
-    cmp.w $70676,d2 ; we only want to run the gradient code if the vector points to 70684
+    cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
     bne.s endvbl
 
     move.w (solid_lines_required),d1
@@ -373,13 +380,77 @@ solid_lines_required_zero_or_less:
     ext.l d0
     add.l #gradient_rgb_values,d0 ; d0 is now start gradient address
 
+    ; is lines remaining > 3?
+    moveq.l #0,d2
+    move.b post_vbl_timer_b_lines_instruction+3,d2
+    cmp.b #3,d2
+    bls.s lines_remaining_less_than_or_equal_to_3
+    ; we want to branch if lines remaining <=3
+
+lines_remaining_greater_than_3:
+
+    and.w #3,d1 ; solid lines required is now anded with 3
+    lea new_routine_after_lookup,a0
+    move.b (a0,d1.w),d1 ; d1 is now "new routine after"
+    ; now we need to calculate linesRemainingMinusNewRoutineAfter
+    ; d2 contains lines remaining, so d2-=d1
+    sub.l d1,d2
+    ; now d2 contains linesRemainingMinusNewRoutineAfter
+
+    ; we'll put countMinusOne in d3
+    move.l d2,d3
+    lsr.l #2,d3
+
+    ; we'll put count in d4
+    move.l d3,d4
+    addq.l #1,d4
+
+    ; we'll reuse d2 for finalBarSize
+    lsl.l #2,d3
+    sub.l d3,d2
+
+    move.b d4,raster_count
+    move.b d2,final_bar_line_count_instruction+2 
+
+    ;move.b    #0,$fffffa1b.w
+    ;move.b    d1,$fffffa21.w ; new routine after
+    ;move.b    #8,$fffffa1b.w
+    ;move.l    new_raster_routine,$0120.w
+
+    ;bra.s endvbl 
+
+lines_remaining_less_than_or_equal_to_3:
+    ; special case, not yet worked out, so just use default code
+
 solid_lines_required_greater_than_zero:
 
     ; $solidLinesRequired > 0
+    ; special case, not yet worked out, so just use default code
 
 endvbl:
-    movem.l   (sp)+,d0-d7/a0-a6
-    rte       
+    jmp $7067a
+
+raster_count:
+    dc.b 4
+    dc.b 0 ; to align
+
+new_raster_routine:
+
+    subq.l #1,raster_count
+    beq final_bar
+
+    move.b    #0,$fffffa1b.w
+    move.b    #4,$fffffa21.w
+    move.b    #8,$fffffa1b.w
+    move.l    new_raster_routine,$0120.w
+
+final_bar:
+
+    move.b    #0,$fffffa1b.w
+final_bar_line_count_instruction:
+    move.b    #$68,$fffffa21.w
+    move.b    #8,$fffffa1b.w
+    move.l    #$70684,$0120.w
 
 map_palette_data:
 

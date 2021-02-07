@@ -167,9 +167,9 @@ for ($type = 0; $type <2; $type++) {
         $pixelColours = [];
 
         for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
-            if (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
+            if (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.54))) {
                 $pixelColour = $rumbleStripColour; // left rumble strip
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
+            } elseif (($texturePosition > ($midpointTexturePosition - 0.54)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
                 $pixelColour = $rumbleStripColour; // right rumble strip
             } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
                 $pixelColour = $computedRoadLinesColour;
