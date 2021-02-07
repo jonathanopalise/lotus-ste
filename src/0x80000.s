@@ -298,7 +298,21 @@ rightendmasks:
     dc.w %1111111111111100
     dc.w %1111111111111110
 
+gradient_y_at_screen_top:
+    dc.w -5
+
+solid_lines_required:
+    dc.w 0
+
 gradient_init:
+    move.w #$684,d2
+    cmp.w $70676,d2 ; we only want to run the gradient code if the vector points to 70684
+    bne.s endvbl
+
+    move.w (gradient_y_at_screen_top),d0
+    neg.w d0
+
+endvbl:
     movem.l   (sp)+,d0-d7/a0-a6
     rte       
 
