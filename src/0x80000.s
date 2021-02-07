@@ -339,6 +339,17 @@ solid_lines_required:
     dc.w 0
 
 gradient_init:
+
+    move.b    #0,$fffffa1b.w
+
+post_vbl_timer_b_lines_instruction:
+    move.b    #$68,$fffffa21.w
+    move.b    #8,$fffffa1b.w
+post_vbl_timer_b_vector_instruction:
+    move.l    #$70790,$0120.w
+
+    jmp $7067a
+
     move.w #$684,d2
     cmp.w $70676,d2 ; we only want to run the gradient code if the vector points to 70684
     bne.s endvbl

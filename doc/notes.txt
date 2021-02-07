@@ -950,6 +950,15 @@ $00070672 : 21fc 0007 0684 0120                move.l    #$70684,$0120.w
 - so somewhere around 70660, we want to branch off to some new code that will decide whether to go to the new routine
 - the new routine will need access to the byte value at 70669 as it represents the linesRemaining value
 
+- What writes a word to 70666? We need to relocate it!
+- It's this instruction:
+$0007086e : 33c0 0007 0668                     move.w    d0,$70668
+
+- What writes a long word to 70674? We need to relocate it!
+- It's these instructions:
+$00070880 : 23fc 0007 0684 0007 06+            move.l    #$70684,$70674
+$0007089e : 23fc 0007 06c0 0007 06+            move.l    #$706c0,$70674
+
 SKY GRADIENT
 ------------
 
