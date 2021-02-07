@@ -49,6 +49,8 @@ drawscenery:
     macro drawsceneryline
     inline
     move.w d3,d6
+    ; https://arcb.csc.ncsu.edu/~mueller/codeopt/codeopt00/notes/constructs
+    ; the "right" kind of loop
     sub.w #1,d3
     bmi.s .2
     move.l a0,(a4)             ; set source address
@@ -296,47 +298,9 @@ rightendmasks:
     dc.w %1111111111111100
     dc.w %1111111111111110
 
-newtimerbtop1:
-		move.w	#$DBA,$FFFF825E.w
-		move.b	#$00,$FFFFFA1B.w
-		move.b	#$04,$FFFFFA21.w
-		move.b	#$08,$FFFFFA1B.w
-		move.l	#newtimerbtop2,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
-
-newtimerbtop2:
-		move.w	#$6BA,$FFFF825E.w
-		move.l	#newtimerbtop3,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
-
-newtimerbtop3:
-		move.w	#$EBA,$FFFF825E.w
-		move.l	#newtimerbtop4,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
-
-newtimerbtop4:
-		move.w	#$7BA,$FFFF825E.w
-		move.l	#newtimerbtop5,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
-
-newtimerbtop5:
-		move.w	#$FBA,$FFFF825E.w
-		move.l	#newtimerbtop6,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
-
-newtimerbtop6:
-		move.w	#$F43,$FFFF825E.w
-		move.b	#$00,$FFFFFA1B.w
-		move.b	#$08+7,$FFFFFA21.w
-		move.b	#$08,$FFFFFA1B.w
-		move.l	#$00070684,$120.w
-		bclr	#$00,$FFFFFA0F.W
-	rte
+gradient_init:
+    movem.l   (sp)+,d0-d7/a0-a6
+    rte       
 
 map_palette_data:
 

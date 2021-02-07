@@ -930,3 +930,85 @@ GENESIS_13: 0000000a
 - colour 14 is the road colours
 
 - so it should be possible to rip the high precision colours from the amiga version manually if we can cheat through the levels
+
+
+
+LATEST THOUGHTS
+---------------
+
+These four instructions within the VBL ($70572) determine what to do next and how many lines to wait:
+
+$00070660 : 11fc 0000 fa1b                     move.b    #0,$fffffa1b.w
+$00070666 : 11fc 0027 fa21                     move.b    #$27,$fffffa21.w
+$0007066c : 11fc 0008 fa1b                     move.b    #8,$fffffa1b.w
+$00070672 : 21fc 0007 0684 0120                move.l    #$70684,$0120.w
+
+- The value $27 in instruction $70666 represents the number of lines until the timer b routine is called
+- The value $70684 in instruction $70672 represents the address of the timer b routine
+- Both of these values are dynamically written by code elsewhere
+- we don't want to relocate 70684, we want to slot something in before 70684
+- so somewhere around 70660, we want to branch off to some new code that will decide whether to go to the new routine
+- the new routine will need access to the byte value at 70669 as it represents the linesRemaining value
+
+SKY GRADIENT
+------------
+
+- 70684 is the current routine that represents the colour changes from sky to ground.
+- we know this because,
+- starting at 70692, we change some palette entries. We can mark these on the raster by changing palette entry 0 instead as follows:
+- w 0x70695 0x40
+- our routine almost certainly needs to chain into 70684 once complete, BUT ONLY IF 70864 NEEDS TO BE CALLED
+
+- when horizon is visible, this updates the timer b vector to be 70684:
+- $00070672 : 21fc 0007 0684 0120                move.l    #$70684,$0120.w
+
+- 70684 only gets called when we can see the switch from sky to ground, which presumably is why cyprian's code crashes
+- how does 70684 only get called when we can see the switch from sky to ground?
+- This is how:
+
+- 70684 gets chained here (inside 70572, the VBL routine that 0x70 points to):
+$00070672 : 21fc 0007 0684 0120                move.l    #$70684,$0120.w
+- HOWEVER, this looks to be modified. When we can't see the sky-ground transition, it looks like this:
+$00070672 : 21fc 0007 06c0 0120                move.l    #$706c0,$0120.w
+- The following instructions modify the vector address, and instructions nearby also change the palette source:
+$00070880 : 23fc 0007 0684 0007 06+            move.l    #$70684,$70674
+$0007089e : 23fc 0007 06c0 0007 06+            move.l    #$706c0,$70674
+
+- so if the horizon is not visible, we just set a couple of colours differently,
+and the next raster change is the end of the player 1 playfield (706c0)!
+
+This is the code that modifies the number of lines instruction within 70684 to wait for the sky-ground transition:
+$0007087a : 33c0 0007 06a2                     move.w    d0,$706a2
+(Here's the instruction that gets modified:)
+$000706a0 : 11fc 0038 fa21                     move.b    #$38,$fffffa21.w
+SO IF WE RELOCATE 70684, THIS (AND 70672) WILL NEED TO BE REFLECTED
+
+ACTION REQUIRED:
+- change bytes 0007 0684 within instruction at $70880 to point to relocated 70684
+- change bytes within instruction at $7087a to point to the appropriate address within the relocated 70684
+
+- Here's the instruction that modifies the number of lines to count before the timer b triggers:
+- When the vector is 706c0, this will be set to 0x60 (96) - the end of player 1 playfield
+$0007086e : 33c0 0007 0668                     move.w    d0,$70668
+
+- 3 values we need to keep track of:
+- number of lines until next colour change
+    - won't this always be 4?
+- colour of next colour change
+- number of lines remaining
+
+- we need a series of chained timer b routines, one per colour change
+- then we need to determine
+    - which timer b routine to call initially
+    - how many lines to wait before calling that routine
+- then we need to determine which timer b routine we will terminate in
+    - we'll need to change the followup routine address within that routine to the ground-sky transition
+    - we'll need to correct the number of lines to wait until the ground-sky transition
+
+- each one needs to be immediately preceded
+
+0x7c59c indicates the pitch of the car (for player 1 presumably)
+this is calculated as: 0x7c546 + 0x56 = 7c59c (a4 might be the base address of the current player?)
+$00076466 : 396c 001a 0056                     move.w    $1a(a4),$56(a4)
+
+gradient can be 16 steps of 4 pixels each

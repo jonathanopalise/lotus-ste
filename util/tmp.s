@@ -1,1 +1,1 @@
-    move.l    (a3)+,(a0)+
+    move.w $0770,$ffff8240.w
