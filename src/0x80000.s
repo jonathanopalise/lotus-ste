@@ -298,8 +298,42 @@ rightendmasks:
     dc.w %1111111111111100
     dc.w %1111111111111110
 
+; Table 1: This table shows which branch instructions will result in a branch
+; taken when testing for a given relationship of D1 to D0 after a CMP D0,D1
+; instruction.
+;
+; Relationship    Signed     Unsigned
+; -------------------------------------------------------
+; D1 <  D0        BLT        BCS (branch on Carry Set)
+; D1 <= D0        BLE        BLS
+; D1 =  D0        BEQ        BEQ
+; D1 <> D0        BNE        BNE
+; D1 >  D0        BGT        BHI
+; D1 >= D0        BGE        BCC (branch on Carry Clear)
+
+lines_remaining equ $70668 
+
+solid_rgb_value:
+    dc.w $000
+
+gradient_rgb_values:
+    dc.w $111
+    dc.w $121
+    dc.w $222
+    dc.w $232
+    dc.w $333
+    dc.w $343
+    dc.w $444
+    dc.w $454
+    dc.w $555
+    dc.w $565
+    dc.w $666
+    dc.w $676
+    dc.w $777
+    dc.w $777
+
 gradient_y_at_screen_top:
-    dc.w -5
+    dc.w 5
 
 solid_lines_required:
     dc.w 0
@@ -309,8 +343,28 @@ gradient_init:
     cmp.w $70676,d2 ; we only want to run the gradient code if the vector points to 70684
     bne.s endvbl
 
+    move.w (solid_lines_required),d1
     move.w (gradient_y_at_screen_top),d0
-    neg.w d0
+    move.w d0,d1
+    neg.w d1 ; $solidLinesRequired = -$gradientYAtScreenTop;
+
+    ; d1 is now solidLinesRequired
+
+    ; equivalent to cmpi.w #$0000,d1
+    tst.w d1 ; test solidLinesRequired
+    bgt.s solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
+
+solid_lines_required_zero_or_less:
+
+    ; $initialGradientRgb = $gradientLookup[$gradientYAtScreenTop >> 2];
+    lsr.w #2,d0
+    lsl.w #1,d0
+    ext.l d0
+    add.l #gradient_rgb_values,d0 ; d0 is now start gradient address
+
+solid_lines_required_greater_than_zero:
+
+    ; $solidLinesRequired > 0
 
 endvbl:
     movem.l   (sp)+,d0-d7/a0-a6
