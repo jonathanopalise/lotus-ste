@@ -401,15 +401,17 @@ lines_remaining_greater_than_3:
     sub.l d3,d2
 
     move.b d4,raster_count
-    move.b d2,final_bar_line_count_instruction+2 
+    move.b d2,final_bar_line_count_instruction+3
 
 trigger_new_raster_routine:
-    bra.s legacy
     move.b    #0,$fffffa1b.w
+    ;move.b    #$5c,$fffffa21.w
     move.b    d1,$fffffa21.w ; new routine after
     move.b    #8,$fffffa1b.w
-    lea.l     new_raster_routine,a0
-    move.l    a0,$0120.w
+    move.l    #new_raster_routine,$0120.w
+    ;lea.l     new_raster_routine,a0
+    ;bclr      #0,$fffffa0f.w
+    ;move.l    a0,$0120
 
     bra.s endvbl 
 
@@ -442,13 +444,14 @@ raster_count:
 
 new_raster_routine:
 
-    subq.l #1,raster_count
+    subq.b #1,raster_count
     beq final_bar
 
     move.b    #0,$fffffa1b.w
     move.b    #4,$fffffa21.w
     move.b    #8,$fffffa1b.w
-    move.l    new_raster_routine,$0120.w
+    move.l    #new_raster_routine,$0120.w
+    bclr      #0,$fffffa0f.w
     rte
 
 final_bar:
