@@ -317,20 +317,37 @@ solid_rgb_value:
     dc.w $000
 
 gradient_rgb_values:
-    dc.w $111
-    dc.w $121
-    dc.w $222
-    dc.w $232
-    dc.w $333
-    dc.w $343
-    dc.w $444
-    dc.w $454
-    dc.w $555
-    dc.w $565
-    dc.w $666
-    dc.w $676
-    dc.w $777
-    dc.w $777
+;    dc.w $303
+;    dc.w $731
+;    dc.w $256
+;    dc.w $383
+;    dc.w $333
+;    dc.w $343
+;    dc.w $444
+;    dc.w $454
+;    dc.w $555
+;    dc.w $565
+;    dc.w $666
+;    dc.w $676
+;    dc.w $777
+;    dc.w $777
+    dc.w $a0a
+    dc.w $a0a
+    dc.w $b9a
+    dc.w $b9a
+    dc.w $caa
+    dc.w $caa
+    dc.w $dba
+    dc.w $dba
+    dc.w $ec9
+    dc.w $ec9
+    dc.w $fd9
+    dc.w $fd9
+    dc.w $fe9
+    dc.w $fe9
+    dc.w $ff9
+    dc.w $ff9
+
 
 gradient_y_at_screen_top:
     dc.w 5
@@ -402,6 +419,7 @@ lines_remaining_greater_than_3:
 
     move.b d4,raster_count
     move.b d2,final_bar_line_count_instruction+3
+    move.l d0,current_gradient_address
 
 trigger_new_raster_routine:
     move.b    #0,$fffffa1b.w
@@ -410,7 +428,7 @@ trigger_new_raster_routine:
     move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,$0120.w
     ;lea.l     new_raster_routine,a0
-    ;bclr      #0,$fffffa0f.w
+    bclr      #0,$fffffa0f.w
     ;move.l    a0,$0120
 
     bra.s endvbl 
@@ -433,6 +451,7 @@ post_vbl_timer_b_lines_instruction:
     move.b    #8,$fffffa1b.w
 post_vbl_timer_b_vector_instruction:
     move.l    #$70790,$0120.w
+    bclr      #0,$fffffa0f.w
 
 endvbl:
 
@@ -442,11 +461,23 @@ raster_count:
     dc.b 4
     dc.b 0 ; to align
 
+current_gradient_address:
+    dc.l 0
+
 new_raster_routine:
 
     subq.b #1,raster_count
     beq final_bar
 
+    move.w    #$2700,sr
+    move.l    a0,-(sp)
+    lea.l    current_gradient_address,a0
+    move.l    (a0),a0
+    move.w    (a0),a0
+    move.w    a0,$ffff825e.w
+    add.l     #2,current_gradient_address
+    move.l    (sp)+,a0
+    move.w    #$2300,sr
     move.b    #0,$fffffa1b.w
     move.b    #4,$fffffa21.w
     move.b    #8,$fffffa1b.w
@@ -461,6 +492,7 @@ final_bar_line_count_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
     move.l    #$70684,$0120.w
+    bclr      #0,$fffffa0f.w
     rte
 
 map_palette_data:

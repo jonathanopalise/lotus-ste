@@ -1,4 +1,4 @@
-so i need to do 2 things:
+
 1) disable the selection of the preshifted sprites
 2) apply the skew value
 
