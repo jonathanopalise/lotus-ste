@@ -380,7 +380,11 @@ gradient_init:
     bne legacy
 
     move.w (solid_lines_required),d1
-    move.w (gradient_y_at_screen_top),d0
+
+    move.w $7c59c,d0 ; gradient_y_at_screen_top
+    asr.w #1,d0
+    add.w #25,d0
+
     move.w d0,d1
     move.w d0,d3 ; copy gradient_y_at_screen_top
     neg.w d1 ; $solidLinesRequired = -$gradientYAtScreenTop;
@@ -429,7 +433,6 @@ lines_remaining_greater_than_4:
     move.l d0,a0
 
     move.l    (a0),a0 ; there must be a better way than all this indirection
-    move.w    (a0),a0
     move.w    a0,$ffff825e.w
 
 trigger_new_raster_routine:
