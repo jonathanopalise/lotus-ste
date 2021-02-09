@@ -331,22 +331,59 @@ gradient_rgb_values:
 ;    dc.w $676
 ;    dc.w $777
 ;    dc.w $777
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $10a
+    dc.w $20a
+    dc.w $30a
+    dc.w $40a
+    dc.w $50a
+    dc.w $60a
+    dc.w $70a
+    dc.w $80a
+    dc.w $90a
+
+
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $00a
+    dc.w $10a
+    dc.w $20a
+    dc.w $30a
+    dc.w $40a
+    dc.w $50a
+    dc.w $60a
+    dc.w $70a
+    dc.w $80a
+    dc.w $90a
+
+
     dc.w $a0a
-    dc.w $a0a
+    dc.w $a9a
     dc.w $b9a
-    dc.w $b9a
+    dc.w $baa
     dc.w $caa
-    dc.w $caa
+    dc.w $cba
     dc.w $dba
-    dc.w $dba
+    dc.w $dca
     dc.w $ec9
-    dc.w $ec9
-    dc.w $fd9
+    dc.w $ed9
     dc.w $fd9
     dc.w $fe9
     dc.w $fe9
     dc.w $ff9
     dc.w $ff9
+    dc.w $ff9
+
 
 
 gradient_y_at_screen_top:
@@ -379,11 +416,11 @@ gradient_init:
     cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
     bne legacy
 
-    move.w (solid_lines_required),d1
+    ;move.w (solid_lines_required),d1
 
     move.w $7c59c,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
-    add.w #25,d0
+    add.w #25+64+64,d0
 
     move.w d0,d1
     move.w d0,d3 ; copy gradient_y_at_screen_top
