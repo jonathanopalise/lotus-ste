@@ -350,7 +350,7 @@ gradient_rgb_values:
 
 
 gradient_y_at_screen_top:
-    dc.w 5
+    dc.w 0
 
 solid_lines_required:
     dc.w 0
@@ -402,11 +402,11 @@ solid_lines_required_zero_or_less:
     ; is lines remaining > 3?
     moveq.l #0,d2
     move.b post_vbl_timer_b_lines_instruction+3,d2 ; lines remaining
-    cmp.b #3,d2
-    bls.s lines_remaining_less_than_or_equal_to_3
-    ; we want to branch if lines remaining <=3
+    cmp.b #4,d2
+    bls.s lines_remaining_less_than_or_equal_to_4
+    ; we want to branch if lines remaining <=4
 
-lines_remaining_greater_than_3:
+lines_remaining_greater_than_4:
 
     lea bars_lookup,a0
     and.w #3,d1 ; solid_lines_required &=3
@@ -426,20 +426,22 @@ lines_remaining_greater_than_3:
     move.b d4,raster_count
     move.b d2,final_bar_line_count_instruction+3
     move.l d0,current_gradient_address
+    move.l d0,a0
+
+    move.l    (a0),a0 ; there must be a better way than all this indirection
+    move.w    (a0),a0
+    move.w    a0,$ffff825e.w
 
 trigger_new_raster_routine:
     move.b    #0,$fffffa1b.w
-    ;move.b    #$5c,$fffffa21.w
     move.b    d1,$fffffa21.w ; new routine after
     move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,$0120.w
-    ;lea.l     new_raster_routine,a0
     bclr      #0,$fffffa0f.w
-    ;move.l    a0,$0120
 
     bra.s endvbl 
 
-lines_remaining_less_than_or_equal_to_3:
+lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
 
 solid_lines_required_greater_than_zero:
@@ -477,11 +479,11 @@ new_raster_routine:
 
     move.w    #$2700,sr
     move.l    a0,-(sp)
-    lea.l    current_gradient_address,a0
+    add.l     #2,current_gradient_address
+    lea.l     current_gradient_address,a0
     move.l    (a0),a0
     move.w    (a0),a0
     move.w    a0,$ffff825e.w
-    add.l     #2,current_gradient_address
     move.l    (sp)+,a0
     move.w    #$2300,sr
     move.b    #0,$fffffa1b.w
