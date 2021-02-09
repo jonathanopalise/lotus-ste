@@ -361,17 +361,28 @@ new_routine_after_lookup:
     dc.b 2
     dc.b 1
 
+bars_lookup:
+    dc.b 4
+    dc.b 1
+    dc.b 2
+    dc.b 3
+    dc.b 4
+    dc.b 1
+    dc.b 2
+    dc.b 3
+
 gradient_init:
 
     ; this is the new code (wip)
 
     move.w #$684,d2
     cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
-    bne.s legacy
+    bne legacy
 
     move.w (solid_lines_required),d1
     move.w (gradient_y_at_screen_top),d0
     move.w d0,d1
+    move.w d0,d3 ; copy gradient_y_at_screen_top
     neg.w d1 ; $solidLinesRequired = -$gradientYAtScreenTop;
 
     ; d1 is now solidLinesRequired
@@ -390,32 +401,27 @@ solid_lines_required_zero_or_less:
 
     ; is lines remaining > 3?
     moveq.l #0,d2
-    move.b post_vbl_timer_b_lines_instruction+3,d2
+    move.b post_vbl_timer_b_lines_instruction+3,d2 ; lines remaining
     cmp.b #3,d2
     bls.s lines_remaining_less_than_or_equal_to_3
     ; we want to branch if lines remaining <=3
 
 lines_remaining_greater_than_3:
 
-    and.w #3,d1 ; solid lines required is now anded with 3
-    lea new_routine_after_lookup,a0
-    move.b (a0,d1.w),d1 ; d1 is now "new routine after"
-    ; now we need to calculate linesRemainingMinusNewRoutineAfter
-    ; d2 contains lines remaining, so d2-=d1
-    sub.l d1,d2
-    ; now d2 contains linesRemainingMinusNewRoutineAfter
+    lea bars_lookup,a0
+    and.w #3,d1 ; solid_lines_required &=3
+    move.b (a0,d1.w),d1 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
 
-    ; we'll put countMinusOne in d3
-    move.l d2,d3
-    lsr.l #2,d3
+    and.w #3,d3 ; gradient_y_at_screen_top &= 3
+    move.w d2,d4 ; copy lines remaining for later
+    and.w #3,d2 ; lines_remaining &= 3
+    add.w d3,d2
+    move.b (a0,d2.w),d2 ; final_bar_size: d2 = bars_lookup[($gradientYAtScreenTop & 3)+($linesRemaining & 3)];
 
-    ; we'll put count in d4
-    move.l d3,d4
-    addq.l #1,d4
-
-    ; we'll reuse d2 for finalBarSize
-    lsl.l #2,d3
-    sub.l d3,d2
+    sub.w d2,d4
+    sub.w d1,d4
+    lsr.w #2,d4
+    add.w #1,d4
 
     move.b d4,raster_count
     move.b d2,final_bar_line_count_instruction+3
