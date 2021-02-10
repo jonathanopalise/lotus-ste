@@ -21,6 +21,11 @@ You'll also need a specific disk image of Lotus to apply the code to at runtime.
 
 Insert the above floppy image, boot the virtual STE, start a race, and then enter the debugger. Enter the following commands to apply the patches:
 
+* `loadbin /path/to/0x70660.bin 0x70660`
+* `loadbin /path/to/0x7086e.bin 0x7086e`
+* `loadbin /path/to/0x70880.bin 0x70880`
+* `loadbin /path/to/0x70896.bin 0x70896`
+* `loadbin /path/to/0x80000.bin 0x80000`
 * `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
 * `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
 * `loadbin /path/to/0x7a312.bin 0x7a312`
@@ -41,4 +46,3 @@ Possible forthcoming objectives for this project are as follows:
 * Add sampled sound effects to replace the current synthesised ones - e.g. car collisions, empty fuel etc;
 * Add further zoom levels for trackside objects;
 * Use enhanced palette of STE for improved colours;
-* (Unlikely but nice to have) Render a sky gradient similar to that present on the Amiga version. 
