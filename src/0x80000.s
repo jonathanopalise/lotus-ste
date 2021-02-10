@@ -331,41 +331,6 @@ gradient_rgb_values:
 ;    dc.w $676
 ;    dc.w $777
 ;    dc.w $777
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $10a
-    dc.w $20a
-    dc.w $30a
-    dc.w $40a
-    dc.w $50a
-    dc.w $60a
-    dc.w $70a
-    dc.w $80a
-    dc.w $90a
-
-
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $00a
-    dc.w $10a
-    dc.w $20a
-    dc.w $30a
-    dc.w $40a
-    dc.w $50a
-    dc.w $60a
-    dc.w $70a
-    dc.w $80a
-    dc.w $90a
-
 
     dc.w $a0a
     dc.w $a9a
@@ -420,7 +385,7 @@ gradient_init:
 
     move.w $7c59c,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
-    add.w #25+64+64,d0
+    add.w #25,d0
 
     move.w d0,d1
     move.w d0,d3 ; copy gradient_y_at_screen_top
@@ -429,6 +394,7 @@ gradient_init:
     ; d1 is now solidLinesRequired
 
     ; equivalent to cmpi.w #$0000,d1
+testd1:
     tst.w d1 ; test solidLinesRequired
     bgt.s solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
 
@@ -484,8 +450,42 @@ trigger_new_raster_routine:
 lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
 
+    bra legacy
+
 solid_lines_required_greater_than_zero:
 
+    move.w    #$a0b,$ffff825e.w
+
+    ; d1 is solidlinesrequired
+    moveq.l #0,d2
+    move.b post_vbl_timer_b_lines_instruction+3,d2 ; put lines remaining into d2
+
+    sub.w d1,d2 ; d2 = lines remaining - solid lines required
+    ble legacy ; no gradient visible
+
+    move.w d2,d3 ; copy linesRemainingMinusSolidLinesRequired into d3
+
+    ; now calculate raster count
+    add.w #3,d2
+    lsr.w #2,d2
+
+    ; now calculate final bar size
+    and.w #3,d3
+    lea bars_lookup,a0
+    move.b (a0,d3.w),d3 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
+ 
+    move.b d2,raster_count
+    move.b d3,final_bar_line_count_instruction+3
+    lea gradient_rgb_values,a0
+    move.l a0,current_gradient_address
+
+    move.b    #0,$fffffa1b.w
+    move.b    d1,$fffffa21.w ; new routine after
+    move.b    #8,$fffffa1b.w
+    move.l    #new_raster_routine,$0120.w
+    bclr      #0,$fffffa0f.w
+
+    bra endvbl
     ; $solidLinesRequired > 0
     ; special case, not yet worked out, so just use default code
 
