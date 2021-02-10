@@ -28,7 +28,7 @@ initdrawroad:
     move.l #$ffff8a24,a3
     move.l #$ffff8a32,a2
     move.l #$ffff8a3c,a6
-    moveq.l #7,d5
+    ;moveq.l #7,d5 ; d5 is now free for use
     lea.l byte_offsets,a0
     move.l a0,usp
     lea.l gfx_data,a0
@@ -317,21 +317,6 @@ solid_rgb_value:
     dc.w $000
 
 gradient_rgb_values:
-;    dc.w $303
-;    dc.w $731
-;    dc.w $256
-;    dc.w $383
-;    dc.w $333
-;    dc.w $343
-;    dc.w $444
-;    dc.w $454
-;    dc.w $555
-;    dc.w $565
-;    dc.w $666
-;    dc.w $676
-;    dc.w $777
-;    dc.w $777
-
     dc.w $a0a
     dc.w $a9a
     dc.w $b9a
@@ -348,20 +333,6 @@ gradient_rgb_values:
     dc.w $ff9
     dc.w $ff9
     dc.w $ff9
-
-
-
-gradient_y_at_screen_top:
-    dc.w 0
-
-solid_lines_required:
-    dc.w 0
-
-new_routine_after_lookup:
-    dc.b 4
-    dc.b 3
-    dc.b 2
-    dc.b 1
 
 bars_lookup:
     dc.b 4

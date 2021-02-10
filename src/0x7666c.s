@@ -9,9 +9,9 @@
 label_76672:
     move.w    (a4)+,d3
     move.w    (a4)+,d0
-    move.w    (a4)+,d2
-    ;move.w    d3,d6    ; this instruction is redudant but can't just be removed due to self modifying code
-    nop                 ; so we replace with a nop for now
+    move.w    (a4)+,d2 ; on track position of the current line
+    move.w    d3,d5
+    ;nop
     addi.w    #$191,d2
     andi.w    #$fffc,d3
     move.w    d0,d1
@@ -29,6 +29,14 @@ label_76672:
     and.w #$3fc,d0                      ; bring the road width value into a 0-255 range
 
     andi.w #$400,d2
+
+    btst #0,d5
+    beq not_the_pits
+
+    add.w #$800,d2
+
+not_the_pits:
+
     add.w d2,d0
 
     move.l usp,a0

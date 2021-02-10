@@ -50,7 +50,6 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
 
     $blocksOf16Pixels = array_chunk($pixelColours, 16); 
     foreach ($blocksOf16Pixels as $block) {
-        //$boo = [0, 0, 0, 0, 3, 3, 3, 3, 5, 5, 5, 5, 7, 7, 7, 7];
         $outputBytes = array_merge(
             $outputBytes,
             convertPixelColourArrayToPlanarArray($block)
@@ -60,83 +59,93 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
     return $outputBytes;
 }
 
-$padding = 14;
+$padding = 22;
 
 $byteOffsets = [];
 $outputBytes = [];
 
-for ($type = 0; $type <2; $type++) {
-    if ($type == 0) {
-        $rumbleStripColour = COLOUR_WHITE;
-        $roadLinesColour = COLOUR_WHITE;
-        $asphaltColour = COLOUR_LIGHT_ASPHALT;
-        $grassColour = COLOUR_GRASS_1;
-    } else {
-        $rumbleStripColour = COLOUR_RED;
-        $roadLinesColour = COLOUR_DARK_ASPHALT;
-        $asphaltColour = COLOUR_DARK_ASPHALT;
-        $grassColour = COLOUR_GRASS_2;
-    }
-
-    $actualPixelWidthFloat = 10;
-    for ($index = 0; $index < 255; $index++) {
-        $actualPixelWidth = (int)$actualPixelWidthFloat;
-
-        $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
-        if ($roadLinesColour == COLOUR_WHITE) {
-            $computedRoadLinesColour = COLOUR_WHITE;
-
-            if ($actualPixelWidth < 60) {
-                $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
-            } elseif ($actualPixelWidth < 120) {
-                $computedRoadLinesColour = COLOUR_GREY;
-            }
+for ($thePits = 0; $thePits < 2; $thePits++) {
+    for ($type = 0; $type <2; $type++) {
+        if ($type == 0) {
+            $rumbleStripColour = COLOUR_WHITE;
+            $roadLinesColour = COLOUR_WHITE;
+            $asphaltColour = COLOUR_LIGHT_ASPHALT;
+            $grassColour = COLOUR_GRASS_1;
+        } else {
+            $rumbleStripColour = COLOUR_RED;
+            $roadLinesColour = COLOUR_DARK_ASPHALT;
+            $asphaltColour = COLOUR_DARK_ASPHALT;
+            $grassColour = COLOUR_GRASS_2;
         }
 
-        $roundedPixelWidth = (($actualPixelWidth - 1) & 0xffe0) + 32 + ($padding * 16);
-        //echo("rounded pixel width: ".$roundedPixelWidth."\n");
+        $actualPixelWidthFloat = 10;
+        for ($index = 0; $index < 255; $index++) {
+            $actualPixelWidth = (int)$actualPixelWidthFloat;
 
-        $textureStep = 1.0 / $actualPixelWidth;
-        $texturePosition = 0;
-        $midpointTexturePosition = $textureStep * ($roundedPixelWidth / 2);
-        $pixelColours = [];
+            $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+            if ($roadLinesColour == COLOUR_WHITE) {
+                $computedRoadLinesColour = COLOUR_WHITE;
 
-        for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
-            if (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.54))) {
-                $pixelColour = $rumbleStripColour; // left rumble strip
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.54)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
-                $pixelColour = $rumbleStripColour; // right rumble strip
-            } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
-                $pixelColour = $computedRoadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
-               $pixelColour = $computedRoadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
-               $pixelColour = $computedRoadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
-               $pixelColour = $computedRoadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
-                $pixelColour = $computedRoadLinesColour;
-            } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5))) {
-                $pixelColour = $asphaltColour;
+                if ($actualPixelWidth < 60) {
+                    $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+                } elseif ($actualPixelWidth < 120) {
+                    $computedRoadLinesColour = COLOUR_GREY;
+                }
+            }
+
+            $roundedPixelWidth = (($actualPixelWidth - 1) & 0xffe0) + 32 + ($padding * 16);
+            //echo("rounded pixel width: ".$roundedPixelWidth."\n");
+
+            $textureStep = 1.0 / $actualPixelWidth;
+            $texturePosition = 0;
+            $midpointTexturePosition = $textureStep * ($roundedPixelWidth / 2);
+            $pixelColours = [];
+
+            if ($thePits) {
+                $pitsOffset = 0.3;
             } else {
-                $pixelColour = $grassColour;
+                $pitsOffset = 0;
             }
 
-            $pixelColours[] = $pixelColour;
-            $texturePosition += $textureStep;
+            for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
+                if (($texturePosition > ($midpointTexturePosition + 0.46 + $pitsOffset)) && ($texturePosition < ($midpointTexturePosition + 0.54 + $pitsOffset))) {
+                    $pixelColour = $rumbleStripColour; // left rumble strip
+                } elseif (($texturePosition > ($midpointTexturePosition - 0.54)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
+                    $pixelColour = $rumbleStripColour; // right rumble strip
+                } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
+                    $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.48)) && $thePits) {
+                    $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
+                   $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
+                   $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
+                   $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
+                    $pixelColour = $computedRoadLinesColour;
+                } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5 + $pitsOffset))) {
+                    $pixelColour = $asphaltColour;
+                } else {
+                    $pixelColour = $grassColour;
+                }
+
+                $pixelColours[] = $pixelColour;
+                $texturePosition += $textureStep;
+            }
+
+            // rounded pixel width: 160
+            // bytes width: 80 (2 pixels per byte)
+            // does count($outputBytes) need to be multiplied by 4? (long words)
+            $byteOffsets[] = (count($outputBytes) + ($roundedPixelWidth / 4)) - (160/2);
+
+            $outputBytes = array_merge(
+                $outputBytes,
+                convertPixelColoursToOutputBytes($pixelColours)
+            );
+
+            $actualPixelWidthFloat+=1.5;
         }
-
-        // rounded pixel width: 160
-        // bytes width: 80 (2 pixels per byte)
-        // does count($outputBytes) need to be multiplied by 4? (long words)
-        $byteOffsets[] = (count($outputBytes) + ($roundedPixelWidth / 4)) - (160/2);
-
-        $outputBytes = array_merge(
-            $outputBytes,
-            convertPixelColoursToOutputBytes($pixelColours)
-        );
-
-        $actualPixelWidthFloat+=1.5;
     }
 }
 

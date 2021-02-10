@@ -38,11 +38,11 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 Exit the debugger to see the STE enhancements in action. You should see the following changes:
 
 * The road is rendered using the Blitter and features graphical details resembling those of the Amiga version;
-* All roadside scenery and cars are rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping)
+* All roadside scenery and cars are rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping);
+* The background features a gradient of raster bars resembling those of the Amiga version.
 
 Possible forthcoming objectives for this project are as follows:
 
-* Render the road with visuals reminiscent on the Amiga version, with performance matching the non-blitter renderer;
 * Add sampled sound effects to replace the current synthesised ones - e.g. car collisions, empty fuel etc;
 * Add further zoom levels for trackside objects;
 * Use enhanced palette of STE for improved colours;
