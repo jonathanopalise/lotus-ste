@@ -1,12 +1,10 @@
-    ; Redirect to blitter-driven road drawing routine
-
     include symbols.inc
  
     ORG $7666c
 
     jmp initdrawroad
 
-label_76672:
+label_76672:                 ; the following code is a replacement for the original code at 0x76672
     move.w    (a4)+,d3
     move.w    (a4)+,d0       ; width of the road at the current line
     move.w    (a4)+,d2       ; distance of current line from camera
@@ -23,53 +21,53 @@ label_76672:
     lsr.w #2,d0              ; bring the road width value into a 0-255 range
     and.w #$3fc,d0           ; bring the road width value into a 0-255 range
 
-    andi.w #$400,d2
+    andi.w #$400,d2          ; go to the start of the appropriate list of source data pointers
 
-    btst #0,d5
+    btst #0,d5               ; is this line in the pits?
     beq not_the_pits
 
     add.w #$800,d2           ; use the pits variant of the road graphics
 
 not_the_pits:
 
-    add.w d2,d0
+    add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
-    move.l usp,a0
+    move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l d6,a0              ; a0 now contains memory location of central source
 
     ext.l d1                 ; d1 is the shift value for the current line
     move.l d1,d4             ; copy to d4
     and.b #15,d4             ; convert to skew value
-    asr.w #1,d1
+    asr.w #1,d1              ; shift the source data pointer to the correct start point
     and.b #$f8,d1
     sub.l d1,a0              ; d1 now contains adjusted source
 
-    move.w #1,(a5)           ; ycount
-    move.l a0,(a3)           ; set source address
-    move.l a1,(a2)           ; set destination
-
     or.w #$c080,d4           ; hog mode
-    move.w d4,(a6)
+    move.l a0,(a3)           ; set source address
 
-    addq.l #2,a1
+    move.w #1,(a5)           ; set ycount in blitter
+    move.l a1,(a2)           ; set destination
+    move.w d4,(a6)           ; start blitter for one bitplane
+
+    addq.l #2,a1             ; advance destination to next bitplane
+    move.w #1,(a5)           ; set ycount in blitter
+    move.l a1,(a2)           ; set destination
+    move.w d4,(a6)           ; start blitter for one bitplane
+
+    addq.l #2,a1             ; advance destination to next bitplane
     move.w #1,(a5)           ; ycount
     move.l a1,(a2)           ; set destination
-    move.w d4,(a6)
+    move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1
+    addq.l #2,a1             ; advance destination to next bitplane
     move.w #1,(a5)           ; ycount
     move.l a1,(a2)           ; set destination
-    move.w d4,(a6)
+    move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1
-    move.w #1,(a5)           ; ycount
-    move.l a1,(a2)           ; set destination
-    move.w d4,(a6)
-
-    add.l #160-6,a1
-    addq.w    #1,d7
-    cmp.w     #$60,d7
-    bne       label_76672
+    add.l #160-6,a1          ; advance destination to next line
+    addq.w #1,d7             ; advance line counter
+    cmp.w #$60,d7            ; have we drawn all the lines?
+    bne label_76672
     rts
 
