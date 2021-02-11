@@ -24,10 +24,10 @@ initdrawroad:
     move.w #20,(a5)           ; xcount 8a36
     addq.l #4,a5
     move.w #$0203,(a5)        ; hop/op 8a3a
-    move.l #$ffff8a38,a5
-    move.l #$ffff8a24,a3
-    move.l #$ffff8a32,a2
-    move.l #$ffff8a3c,a6
+    move.l #$ffff8a38,a5      ; ycount
+    move.l #$ffff8a24,a3      ; source
+    move.l #$ffff8a32,a2      ; destination
+    move.l #$ffff8a3c,a6      ; linenum (to start blitter)
     ;moveq.l #7,d5 ; d5 is now free for use
     lea.l byte_offsets,a0
     move.l a0,usp
@@ -58,15 +58,9 @@ drawscenery:
 .1:
     move.w #1,(a2)             ; ycount
     move.b #$c0,(a6)
-    ;add.l d7,a0 ; update source
-    ;add.l d6,a1 ; update destination
-    
+   
     dbra d3,.1
     move.w d6,d3
-
-    ;bset.b d2,(a6)             ; start
-    ;bset.b d2,(a6)             ; start
-    ;bne.s .1
 .2:
     einline
     endm
@@ -113,7 +107,7 @@ nonfsr:
 
     move.w d7,($ffff8a22).w             ; source y increment
     move.w d6,($ffff8a30).w             ; dest y increment
-    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
+    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (one pass per bitplane)
     move.b d1,($ffff8a3d).w
 
     lea.l rightendmasks,a3
@@ -346,13 +340,9 @@ bars_lookup:
 
 gradient_init:
 
-    ; this is the new code (wip)
-
     move.w #$684,d2
     cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
     bne legacy
-
-    ;move.w (solid_lines_required),d1
 
     move.w $7c59c,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
@@ -364,8 +354,6 @@ gradient_init:
 
     ; d1 is now solidLinesRequired
 
-    ; equivalent to cmpi.w #$0000,d1
-testd1:
     tst.w d1 ; test solidLinesRequired
     bgt.s solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
 
