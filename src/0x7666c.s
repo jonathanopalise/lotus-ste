@@ -22,11 +22,11 @@ label_76672:                 ; the following code is a replacement for the origi
     and.w #$3fc,d0           ; bring the road width value into a 0-255 range
 
     andi.w #$400,d2          ; go to the start of the appropriate list of source data pointers
-    beq line_type_2
+    beq.s line_type_2
 
 line_type_1:
     btst #0,d4               ; is this line in the pits?
-    beq not_the_pits_1
+    beq.s not_the_pits_1
 
     add.w #$800,d2           ; use the pits variant of the road graphics
 
@@ -41,34 +41,32 @@ not_the_pits_1:
     ext.l d1                 ; d1 is the shift value for the current line
     move.l d1,d4             ; copy to d4
     and.b #15,d4             ; convert to skew value
-    asr.w #1,d1              ; shift the source data pointer to the correct start point
+    asr.w d5,d1              ; shift the source data pointer to the correct start point
     and.b #$f8,d1
     sub.l d1,a0              ; d1 now contains adjusted source
 
     or.w #$c080,d4           ; hog mode
     move.l a0,(a3)           ; set source address
-
-    move.w #$0203,$ffff8a3a.w
-    move.w d5,(a5)           ; set ycount in blitter
     move.l a1,(a2)           ; set destination
-    move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$0203,$ffff8a3a.w
     move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$0203,$ffff8a3a.w
+    move.w #$f,$ffff8a3a.w   ; second bitplane is always all 1's so no read required
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w #$203,$ffff8a3a.w ; restore read/write mode
+
+    addq.l #4,a0
+    move.l a0,(a3)           ; advance source address to third bitplane
+
     move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$0203,$ffff8a3a.w
     move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    add.l #160-6,a1          ; advance destination to next line
+    lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
     cmp.w #$60,d7            ; have we drawn all the lines?
     bne label_76672
@@ -91,41 +89,33 @@ not_the_pits_2:
     ext.l d1                 ; d1 is the shift value for the current line
     move.l d1,d4             ; copy to d4
     and.b #15,d4             ; convert to skew value
-    asr.w #1,d1              ; shift the source data pointer to the correct start point
+    asr.w d5,d1              ; shift the source data pointer to the correct start point
     and.b #$f8,d1
 
     sub.l d1,a0              ; d1 now contains adjusted source
 
     or.w #$c080,d4           ; hog mode
     move.l a0,(a3)           ; set source address
-
-    move.w #$0203,$ffff8a3a.w
-    move.w #1,(a5)           ; set ycount in blitter
     move.l a1,(a2)           ; set destination
+
+    move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$0203,$ffff8a3a.w
-    move.w #1,(a5)           ; ycount
-    ;move.l a1,(a2)           ; set destination
+    move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$f,$ffff8a3a.w
-    move.w #1,(a5)           ; ycount
-    ;move.l a1,(a2)           ; set destination
+    move.w #$f,$ffff8a3a.w   ; third bitplane is always all 1's so no read required
+    move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
+    move.w #$203,$ffff8a3a.w ; restore read/write mode
 
     addq.l #6,a0
-    move.l a0,(a3)
+    move.l a0,(a3)           ; advance source address to final bitplane
 
-    addq.l #2,a1             ; advance destination to next bitplane
-    move.w #$0203,$ffff8a3a.w
-    move.w #1,(a5)           ; ycount
-    ;move.l a1,(a2)           ; set destination
+    move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    add.l #160-6,a1          ; advance destination to next line
+    add.l #160,a1            ; advance destination to next line
     addq.w #1,d7             ; advance line counter
     cmp.w #$60,d7            ; have we drawn all the lines?
     bne label_76672
