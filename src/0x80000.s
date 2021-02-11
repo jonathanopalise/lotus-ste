@@ -28,7 +28,7 @@ initdrawroad:
     move.l #$ffff8a24,a3      ; source
     move.l #$ffff8a32,a2      ; destination
     move.l #$ffff8a3c,a6      ; linenum (to start blitter)
-    ;moveq.l #7,d5 ; d5 is now free for use
+    moveq.l #1,d5 ; d5 is now free for use
     lea.l byte_offsets,a0
     move.l a0,usp
     lea.l gfx_data,a0

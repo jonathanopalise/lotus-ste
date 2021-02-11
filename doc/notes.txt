@@ -1021,3 +1021,28 @@ this is calculated as: 0x7c546 + 0x56 = 7c59c (a4 might be the base address of t
 $00076466 : 396c 001a 0056                     move.w    $1a(a4),$56(a4)
 
 gradient can be 16 steps of 4 pixels each
+
+
+const COLOUR_RED = 2;             // 0010
+const COLOUR_WHITE = 6;           // 0110
+const COLOUR_GREY = 5;            // 0101
+const COLOUR_LIGHT_ASPHALT = 13;  // 1101
+const COLOUR_GRASS_1 = 12;        // 1100
+const COLOUR_DARK_ASPHALT = 15;   // 1111
+const COLOUR_GRASS_2 = 14;        // 1110
+
+note: bitplane 2 is always 1
+WHITE          0110 -> want 0110
+LIGHT_ASPHALT  1101 -> want 0110
+GRASS_1        1100 -> want 1100
+
+note: bitplane 3 is always 1
+RED            0010 -> want 0110
+DARK_ASPHALT   1111 -> want 0110 -> 
+GRASS_2        1110
+
+            $rumbleStripColour = COLOUR_RED;
+            $roadLinesColour = COLOUR_DARK_ASPHALT;
+            $asphaltColour = COLOUR_DARK_ASPHALT;
+            $grassColour = COLOUR_GRASS_2;
+

@@ -10,8 +10,44 @@ const COLOUR_GRASS_1 = 12;        // 1100
 const COLOUR_DARK_ASPHALT = 15;   // 1111
 const COLOUR_GRASS_2 = 14;        // 1110
 
-function convertPixelColourArrayToPlanarArray($pixel_colours) {
-	$planar_pixels=array();
+
+$rumbleStripColour = COLOUR_WHITE;        // 0110
+$roadLinesColour = COLOUR_WHITE;          // 0110
+$asphaltColour = COLOUR_LIGHT_ASPHALT;    // 1101
+$grassColour = COLOUR_GRASS_1;            // 1100
+
+$rumbleStripColour = COLOUR_RED;          // 0010
+$roadLinesColour = COLOUR_DARK_ASPHALT;   // 1111
+$asphaltColour = COLOUR_DARK_ASPHALT;     // 1111
+$grassColour = COLOUR_GRASS_2;            // 1110
+
+function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneIndex) {
+    $bitplanes = [
+        [],
+        [],
+        [],
+        []
+    ];
+
+    foreach ($pixel_colours as $pixel_colour) {
+        $bitplanes[3][] = ($pixel_colour & 8) ? 1: 0;
+        $bitplanes[2][] = ($pixel_colour & 4) ? 1: 0;
+        $bitplanes[1][] = ($pixel_colour & 2) ? 1: 0;
+        $bitplanes[0][] = ($pixel_colour & 1) ? 1: 0;
+    }
+
+    foreach ($bitplanes as $index => $bitplane) {
+        if ($index != $ignoreBitplaneIndex) {
+            $bitplaneBinary = implode('', array_slice($bitplane, 0, 8));
+            $planar_pixels[] = bindec($bitplaneBinary);
+
+            $bitplaneBinary = implode('', array_slice($bitplane, 8, 8));
+            $planar_pixels[] = bindec($bitplaneBinary);
+        }
+    }
+
+
+    /*$planar_pixels=array();
 	for ($span_pixel_x=0; $span_pixel_x<8; $span_pixel_x++) {
 		$planar_pixels[$span_pixel_x]=0;
 	}
@@ -35,12 +71,12 @@ function convertPixelColourArrayToPlanarArray($pixel_colours) {
 		$planar_pixels[$start_offset+2]|=($plane_1<<$shift);
 		$planar_pixels[$start_offset+4]|=($plane_2<<$shift);
 		$planar_pixels[$start_offset+6]|=($plane_3<<$shift);
-	}
+    }*/
 
     return $planar_pixels;
 }
 
-function convertPixelColoursToOutputBytes(array $pixelColours) {
+function convertPixelColoursToOutputBytes(array $pixelColours, $ignoreBitplaneIndex) {
 
     if ((count($pixelColours) & 15) != 0) {
         throw new \RuntimeException('Output byte array size is not a multiple of 16');
@@ -52,7 +88,7 @@ function convertPixelColoursToOutputBytes(array $pixelColours) {
     foreach ($blocksOf16Pixels as $block) {
         $outputBytes = array_merge(
             $outputBytes,
-            convertPixelColourArrayToPlanarArray($block)
+            convertPixelColourArrayToPlanarArray($block, $ignoreBitplaneIndex)
         );
     }
 
@@ -71,12 +107,15 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
             $roadLinesColour = COLOUR_WHITE;
             $asphaltColour = COLOUR_LIGHT_ASPHALT;
             $grassColour = COLOUR_GRASS_1;
+            $ignoreBitplaneIndex = 1;
         } else {
             $rumbleStripColour = COLOUR_RED;
             $roadLinesColour = COLOUR_DARK_ASPHALT;
             $asphaltColour = COLOUR_DARK_ASPHALT;
             $grassColour = COLOUR_GRASS_2;
+            $ignoreBitplaneIndex = 2;
         }
+        $ignoreBitplaneIndex=15;
 
         $actualPixelWidthFloat = 10;
         for ($index = 0; $index < 255; $index++) {
@@ -141,7 +180,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
 
             $outputBytes = array_merge(
                 $outputBytes,
-                convertPixelColoursToOutputBytes($pixelColours)
+                convertPixelColoursToOutputBytes($pixelColours, $ignoreBitplaneIndex)
             );
 
             $actualPixelWidthFloat+=1.5;
