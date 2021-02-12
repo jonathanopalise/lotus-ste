@@ -148,25 +148,50 @@ blitterstart:
     move.b #$80,d0                      ; store blitter start instruction
     moveq.l #7,d2
 
+    ; start new code
+
+    move.w #1602,d1
+    lsl.w #3,d3
+    sub.w d3,d1
+    move.w d1,2+drawsceneryplane_jsr
+    moveq.l #1,d1
+
+    ; end new code
+
     rept 3
-    drawsceneryline
+    jsr drawsceneryplane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    drawsceneryline
+    jsr drawsceneryplane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
     rept 3
     addq.l #2,a0                        ; move source to next bitplane
-    drawsceneryline
+    jsr drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    drawsceneryline
+    jsr drawsceneryplane
 
     movem.l (a7)+,a2-a6
 
+    rts
+
+drawsceneryplane:
+    ; d3 is number of lines
+    move.w d3,d6               ; backup number of lines
+    move.l a0,(a4)             ; set source address
+    move.l a1,(a5)             ; set destination
+
+drawsceneryplane_jsr:
+    bra drawsceneryplane_aft
+    rept 200
+    move.w #1,(a2)             ; ycount
+    move.b #$c0,(a6)
+    endr
+drawsceneryplane_aft:
     rts
 
 drawscenery_3bpp:
