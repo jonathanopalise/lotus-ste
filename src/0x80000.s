@@ -48,19 +48,16 @@ drawscenery:
 
     macro drawsceneryline
     inline
-    move.w d3,d6
-    ; https://arcb.csc.ncsu.edu/~mueller/codeopt/codeopt00/notes/constructs
-    ; the "right" kind of loop
-    sub.w #1,d3
-    bmi.s .2
+    move.w d3,d6               ; backup number of lines
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
+    bra.s .3
 .1:
     move.w #1,(a2)             ; ycount
     move.b #$c0,(a6)
-   
+.3: 
     dbra d3,.1
-    move.w d6,d3
+    move.w d6,d3               ; restore number of lines
 .2:
     einline
     endm
@@ -71,17 +68,17 @@ drawscenery:
     move.l #$ffff8a32,a5
     move.l #$ffff8a3c,a6
 
-    addq.l #8,d6                        ; convert to value suitable for blitter
-    add.w #10,d7                        ; convert to value suitable for blitter
+    addq.l #8,d6               ; convert to value suitable for blitter
+    add.w #10,d7               ; convert to value suitable for blitter
 
-    move.w #10,($ffff8a20).w            ; source x increment
-    move.w #8,($ffff8a2e).w             ; dest x increment
-    move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
+    move.w #10,($ffff8a20).w   ; source x increment
+    move.w #8,($ffff8a2e).w    ; dest x increment
+    move.w #$201,($ffff8a3a).w ; hop/op: read from source, source & destination
 
-    move.l a3,d0                        ; get desired xpos of scenery object
-    and.w #$f,d0                        ; convert to skew value for blitter
+    move.l a3,d0               ; get desired xpos of scenery object
+    and.w #$f,d0               ; convert to skew value for blitter
     move.w d0,d1
-    beq.s nonfsr                        ; if skew is zero, we can't use nfsr
+    beq.s nonfsr               ; if skew is zero, we can't use nfsr
 
     cmp.w #0,rightclipped
     bne.s nonfsr
