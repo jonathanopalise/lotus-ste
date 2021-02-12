@@ -146,15 +146,16 @@ nocalcendmask3:
 
 blitterstart:
     move.b #$80,d0                      ; store blitter start instruction
-    moveq.l #7,d2
+    moveq.l #7,d2 ; redundant?
 
     ; start new code
 
-    move.w #1602,d1
-    lsl.w #3,d3
+    move.w #802,d1
+    lsl.w #2,d3
     sub.w d3,d1
     move.w d1,2+drawsceneryplane_jsr
     moveq.l #1,d1
+    move.b #$c0,d6
 
     ; end new code
 
@@ -181,15 +182,17 @@ blitterstart:
 
 drawsceneryplane:
     ; d3 is number of lines
-    move.w d3,d6               ; backup number of lines
+    ;move.w d3,d6               ; backup number of lines
     move.l a0,(a4)             ; set source address
     move.l a1,(a5)             ; set destination
+    bset.b #6,(a6)
 
 drawsceneryplane_jsr:
     bra drawsceneryplane_aft
     rept 200
-    move.w #1,(a2)             ; ycount
-    move.b #$c0,(a6)
+    move.w d1,(a2)             ; ycount
+    ;move.b #$c0,(a6)
+    move.b d6,(a6)
     endr
 drawsceneryplane_aft:
     rts
