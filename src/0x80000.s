@@ -46,22 +46,6 @@ drawscenery:
     ; d6 is destination bytes to skip after each line
     ; d7 is source bytes to skip after each line
 
-    macro drawsceneryline
-    inline
-    move.w d3,d6               ; backup number of lines
-    move.l a0,(a4)             ; set source address
-    move.l a1,(a5)             ; set destination
-    bra.s .3
-.1:
-    move.w #1,(a2)             ; ycount
-    move.b #$c0,(a6)
-.3: 
-    dbra d3,.1
-    move.w d6,d3               ; restore number of lines
-.2:
-    einline
-    endm
-
     movem.l a2-a6,-(a7)
     move.l #$ffff8a38,a2
     move.l #$ffff8a24,a4
@@ -204,7 +188,6 @@ drawscenery_3bpp:
 
     move.l a3,d0                        ; get desired xpos of scenery object
     and.w #$f,d0                        ; convert to skew value for blitter
-    ;move.l #0,d0
     move.w d0,d1
     beq.s nonfsr_3bpp                        ; if skew is zero, we can't use nfsr
 
@@ -244,25 +227,29 @@ nocalcendmask3_3bpp:
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
 
-    move.b #$80,d0                      ; store blitter start instruction
-    moveq.l #7,d2
+    move.w #802,d1
+    lsl.w #2,d3
+    sub.w d3,d1
+    move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
+    moveq.l #1,d1                       ; ycount
+    move.b #$c0,d6                      ; blitter start instruction
 
     rept 3
-    drawsceneryline
+    jsr drawsceneryplane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    drawsceneryline
+    jsr drawsceneryplane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    drawsceneryline
+    jsr drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    drawsceneryline
+    jsr drawsceneryplane
 
     movem.l (a7)+,a2-a6
 
