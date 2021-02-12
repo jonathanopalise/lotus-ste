@@ -198,6 +198,33 @@ drawscenery_3bpp:
     or.b #$40,d1
 
 nonfsr_3bpp:
+
+    cmp.w #0,leftclipped
+    beq.s nofxsr_3bpp
+
+    sub.w #8,d7 ; d7 is source bytes to skip after each line - might need to be tuned
+    sub.w #8,a0 ; blitter source
+    or.b #$80,d1
+
+    cmp.w #1,d4
+    bne.s nofxsr_3bpp
+
+    ; when words to draw = 4 and leftclipped != 0, we need to set endmask1 from rightendmasks
+    ; In the case of a one word line ENDMASK 1 is used (http://www.atari-wiki.com/index.php/Blitter_manual)
+    ; this is a special case and could do with tidying up
+
+    move.w d7,($ffff8a22).w             ; source y increment
+    move.w d6,($ffff8a30).w             ; dest y increment
+    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
+    move.b d1,($ffff8a3d).w
+
+    lea.l rightendmasks,a3
+    add.l d0,d0                         ; byte offset in mask lookup table
+    move.w (a3,d0.w),d1
+    move.w d1,($ffff8a28).w             ; endmask1
+    bra.s blitterstart_3bpp
+
+nofxsr_3bpp:
     move.w d7,($ffff8a22).w             ; source y increment
     move.w d6,($ffff8a30).w             ; dest y increment
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
@@ -227,9 +254,10 @@ nocalcendmask3_3bpp:
     ; we are now free to use d0, d6 and d4 for our own purposes
     ; looks like d0, d1 and d2 are also available to us
 
-    move.w #802,d1
-    lsl.w #2,d3
-    sub.w d3,d1
+blitterstart_3bpp:
+    move.w #802,d1                      ; size of unrolled blitter calling table plus 2
+    lsl.w #2,d3                         ; one entry in the table is 4 bytes
+    sub.w d3,d1                         ; generate value to be placed within modified bra instruction
     move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
     moveq.l #1,d1                       ; ycount
     move.b #$c0,d6                      ; blitter start instruction
@@ -305,11 +333,6 @@ rightendmasks:
 ; D1 <> D0        BNE        BNE
 ; D1 >  D0        BGT        BHI
 ; D1 >= D0        BGE        BCC (branch on Carry Clear)
-
-lines_remaining equ $70668 
-
-solid_rgb_value:
-    dc.w $000
 
 gradient_rgb_values:
     dc.w $a0a
@@ -398,7 +421,6 @@ lines_remaining_greater_than_4:
     move.l    (a0),a0 ; there must be a better way than all this indirection
     move.w    a0,$ffff825e.w
 
-trigger_new_raster_routine:
     move.b    #0,$fffffa1b.w
     move.b    d1,$fffffa21.w ; new routine after
     move.b    #8,$fffffa1b.w

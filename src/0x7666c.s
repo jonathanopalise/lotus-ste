@@ -115,7 +115,7 @@ not_the_pits_2:
     move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    add.l #160,a1            ; advance destination to next line
+    lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
     cmp.w #$60,d7            ; have we drawn all the lines?
     bne label_76672

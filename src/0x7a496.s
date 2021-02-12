@@ -27,15 +27,17 @@ setrightclipped:
 
 zeroskew:
 
-
     tst.w     d2
     bpl.s     label_7a4ae
     tst.w     d6
     bmi       nothingtodraw
     move.w    d2,d0
     moveq     #0,d2
+
+    move.w    #$ffff,leftclipped
     add.w     d0,d4
     add.w     d0,d0
+    ;suba.w    d0,a0
     add.w     d0,d0
     add.w     d0,d0
     suba.w    d0,a0
@@ -61,6 +63,10 @@ label_7a4c8:
     move.w    d6,d0
     subi.w    #$14,d0
     sub.w     d0,d4
+    move.w    #$ffff,rightclipped
+
+    ; sprite has been clipped on right edge
+    ; so endmask3 needs to be $ffff
 label_7a4de:
     cmp.w     $7ad6e,d7
     bls.s     label_7a4f4
