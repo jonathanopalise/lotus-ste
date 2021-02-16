@@ -334,8 +334,9 @@ rightendmasks:
 ; D1 >  D0        BGT        BHI
 ; D1 >= D0        BGE        BCC (branch on Carry Clear)
 
-gradient_rgb_values:
+solid_sky_rgb_value:
     dc.w $a0a
+gradient_rgb_values:
     dc.w $a9a
     dc.w $b9a
     dc.w $baa
@@ -436,7 +437,8 @@ lines_remaining_less_than_or_equal_to_4:
 
 solid_lines_required_greater_than_zero:
 
-    move.w    #$a0b,$ffff825e.w
+    lea solid_sky_rgb_value,a0
+    move.w (a0),$ffff825e.w
 
     ; d1 is solidlinesrequired
     moveq.l #0,d2
@@ -547,7 +549,7 @@ preprocess_palette:
 
     move.w #15,d6
     add.l #26,a0
-    lea gradient_rgb_values,a1
+    lea solid_sky_rgb_value,a1
 
 transfer_gradient_step:
     jsr $74584
