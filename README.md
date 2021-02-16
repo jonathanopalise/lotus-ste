@@ -25,13 +25,15 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 * `loadbin /path/to/0x7086e.bin 0x7086e`
 * `loadbin /path/to/0x70880.bin 0x70880`
 * `loadbin /path/to/0x70896.bin 0x70896`
-* `loadbin /path/to/0x80000.bin 0x80000`
+* `loadbin /path/to/0x744ba.bin 0x744ba`
+* `loadbin /path/to/0x7450c.bin 0x7450c`
+* `loadbin /path/to/0x74586.bin 0x74586`
 * `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
 * `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
 * `loadbin /path/to/0x7a312.bin 0x7a312`
-* `loadbin /path/to/0x744ba.bin 0x744ba`
-* `loadbin /path/to/0x7a496.bin 0x7a496`
 * `loadbin /path/to/0x7666c.bin 0x7666c`
+* `loadbin /path/to/0x7a496.bin 0x7a496`
+* `loadbin /path/to/0x7c916.bin 0x7c916`
 * `loadbin /path/to/0x80000.bin 0x80000`
 
 `/path/to` in the above commands represents the directory to which `bin` files have been assembled - normally the `bin` directory within the repository.

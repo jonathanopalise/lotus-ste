@@ -1090,8 +1090,7 @@ on the iceland track, this results in the following values at $70856 with the pa
 - there are some colours specified in a lookup starting at 7c924
 - there are two colours specified at 7085e
 
-some kind of initialisation routine seems to start at 744b4
-this is the 
+
 
 starting at 744c8, 80 words get copied from 321C2 to 43330
 - what are they?
@@ -1250,6 +1249,8 @@ see list of pointers at 321c0 - what are they?
 
 could we add some supplemental code at 74582?
 
+74474 appears to be some kind of init routine for palette amongst other things
+
 $000744b4 : 207c 0003 2e30                     movea.l   #$32e30,a0
 $000744b4 : 207c 0003 37d4                     movea.l   #$337d4,a0
 this instruction gets modified!
@@ -1258,4 +1259,31 @@ after the file has been unpacked to 321c0, overwrite all colour data with that o
 
 replace the code at 744ba to a jsr into high memory
 - then we can copy the gradient into the correct location
+somewhere around 7c796 (maybe 7d07e?), there appears to be some kind of palette lookup table
+
+
+$00073a3c : 2f08                               move.l    a0,-(sp)
+$00073a3e : 3039 0007 cd5a                     move.w    $7cd5a,d0
+$00073a44 : d040                               add.w     d0,d0
+$00073a46 : 41f9 0007 d342                     lea       $7d342,a0
+$00073a4c : 3230 0000                          move.w    (a0,d0.w),d1
+$00073a50 : d279 0007 d07e                     add.w     $7d07e,d1
+$00073a56 : 205f                               movea.l   (sp)+,a0
+$00073a58 : 4e75                               rts       
+
+looks like a table begins at 7d07e, and there's an index into this table at 7d342, with the input into the index provided by the value at 7cd5a
+
+7c910 - something to do with colours? What does this do?
+
+
+
+we need to look at replacing this:
+$0007450c : 43f9 0007 0858                     lea       $70858,a1 ; set destination - needs 
+$00074512 : 6100 0070                          bsr       $74584
+$00074516 : 5449                               addq.w    #2,a1
+$00074518 : 6100 006a                          bsr       $74584
+$0007451c : 5149                               subq.w    #8,a1
+$0007451e : 6100 0064                          bsr       $74584
+$00074522 : 5449                               addq.w    #2,a1
+$00074524 : 6100 005e                          bsr       $74584
 
