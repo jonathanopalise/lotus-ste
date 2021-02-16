@@ -536,7 +536,29 @@ map_palette_data:
     move.w d0,(a1)+
     rts
 
+preprocess_palette:
+
+    ; these first two lines were previously located at $744ba and have been displaced
+    ; by the jsr instruction to this routine
+    move.w    (a0)+,d7
+    move.w    d7,$7ca9a
+
+    move.l a0,-(a7)
+
+    move.w #15,d6
+    add.l #26,a0
+    lea gradient_rgb_values,a1
+
+transfer_gradient_step:
+    jsr $74584
+    dbra d6,transfer_gradient_step
+
+    move.l (a7)+,a0
+ 
+    rts
+
     align 2
 
     include "road.s"
+
 

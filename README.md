@@ -29,6 +29,7 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 * `loadbin /path/to/0x7a2c0.bin 0x7a2c0`
 * `loadbin /path/to/0x7a2dc.bin 0x7a2dc`
 * `loadbin /path/to/0x7a312.bin 0x7a312`
+* `loadbin /path/to/0x744ba.bin 0x744ba`
 * `loadbin /path/to/0x7a496.bin 0x7a496`
 * `loadbin /path/to/0x7666c.bin 0x7666c`
 * `loadbin /path/to/0x80000.bin 0x80000`

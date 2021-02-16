@@ -1046,3 +1046,216 @@ GRASS_2        1110
             $asphaltColour = COLOUR_DARK_ASPHALT;
             $grassColour = COLOUR_GRASS_2;
 
+
+colours of the road and grass
+-----------------------------
+
+- there are four words at 70856 that get written to ffff8258 to set the colours for the road and grass
+- this happens at 7068c
+
+- value gets read from address $43332 at pc=74584, modified to ST format and written back to address $7085e
+- value gets read from address $32e34 at pc=744cc and written back to $43332 (32e34 is presumably in the buffer)
+- value gets read from $36912 and written to $32e36, $pc=74d38
+- value gets read from $36917 and written to $36913, $pc=74d38
+
+$00074584 : 3018                               move.w    (a0)+,d0
+$00074586 : 0240 0eee                          andi.w    #$eee,d0
+$0007458a : e248                               lsr.w     #1,d0
+$0007458c : 32c0                               move.w    d0,(a1)+ ; where is this being read from?
+$0007458e : 4e75                               rts       
+
+sample colours
+08ae 048c 0259 004e 0224 0222 048c
+addresses written to:
+70856
+70858
+7085a
+7085c
+7085e
+70860
+70862
+70864
+on the iceland track, this results in the following values at $70856 with the patch:
+02 46 01 12 02 35 01 11 04 57 02 46 01 ac 00 27
+
+0888
+0000
+0444
+0486
+0220
+0020
+0444
+0242
+
+- there are some colours specified in a lookup starting at 7c924
+- there are two colours specified at 7085e
+
+some kind of initialisation routine seems to start at 744b4
+this is the 
+
+starting at 744c8, 80 words get copied from 321C2 to 43330
+- what are they?
+
+- the filename is "filexx.scr"
+- this gets adjusted at runtime
+- the adjustable parts "xx" are at $7d368
+- these are the instructions that rewrite the filename
+  - $000745ea : 13f0 1000 0007 d368                move.b    (a0,d1.w),$7d368
+  - $000745f2 : 13f0 0000 0007 d369                move.b    (a0,d0.w),$7d369
+
+$00074606 : 4e41 trap #1
+fopen file87.scr (function 61)
+function number, filename address, read mode
+d7: [00 3d] [00 07 d3 62] [00 00]
+
+00074622 4e41 TRAP #$01
+fread (function 63)
+    func    handle  count         buf 
+d7: [00 3f] [00 06] [00 03 0d 40] [00 01 be 00]
+fread
+
+00074638 4e41 TRAP #$01
+d7: [00 3e]
+fclose
+
+$74606:
+fread (function 61)
+[00 3d] [00 07 d3 62] [00 00]
+fopen file84.scr
+
+00074622 4e41 TRAP #$01
+fread (function 63)
+    func    handle  count         buf 
+d7: [00 3f] [00 06] [00 03 0d 40] [00 01 be 00]
+
+move.w    mode,-(sp)   ; Offset 6
+pea       fname        ; Offset 2
+move.w    #61,-(sp)    ; Offset 0
+trap      #1           ; GEMDOS
+addq.l    #8,sp        ; Correct stack
+
+so:
+- fopen is at $74606
+- fread is at $74622
+- fclose is at $74638
+- rts at 7463c
+
+what is 7a1c6?
+
+fopen is at 74606
+decompress routine is at 74b2c
+command to show loaded filename: m 0x0007d362
+
+after options screen:
+(easy 1)
+74606: fopen file30.scr
+74b2c: a1=321C0, a2=10000
+74606: fopen file86.scr
+74b2c: a1=23B00, a2=10000
+74606: fopen file8a.scr
+74b2c: a1=268F4, a2=10000
+74606: fopen file89.scr
+74b2c: a1=276A4, a2=10000
+74606: fopen file94.scr
+74b2c: a1=29354, a2=10000
+74606: fopen file8b.scr
+74b2c: a1=2E3C6, a2=10000
+74606: fopen file59.scr
+74b2c: a1=2FD40, a2=10000
+74606: fopen file60.scr
+74b2c: a1=23B00, a2=10000
+(easy 1 race end)
+74606: fopen fileed.scr
+(no call to 74b2c - is this either uncompressed or compressed using a different method?)
+74606: fopen fileec.scr
+74b2c: a1=47980, a2=10000
+74606: fopen file30.scr
+742bc: a1=321C0, a2=10000
+(race result displayed)
+74606: fopen file8f.scr
+(easy 2 - mexico loading screen displayed)
+742bc: a1=23B00, a2=10000
+74606: fopen file9e.scr
+742bc: a1=2513E, a2=10000
+74606: fopen file9d.scr
+742bc: a1=26100, a2=10000
+74606: fopen file8b.scr
+742bc: a1=285e4, a2=10000
+74606: fopen file8a.scr
+742bc: a1=290ce, a2=10000
+74606: fopen filea1.scr
+742bc: a1=29E7E, a2=10000
+74606: fopen file9f.scr
+742bc: a1=2B53E, a2=10000
+74606: fopen file59.scr
+742bc: a1=2fd40, a2=10000
+74606: fopen file60.scr
+742bc: a1=23B00, a2=10000
+(easy 2 - mexico - race start)
+(easy 2 - mexico - race end)
+74606: fopen fileed.scr
+(no call to 74b2c - is this either uncompressed or compressed using a different method?)
+74606: fopen fileec.scr
+74b2c: a1=47980, a2=10000
+(race result displayed, screen clears)
+74606: fopen file30.scr
+(current table displayed)
+742bc: a1=321C0, a2=10000
+(current table clears)
+74606: fopen filee8f.scr
+(easy 3 - iceland loading screen displayed)
+742bc: a1=23b00, a2=10000
+74606: fopen file87.scr
+74b2c: a1=2513e, a2=10000
+74606: fopen file84.scr
+74b2c: a1=2ad4a, a2=10000
+74606: fopen file8b.scr
+74b2c: a1=2D78E, a2=10000
+74606: fopen file8a.scr
+74b2c: a1=2E278, a2=10000
+74606: fopen file59.scr
+74b2c: a1=2FD40, a2=10000
+74606: fopen file60.scr
+74b2c: a1=23B00, a2=10000
+(easy 3 - iceland - race start)
+(easy 3 - iceland - race end)
+74606: fopen fileed.scr
+74606: fopen fileec.scr
+74b2c: a1=47980, a2=10000
+(race result displayed, screen clears)
+74606: fopen file30.scr
+(current table displayed)
+742bc: a1=321C0, a2=10000
+(screen clears)
+74606: fopen fileaa.scr
+(easy 4 - spain loading screen displayed)
+742bc: a1=23B00, a2=10000
+74606: fopen file8a.scr
+742bc: a1=2A6D4, a2=10000
+74606: fopen file8b.scr
+742bc: a1=2B484, a2=10000
+74606: fopen file8f.scr
+742bc: a1=2BF6E, a2=10000
+74606: fopen file59.scr
+742bc: a1=2FD40, a2=10000
+74606: fopen file60.scr
+742bc: a1=23B00, a2=10000
+
+see list of pointers at 321c0 - what are they?
+
+
+0x32204 - 0x334dc
+0x334dc - 0x343f4
+
+
+could we add some supplemental code at 74582?
+
+$000744b4 : 207c 0003 2e30                     movea.l   #$32e30,a0
+$000744b4 : 207c 0003 37d4                     movea.l   #$337d4,a0
+this instruction gets modified!
+
+after the file has been unpacked to 321c0, overwrite all colour data with that of the amiga version
+
+replace the code at 744ba to a jsr into high memory
+- then we can copy the gradient into the correct location
+
