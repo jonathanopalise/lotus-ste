@@ -371,7 +371,7 @@ gradient_init:
 
     move.w $7c59c,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
-    add.w #25,d0
+    add.w #21,d0
 
     move.w d0,d1
     move.w d0,d3 ; copy gradient_y_at_screen_top
