@@ -4,7 +4,7 @@ _Enhancements to the Atari ST version of Lotus Esprit Turbo Challenge to support
 
 ![Screenshot of current progress](https://github.com/jonathanopalise/lotus-ste/blob/master/screenshot.png)
 
-This project is at a very early stage and currently doesn't do anything of great interest to end users.
+This project is at an early stage and currently doesn't do anything of great interest to end users.
 
 Directory layout is as follows:
 
@@ -13,9 +13,9 @@ Directory layout is as follows:
 * `src` - contains the core source code to generate the code for use on the ST side
 * `util` - contains utilities for use in reverse engineering efforts
 
-Run `make` to generate the binary patches for use on the ST side. In order to successfully run the Makefile, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). You'll also need a `m68k-ataribrownest-elf-nm` executable or something similar from one of the available GCC cross-assembler packages (e.g. https://bitbucket.org/ggnkua/bigbrownbuild/src/default/). The Makefile is designed for use only with Linux but I imagine it could be repurposed for Windows or Mac with some changes.
+Run `make` to generate the binary patches for use on the ST side. In order to successfully run the Makefile, you'll need a reasonably recent install of `php` (https://php.net) in your path, along with the `vasmm68k_mot` executable from the vasm project (http://sun.hasenbraten.de/vasm/). You'll also need a `m68k-ataribrownest-elf-nm` executable or something similar from one of the available GCC cross-assembler packages (e.g. https://bitbucket.org/ggnkua/bigbrownbuild/src/default/). The Makefile is designed for use with Linux but I imagine it could be repurposed for Windows or Mac with some changes.
 
-In order to test the current functionality of this project, you'll need a recent build of the Hatari emulator, configured as an STE with 1 meg of memory.
+In order to test the current functionality of this project, you'll need a recent build of the Hatari emulator (https://hatari.tuxfamily.org/), configured as an STE with 1 meg of memory.
 
 You'll also need a specific disk image of Lotus to apply the code to at runtime. The filename of this image is `Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Empire][a].st` and the md5sum is `942911068dd0a82debfba6d45d3370c4`.
 
@@ -40,12 +40,12 @@ Insert the above floppy image, boot the virtual STE, start a race, and then ente
 
 Exit the debugger to see the STE enhancements in action. You should see the following changes:
 
-* The road is rendered using the Blitter and features graphical details resembling those of the Amiga version;
-* All roadside scenery and cars are rendered at single-pixel horizontal accuracy (currently with a few unresolved issues around clipping);
-* The background features a gradient of raster bars resembling those of the Amiga version.
+* The road is rendered by the Blitter and features graphical details resembling those of the Amiga version;
+* All roadside scenery and cars are rendered by the blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
+* The background features a gradient of raster bars resembling those of the Amiga version;
+* The road and roadside colours are refined to leverage the enhanced STE colour palette.
 
 Possible forthcoming objectives for this project are as follows:
 
 * Add sampled sound effects to replace the current synthesised ones - e.g. car collisions, empty fuel etc;
-* Add further zoom levels for trackside objects;
-* Use enhanced palette of STE for improved colours;
+* Add further zoom levels for trackside objects.
