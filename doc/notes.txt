@@ -1287,3 +1287,44 @@ $0007451e : 6100 0064                          bsr       $74584
 $00074522 : 5449                               addq.w    #2,a1
 $00074524 : 6100 005e                          bsr       $74584
 
+Looks like CARS.REL is loaded at 70400
+Need to disassemble the loader with Ghidra
+
+Memory detection:
+$42E  L     phystop     Physical RAM top (points to first unusable byte RAM)
+
+Machine detection:
+https://www.atari-forum.com/viewtopic.php?t=15038
+
+With MYLOADER.PRG, the byte at offset 1c is loaded to address $aa9a:
+$0000aa9a : a00a                               linea     #$a
+- So is aa9a the actual code of substance that loads the game? This appears to run AFTER the splash screen!
+- It looks like the code at aa9a gets overwritten once the splash screen has displayed!
+
+- abea is the instruction that appears to start the process of loading cars.rel
+
+- here's the code that appears to overwrite the content at aa9a - where does it come from?
+
+$000f7fd0 : b478 224d                          cmp.w     $224d.w,d2
+$000f7fd4 : 2029 000c                          move.l    $c(a1),d0
+$000f7fd8 : d0a9 0014                          add.l     $14(a1),d0
+$000f7fdc : e488                               lsr.l     #2,d0
+$000f7fde : 5480                               addq.l    #2,d0
+$000f7fe0 : 43e9 0100                          lea       $100(a1),a1
+$000f7fe4 : 2449                               movea.l   a1,a2
+$000f7fe6 : 22db                               move.l    (a3)+,(a1)+
+$000f7fe8 : 5380                               subq.l    #1,d0
+$000f7fea : 66fa                               bne.s     $f7fe6
+$000f7fec : 206d 0018                          movea.l   $18(a5),a0
+$000f7ff0 : 4298                               clr.l     (a0)+
+$000f7ff2 : b1cf                               cmpa.l    sp,a0
+$000f7ff4 : 65fa                               bcs.s     $f7ff0
+$000f7ff6 : 4ed2                               jmp       (a2)
+
+and the instructions above appear to be written by this loop:
+
+$0000abc8 : 204e                               movea.l   a6,a0
+$0000abca : 7025                               moveq     #$25,d0
+$0000abcc : 10d9                               move.b    (a1)+,(a0)+
+$0000abce : 51c8 fffc                          dbra      d0,$abcc
+

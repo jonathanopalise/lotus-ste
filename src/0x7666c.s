@@ -2,7 +2,7 @@
  
     ORG $7666c
 
-    jmp initdrawroad
+    jsr initdrawroad
 
 label_76672:                 ; the following code is a replacement for the original code at 0x76672
     move.w    (a4)+,d3
