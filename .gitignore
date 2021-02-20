@@ -10,3 +10,4 @@ gamefiles/destination/*
 !gamefiles/source
 gamefiles/source/*
 !gamefiles/source/README
+release/lotus_ste.st

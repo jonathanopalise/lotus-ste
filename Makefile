@@ -4,10 +4,16 @@ PHP = php
 LZ4 = lz4
 ZIP2ST = zip2st
 ZIP = zip
+DD = dd
+RELEASE_DISK_IMAGE = release/lotus_ste.st
+GAMEFILES_DIR = gamefiles/
+GAMEFILES_SOURCE_DIR = $(GAMEFILES_DIR)source/
+GAMEFILES_DESTINATION_DIR = $(GAMEFILES_DIR)destination/
+BIN_DIR = bin/
 
-BIN_FILES = bin/0x70660.bin bin/0x7086e.bin bin/0x70880.bin bin/0x70896.bin bin/0x7450c.bin bin/0x744ba.bin bin/0x74586.bin bin/0x7666c.bin bin/0x7c916.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin bin/0x80000.bin
+CARS_REL_PATCHES = bin/0x70660.bin bin/0x7086e.bin bin/0x70880.bin bin/0x70896.bin bin/0x7450c.bin bin/0x744ba.bin bin/0x74586.bin bin/0x7666c.bin bin/0x7c916.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin
 
-default: check_dependencies all
+default: check_dependencies $(RELEASE_DISK_IMAGE)
 
 check_dependencies:
 	@command -v $(PHP) >/dev/null 2>&1 || { echo >&2 "I require $(PHP) but it's not installed.  Aborting."; exit 1; }
@@ -17,23 +23,38 @@ check_dependencies:
 	@command -v $(ZIP2ST) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP2ST) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(ZIP) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP) but it's not installed.  Aborting."; exit 1; }
 
-.PHONY: clean
+.PHONY: clean $(GAMEFILES_DESTINATION_DIR)
 
 clean:
 	rm src/symbols.* || true
 	rm src/road.s || true
-	rm bin/*.bin || true
-	rm bin/*.o || true
-	mv gamefiles/destination/README gamefiles/
-	rm -r gamefiles/destination/* || true
-	mv gamefiles/README gamefiles/destination/
+	rm $(BIN_DIR)*.bin || true
+	rm $(BIN_DIR)*.o || true
+	mv $(GAMEFILES_DESTINATION_DIR)README $(GAMEFILES_DIR)
+	rm -r $(GAMEFILES_DESTINATION_DIR)* || true
+	mv $(GAMEFILES_DIR)README $(GAMEFILES_DESTINATION_DIR)
+	rm $(RELEASE_DISK_IMAGE) || true
 
-.PHONY: all
+$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4
+	rm $(RELEASE_DISK_IMAGE) || true
+	$(ZIP2ST) $(GAMEFILES_DESTINATION_DIR) $@
+	@echo "*************************************************************"
+	@echo "Build complete. See $(RELEASE_DISK_IMAGE) for the disk image."
+	@echo "*************************************************************"
 
-all: $(BIN_FILES)
+$(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATION_DIR)
+	cp $(GAMEFILES_SOURCE_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)CARS.REL
+	$(DD) bs=1 count=60 if=$(BIN_DIR)0x70660.bin of=$@
 
-#bin/0x80000.rel: bin/0x80000.bin
-#	$(LZ4) -1 bin/0x80000.bin bin/0x80000.rel
+$(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
+	lz4 -1 $< $@
+
+$(GAMEFILES_DESTINATION_DIR):
+	@echo "Copying game files..."
+	cp -R $(GAMEFILES_SOURCE_DIR) $(GAMEFILES_DESTINATION_DIR)
+
+$(CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols.inc
+	$(VASM) $< -Fbin -o $@
 
 bin/0x80000.bin: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Fbin -o bin/0x80000.bin
@@ -41,49 +62,10 @@ bin/0x80000.bin: src/0x80000.s src/road.s
 bin/0x80000.o: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
-bin/0x70660.bin: src/0x70660.s src/symbols.inc
-	$(VASM) src/0x70660.s -Fbin -o bin/0x70660.bin
-
-bin/0x7086e.bin: src/0x7086e.s src/symbols.inc
-	$(VASM) src/0x7086e.s -Fbin -o bin/0x7086e.bin
-
-bin/0x70880.bin: src/0x70880.s src/symbols.inc
-	$(VASM) src/0x70880.s -Fbin -o bin/0x70880.bin
-
-bin/0x70896.bin: src/0x70896.s src/symbols.inc
-	$(VASM) src/0x70896.s -Fbin -o bin/0x70896.bin
-
-bin/0x7450c.bin: src/0x7450c.s src/symbols.inc
-	$(VASM) src/0x7450c.s -Fbin -o bin/0x7450c.bin
-
-bin/0x744ba.bin: src/0x744ba.s src/symbols.inc
-	$(VASM) src/0x744ba.s -Fbin -o bin/0x744ba.bin
-
-bin/0x74586.bin: src/0x74586.s src/symbols.inc
-	$(VASM) src/0x74586.s -Fbin -o bin/0x74586.bin
-
-bin/0x7a2c0.bin: src/0x7a2c0.s
-	$(VASM) src/0x7a2c0.s -Fbin -o bin/0x7a2c0.bin
-
-bin/0x7a2dc.bin: src/0x7a2dc.s
-	$(VASM) src/0x7a2dc.s -Fbin -o bin/0x7a2dc.bin
-
-bin/0x7a496.bin: src/0x7a496.s src/symbols.inc
-	$(VASM) src/0x7a496.s -Fbin -o bin/0x7a496.bin
-
-bin/0x7a312.bin: src/0x7a312.s src/symbols.inc
-	$(VASM) src/0x7a312.s -Fbin -o bin/0x7a312.bin
-
-bin/0x7666c.bin: src/0x7666c.s src/symbols.inc
-	$(VASM) src/0x7666c.s -Fbin -o bin/0x7666c.bin
-
-bin/0x7c916.bin: src/0x7c916.s src/symbols.inc
-	$(VASM) src/0x7c916.s -Fbin -o bin/0x7c916.bin
-
 src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
 
 src/symbols.inc: bin/0x80000.o src/process_symbols.php
-	echo Process symbols...
-	$(NM) bin/0x80000.o > src/symbols.txt
+	@echo "Process symbols..."
+	$(NM) $(BIN_DIR)0x80000.o > src/symbols.txt
 	$(PHP) src/process_symbols.php > src/symbols.inc
