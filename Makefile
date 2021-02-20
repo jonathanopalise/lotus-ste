@@ -4,7 +4,6 @@ PHP = php
 LZ4 = lz4
 ZIP2ST = zip2st
 ZIP = zip
-DD = dd
 RELEASE_DISK_IMAGE = release/lotus_ste.st
 GAMEFILES_DIR = gamefiles/
 GAMEFILES_SOURCE_DIR = $(GAMEFILES_DIR)source/
@@ -43,8 +42,7 @@ $(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINAT
 	@echo "*************************************************************"
 
 $(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATION_DIR)
-	cp $(GAMEFILES_SOURCE_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)CARS.REL
-	$(DD) bs=1 count=60 if=$(BIN_DIR)0x70660.bin of=$@
+	php src/generate_cars_rel.php $@ $(CARS_REL_PATCHES)
 
 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
