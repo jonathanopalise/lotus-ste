@@ -21,6 +21,7 @@ $sourcePaths = array_slice($arguments, 1);
 $baseAddress = 0x70400;
 
 $destinationFileContents = getFile($destinationPath);
+echo("destination file contents length: ".strlen($destinationFileContents)."\n");
 
 foreach ($sourcePaths as $sourcePath) {
     echo("Reading patch file ".$sourcePath."\n");
@@ -54,7 +55,8 @@ foreach ($sourcePaths as $sourcePath) {
     echo("Writing patch to ".$destinationPath." address ".dechex($intAddress)."\n");
 
     $sourceFileContents = getFile($sourcePath);
-    $destinationFileContents = substr_replace($destinationFileContents, $sourceFileContents, $intAddress);
+    $destinationFileContents = substr_replace($destinationFileContents, $sourceFileContents, $intAddress, strlen($sourceFileContents));
+    echo("destination file contents length: ".strlen($destinationFileContents)."\n");
 }
 
 echo("Writing modified file back to ".$destinationPath."...\n");

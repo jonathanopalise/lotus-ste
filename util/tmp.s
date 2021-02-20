@@ -1,3 +1,3 @@
-    jmp $abea
+    jmp $0x80000
 
 

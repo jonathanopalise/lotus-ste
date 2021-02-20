@@ -121,6 +121,63 @@ not_the_pits_2:
     bne label_76672
     rts
 
+filename:
+    dc.b "A:0x80000.LZ4"
+    dc.b 0
+
+fhandle:
+    dc.w 0
+
+init_lotus:
+    ; open file
+	move.w	#0,-(sp)
+	pea filename	 ; Pointer to Filename
+	move.w	#$3d,-(sp) 
+	trap	#1
+	addq.l	#8,sp
+	move.w	d0,fhandle
+
+    ; read file
+    move.l #$321c0,-(sp)
+    move.l    #$ffff,-(sp)   ; Offset 4
+    move.w    fhandle,-(sp)  ; Offset 2
+    move.w    #63,-(sp)     ; Offset 0
+    trap      #1            ; GEMDOS
+    lea       $C(sp),sp     ; Correct stack
+
+    ; close file
+	move.w	fhandle,-(sp)
+	move.w	#$3e,-(sp)
+	trap	#1
+	addq.l	#4,sp
+
+    move.l #$321c0,a0
+    move.l #$80000,a1
+    jsr lz4_decode
+
+    ; existing lotus code
+
+    move.l    #$708ce,-(sp)
+    move.l    #$60,-(sp)
+    move.l    #$1f0001,-(sp)
+    trap      #$e
+    adda.w    #$c,sp
+    move.b    #3,$fffffc00.w
+    move.b    #$96,$fffffc00.w
+    move.l    #$70448,-(sp)
+    move.l    #$d0006,-(sp)
+    trap      #$e
+    addq.w    #8,sp
+    move.l    #$70564,-(sp)
+    move.l    #$190002,-(sp)
+    trap      #$e
+    addq.w    #8,sp
+
+
+
+    ; load 0x80000
+    jmp $70938
+
 ;input:
 ; a0.l = lz4 compressed data address
 ; a1.l = destination address
