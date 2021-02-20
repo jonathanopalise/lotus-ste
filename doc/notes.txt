@@ -1328,3 +1328,11 @@ $0000abca : 7025                               moveq     #$25,d0
 $0000abcc : 10d9                               move.b    (a1)+,(a0)+
 $0000abce : 51c8 fffc                          dbra      d0,$abcc
 
+Going to try using lz4 as the packer for 0x80000.bin
+
+move.l	#Addr_Lotus512RAM,A0			; LZ4_File
+move.l	#0+8,A1							; Destination RAM
+bsr		LZ4_Decode
+
+
+Binary patching: https://superuser.com/questions/1251882/write-n-bytes-from-a-file-into-another-in-bash

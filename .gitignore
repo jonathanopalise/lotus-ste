@@ -3,3 +3,10 @@
 *.o
 src/road.s
 src/symbols.*
+gamefiles/*
+!gamefiles/destination
+gamefiles/destination/*
+!gamefiles/destination/README
+!gamefiles/source
+gamefiles/source/*
+!gamefiles/source/README
