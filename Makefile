@@ -10,7 +10,11 @@ GAMEFILES_SOURCE_DIR = $(GAMEFILES_DIR)source/
 GAMEFILES_DESTINATION_DIR = $(GAMEFILES_DIR)destination/
 BIN_DIR = bin/
 
-CARS_REL_PATCHES = bin/0x70660.bin bin/0x7086e.bin bin/0x70880.bin bin/0x70896.bin bin/0x7450c.bin bin/0x744ba.bin bin/0x74586.bin bin/0x7666c.bin bin/0x7c916.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin
+GENERIC_CARS_REL_PATCHES = bin/0x70660.bin bin/0x7086e.bin bin/0x70880.bin bin/0x70896.bin bin/0x7450c.bin bin/0x744ba.bin bin/0x74586.bin bin/0x7c916.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin
+0x7666C_CARS_REL_PATCH = bin/0x7666c.bin
+0x70400_CARS_REL_PATCH = bin/0x70400.bin
+CUSTOM_CARS_REL_PATCHES = $(0x7666C_CARS_REL_PATCH) $(0x70400_CARS_REL_PATCH)
+CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 
 default: check_dependencies $(RELEASE_DISK_IMAGE)
 
@@ -49,10 +53,24 @@ $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTI
 
 $(GAMEFILES_DESTINATION_DIR):
 	@echo "Copying game files..."
-	cp -R $(GAMEFILES_SOURCE_DIR) $(GAMEFILES_DESTINATION_DIR)
+	cp -R $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR)
 
-$(CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols.inc
+$(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
+
+$(0x70400_CARS_REL_PATCH): src/0x70400.s src/symbols_0x7666c.inc
+	$(VASM) $< -Fbin -o $@
+
+$(0x7666C_CARS_REL_PATCH): src/0x7666c.s src/symbols_0x80000.inc
+	$(VASM) $< -Fbin -o $@
+
+src/symbols_0x7666c.inc: bin/0x7666c.o src/process_symbols.php
+	@echo "Process symbols for 0x7666c..."
+	$(NM) $(BIN_DIR)0x7666c.o > src/symbols_0x7666c.txt
+	$(PHP) src/process_symbols.php src/symbols_0x7666c.txt > src/symbols_0x7666c.inc
+
+bin/0x7666c.o: src/0x7666c.s
+	$(VASM) src/0x7666c.s -Felf -o bin/0x7666c.o
 
 bin/0x80000.bin: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Fbin -o bin/0x80000.bin
@@ -60,10 +78,12 @@ bin/0x80000.bin: src/0x80000.s src/road.s
 bin/0x80000.o: src/0x80000.s src/road.s
 	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
+src/symbols_0x80000.inc: bin/0x80000.o src/process_symbols.php
+	@echo "Process symbols..."
+	$(NM) $(BIN_DIR)0x80000.o > src/symbols_0x80000.txt
+	$(PHP) src/process_symbols.php src/symbols_0x80000.txt > src/symbols_0x80000.inc
+
 src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
 
-src/symbols.inc: bin/0x80000.o src/process_symbols.php
-	@echo "Process symbols..."
-	$(NM) $(BIN_DIR)0x80000.o > src/symbols.txt
-	$(PHP) src/process_symbols.php > src/symbols.inc
+

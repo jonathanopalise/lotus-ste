@@ -1,6 +1,6 @@
 <?php
 
-$handle = fopen('src/symbols.txt', 'r');
+$handle = fopen($argv[1], 'r');
 
 if ($handle) {
     while (($buffer = fgets($handle, 4096)) !== false) {

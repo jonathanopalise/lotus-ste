@@ -1,4 +1,4 @@
-    include symbols.inc
+    include symbols_0x80000.inc
 
     ORG $7666c
 
@@ -125,7 +125,7 @@ not_the_pits_2:
 ; a0.l = lz4 compressed data address
 ; a1.l = destination address
 
-; lz4_decode:
+lz4_decode:
 	addq.l    #7,a0
 	lea       little_endian+4,a2
 	moveq     #0,d2

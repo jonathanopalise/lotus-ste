@@ -1,6 +1,6 @@
     ORG $7a496
 
-    include symbols.inc
+    include symbols_0x80000.inc
 
     ; code at 0x7a496 (tst.w d2) seems to be equivalent to what we have in 7a312
     moveq     #0,d0
