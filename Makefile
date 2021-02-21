@@ -38,7 +38,7 @@ clean:
 	mv $(GAMEFILES_DIR)README $(GAMEFILES_DESTINATION_DIR)
 	rm $(RELEASE_DISK_IMAGE) || true
 
-$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4
+$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4
 	rm $(RELEASE_DISK_IMAGE) || true
 	$(ZIP2ST) $(GAMEFILES_DESTINATION_DIR) $@
 	@echo "*************************************************************"
@@ -49,6 +49,9 @@ $(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATIO
 	php src/generate_cars_rel.php $@ $(CARS_REL_PATCHES)
 
 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
+	lz4 -1 $< $@
+
+$(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4: $(BIN_DIR)system_check.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
 
 $(GAMEFILES_DESTINATION_DIR):
@@ -86,4 +89,11 @@ src/symbols_0x80000.inc: bin/0x80000.o src/process_symbols.php
 src/road.s: src/generate_road.php
 	php src/generate_road.php > src/road.s
 
+bin/system_check.bin: src/system_check.s bin/system_check_palette.s bin/system_check_graphics.s
+	$(VASM) src/system_check.s -Fbin -o bin/system_check.bin
 
+bin/system_check_palette.s: src/system_check.raw.pal src/generate_palette.php
+	php src/generate_palette.php src/system_check.raw.pal > src/system_check_palette.s
+
+bin/system_check_graphics.s: src/system_check.raw src/generate_planar.php
+	php src/generate_planar.php src/system_check.raw > src/system_check_graphics.s
