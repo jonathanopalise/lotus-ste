@@ -1,6 +1,10 @@
 
     ORG $23b00
 
+dbasell     equ	$ffff820d	; addr of low byte of this reg
+dbasel		equ	$ffff8203	; display base low
+color0		equ	$ffff8240	; color palette #0
+
     lea system_check_palette,a0
     move.l #$ffff8240,a1
     move.w #16,d6
@@ -46,6 +50,39 @@ memory_ok:
     move.l a5,a1 ; restore physbase from earlier
     add.l #(160*140),a1
     move.l a2,a0
+    move.l #(160*7/4),d6
+    jsr copy_graphics
+
+    ; now test machine type
+
+	move.b #$5a,dbasell	 ; see if dbasell is RAM
+	tst.b	dbasel			; read another register to destroy
+						        ; capacitance effects; dbasel is 00.
+	move.b	dbasell,d0    ; read; don't say cmp.b because that
+						        ; would put $5a on the bus.
+	cmp.b	#$5a,d0		  ; NOW cmp.b
+	bne	memST
+
+	clr.b	dbasell		  ; try the test again using zero
+	tst.w	color0			; color0 is $FFF
+	tst.b	dbasell		  ; read back - should be zero.
+	bne	memST
+
+    ; OK, dbasell holds its value: you're an STe.
+
+memSTE:
+    bra verdict
+
+memST:				; for ST
+
+    add.l #(7*160),a3
+    addq.l #1,d5 ; increment tests failed
+
+verdict:
+    ; draw machine status message
+    move.l a5,a1 ; restore physbase from earlier
+    add.l #(160*153),a1
+    move.l a3,a0
     move.l #(160*7/4),d6
     jsr copy_graphics
 
