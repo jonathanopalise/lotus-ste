@@ -68,7 +68,7 @@ drawscenery:
     cmp.w #1,d4
     beq.s nonfsr
 
-    cmp.w #0,rightclipped
+    tst.w rightclipped
     bne.s nonfsr
 
     add.w #10,d7
@@ -76,7 +76,7 @@ drawscenery:
 
 nonfsr:
 
-    cmp.w #0,leftclipped
+    tst.w leftclipped
     beq.s nofxsr
 
     sub.w #10,d7
@@ -198,7 +198,7 @@ drawscenery_3bpp:
     cmp.w #1,d4
     beq.s nonfsr_3bpp
 
-    cmp.w #0,rightclipped
+    tst.w rightclipped
     bne.s nonfsr_3bpp
 
     add.w #8,d7
@@ -206,7 +206,7 @@ drawscenery_3bpp:
 
 nonfsr_3bpp:
 
-    cmp.w #0,leftclipped
+    tst.w leftclipped
     beq.s nofxsr_3bpp
 
     sub.w #8,d7 ; d7 is source bytes to skip after each line - might need to be tuned
