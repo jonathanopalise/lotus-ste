@@ -87,6 +87,20 @@ verdict:
     jsr copy_graphics
 
     tst.l d5
+    beq verdict_ok
+
+    add.l #(7*160),a4
+
+verdict_ok:
+
+    ; draw verdict message
+    move.l a5,a1 ; restore physbase from earlier
+    add.l #(160*166),a1
+    move.l a4,a0
+    move.l #(160*7/4),d6
+    jsr copy_graphics
+
+    tst.l d5
     bne endless_loop
 
     rts
