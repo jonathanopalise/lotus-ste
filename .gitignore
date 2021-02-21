@@ -3,6 +3,8 @@
 *.o
 src/road.s
 src/symbols.*
+src/system_check_graphics.s
+src/system_check_palette.s
 gamefiles/*
 !gamefiles/destination
 gamefiles/destination/*
