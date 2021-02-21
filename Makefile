@@ -29,7 +29,7 @@ check_dependencies:
 .PHONY: clean $(GAMEFILES_DESTINATION_DIR)
 
 clean:
-	rm src/symbols.* || true
+	rm src/symbols*.* || true
 	rm src/road.s || true
 	rm $(BIN_DIR)*.bin || true
 	rm $(BIN_DIR)*.o || true

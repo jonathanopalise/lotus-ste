@@ -2,7 +2,8 @@
 *.bin
 *.o
 src/road.s
-src/symbols.*
+src/symbols_0x80000.*
+src/symbols_0x7666c.*
 src/system_check_graphics.s
 src/system_check_palette.s
 gamefiles/*
