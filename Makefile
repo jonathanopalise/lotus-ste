@@ -1,9 +1,11 @@
 VASM = vasmm68k_mot 
+VLINK = vlink
 NM = m68k-ataribrownest-elf-nm
 PHP = php
 LZ4 = lz4
 ZIP2ST = zip2st
 ZIP = zip
+
 RELEASE_DISK_IMAGE = release/lotus_ste.st
 GAMEFILES_DIR = gamefiles/
 GAMEFILES_SOURCE_DIR = $(GAMEFILES_DIR)source/
@@ -19,9 +21,10 @@ CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 default: check_dependencies $(RELEASE_DISK_IMAGE)
 
 check_dependencies:
-	@command -v $(PHP) >/dev/null 2>&1 || { echo >&2 "I require $(PHP) but it's not installed.  Aborting."; exit 1; }
-	@command -v $(NM) >/dev/null 2>&1 || { echo >&2 "I require $(NM) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(VASM) >/dev/null 2>&1 || { echo >&2 "I require $(VASM) but it's not installed.  Aborting."; exit 1; }
+	@command -v $(VLINK) >/dev/null 2>&1 || { echo >&2 "I require $(LINK) but it's not installed.  Aborting."; exit 1; }
+	@command -v $(NM) >/dev/null 2>&1 || { echo >&2 "I require $(NM) but it's not installed.  Aborting."; exit 1; }
+	@command -v $(PHP) >/dev/null 2>&1 || { echo >&2 "I require $(PHP) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(LZ4) >/dev/null 2>&1 || { echo >&2 "I require $(LZ4) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(ZIP2ST) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP2ST) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(ZIP) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP) but it's not installed.  Aborting."; exit 1; }
@@ -38,7 +41,7 @@ clean:
 	mv $(GAMEFILES_DIR)README $(GAMEFILES_DESTINATION_DIR)
 	rm $(RELEASE_DISK_IMAGE) || true
 
-$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4 $(GAMEFILES_DESTINATION_DIR)/AUTO/MYLOADER.PRG
+$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG
 	rm $(RELEASE_DISK_IMAGE) || true
 	$(ZIP2ST) $(GAMEFILES_DESTINATION_DIR) $@
 	@echo "*************************************************************"
@@ -54,13 +57,14 @@ $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTI
 $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4: $(BIN_DIR)system_check.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
 
-$(GAMEFILES_DESTINATION_DIR)/AUTO/MYLOADER.PRG: src/patch_myloader.php $(GAMEFILES_DESTINATION_DIR)
-	@echo "Patch loader..."
-	php src/patch_myloader.php $@
+$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s $(GAMEFILES_DESTINATION_DIR)
+	$(VASM) src/loader.s -Felf -o bin/loader.o
+	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
+	vlink -b ataritos bin/loader.o -o $@
 
 $(GAMEFILES_DESTINATION_DIR):
 	@echo "Copying game files..."
-	cp -R $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR)
+	cp $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR) || true
 
 $(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
