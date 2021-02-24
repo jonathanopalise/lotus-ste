@@ -125,42 +125,10 @@ filename:
     dc.b "A:0x80000.LZ4"
     dc.b 0
 
-syscheck_filename:
-    dc.b "A:SYSCHECK.LZ4"
-
 fhandle:
     dc.w 0
 
 init_lotus:
-    ; SYSCHECK - open file
-	move.w	#0,-(sp)
-	pea syscheck_filename	 ; Pointer to Filename
-	move.w	#$3d,-(sp) 
-	trap	#1
-	addq.l	#8,sp
-	move.w	d0,fhandle
-
-    ; read file
-    move.l #$30d40,-(sp)
-    move.l    #$ffff,-(sp)   ; Offset 4
-    move.w    fhandle,-(sp)  ; Offset 2
-    move.w    #63,-(sp)     ; Offset 0
-    trap      #1            ; GEMDOS
-    lea       $C(sp),sp     ; Correct stack
-
-    ; close file
-	move.w	fhandle,-(sp)
-	move.w	#$3e,-(sp)
-	trap	#1
-	addq.l	#4,sp
-
-    ; decompress
-    move.l #$30d40,a0
-    move.l #$23b00,a1
-    jsr lz4_decode
-
-    jsr $23b00
-
     ; 0x80000 - open file
 	move.w	#0,-(sp)
 	pea filename	 ; Pointer to Filename
@@ -205,8 +173,6 @@ init_lotus:
     move.l    #$190002,-(sp)
     trap      #$e
     addq.w    #8,sp
-
-
 
     ; load 0x80000
     jmp $70938

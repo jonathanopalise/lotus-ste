@@ -5,6 +5,7 @@ PHP = php
 LZ4 = lz4
 ZIP2ST = zip2st
 ZIP = zip
+UPX = upx
 
 RELEASE_DISK_IMAGE = release/lotus_ste.st
 GAMEFILES_DIR = gamefiles/
@@ -28,6 +29,7 @@ check_dependencies:
 	@command -v $(LZ4) >/dev/null 2>&1 || { echo >&2 "I require $(LZ4) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(ZIP2ST) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP2ST) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(ZIP) >/dev/null 2>&1 || { echo >&2 "I require $(ZIP) but it's not installed.  Aborting."; exit 1; }
+	@command -v $(UPX) >/dev/null 2>&1 || { echo >&2 "I require $(UPX) but it's not installed.  Aborting."; exit 1; }
 
 .PHONY: clean $(GAMEFILES_DESTINATION_DIR)
 
@@ -36,12 +38,9 @@ clean:
 	rm src/road.s || true
 	rm $(BIN_DIR)*.bin || true
 	rm $(BIN_DIR)*.o || true
-	mv $(GAMEFILES_DESTINATION_DIR)README $(GAMEFILES_DIR)
-	rm -r $(GAMEFILES_DESTINATION_DIR)* || true
-	mv $(GAMEFILES_DIR)README $(GAMEFILES_DESTINATION_DIR)
 	rm $(RELEASE_DISK_IMAGE) || true
 
-$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG
+$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG
 	rm $(RELEASE_DISK_IMAGE) || true
 	$(ZIP2ST) $(GAMEFILES_DESTINATION_DIR) $@
 	@echo "*************************************************************"
@@ -54,17 +53,17 @@ $(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATIO
 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
 
-$(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4: $(BIN_DIR)system_check.bin $(GAMEFILES_DESTINATION_DIR)
-	lz4 -1 $< $@
-
 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s $(GAMEFILES_DESTINATION_DIR)
 	$(VASM) src/loader.s -Felf -o bin/loader.o
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
 	vlink -s -S -x -b ataritos bin/loader.o -o $@
+	upx $@
 
 $(GAMEFILES_DESTINATION_DIR):
-	@echo "Copying game files..."
+	mkdir -p $(GAMEFILES_DESTINATION_DIR)
+	rm -r $(GAMEFILES_DESTINATION_DIR)* || true
 	cp $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR) || true
+	rm $(GAMEFILES_DESTINATION_DIR)README
 
 $(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
