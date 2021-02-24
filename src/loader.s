@@ -26,7 +26,22 @@
 	trap	#1
 	add.l	#12,sp
 
-    bclr #5,$fffffa09.w
+    ; grazey code START
+
+    ;bclr #5,$fffffa09.w
+
+    ; grazey code END
+
+    ; empire code START
+
+    lea    $fffffa01,a0        >MFP
+    moveq    #0,d0
+    movep.l    d0,(a0)
+    movep.l    d0,8(a0)
+    movep.l    d0,16(a0)
+    move.b    #$48,22(a0)
+
+    ; empire code END
 
 	jmp	$70400	; Do it!
 
