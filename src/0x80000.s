@@ -594,6 +594,6 @@ convert_palette_entry:
 
     align 2
 
-    include "road.s"
+    include "generated/road.s"
 
 

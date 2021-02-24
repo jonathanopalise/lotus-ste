@@ -168,8 +168,8 @@ endless_loop:
     bra endless_loop
 
 system_check_graphics:
-    include "system_check_graphics.s"
+    include "generated/system_check_graphics.s"
 
 system_check_palette:
-    include "system_check_palette.s"
+    include "generated/system_check_palette.s"
 

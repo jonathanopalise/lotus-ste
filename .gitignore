@@ -1,11 +1,9 @@
 *.swp
 *.bin
 *.o
-src/road.s
+src/generated/*
 src/symbols_0x80000.*
 src/symbols_0x7666c.*
-src/system_check_graphics.s
-src/system_check_palette.s
 gamefiles/*
 !gamefiles/destination
 gamefiles/destination/*
