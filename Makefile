@@ -53,7 +53,7 @@ $(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATIO
 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
 
-$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s $(GAMEFILES_DESTINATION_DIR)
+$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s src/system_check_graphics.s src/system_check_palette.s $(GAMEFILES_DESTINATION_DIR)
 	$(VASM) src/loader.s -Felf -o bin/loader.o
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
 	vlink -s -S -x -b ataritos bin/loader.o -o $@
@@ -99,8 +99,8 @@ src/road.s: src/generate_road.php
 bin/system_check.bin: src/system_check.s bin/system_check_palette.s bin/system_check_graphics.s
 	$(VASM) src/system_check.s -Fbin -o bin/system_check.bin
 
-bin/system_check_palette.s: src/system_check.raw.pal src/generate_palette.php
+src/system_check_palette.s: src/system_check.raw.pal src/generate_palette.php
 	php src/generate_palette.php src/system_check.raw.pal > src/system_check_palette.s
 
-bin/system_check_graphics.s: src/system_check.raw src/generate_planar.php
+src/system_check_graphics.s: src/system_check.raw src/generate_planar.php
 	php src/generate_planar.php src/system_check.raw > src/system_check_graphics.s
