@@ -35,10 +35,8 @@ check_dependencies:
 .PHONY: clean $(GAMEFILES_DESTINATION_DIR) $(GENERATED_SOURCE_DIR)
 
 clean:
-	rm src/symbols*.* || true
 	rm $(GENERATED_SOURCE_DIR)* || true
 	rmdir $(GENERATED_SOURCE_DIR)
-	rm src/road.s || true
 	rm $(BIN_DIR)*.bin || true
 	rm $(BIN_DIR)*.o || true
 	rm $(RELEASE_DISK_IMAGE) || true
@@ -68,19 +66,19 @@ $(GAMEFILES_DESTINATION_DIR):
 	cp $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR) || true
 	rm $(GAMEFILES_DESTINATION_DIR)README
 
-$(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/symbols_0x80000.inc
+$(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/generated/symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
 
-$(0x70400_CARS_REL_PATCH): src/0x70400.s src/symbols_0x7666c.inc
+$(0x70400_CARS_REL_PATCH): src/0x70400.s src/generated/symbols_0x7666c.inc
 	$(VASM) $< -Fbin -o $@
 
-$(0x7666C_CARS_REL_PATCH): src/0x7666c.s src/symbols_0x80000.inc
+$(0x7666C_CARS_REL_PATCH): src/0x7666c.s src/generated/symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
 
-src/symbols_0x7666c.inc: bin/0x7666c.o src/process_symbols.php
+src/generated/symbols_0x7666c.inc: bin/0x7666c.o src/process_symbols.php
 	@echo "Process symbols for 0x7666c..."
-	$(NM) $(BIN_DIR)0x7666c.o > src/symbols_0x7666c.txt
-	$(PHP) src/process_symbols.php src/symbols_0x7666c.txt > src/symbols_0x7666c.inc
+	$(NM) $(BIN_DIR)0x7666c.o > src/generated/symbols_0x7666c.txt
+	$(PHP) src/process_symbols.php src/generated/symbols_0x7666c.txt > src/generated/symbols_0x7666c.inc
 
 bin/0x7666c.o: src/0x7666c.s
 	$(VASM) src/0x7666c.s -Felf -o bin/0x7666c.o
@@ -91,10 +89,10 @@ bin/0x80000.bin: src/0x80000.s src/generated/road.s
 bin/0x80000.o: src/0x80000.s src/generated/road.s
 	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
 
-src/symbols_0x80000.inc: bin/0x80000.o src/process_symbols.php
+src/generated/symbols_0x80000.inc: bin/0x80000.o src/process_symbols.php
 	@echo "Process symbols..."
-	$(NM) $(BIN_DIR)0x80000.o > src/symbols_0x80000.txt
-	$(PHP) src/process_symbols.php src/symbols_0x80000.txt > src/symbols_0x80000.inc
+	$(NM) $(BIN_DIR)0x80000.o > src/generated/symbols_0x80000.txt
+	$(PHP) src/process_symbols.php src/generated/symbols_0x80000.txt > src/generated/symbols_0x80000.inc
 
 $(GENERATED_SOURCE_DIR)road.s: src/generate_road.php $(GENERATED_SOURCE_DIR)
 	php $< > $@

@@ -1,4 +1,4 @@
-    include symbols_0x80000.inc
+    include generated/symbols_0x80000.inc
 
     ORG $7666c
 

@@ -1,6 +1,6 @@
     ORG $7a312
 
-    include symbols_0x80000.inc
+    include generated/symbols_0x80000.inc
 
     moveq     #0,d0
     move.w    d0,leftclipped
