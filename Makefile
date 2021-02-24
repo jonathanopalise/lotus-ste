@@ -60,7 +60,7 @@ $(GAMEFILES_DESTINATION_DIR)SYSCHECK.LZ4: $(BIN_DIR)system_check.bin $(GAMEFILES
 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s $(GAMEFILES_DESTINATION_DIR)
 	$(VASM) src/loader.s -Felf -o bin/loader.o
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
-	vlink -b ataritos bin/loader.o -o $@
+	vlink -s -S -x -b ataritos bin/loader.o -o $@
 
 $(GAMEFILES_DESTINATION_DIR):
 	@echo "Copying game files..."

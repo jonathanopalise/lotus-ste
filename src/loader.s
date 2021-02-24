@@ -26,6 +26,8 @@
 	trap	#1
 	add.l	#12,sp
 
+    bclr #5,$fffffa09.w
+
 	jmp	$70400	; Do it!
 
 filename	dc.b	"cars.rel",0
