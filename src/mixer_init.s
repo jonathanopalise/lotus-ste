@@ -13,8 +13,8 @@ dma_frame:
     dcb.b 1024,0
 dma_position:
     dc.b 0
-pcm_dummy:
     align 2
+pcm_dummy:
     dcb.b 1024,0
 sample1_size:
     dc.b 0
@@ -66,11 +66,10 @@ sample4_playing:
     dc.b 0
 pcm_mix:
     dc.b 0
-dma_irq:
     align 2
+dma_irq:
     dc.w 0
 old_timera:
-    align 2
     dc.l 0
 dma0_start_high:
     dc.b 0
@@ -144,7 +143,7 @@ stop_ste_dma_sound:
 	move.w #-1517,a0
 	and.b #-33,d0
 	move.b d0,(a0)
-	move.w #134,a0
+	move.w #$134,a0
 	move.l old_timera,d0
 	move.l d0,(a0)
 	nop
@@ -272,10 +271,10 @@ start_ste_dma_sound:
 	move.b d0,dma0_end_med
 	move.l -8(fp),d0
 	move.b d0,dma0_end_low
-	move.w #134,a0
+	move.w #$134,a0
 	move.l (a0),d0
 	move.l d0,old_timera
-	move.w #134,a0
+	move.w #$134,a0
 	move.l #timera_irq_new,d0
 	move.l d0,(a0)
 	move.w #1025,LMC1992_data
@@ -383,5 +382,6 @@ start_ste_dma_sound:
 	move.b #2,dma_position
 	nop
 	unlk fp
+mixer_init_end:
 	rts
 

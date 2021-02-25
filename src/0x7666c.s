@@ -156,6 +156,8 @@ init_lotus:
     move.l #$80000,a1
     jsr lz4_decode
 
+    jsr start_ste_dma_sound
+
     ; existing lotus code
 
     move.l    #$708ce,-(sp)
