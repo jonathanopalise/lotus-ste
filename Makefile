@@ -78,21 +78,21 @@ $(0x7666C_CARS_REL_PATCH): $(SOURCE_DIR)0x7666c.s $(GENERATED_SOURCE_DIR)symbols
 
 $(GENERATED_SOURCE_DIR)symbols_0x7666c.inc: $(BIN_DIR)0x7666c.o $(SOURCE_DIR)process_symbols.php
 	@echo "Process symbols for 0x7666c..."
-	$(NM) $(BIN_DIR)0x7666c.o > $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt
-	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt > $(GENERATED_SOURCE_DIR)symbols_0x7666c.inc
+	$(NM) $< > $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt
+	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt > $@
 
 $(BIN_DIR)0x7666c.o: $(SOURCE_DIR)0x7666c.s
-	$(VASM) $(SOURCE_DIR)0x7666c.s -Felf -o $(BIN_DIR)0x7666c.o
+	$(VASM) $< -Felf -o $@
 
 $(BIN_DIR)0x80000.bin: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s
-	$(VASM) $(SOURCE_DIR)0x80000.s -Fbin -o $(BIN_DIR)0x80000.bin
+	$(VASM) $< -Fbin -o $@
 
 $(BIN_DIR)0x80000.o: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s
-	$(VASM) $(SOURCE_DIR)0x80000.s -Felf -o $(BIN_DIR)0x80000.o
+	$(VASM) $< -Felf -o $@
 
 $(GENERATED_SOURCE_DIR)symbols_0x80000.inc: $(BIN_DIR)0x80000.o $(SOURCE_DIR)process_symbols.php
 	@echo "Process symbols..."
-	$(NM) $(BIN_DIR)0x80000.o > $(GENERATED_SOURCE_DIR)symbols_0x80000.txt
+	$(NM) $< > $(GENERATED_SOURCE_DIR)symbols_0x80000.txt
 	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x80000.txt > $(GENERATED_SOURCE_DIR)symbols_0x80000.inc
 
 $(GENERATED_SOURCE_DIR)road.s: $(SOURCE_DIR)generate_road.php $(GENERATED_SOURCE_DIR)
