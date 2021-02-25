@@ -11,12 +11,13 @@ RELEASE_DISK_IMAGE = release/lotus_ste.st
 GAMEFILES_DIR = gamefiles/
 GAMEFILES_SOURCE_DIR = $(GAMEFILES_DIR)source/
 GAMEFILES_DESTINATION_DIR = $(GAMEFILES_DIR)destination/
-GENERATED_SOURCE_DIR = src/generated/
+SOURCE_DIR = src/
+GENERATED_SOURCE_DIR = $(SOURCE_DIR)generated/
 BIN_DIR = bin/
 
-GENERIC_CARS_REL_PATCHES = bin/0x70660.bin bin/0x7086e.bin bin/0x70880.bin bin/0x70896.bin bin/0x7450c.bin bin/0x744ba.bin bin/0x74586.bin bin/0x7c916.bin bin/0x7a2c0.bin bin/0x7a2dc.bin bin/0x7a312.bin bin/0x7a496.bin
-0x7666C_CARS_REL_PATCH = bin/0x7666c.bin
-0x70400_CARS_REL_PATCH = bin/0x70400.bin
+GENERIC_CARS_REL_PATCHES = $(BIN_DIR)0x70660.bin $(BIN_DIR)0x7086e.bin $(BIN_DIR)0x70880.bin $(BIN_DIR)0x70896.bin $(BIN_DIR)0x7450c.bin $(BIN_DIR)0x744ba.bin $(BIN_DIR)0x74586.bin $(BIN_DIR)0x7c916.bin $(BIN_DIR)0x7a2c0.bin $(BIN_DIR)0x7a2dc.bin $(BIN_DIR)0x7a312.bin $(BIN_DIR)0x7a496.bin
+0x7666C_CARS_REL_PATCH = $(BIN_DIR)0x7666c.bin
+0x70400_CARS_REL_PATCH = $(BIN_DIR)0x70400.bin
 CUSTOM_CARS_REL_PATCHES = $(0x7666C_CARS_REL_PATCH) $(0x70400_CARS_REL_PATCH)
 CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 
@@ -49,59 +50,59 @@ $(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.REL $(GAMEFILES_DESTINAT
 	@echo "*************************************************************"
 
 $(GAMEFILES_DESTINATION_DIR)CARS.REL: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATION_DIR)
-	php src/generate_cars_rel.php $@ $(CARS_REL_PATCHES)
+	php $(SOURCE_DIR)generate_cars_rel.php $@ $(CARS_REL_PATCHES)
 
 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTINATION_DIR)
 	lz4 -1 $< $@
 
-$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: src/loader.s src/generated/system_check_graphics.s src/generated/system_check_palette.s $(GAMEFILES_DESTINATION_DIR)
-	$(VASM) src/loader.s -Felf -o bin/loader.o
+$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: $(SOURCE_DIR)loader.s $(GENERATED_SOURCE_DIR)system_check_graphics.s $(GENERATED_SOURCE_DIR)system_check_palette.s $(GAMEFILES_DESTINATION_DIR)
+	$(VASM) $(SOURCE_DIR)loader.s -Felf -o $(BIN_DIR)loader.o
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
-	vlink -s -S -x -b ataritos bin/loader.o -o $@
+	vlink -s -S -x -b ataritos $(BIN_DIR)loader.o -o $@
 	upx $@
 
 $(GAMEFILES_DESTINATION_DIR):
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)
 	rm -r $(GAMEFILES_DESTINATION_DIR)* || true
 	cp $(GAMEFILES_SOURCE_DIR)* $(GAMEFILES_DESTINATION_DIR) || true
-	rm $(GAMEFILES_DESTINATION_DIR)README
+	rm $(GAMEFILES_DESTINATION_DIR)README || true
 
-$(GENERIC_CARS_REL_PATCHES): bin/%.bin: src/%.s src/generated/symbols_0x80000.inc
+$(GENERIC_CARS_REL_PATCHES): $(BIN_DIR)%.bin: $(SOURCE_DIR)%.s $(GENERATED_SOURCE_DIR)symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
 
-$(0x70400_CARS_REL_PATCH): src/0x70400.s src/generated/symbols_0x7666c.inc
+$(0x70400_CARS_REL_PATCH): $(SOURCE_DIR)0x70400.s $(GENERATED_SOURCE_DIR)symbols_0x7666c.inc
 	$(VASM) $< -Fbin -o $@
 
-$(0x7666C_CARS_REL_PATCH): src/0x7666c.s src/generated/symbols_0x80000.inc
+$(0x7666C_CARS_REL_PATCH): $(SOURCE_DIR)0x7666c.s $(GENERATED_SOURCE_DIR)symbols_0x80000.inc
 	$(VASM) $< -Fbin -o $@
 
-src/generated/symbols_0x7666c.inc: bin/0x7666c.o src/process_symbols.php
+$(GENERATED_SOURCE_DIR)symbols_0x7666c.inc: $(BIN_DIR)0x7666c.o $(SOURCE_DIR)process_symbols.php
 	@echo "Process symbols for 0x7666c..."
-	$(NM) $(BIN_DIR)0x7666c.o > src/generated/symbols_0x7666c.txt
-	$(PHP) src/process_symbols.php src/generated/symbols_0x7666c.txt > src/generated/symbols_0x7666c.inc
+	$(NM) $(BIN_DIR)0x7666c.o > $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt
+	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x7666c.txt > $(GENERATED_SOURCE_DIR)symbols_0x7666c.inc
 
-bin/0x7666c.o: src/0x7666c.s
-	$(VASM) src/0x7666c.s -Felf -o bin/0x7666c.o
+$(BIN_DIR)0x7666c.o: $(SOURCE_DIR)0x7666c.s
+	$(VASM) $(SOURCE_DIR)0x7666c.s -Felf -o $(BIN_DIR)0x7666c.o
 
-bin/0x80000.bin: src/0x80000.s src/generated/road.s
-	$(VASM) src/0x80000.s -Fbin -o bin/0x80000.bin
+$(BIN_DIR)0x80000.bin: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s
+	$(VASM) $(SOURCE_DIR)0x80000.s -Fbin -o $(BIN_DIR)0x80000.bin
 
-bin/0x80000.o: src/0x80000.s src/generated/road.s
-	$(VASM) src/0x80000.s -Felf -o bin/0x80000.o
+$(BIN_DIR)0x80000.o: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s
+	$(VASM) $(SOURCE_DIR)0x80000.s -Felf -o $(BIN_DIR)0x80000.o
 
-src/generated/symbols_0x80000.inc: bin/0x80000.o src/process_symbols.php
+$(GENERATED_SOURCE_DIR)symbols_0x80000.inc: $(BIN_DIR)0x80000.o $(SOURCE_DIR)process_symbols.php
 	@echo "Process symbols..."
-	$(NM) $(BIN_DIR)0x80000.o > src/generated/symbols_0x80000.txt
-	$(PHP) src/process_symbols.php src/generated/symbols_0x80000.txt > src/generated/symbols_0x80000.inc
+	$(NM) $(BIN_DIR)0x80000.o > $(GENERATED_SOURCE_DIR)symbols_0x80000.txt
+	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x80000.txt > $(GENERATED_SOURCE_DIR)symbols_0x80000.inc
 
-$(GENERATED_SOURCE_DIR)road.s: src/generate_road.php $(GENERATED_SOURCE_DIR)
+$(GENERATED_SOURCE_DIR)road.s: $(SOURCE_DIR)generate_road.php $(GENERATED_SOURCE_DIR)
 	php $< > $@
 
-$(GENERATED_SOURCE_DIR)system_check_palette.s: src/generate_palette.php src/system_check.raw.pal $(GENERATED_SOURCE_DIR)
-	php $< src/system_check.raw.pal > $@
+$(GENERATED_SOURCE_DIR)system_check_palette.s: $(SOURCE_DIR)generate_palette.php $(SOURCE_DIR)system_check.raw.pal $(GENERATED_SOURCE_DIR)
+	php $< $(SOURCE_DIR)system_check.raw.pal > $@
 
-$(GENERATED_SOURCE_DIR)system_check_graphics.s: src/generate_planar.php src/system_check.raw $(GENERATED_SOURCE_DIR)
-	php $< src/system_check.raw > $@
+$(GENERATED_SOURCE_DIR)system_check_graphics.s: $(SOURCE_DIR)generate_planar.php $(SOURCE_DIR)system_check.raw $(GENERATED_SOURCE_DIR)
+	php $< $(SOURCE_DIR)system_check.raw > $@
 
 $(GENERATED_SOURCE_DIR):
 	mkdir -p $@
