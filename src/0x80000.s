@@ -595,5 +595,7 @@ convert_palette_entry:
     align 2
 
     include "generated/road.s"
+    include "mixer_init.s"
+    include "mixer_interrupt.s"
 
 
