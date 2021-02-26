@@ -1342,3 +1342,39 @@ disabling the graphics in the loader
 physbase appears to be ( $f8000 ) . w ! ( $f8000 ) . w
 
 w 0xab08 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71 0x4e 0x71
+
+b ($ffff8800).w ! ($ffff8800).w :trace
+
+--------------
+instructions that modify the sound registers
+
+driving along
+$00070b1a : 0588 0000                          movep.w   d2,0(a0)
+$00070b26 : 0588 0000                          movep.w   d2,0(a0)
+$00070b34 : 0588 0000                          movep.w   d2,0(a0)
+$00070b40 : 0588 0000                          movep.w   d2,0(a0)
+$00070bca : 10bc 0007                          move.b    #7,(a0)
+$00070bde : 0188 0000                          movep.w   d0,0(a0)
+$00070be8 : 0588 0000                          movep.w   d2,0(a0)
+$00070bf2 : 0588 0000                          movep.w   d2,0(a0)
+
+rumble strips, or something to do with car/scenery collision?
+$00070b78 : 0588 0000                          movep.w   d2,0(a0)
+$00070b84 : 0588 0000                          movep.w   d2,0(a0)
+$00070b9c : 0588 0000                          movep.w   d2,0(a0)
+$00070bae : 0188 0000                          movep.w   d0,0(a0)
+$00070bce : 1010                               move.b    (a0),d0
+
+70a2e: some kind of collision noise countdown timer?
+move.w    (a0)+,$70a2e
+
+$00070b44 : 4a79 0007 0a2e                     tst.w     $70a2e ; is a sound effective active?
+$00070b4a : 6700 007e                          beq       $70bca
+$00070b4e : 5379 0007 0a2e                     subq.w    #1,$70a2e
+
+
+70a30: some kind of value passed into the registers?
+seems to vary depending on the sound effect required
+
+70a0a seems to be inside the routine that triggers a sound effect
+this is the point at which 70a2e.w goes above 0
