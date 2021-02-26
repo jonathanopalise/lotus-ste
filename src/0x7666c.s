@@ -158,6 +158,21 @@ init_lotus:
 
     jsr start_ste_dma_sound
 
+    ; let's try playing a sample
+
+    lea pcm_mission1,a0
+    move.l a0,sample2
+    move.l a0,sample2_mix
+    move.b #(9250/250),sample2_size
+    move.b #255,sample2_loop
+    move.b #255,sample2_playing
+
+    ;sample2 = (u32)(void*)pcm_bigexp;//Sets the pointer to the sound to be played
+    ;sample2_mix = (u32)(void*)pcm_bigexp;//If you need to check the current mixing sound of a channel
+    ;sample2_size = pcm_bigexp_size;//The number of mixing frames of the sound; all .WAV sounds need //to be multiple of 250 samples, all this quantity is called "mixing frame" here
+    ;sample2_loop = 0;//Its a flag, if you write a 255 here, the sound will be played on a loop fashion
+    ;sample2_playing = 255;//Its a flag, turned to 0 at DMA IRQ mixer when the sound ends
+
     ; existing lotus code
 
     move.l    #$708ce,-(sp)

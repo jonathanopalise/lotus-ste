@@ -17,6 +17,7 @@ timera_irq_new:
 	cmpi.b      #1,d0
 	beq.w       dma1_new
 
+check_dma2_new: ;temp label
 	cmpi.b      #2,d0
 	beq.w       dma2_new
 

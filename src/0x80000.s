@@ -598,4 +598,8 @@ convert_palette_entry:
     include "mixer_init.s"
     include "mixer_interrupt.s"
 
+pcm_mission1:
+
+    incbin "samples/pcm_mission1.bin"
+
 

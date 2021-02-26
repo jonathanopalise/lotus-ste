@@ -6,8 +6,8 @@
     ; *                                                                        *
     ; * VBL modifications                                                      *
     ; *                                                                        *
-    ; * Address $70660 lies within the VBL handler. The purpose of these       *
-    ; * changes is twofold:                                                    *
+    ; * Address $70660 lies within the in-raceVBL handler. The purpose of      *
+    ; * these changes is twofold:                                              *
     ; *                                                                        *
     ; * 1) To call the sound mixer;                                            *
     ; * 2) To change the existing Timer B code to redirect to the new sky      *
