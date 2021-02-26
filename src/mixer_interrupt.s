@@ -1,6 +1,6 @@
 timera_irq_new:
-	;move.w		#$2300,sr
-	;movem.l		d0-d7/a0-a6,-(sp)
+	move.w		#$2300,sr
+	movem.l		d0-d7/a0-a6,-(sp)
 
 	lea			$ffff8902.w,a0
 	lea			$ffff8904.w,a1
@@ -199,8 +199,8 @@ queue_check_sample4:
 
 zero_check_out:
     bclr.b		#5,$fffffa0f.w
-	;movem.l		(sp)+,d0-d7/a0-a6
-	rts
+	movem.l		(sp)+,d0-d7/a0-a6
+	rte
 
 set_LMC1992:
 	movem.l		d0-d7/a0-a6,-(sp)

@@ -164,7 +164,7 @@ init_lotus:
     move.l a0,sample2
     move.l a0,sample2_mix
     move.b #(9250/250),sample2_size
-    move.b #255,sample2_loop
+    move.b #0,sample2_loop
     move.b #255,sample2_playing
 
     ;sample2 = (u32)(void*)pcm_bigexp;//Sets the pointer to the sound to be played
