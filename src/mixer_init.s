@@ -289,27 +289,34 @@ start_ste_dma_sound:
 	jsr set_LMC1992
 	move.w #1364,LMC1992_data
 	jsr set_LMC1992
-	move.w #-1529,a0
-	move.b (a0),d0
-	move.w #-1529,a0
-	or.b #32,d0
-	move.b d0,(a0)
-	move.w #-1517,a0
-	move.b (a0),d0
-	move.w #-1517,a0
-	or.b #32,d0
-	move.b d0,(a0)
-	move.w #-1533,a0
-	move.b (a0),d0
-	move.w #-1533,a0
-	and.b #127,d0
-	move.b d0,(a0)
-	move.w #-1511,a0
-	clr.b (a0)
-	move.w #-1505,a0
-	move.b #1,(a0)
-	move.w #-1511,a0
-	move.b #8,(a0)
+
+	;move.w #-1529,a0 ; reg8(0xfffffa07) |=  0b00100000;
+	;move.b (a0),d0
+	;move.w #-1529,a0
+	;or.b #32,d0
+	;move.b d0,(a0)
+
+	;move.w #-1517,a0 ; reg8(0xfffffa13) |=  0b00100000;
+	;move.b (a0),d0
+	;move.w #-1517,a0
+	;or.b #32,d0
+	;move.b d0,(a0)
+
+	;move.w #-1533,a0 ; reg8(0xfffffa03) &=  0b01111111;
+	;move.b (a0),d0
+	;move.w #-1533,a0
+	;and.b #127,d0
+	;move.b d0,(a0)
+
+	;move.w #-1511,a0 ; reg8(0xfffffa19) =   0;
+	;clr.b (a0)
+
+	;move.w #-1505,a0 ; reg8(0xfffffa1f) =   1;
+	;move.b #1,(a0)
+
+	;move.w #-1511,a0 ; reg8(0xfffffa19) =   8;
+	;move.b #8,(a0)
+
 	move.w #-30463,a0
 	clr.b (a0)
 	move.w #-30431,a0
