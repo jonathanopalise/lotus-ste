@@ -1,4 +1,6 @@
-VASM = vasmm68k_mot 
+VASM_CMD = vasmm68k_mot
+VASM_OPTS = -no-opt
+VASM = $(VASM_CMD) $(VASM_OPTS)
 VLINK = vlink
 NM = m68k-ataribrownest-elf-nm
 PHP = php
@@ -24,7 +26,7 @@ CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 default: check_dependencies $(RELEASE_DISK_IMAGE)
 
 check_dependencies:
-	@command -v $(VASM) >/dev/null 2>&1 || { echo >&2 "I require $(VASM) but it's not installed.  Aborting."; exit 1; }
+	@command -v $(VASM_CMD) >/dev/null 2>&1 || { echo >&2 "I require $(VASM_CMD) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(VLINK) >/dev/null 2>&1 || { echo >&2 "I require $(LINK) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(NM) >/dev/null 2>&1 || { echo >&2 "I require $(NM) but it's not installed.  Aborting."; exit 1; }
 	@command -v $(PHP) >/dev/null 2>&1 || { echo >&2 "I require $(PHP) but it's not installed.  Aborting."; exit 1; }

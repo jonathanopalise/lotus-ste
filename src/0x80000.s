@@ -387,7 +387,7 @@ gradient_init:
     ; d1 is now solidLinesRequired
 
     tst.w d1 ; test solidLinesRequired
-    bgt.s solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
+    bgt solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
 
 solid_lines_required_zero_or_less:
 
@@ -435,7 +435,7 @@ lines_remaining_greater_than_4:
     move.l    #new_raster_routine,$0120.w
     bclr      #0,$fffffa0f.w
 
-    bra.s endvbl 
+    bra endvbl
 
 lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
