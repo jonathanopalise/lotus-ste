@@ -160,12 +160,13 @@ init_lotus:
 
     ; let's try playing a sample
 
-    lea pcm_mission1,a0
-    move.l a0,sample2
-    move.l a0,sample2_mix
-    move.b #(9250/250),sample2_size
-    move.b #255,sample2_loop
-    move.b #255,sample2_playing
+    ;lea pcm_mission1,a0
+    ;move.l a0,sample2
+    ;move.l a0,sample2_mix
+    ;move.b #(8250/250),sample2_size
+    ;move.b #(8250/250),sample2_len
+    ;move.b #255,sample2_loop
+    ;move.b #255,sample2_playing
 
     ;sample2 = (u32)(void*)pcm_bigexp;//Sets the pointer to the sound to be played
     ;sample2_mix = (u32)(void*)pcm_bigexp;//If you need to check the current mixing sound of a channel

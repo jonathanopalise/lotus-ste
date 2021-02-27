@@ -1377,4 +1377,147 @@ $00070b4e : 5379 0007 0a2e                     subq.w    #1,$70a2e
 seems to vary depending on the sound effect required
 
 70a0a seems to be inside the routine that triggers a sound effect
+this routine seems to start at 709b2
 this is the point at which 70a2e.w goes above 0
+
+here's this routine:
+$000709b2 : 48e7 fffe                          movem.l   d0-d7/a0-a6,-(sp)
+$000709b6 : 3039 0007 097c                     move.w    $7097c,d0
+$000709bc : 0240 0007                          andi.w    #7,d0
+$000709c0 : 41f9 0007 0a34                     lea       $70a34,a0
+$000709c6 : e940                               asl.w     #4,d0
+$000709c8 : d0c0                               adda.w    d0,a0
+$000709ca : 3010                               move.w    (a0),d0
+$000709cc : b079 0007 0a24                     cmp.w     $70a24,d0
+$000709d2 : 6702                               beq.s     $709d6
+$000709d4 : 6410                               bcc.s     $709e6
+$000709d6 : 3039 0007 0a2e                     move.w    $70a2e,d0
+$000709dc : b079 0007 0a26                     cmp.w     $70a26,d0
+$000709e2 : 6702                               beq.s     $709e6
+$000709e4 : 6430                               bcc.s     $70a16
+$000709e6 : 33d8 0007 0a24                     move.w    (a0)+,$70a24
+$000709ec : 33d8 0007 0a26                     move.w    (a0)+,$70a26
+$000709f2 : 33d8 0007 0a28                     move.w    (a0)+,$70a28
+$000709f8 : 33d8 0007 0a2a                     move.w    (a0)+,$70a2a
+$000709fe : 33d8 0007 0a2c                     move.w    (a0)+,$70a2c
+$00070a04 : 33d8 0007 0a2e                     move.w    (a0)+,$70a2e
+$00070a0a : 33d8 0007 0a30                     move.w    (a0)+,$70a30
+$00070a10 : 33d8 0007 0a32                     move.w    (a0)+,$70a32
+$00070a16 : 33fc ffff 0007 097c                move.w    #$ffff,$7097c
+$00070a1e : 4cdf 7fff                          movem.l   (sp)+,d0-d7/a0-a6
+$00070a22 : 4e75                               rts       
+
+this is a couple of levels up, seems to call the above:
+$00075870 : 6100 c504                          bsr       $71d76
+
+if we go even higher, we have this:
+$000707b6 : 6100 4d96                          bsr       $7554e
+if we comment this out, the car stops moving
+
+on entering $000709b2,
+is 7097c the sound effect to be played?
+00 01 is this the collision sound?
+00 02 collision with car?
+00 03 appears to be the first notes of 3-2-1-GO (after 70a22, returns to 71d02)
+00 04 appears to be the final note of 3-2-1-GO
+00 05 is the fuel low sound (after 70a22, returns to 71d02)
+00 06 is this the rumble strip sound?
+00 07 skidding sound?
+
+These are the places where 7097c gets set:
+$00071fe8 : 33c2 0007 097c                     move.w    d2,$7097c (3-2-1 sound)
+$00070a16 : 33fc ffff 0007 097c                move.w    #$ffff,$7097c (hmmm)
+$00071fe8 : 33c2 0007 097c                     move.w    d2,$7097c (rumble strip)
+so for all sound effects, 7097c gets set at 71fe8
+the start of the function that contains 71fe8 is $71d76
+
+
+$00071d76 : 4a79 0007 c53e                     tst.w     $7c53e              ; seems to start at 0x100, increment up to 0x200, and then start at 0x100 again
+$00071d7c : 6a2a                               bpl.s     $71da8
+$00071d7e : 6100 0d74                          bsr       $72af4
+$00071d82 : 33f9 0007 2af0 0007 1f+            move.w    $72af0,$71ffe
+$00071d8c : 33f9 0007 2af2 0007 20+            move.w    $72af2,$72000
+$00071d96 : 33fc 003f 0007 2002                move.w    #$3f,$72002
+$00071d9e : 33fc 003f 0007 2004                move.w    #$3f,$72004
+$00071da6 : 6058                               bra.s     $71e00
+$00071da8 : 4a79 0007 c5ae                     tst.w     $7c5ae              ; is the engine sound playing (for player 1)?
+$00071dae : 6720                               beq.s     $71dd0
+$00071db0 : 33f9 0007 c5d6 0007 1f+            move.w    $7c5d6,$71ffe
+$00071dba : 2039 0007 c596                     move.l    $7c596,d0
+$00071dc0 : 90b9 0007 c57e                     sub.l     $7c57e,d0
+$00071dc6 : 6100 0246                          bsr       $7200e
+$00071dca : 33c0 0007 2002                     move.w    d0,$72002
+$00071dd0 : 4a79 0007 cd5c                     tst.w     $7cd5c
+$00071dd6 : 6728                               beq.s     $71e00
+$00071dd8 : 4a79 0007 c664                     tst.w     $7c664
+$00071dde : 6720                               beq.s     $71e00
+$00071de0 : 33f9 0007 c68c 0007 20+            move.w    $7c68c,$72000
+$00071dea : 2039 0007 c64c                     move.l    $7c64c,d0
+$00071df0 : 90b9 0007 c634                     sub.l     $7c634,d0
+$00071df6 : 6100 0216                          bsr       $7200e
+$00071dfa : 33c0 0007 2004                     move.w    d0,$72004
+$00071e00 : 4a79 0007 c53c                     tst.w     $7c53c
+$00071e06 : 670c                               beq.s     $71e14
+$00071e08 : 4279 0007 2002                     clr.w     $72002
+$00071e0e : 4279 0007 2004                     clr.w     $72004
+$00071e14 : 343c ffff                          move.w    #$ffff,d2
+$00071e18 : 363c ffff                          move.w    #$ffff,d3
+$00071e1c : 0c79 0032 0007 c53e                cmpi.w    #$32,$7c53e
+$00071e24 : 6a34                               bpl.s     $71e5a
+$00071e26 : 0c79 ff6a 0007 c53e                cmpi.w    #$ff6a,$7c53e
+$00071e2e : 6726                               beq.s     $71e56
+$00071e30 : 0c79 ff9c 0007 c53e                cmpi.w    #$ff9c,$7c53e
+$00071e38 : 671c                               beq.s     $71e56
+$00071e3a : 0c79 ffce 0007 c53e                cmpi.w    #$ffce,$7c53e
+$00071e42 : 6712                               beq.s     $71e56
+$00071e44 : 0c79 0000 0007 c53e                cmpi.w    #0,$7c53e
+$00071e4c : 660c                               bne.s     $71e5a
+$00071e4e : 343c 0004                          move.w    #4,d2           ; what's this then?
+$00071e52 : 6000 0006                          bra       $71e5a
+$00071e56 : 343c 0003                          move.w    #3,d2           ; what's this then?
+$00071e5a : 0c79 0002 0007 cd5a                cmpi.w    #2,$7cd5a
+$00071e62 : 6618                               bne.s     $71e7c
+$00071e64 : 0c79 0003 0007 d07e                cmpi.w    #3,$7d07e
+$00071e6c : 6700 00f6                          beq       $71f64
+$00071e70 : 0c79 000c 0007 d07e                cmpi.w    #$c,$7d07e
+$00071e78 : 6700 00ea                          beq       $71f64
+$00071e7c : 0479 0200 0007 6158                subi.w    #$200,$76158
+$00071e84 : 6a06                               bpl.s     $71e8c
+$00071e86 : 4279 0007 6158                     clr.w     $76158
+$00071e8c : 0c79 4000 0007 6158                cmpi.w    #$4000,$76158   ; 76158 is some kind of skidding force + phase
+$00071e94 : 650a                               bcs.s     $71ea0
+$00071e96 : 343c 0007                          move.w    #7,d2           ; what's this then?
+
+
+$75870 - if we nop this out, there seems to be no effect apart from sound related
+
+709b2 appears only to be entered if there's an active sound effect?
+this will be why:
+
+$00071cf6 : 4a79 0007 097c                     tst.w     $7097c          ; is there an active sound effect?
+$00071cfc : 6b04                               bmi.s     $71d02
+$00071cfe : 6100 ecb2                          bsr       $709b2
+$00071d02 : 4a79 0007 1ffe                     tst.w     $71ffe
+
+I think 709b2 is the code that kicks off the playing of the sound - i.e. sets a load of variables that will go on to control YM regs
+- so can we just replace this with something to call DMA?
+- but it also appears to reset 7097c to ffff
+- is this going to be a problem?
+
+we may be able to kill off any code that concerns itself with the following memory locations:
+$000709e6 : 33d8 0007 0a24                     move.w    (a0)+,$70a24
+$000709ec : 33d8 0007 0a26                     move.w    (a0)+,$70a26
+$000709f2 : 33d8 0007 0a28                     move.w    (a0)+,$70a28
+$000709f8 : 33d8 0007 0a2a                     move.w    (a0)+,$70a2a
+$000709fe : 33d8 0007 0a2c                     move.w    (a0)+,$70a2c
+$00070a04 : 33d8 0007 0a2e                     move.w    (a0)+,$70a2e
+$00070a0a : 33d8 0007 0a30                     move.w    (a0)+,$70a30
+$00070a10 : 33d8 0007 0a32                     move.w    (a0)+,$70a32
+$00070a16 : 33fc ffff 0007 097c                move.w    #$ffff,$7097c
+
+$00071d62 : 6100 ed50                          bsr       $70ab4
+the contents of 70ab4 seem to update the value of 70a2a above
+can we nop this out?
+nopping this out seems to disable all engine sound and fx!
+(but maybe that's what we want in the long run?)
+(this seems not to break the YM music - bonus!)

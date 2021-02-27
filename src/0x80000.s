@@ -600,6 +600,6 @@ convert_palette_entry:
 
 pcm_mission1:
 
-    incbin "samples/pcm_mission1.bin"
+    incbin "samples/skidding.bin"
 
 
