@@ -17,7 +17,7 @@
     include generated/symbols_0x80000.inc
 
     ;the jsr is equivalent to 6 nops
-    jsr timera_irq_new
+    jsr mixer_vbl
     jmp gradient_init
     ;nop
     ;nop

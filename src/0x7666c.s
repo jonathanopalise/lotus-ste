@@ -139,7 +139,7 @@ init_lotus:
 
     ; read file
     move.l #$321c0,-(sp)
-    move.l    #$ffff,-(sp)   ; Offset 4
+    move.l    #100000,-(sp)   ; Offset 4
     move.w    fhandle,-(sp)  ; Offset 2
     move.w    #63,-(sp)     ; Offset 0
     trap      #1            ; GEMDOS
@@ -156,7 +156,9 @@ init_lotus:
     move.l #$80000,a1
     jsr lz4_decode
 
-    jsr start_ste_dma_sound
+
+    ; needs to be replaced with the init call for junosix mixer
+    jsr mixer_init
 
     ; let's try playing a sample
 

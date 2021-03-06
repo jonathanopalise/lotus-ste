@@ -595,72 +595,11 @@ convert_palette_entry:
     align 2
 
     include "generated/road.s"
+
+    align 2
+
     include "mixer_init.s"
-    include "mixer_interrupt.s"
-
-    align 2
-sample_lookup:
-    dc.l 0
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_hitobject
-    dc.b (8250/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_hitcar
-    dc.b (5000/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_racestartlow
-    dc.b (7750/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_racestarthigh
-    dc.b (6250/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_lowfuel 
-    dc.b (1500/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_roadedge
-    dc.b (3000/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-    dc.l sample_skid
-    dc.b (10250/250)
-    dc.b 0
-    dc.b 0
-    dc.b 0
-
-    align 2
-sample_hitcar:
-    incbin "samples/hitcar.snd"
-    align 2
-sample_hitobject:
-    incbin "samples/hitobject.snd"
-    align 2
-sample_lowfuel:
-    incbin "samples/lowfuel.snd"
-    align 2
-sample_racestarthigh:
-    incbin "samples/racestarthigh.snd"
-    align 2
-sample_racestartlow:
-    incbin "samples/racestartlow.snd"
-    align 2
-sample_roadedge:
-    incbin "samples/roadedge.snd"
-    align 2
-sample_skid:
-    incbin "samples/skid.snd"
-
+    include "mixer_data.s"
+    include "mixer_variables.s"
+    include "mixer_vbl.s"
 
