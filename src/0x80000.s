@@ -596,4 +596,10 @@ convert_palette_entry:
 
     include "generated/road.s"
 
+    align 2
+
+    include "mixer_init.s"
+    include "mixer_data.s"
+    include "mixer_variables.s"
+    include "mixer_vbl.s"
 

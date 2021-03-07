@@ -139,7 +139,7 @@ init_lotus:
 
     ; read file
     move.l #$321c0,-(sp)
-    move.l    #$ffff,-(sp)   ; Offset 4
+    move.l    #100000,-(sp)   ; Offset 4
     move.w    fhandle,-(sp)  ; Offset 2
     move.w    #63,-(sp)     ; Offset 0
     trap      #1            ; GEMDOS
@@ -155,6 +155,26 @@ init_lotus:
     move.l #$321c0,a0
     move.l #$80000,a1
     jsr lz4_decode
+
+
+    ; needs to be replaced with the init call for junosix mixer
+    jsr mixer_init
+
+    ; let's try playing a sample
+
+    ;lea pcm_mission1,a0
+    ;move.l a0,sample2
+    ;move.l a0,sample2_mix
+    ;move.b #(8250/250),sample2_size
+    ;move.b #(8250/250),sample2_len
+    ;move.b #255,sample2_loop
+    ;move.b #255,sample2_playing
+
+    ;sample2 = (u32)(void*)pcm_bigexp;//Sets the pointer to the sound to be played
+    ;sample2_mix = (u32)(void*)pcm_bigexp;//If you need to check the current mixing sound of a channel
+    ;sample2_size = pcm_bigexp_size;//The number of mixing frames of the sound; all .WAV sounds need //to be multiple of 250 samples, all this quantity is called "mixing frame" here
+    ;sample2_loop = 0;//Its a flag, if you write a 255 here, the sound will be played on a loop fashion
+    ;sample2_playing = 255;//Its a flag, turned to 0 at DMA IRQ mixer when the sound ends
 
     ; existing lotus code
 
