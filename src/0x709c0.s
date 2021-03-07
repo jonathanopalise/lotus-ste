@@ -6,13 +6,12 @@
 
     include generated/symbols_0x80000.inc
 
-    and.w #7,d0
+    move.w $7097c,d0
 
-    cmp.b variableSoundEvent,d0
+    cmp.w variableSoundEventLatch,d0
     beq.s noplay
 
-    move.w $7097c,d0
-    move.b      d0,variableSoundEvent
+    move.w      d0,variableSoundEventLatch
     move.w      #0,variableSoundEventPosition
 
 noplay:
