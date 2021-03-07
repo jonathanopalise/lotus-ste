@@ -4,7 +4,7 @@ _Enhancements to the Atari ST version of Lotus Esprit Turbo Challenge to support
 
 ![Screenshot of current progress](https://github.com/jonathanopalise/lotus-ste/blob/master/screenshot.png)
 
-This project is at an early stage and no builds are currently available to end users.
+This project is under development and no builds are currently available to end users.
 
 ## Credits
 
@@ -15,6 +15,20 @@ This project is at an early stage and no builds are currently available to end u
 **Thanks to**: metalages/AF, masteries/AF
 
 _(AF = Atari-Forum - https://www.atari-forum.com/)_
+
+## What STE enhancements have been made?
+
+* The road is rendered by the Blitter and features graphical details resembling those of the Amiga version;
+* All roadside scenery and cars are rendered by the blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
+* The background features a gradient of raster bars resembling those of the Amiga version (currently player 1 only);
+* The road and roadside colours are refined to leverage the enhanced STE colour palette;
+* Sampled sound effects and engine noise are present (currently player 1 only).
+
+Possible forthcoming objectives for this project are as follows:
+
+* Fullscreen mode for player 1;
+* New tracks, or modification to existing tracks;
+* Modified trackside objects, or additional zoom levels for trackside objects.
 
 ## Directory layout
 
@@ -45,15 +59,3 @@ Following the above step, run `make` to start the build process. The following e
 - `upx` (https://upx.github.io/)
 
 Should the build process succeed, there will be a `lotus_ste.st` file present within the `release` directory that can be run within an emulator such as Hatari (https://hatari.tuxfamily.org/) or transferred elsewhere to run on real STE hardware. Whether running on an emulator or real hardware, the machine will need to be configured as an STE with one meg or more of memory. In the event that the build process fails, please raise an issue against the project and I'll help in any way I can.
-
-Upon booting the newly generated disk image, the following changes should be evident once in-game:
-
-* The road is rendered by the Blitter and features graphical details resembling those of the Amiga version;
-* All roadside scenery and cars are rendered by the blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
-* The background features a gradient of raster bars resembling those of the Amiga version (currently player 1 only);
-* The road and roadside colours are refined to leverage the enhanced STE colour palette;
-* Sampled sound effects and engine noise are present (currently player 1 only).
-
-Possible forthcoming objectives for this project are as follows:
-
-* Add further zoom levels for trackside objects.
