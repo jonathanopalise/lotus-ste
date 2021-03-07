@@ -9,7 +9,7 @@ This project is under development and no builds are currently available to end u
 ## Credits
 
 * **Graphics enhancements**: Chicane/AF (Jonathan Thomas)
-* **Sound enhancements**: Junosix/AF
+* **Sound enhancements**: Junosix/AF (Jamie Hamshere)
 * **Loader and other technical assistance**: Grazey/PHF
 
 **Thanks to**: metalages/AF, masteries/AF
