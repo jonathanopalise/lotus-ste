@@ -18,10 +18,10 @@ drawscenery:
     ; d7 is source bytes to skip after each line
 
     movem.l a2-a6,-(a7)
-    move.l #$ffff8a38,a2
-    move.l #$ffff8a24,a4
-    move.l #$ffff8a32,a5
-    move.l #$ffff8a3c,a6
+    lea $ffff8a38.w,a2
+    lea $ffff8a24.w,a4
+    lea $ffff8a32.w,a5
+    lea $ffff8a3c.w,a6
 
     addq.l #8,d6               ; convert to value suitable for blitter
     add.w #10,d7               ; convert to value suitable for blitter
@@ -148,10 +148,10 @@ drawsceneryplane_aft:
 drawscenery_3bpp:
 
     movem.l a2-a6,-(a7)
-    move.l #$ffff8a38,a2
-    move.l #$ffff8a24,a4
-    move.l #$ffff8a32,a5
-    move.l #$ffff8a3c,a6
+    lea $ffff8a38.w,a2
+    lea $ffff8a24.w,a4
+    lea $ffff8a32.w,a5
+    lea $ffff8a3c.w,a6
 
     moveq.l #8,d0
     add.l d0,d6                        ; convert to value suitable for blitter
