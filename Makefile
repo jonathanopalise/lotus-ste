@@ -24,6 +24,7 @@ CUSTOM_CARS_REL_PATCHES = $(0x7666C_CARS_REL_PATCH) $(0x70400_CARS_REL_PATCH)
 CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 SAMPLES_DIR = $(SOURCE_DIR)samples/
 SAMPLES = $(SAMPLES_DIR)lotus-hitcar.snd $(SAMPLES_DIR)lotus-hitobject.snd $(SAMPLES_DIR)lotus-lowfuel.snd $(SAMPLES_DIR)lotus-racestarthigh.snd $(SAMPLES_DIR)lotus-racestartlow.snd $(SAMPLES_DIR)lotus-roadedge.snd $(SAMPLES_DIR)lotus-skid.snd $(SAMPLES_DIR)lotus-engine.snd
+0X80000_DEPENDENCIES = $(GENERATED_SOURCE_DIR)road.s $(SOURCE_DIR)init_draw_road.s $(SOURCE_DIR)blitter_sprites.s $(SOURCE_DIR)sky_gradient.s $(SOURCE_DIR)preprocess_palette.s $(SOURCE_DIR)mixer_init.s $(SOURCE_DIR)mixer_data.s $(SOURCE_DIR)mixer_variables.s $(SOURCE_DIR)mixer_vbl.s $(SAMPLES)
 
 default: check_dependencies $(RELEASE_DISK_IMAGE)
 
@@ -88,10 +89,10 @@ $(GENERATED_SOURCE_DIR)symbols_0x7666c.inc: $(BIN_DIR)0x7666c.o $(SOURCE_DIR)pro
 $(BIN_DIR)0x7666c.o: $(SOURCE_DIR)0x7666c.s
 	$(VASM) $< -Felf -o $@
 
-$(BIN_DIR)0x80000.bin: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s $(SOURCE_DIR)mixer_init.s $(SOURCE_DIR)mixer_variables.s $(SOURCE_DIR)mixer_data.s $(SOURCE_DIR)mixer_vbl.s $(SAMPLES)
+$(BIN_DIR)0x80000.bin: $(SOURCE_DIR)0x80000.s $(0X80000_DEPENDENCIES)
 	$(VASM) $< -Fbin -o $@
 
-$(BIN_DIR)0x80000.o: $(SOURCE_DIR)0x80000.s $(GENERATED_SOURCE_DIR)road.s $(SOURCE_DIR)mixer_init.s $(SOURCE_DIR)mixer_variables.s $(SOURCE_DIR)mixer_data.s $(SOURCE_DIR)mixer_vbl.s $(SAMPLES) 
+$(BIN_DIR)0x80000.o: $(SOURCE_DIR)0x80000.s $(0X80000_DEPENDENCIES) 
 	$(VASM) $< -Felf -o $@
 
 $(GENERATED_SOURCE_DIR)symbols_0x80000.inc: $(BIN_DIR)0x80000.o $(SOURCE_DIR)process_symbols.php
