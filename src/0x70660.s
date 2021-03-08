@@ -12,6 +12,8 @@
     ; * 1) To call the sound mixer;                                            *
     ; * 2) To change the existing Timer B code to redirect to the new sky      *
     ; *    gradient code.                                                      *
+    ; *                                                                        *
+    ; * TODO: find out why the nops are present in the below code              *
     ; **************************************************************************
 
     include generated/symbols_0x80000.inc
