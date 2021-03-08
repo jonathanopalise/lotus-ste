@@ -4,8 +4,8 @@ dataSoundHitCar						incbin		samples/lotus-hitcar.snd
 dataSoundRaceStartLow				incbin		samples/lotus-racestartlow.snd
 dataSoundRaceStartHigh				incbin		samples/lotus-racestarthigh.snd
 dataSoundLowFuel					incbin		samples/lotus-lowfuel.snd
-dataSoundRoadEdge					incbin		samples/lotus-roadedge.snd
-dataSoundSkid						incbin		samples/lotus-skid.snd
+dataSoundRoadEdge					incbin		samples/lotus-roadedge-divided.snd
+dataSoundSkid						incbin		samples/lotus-skid-divided.snd
 dataSoundEngine						incbin		samples/lotus-engine.snd
 									incbin		samples/lotus-engine.snd					; repeated because of looping
 

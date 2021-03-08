@@ -23,7 +23,7 @@ GENERIC_CARS_REL_PATCHES = $(BIN_DIR)0x70660.bin $(BIN_DIR)0x7086e.bin $(BIN_DIR
 CUSTOM_CARS_REL_PATCHES = $(0x7666C_CARS_REL_PATCH) $(0x70400_CARS_REL_PATCH)
 CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 SAMPLES_DIR = $(SOURCE_DIR)samples/
-SAMPLES = $(SAMPLES_DIR)lotus-hitcar.snd $(SAMPLES_DIR)lotus-hitobject.snd $(SAMPLES_DIR)lotus-lowfuel.snd $(SAMPLES_DIR)lotus-racestarthigh.snd $(SAMPLES_DIR)lotus-racestartlow.snd $(SAMPLES_DIR)lotus-roadedge.snd $(SAMPLES_DIR)lotus-skid.snd $(SAMPLES_DIR)lotus-engine.snd
+SAMPLES = $(SAMPLES_DIR)lotus-hitcar.snd $(SAMPLES_DIR)lotus-hitobject.snd $(SAMPLES_DIR)lotus-lowfuel.snd $(SAMPLES_DIR)lotus-racestarthigh.snd $(SAMPLES_DIR)lotus-racestartlow.snd $(SAMPLES_DIR)lotus-roadedge-divided.snd $(SAMPLES_DIR)lotus-skid-divided.snd $(SAMPLES_DIR)lotus-engine.snd
 0X80000_DEPENDENCIES = $(GENERATED_SOURCE_DIR)road.s $(SOURCE_DIR)init_draw_road.s $(SOURCE_DIR)blitter_sprites.s $(SOURCE_DIR)sky_gradient.s $(SOURCE_DIR)preprocess_palette.s $(SOURCE_DIR)mixer_init.s $(SOURCE_DIR)mixer_data.s $(SOURCE_DIR)mixer_variables.s $(SOURCE_DIR)mixer_vbl.s $(SAMPLES)
 
 default: check_dependencies $(RELEASE_DISK_IMAGE)

@@ -1,23 +1,25 @@
 ; --- variable + fixed frequency 2-channel mixer. ideally put near the top of the vbl
 mixer_vbl:
 	movem.l		d0-d3/a0-a3,-(sp)
+
 	lea.l		$ffff8900.w,a0																; dma audio registers base address
-	move.b		addressAudioWorkingStart+1,$03(a0)											; set start address high byte
-	move.b		addressAudioWorkingStart+2,$05(a0)											; set start address middle byte (of buffer a)
-	move.b		addressAudioWorkingStart+3,$07(a0)											; set start address low byte
-	move.b		addressAudioWorkingEnd+1,$0f(a0)											; set end address high byte
-	move.b		addressAudioWorkingEnd+2,$11(a0)											; set end address middle byte (of buffer a)
-	move.b		addressAudioWorkingEnd+3,$13(a0)											; set end address low byte
+	lea.l		addressAudioCurrentStart,a1
+	move.b		9(a1),$03(a0)											; set start address high byte
+	move.b		10(a1),$05(a0)											; set start address middle byte (of buffer a)
+	move.b		11(a1),$07(a0)											; set start address low byte
+	move.b		13(a1),$0f(a0)											; set end address high byte
+	move.b		14(a1),$11(a0)											; set end address middle byte (of buffer a)
+	move.b		15(a1),$13(a0)											; set end address low byte
 	move.b		#1,$01(a0)																	; (re)start dma
 
-	move.l		addressAudioCurrentStart,d0													; these lines swap the current/working audio buffers
-	move.l		addressAudioCurrentEnd,d1
-	move.l		addressAudioWorkingStart,d2
-	move.l		addressAudioWorkingEnd,d3
-	move.l		d0,addressAudioWorkingStart
-	move.l		d1,addressAudioWorkingEnd
-	move.l		d2,addressAudioCurrentStart
-	move.l		d3,addressAudioCurrentEnd
+	move.l		(a1),d0													; these lines swap the current/working audio buffers
+	move.l		4(a1),d1
+	move.l		8(a1),d2
+	move.l		12(a1),d3
+	move.l		d0,8(a1)
+	move.l		d1,12(a1)
+	move.l		d2,(a1)
+	move.l		d3,4(a1)
 
 	move.l		d0,a2
 
