@@ -7,6 +7,9 @@ addressAudioCurrentEnd				ds.l		1
 addressAudioWorkingStart			ds.l		1
 addressAudioWorkingEnd				ds.l		1
 
-variableEngineEffectPosition			ds.w		1
-variableSoundEventLatch				ds.w		1
-variableSoundEventPosition			ds.w		1
+variableP1EngineEffectPosition		ds.w		1
+;variableP2EngineEffectPosition		ds.w		1		; not required yet, but probably will be
+variableP1SoundEventLatch			ds.w		1
+;variableP2SoundEventLatch			ds.w		1		; not required yet, but probably will be
+variableP1SoundEventPosition		ds.w		1
+;variableP2SoundEventPosition		ds.w		1		; not required yet, but probably will be

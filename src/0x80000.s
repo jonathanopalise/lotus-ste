@@ -12,4 +12,4 @@
     include "mixer_data.s"
     include "mixer_variables.s"
     include "mixer_vbl.s"
-
+    include "write_microwire.s"
