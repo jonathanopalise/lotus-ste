@@ -4,32 +4,14 @@
     ; **************************************************************************
     ; * Lotus STE                                                              *
     ; *                                                                        *
-    ; * VBL modifications                                                      *
+    ; * VBL sky gradient modifications                                         *
     ; *                                                                        *
-    ; * Address $70660 lies within the in-raceVBL handler. The purpose of      *
-    ; * these changes is twofold:                                              *
-    ; *                                                                        *
-    ; * 1) To call the sound mixer;                                            *
-    ; * 2) To change the existing Timer B code to redirect to the new sky      *
-    ; *    gradient code.                                                      *
-    ; *                                                                        *
-    ; * TODO: find out why the nops are present in the below code              *
+    ; * Address $70660 lies within the in-raceVBL handler. The purpose of this *
+    ; * change is to redirect from the existing Timer B code to the new        *
+    ; * sky gradient code.                                                     *
     ; **************************************************************************
 
     include generated/symbols_0x80000.inc
 
-    ;the jsr is equivalent to 6 nops
-    jsr mixer_vbl
     jmp gradient_init
-    ;nop
-    ;nop
-    ;nop
-    ;nop
-    ;nop
-    ;nop
-    nop
-    nop
-    nop
-    nop
-
 
