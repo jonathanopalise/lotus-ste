@@ -7,6 +7,7 @@
     include "sky_gradient.s"
     include "preprocess_palette.s"
     include "ym_volume_adjust.s"
+    include "vbl_start_intercept.s"
     include "mixer_init.s"
     include "mixer_data.s"
     include "mixer_variables.s"
