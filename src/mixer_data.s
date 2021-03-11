@@ -10,22 +10,35 @@ dataSoundEngine						incbin		samples/lotus-engine.snd
 									incbin		samples/lotus-engine.snd					; repeated because of looping
 
     align 1
-tableSoundEvents					dc.l    0
-                                    dc.w    0
+tableSoundEvents					dc.l    0																; address
+                                    dc.w    0																; length
+                                    dc.w	0																; Amiga retrig time * STE sample frame
+ 
+                                    ; dc.l dataSoundIntro
+                                    ; dc.w size
+                                    ; dc.w size
+
                                     dc.l	dataSoundHitObject												; address
 									dc.w	8223															; length
+									dc.w	20*250															; Amiga retrig time * STE sample frame
 									dc.l	dataSoundHitCar													; address
 									dc.w	4894															; length
+									dc.w	30*250															; Amiga retrig time * STE sample frame
 									dc.l	dataSoundRaceStartLow											; address
 									dc.w	7677															; length
+									dc.w	40*250															; Amiga retrig time * STE sample frame							
 									dc.l	dataSoundRaceStartHigh											; address
 									dc.w	6101															; length
+									dc.w	40*250															; Amiga retrig time * STE sample frame
 									dc.l	dataSoundLowFuel												; address
 									dc.w	2104															; length
+									dc.w	4*250															; Amiga retrig time * STE sample frame
 									dc.l	dataSoundRoadEdge												; address
 									dc.w	4397															; length
+									dc.w	6*250															; Amiga retrig time * STE sample frame
 									dc.l	dataSoundSkid													; address
 									dc.w	10231															; length
+									dc.w	24*250															; Amiga retrig time * STE sample frame
 
 table12517HzScaler					dc.l	18278
 									dc.l	18314
@@ -7027,3 +7040,4 @@ table12517HzScaler					dc.l	18278
 									dc.l	146225
 									dc.l	146225
 									dc.l	146225
+
