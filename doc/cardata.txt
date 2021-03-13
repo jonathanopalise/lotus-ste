@@ -1,0 +1,14 @@
+car a4 data offsets
+-------------------
+
+offset    name
+-------------------------------------------------------------------------------
+$56       offcarsteep
+$5a       offhorizon
+$5c       offmountop(a4)
+$62       offgaptop(a4)
+$60       offmounskip(a4)
+$64       offgapsize(a4)
+$5e       offmounsize(a4)
+$66       offskysize(a4)
+

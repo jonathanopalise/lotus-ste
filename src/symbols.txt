@@ -1,0 +1,30 @@
+# content of 76560
+
+2b400 D ascnlinedists
+2b880 D distxoffsets
+2fd40 D oneovertab
+30e40 D distbasewidths
+3113b D courseall_minus5
+7ad76 D datacounter
+7c586 D apitstop
+7c596 D acardist
+7c5b6 D astartcount
+7657e T doneaaa
+78a60 T ashiftnstore
+78a98 T shiftnstore
+78f3a T adolines
+78f6c T dolines
+78fa0 T nextloop
+78fac T dolines_zeero
+78fb2 T doafill
+78fba T dnfill
+78fca T upfill
+78ff2 T nupfill
+79016 T nofillup
+7901c T donefill
+79020 T deebraq
+7902e T ahorizons
+79042 T horizons
+7c546 D astartvariables
+7ca9a D tracklength
+ 

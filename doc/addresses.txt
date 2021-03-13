@@ -12,11 +12,23 @@ Location   Size          Description
 3113b      Table?        Some kind of lookup table. Changed initial entries to zero and phantom car appearing at top
                          of screen.
 
-7adf6      Word
+707c0      Word
+
+707c2      Word          Cleared at 76552
+
+726ba      Long
+
+7667c      Word          shift value of the road stripes (makes the road stripes roll)
 
 78af6      Word          Used in $78a98 so maybe something to do with road/scenery calcs
 
 78ec8      Word          Used in $78a98 so maybe something to do with road/scenery calcs
+
+7ad76      Word          Frames drawn during current race
+
+7adf0      Word
+
+7adf6      Word
 
 7c53e      Word
 
@@ -47,9 +59,21 @@ Location   Size          Description
 
 7c6b2      Table         Car position data (for game logic?). Transferred at code starting 764d6
 
+7cce6      Word          Game state (i.e which screen we're on)
+
+7d3bc      Table?
+
+7d3ce      
+
 2bcc8      Table         Car position data (for rendering?). Transferred at code starting 764d6
 
+7adf6      Word
+
+7c540      Word
+
 7c53e      Word          Counts from $100 to $1ff and then starts again
+
+7c542      Word
 
 7c586      Word          Value tested at 7656a - maybe determines whether something needs to be drawn
 
@@ -59,6 +83,20 @@ Location   Size          Description
 
 7ca9a      Word
 
+7cc9c      Word
+
+7cc9e      Word
+
+7cca4      Word
+
+7ccfc      Word
+
+7d3bc      Table         Table of 8 words, indexed by 7d3cc
+
+7d3cc      Word
+
+7d40a      Long
+
 7d40e      Long
 
-
+7d412      Long

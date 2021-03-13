@@ -1102,6 +1102,38 @@ starting at 744c8, 80 words get copied from 321C2 to 43330
   - $000745ea : 13f0 1000 0007 d368                move.b    (a0,d1.w),$7d368
   - $000745f2 : 13f0 0000 0007 d369                move.b    (a0,d0.w),$7d369
 
+descrunfil CONFIRMED AT 74B2C
+fopen cars.rel
+load to 70400
+mfopen 0x80000.LZ4
+load to 321c0
+fopen file80.scr
+load to 1be00
+fopen file81.scr
+load to 1be00
+fopen file83.scr
+load to 30d40
+fopen filec0.scr
+load to 30d40
+fopen filec1.scr
+load to 30d40
+fopen filec8.scr
+load to 30d40
+fopen filec9.scr
+load to 30d40
+fopen file50.scr
+load to 30d40
+fopen file78.scr
+load to 30d40
+fopen filef0.scr ; amiga source suggests that this is the gremlin/magfields screen
+load to 30d40
+fopen filef5.scr
+(magnetic fields screen shows)
+load to 30d40
+fopen filefd.scr
+(title screen appears and music starts)
+load to 03d40
+
 $00074606 : 4e41 trap #1
 fopen file87.scr (function 61)
 function number, filename address, read mode
@@ -1521,3 +1553,19 @@ can we nop this out?
 nopping this out seems to disable all engine sound and fx!
 (but maybe that's what we want in the long run?)
 (this seems not to break the YM music - bonus!)
+
+
+
+$00076572 : 6100 24ec                          bsr       $78a60  ; this does some calculating of the road too
+$00076576 : 6100 29c2                          bsr       $78f3a  ; this is the one that has been replaced by our calculate_raod
+$0007657a : 6100 2ab2                          bsr       $7902e  ; this looks like it sets all the y positions ready for rendering
+$0007657e : 4a79 0007 c586                     tst.w     $7c586
+$00076584 : 6604                               bne.s     $7658a
+$00076586 : 6100 0076                          bsr       $765fe  ; this draws the road
+$0007658a : 6100 2be4                          bsr       $79170  ; this draws everything above the road (ground up to horizon, mountains, sky)
+$0007658e : 4a79 0007 c586                     tst.w     $7c586
+$00076594 : 660c                               bne.s     $765a2
+$00076596 : 6100 3162                          bsr       $796fa  ; this draws all sprites
+$0007659a : 6100 2b4a                          bsr       $790e6  ; this draws the status panel
+$0007659e : 6100 40ac                          bsr       $7a64c  ; no idea
+$000765a2 : 6100 2460                          bsr       $78a04  ; something to do with palette switching and horizon position
