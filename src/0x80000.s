@@ -1,6 +1,10 @@
 
     ORG $80000
 
+distxoffsets   equ $2b880
+oneovertab     equ $2fd40
+distbasewidths equ $30e40
+
     include "generated/road.s"
     include "init_draw_road.s"
     include "blitter_sprites.s"
