@@ -17,6 +17,7 @@ distbasewidths equ $30e40
     include "mixer_variables.s"
     include "mixer_vbl.s"
     include "write_microwire.s"
+    include "shiftnstore.s"
     include "dolines.s"
     include "ascnlinedists.s"
 
