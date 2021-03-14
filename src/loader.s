@@ -99,7 +99,7 @@ memory_ok:
 
     ; draw memory status message
     move.l a5,a1 ; restore physbase from earlier
-    add.l #(160*140),a1
+    add.l #(160*165),a1
     move.l a2,a0
     move.l #(160*7/4),d6
     jsr copy_graphics
@@ -132,7 +132,7 @@ memST:				; for ST
 verdict:
     ; draw machine status message
     move.l a5,a1 ; restore physbase from earlier
-    add.l #(160*153),a1
+    add.l #(160*176),a1
     move.l a3,a0
     move.l #(160*7/4),d6
     jsr copy_graphics
@@ -146,7 +146,7 @@ verdict_ok:
 
     ; draw verdict message
     move.l a5,a1 ; restore physbase from earlier
-    add.l #(160*166),a1
+    add.l #(160*187),a1
     move.l a4,a0
     move.l #(160*7/4),d6
     jsr copy_graphics
