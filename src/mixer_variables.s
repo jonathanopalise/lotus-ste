@@ -7,9 +7,9 @@ addressAudioCurrentEnd				ds.l		1
 addressAudioWorkingStart			ds.l		1
 addressAudioWorkingEnd				ds.l		1
 
-variableP1EngineEffectPosition		ds.w		1
-variableP1SoundEventLatch			ds.w		1
-variableP1SoundEventAddress			ds.l		1
-variableP1SoundEventLength			ds.w		1
-variableP1SoundEventRetrigPeriod	ds.w		1
-variableP1SoundEventPosition		ds.w		1
+variableEngineEffectPosition		ds.w		1
+variableSoundEventLatch				ds.w		1
+variableSoundEventAddress			ds.l		1
+variableSoundEventLength			ds.w		1
+variableSoundEventRetrigPeriod		ds.w		1
+variableSoundEventPosition			ds.w		1

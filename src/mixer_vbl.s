@@ -4,47 +4,37 @@ mixer_vbl:
 
 ; --- conditions:
 ; --- 7cce6 = 1					play intro sample (to do later...)
-; --- 7cce6 = 29 & 7cd56 = 0	master volume to +0dB
-; --- 7cce6 = 29 & 7cd56 != 0	master volume to +0dB, clear audio buffer
+; --- 7cce6 = 29 & 7cd56 = 0	master volume to +0dB, play audio buffer
+; --- 7cce6 = 29 & 7cd56 != 0	master volume to +0dB, skip audio buffer
 ; --- 7cd56 != 0				don't fade
-; --- anything else				master volume to +0dB and clear audio buffer
+; --- anything else				master volume to +0dB, skip audio buffer
 
 	move.w		#%10011101000,d0															; master volume = +0dB
 	tst.w		$707c4																		; check game state flag
-	beq			labelAudioInGame															; if not zero, then not in game
+	beq.s		labelDMAAudioOn															; if not zero, then in game
 
-	move.w		$7cce6,d1																	; fetch out of game state machine
+	move.w		$7cce6,d1																	; otherwise not in game, so fetch out of game state machine
 
-;	cmp.w		#1,d0																		; for testing Magnetic Fields intro screen (to do later)
+;	cmp.w		#1,d1																		; check if on Magnetic Fields intro screen (to do later)
 ;	bne.s		labelCheckIfAudioInStereoScreen or similar...
 
 	cmp.w		#$29,d1																		; check if on stereo screen
-	bne.s		labelClearAudioBuffer
+	bne.s		labelDMAAudioOff															; if not, then set master volume to +0dB and don't mix any dma sound
 
-	tst.w		$7cd56																		; check if music track is selected
-	beq			labelFinishedVolumeCheck													; if not then don't clear audio buffer
+	tst.w		$7cd56																		; otherwise check if engine sound (0) or music track (1-4) is selected
+	beq.s		labelDMAAudioOn															; if track is engine, then use dma sound
 
-labelClearAudioBuffer
-	cmp.w		#$34,d1																		; check if on race results screen
-	bne.s		labelNoMuteBeforeClear
-	move.w		#%10011000000,d0															; master volume = -80dB to mask click when clearing audio buffer due to no music
+labelDMAAudioOff
+	jsr			write_microwire																; otherwise set master volume to +0dB
+	bra			labelFinishedAudio															; and end
 
-labelNoMuteBeforeClear
-	moveq		#0,d1																		; value to write to buffer
-	lea.l		bufferAudioMixer,a0															; base address of both buffers
-
-	rept		125																			; buffer size in bytes / 4
-	move.l		d1,(a0)+																	; wipe it
-	endr
-
-	bra			labelFinishedVolumeCheck													; thank you
-
-labelAudioInGame
+labelDMAAudioOn
+	move.w		$72002,d1																	; fetch ausevol
+	cmp.w		#63,d1																		; is it at full volume? if so then no need to change master volume
+	beq.s		labelFinishedVolumeCheck
 	tst.w		$7cd56																		; if no music track selected, then don't fade out
 	bne.s		labelFinishedVolumeCheck
-
-	move.w		$72002,d1																	; fetch ausevol
-	lsr.w		#1,d1																		; divide by 2
+	lsr.w		#1,d1																		; otherwise divide volume by 2
 	sub.w		#31,d1																		; subtract maximum value
 	neg			d1																			; invert the value
 	sub.w		d1,d0																		; subtract result from master volume centre position
@@ -73,8 +63,8 @@ labelFinishedVolumeCheck
 
 	move.l		d0,a2																		; copy start address of work buffer for mixing routines
 
-	move.w		variableP1EngineEffectPosition,d0											; current step into engine effect
-	lea.l		dataSoundEngine,a0															; base address of engine sound effect
+	move.w		variableEngineEffectPosition,d0											; current step into engine effect
+	move.l		tableSoundEvents,a0															; first entry in table contains base address of engine sound effect
 	lea.l		(a0,d0.w),a0																; offset current engine effect position into engine sound effect base address
 
 	move.w		$7cc3c,d0																	; fetch 'auserevs' (player 1 ingame revs)
@@ -85,14 +75,24 @@ labelFinishedVolumeCheck
 
 	moveq		#0,d0																		; clear it for use as engine offset
 
-	tst.w		variableP1SoundEventLatch													; is there a sound event?
+	tst.w		variableSoundEventLatch														; is there a sound event?
 	bmi			labelMixEngineOnly															; if not then just mix the engine sound
 
-labelMixEngineAndSoundEvent
-	move.l		variableP1SoundEventAddress,a1												; current sound event sample base address											
-	move.w		variableP1SoundEventPosition,d2												; offset into sample data
+	move.l		variableSoundEventAddress,a1												; current sound event sample base address											
+	move.w		variableSoundEventPosition,d2												; offset into sample data
 	lea.l		(a1,d2),a1																	; adjust address
 
+;	tst.w		$7cd62																		; test if 1 player (0) or 2 player (1) game
+;	beq			labelMixEngineAndSoundEvent
+
+;labelMixSoundEventOnly
+;	rept		250
+;	move.b		(a1)+,(a2)+																	; add sound event sample to mix
+;	endr
+
+;	bra			labelFinishedMixingSoundEvent
+
+;labelMixEngineAndSoundEvent
 	rept		250
 	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
 	swap		d0																			; effectively multiply offset by 65536
@@ -102,11 +102,12 @@ labelMixEngineAndSoundEvent
 	move.b		d2,(a2)+																	; put accumulated sample value into dma buffer
 	endr
 
-	add.w		#250,variableP1SoundEventPosition											; store current position of sound event effect
-	move.w		variableP1SoundEventLength,d1												; fetch sound event length
-	cmp.w		variableP1SoundEventPosition,d1												; compare current sound event position with sound event length
+labelFinishedMixingSoundEvent
+	add.w		#250,variableSoundEventPosition											; store current position of sound event effect
+	move.w		variableSoundEventLength,d1												; fetch sound event length
+	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
 	bhi			labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
-	move.w		#$ffff,variableP1SoundEventLatch											; set sound event latch to null
+	move.w		#$ffff,variableSoundEventLatch											; set sound event latch to null
 
 	bra			labelFinishedSoundMixing													; finished
 
@@ -121,12 +122,12 @@ labelMixEngineOnly
 
 labelFinishedSoundMixing
 
-	add.w		d0,variableP1EngineEffectPosition											; store current position of engine sound effect
-	cmp.w		#3116,variableP1EngineEffectPosition										; compare engine sound effect length with current position
-	blo.s		labelResetP1EngineEffectPositionFalse										; if current position is less than length then nothing to do
-	sub.w		#3116,variableP1EngineEffectPosition										; otherwise adjust position
-labelResetP1EngineEffectPositionFalse
+	add.w		d0,variableEngineEffectPosition											; store current position of engine sound effect
+	cmp.w		#3116,variableEngineEffectPosition										; compare engine sound effect length with current position
+	blo.s		labelFinishedAudio															; if current position is less than length then nothing to do
+	sub.w		#3116,variableEngineEffectPosition										; otherwise adjust position
+
+labelFinishedAudio
 
 	movem.l		(sp)+,d0-d3/a0-a3
 	rts
-

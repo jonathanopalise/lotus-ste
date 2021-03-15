@@ -1,42 +1,29 @@
 ; --- data and tables
-dataSoundHitObject					incbin		samples/lotus-hitobject.snd
-dataSoundHitCar						incbin		samples/lotus-hitcar.snd
-dataSoundRaceStartLow				incbin		samples/lotus-racestartlow.snd
-dataSoundRaceStartHigh				incbin		samples/lotus-racestarthigh.snd
-dataSoundLowFuel					incbin		samples/lotus-lowfuel.snd
-dataSoundRoadEdge					incbin		samples/lotus-roadedge-divided.snd
-dataSoundSkid						incbin		samples/lotus-skid-divided.snd
-dataSoundEngine						incbin		samples/lotus-engine.snd
-									incbin		samples/lotus-engine.snd					; repeated because of looping
+dataSounds							incbin		samples/lotus-sounds.snd								
 
     align 1
-tableSoundEvents					dc.l    0																; address
+tableSoundEvents					dc.l    dataSounds+8473+5144+7927+6351+2354+4647+10481					; 'engine' address
                                     dc.w    0																; length
                                     dc.w	0																; Amiga retrig time * STE sample frame
- 
-                                    ; dc.l dataSoundIntro
-                                    ; dc.w size
-                                    ; dc.w size
-
-                                    dc.l	dataSoundHitObject												; address
+                                    dc.l	dataSounds														; 'hitobject' address
 									dc.w	8223															; length
 									dc.w	20*250															; Amiga retrig time * STE sample frame
-									dc.l	dataSoundHitCar													; address
+									dc.l	dataSounds+8473													; 'hitcar' address
 									dc.w	4894															; length
 									dc.w	30*250															; Amiga retrig time * STE sample frame
-									dc.l	dataSoundRaceStartLow											; address
+									dc.l	dataSounds+8473+5144											; 'racestartlow' address
 									dc.w	7677															; length
 									dc.w	40*250															; Amiga retrig time * STE sample frame							
-									dc.l	dataSoundRaceStartHigh											; address
+									dc.l	dataSounds+8473+5144+7927										; 'racestarthigh' address
 									dc.w	6101															; length
 									dc.w	40*250															; Amiga retrig time * STE sample frame
-									dc.l	dataSoundLowFuel												; address
+									dc.l	dataSounds+8473+5144+7927+6351									; 'lowfuel' address
 									dc.w	2104															; length
 									dc.w	4*250															; Amiga retrig time * STE sample frame
-									dc.l	dataSoundRoadEdge												; address
+									dc.l	dataSounds+8473+5144+7927+6351+2354								; 'roadedge' address
 									dc.w	4397															; length
 									dc.w	6*250															; Amiga retrig time * STE sample frame
-									dc.l	dataSoundSkid													; address
+									dc.l	dataSounds+8473+5144+7927+6351+2354+4647						; 'skid' address
 									dc.w	10231															; length
 									dc.w	24*250															; Amiga retrig time * STE sample frame
 

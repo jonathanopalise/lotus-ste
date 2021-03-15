@@ -9,6 +9,13 @@ mixer_init:
 	lea.l		250(a0),a0
 	move.l		a0,(a1)
 
+;	moveq		#0,d0																		; value to write to buffer
+;	lea.l		bufferAudioMixer,a0															; base address of both buffers
+
+;	rept		125																			; buffer size in bytes / 4
+;	move.l		d0,(a0)+																	; wipe it
+;	endr
+
 	move.w		#1000,$7cc3c					; force revs to 1000rpm - not needed now
 
 	movem.l		d0/a0,-(sp)						; is this needed?
