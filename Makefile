@@ -24,9 +24,10 @@ GENERIC_CARS_REL_PATCHES =\
 	$(BIN_DIR)0x70880.bin\
 	$(BIN_DIR)0x70896.bin\
 	$(BIN_DIR)0x709b2.bin\
-	$(BIN_DIR)0x71d62.bin\
+	$(BIN_DIR)0x70be2.bin\
 	$(BIN_DIR)0x71938.bin\
 	$(BIN_DIR)0x71ce6.bin\
+	$(BIN_DIR)0x72abc.bin\
 	$(BIN_DIR)0x72afa.bin\
 	$(BIN_DIR)0x72b04.bin\
 	$(BIN_DIR)0x744ba.bin\
@@ -47,7 +48,23 @@ CUSTOM_CARS_REL_PATCHES = $(0x7666C_CARS_REL_PATCH) $(0x70400_CARS_REL_PATCH)
 CARS_REL_PATCHES = $(GENERIC_CARS_REL_PATCHES) $(CUSTOM_CARS_REL_PATCHES)
 SAMPLES_DIR = $(SOURCE_DIR)samples/
 SAMPLES = $(SAMPLES_DIR)lotus-intro.snd $(SAMPLES_DIR)lotus-sounds.snd
-0X80000_DEPENDENCIES = $(GENERATED_SOURCE_DIR)road.s $(SOURCE_DIR)init_draw_road.s $(SOURCE_DIR)blitter_sprites.s $(SOURCE_DIR)sky_gradient.s $(SOURCE_DIR)preprocess_palette.s $(SOURCE_DIR)mixer_init.s $(SOURCE_DIR)mixer_data.s $(SOURCE_DIR)mixer_variables.s $(SOURCE_DIR)mixer_vbl.s $(SAMPLES)
+
+0X80000_DEPENDENCIES =\
+	$(GENERATED_SOURCE_DIR)road.s\
+	$(SOURCE_DIR)init_draw_road.s\
+	$(SOURCE_DIR)blitter_sprites.s\
+	$(SOURCE_DIR)sky_gradient.s\
+	$(SOURCE_DIR)preprocess_palette.s\
+	$(SOURCE_DIR)ym_volume_adjust.s\
+	$(SOURCE_DIR)ym_engine_volume_adjust.s\
+	$(SOURCE_DIR)vbl_start_intercept.s\
+	$(SOURCE_DIR)mixer_init.s\
+	$(SOURCE_DIR)mixer_data.s\
+	$(SOURCE_DIR)mixer_variables.s\
+	$(SOURCE_DIR)mixer_vbl.s\
+	$(SOURCE_DIR)write_microwire.s\
+	$(SOURCE_DIR)do_sound_events.s\
+	$(SAMPLES)
 
 default: check_dependencies $(RELEASE_DISK_IMAGE)
 

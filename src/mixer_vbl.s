@@ -43,12 +43,40 @@ labelFinishedVolumeCheck
 	jsr			write_microwire																; use value in d0 to write master volume data to microwire
 
 	lea.l		$ffff8900.w,a0																; dma audio registers base address
+
+	tst.w		$7cd62																		; test if 1 or 2 player game (0 = 1 player, 1 = 2 player)
+	beq			label1PlayerSound
+
+label2PlayerSound
+	tst.w		variableSoundEventLatch
+	bmi			labelFinishedAudio
+
+	lea.l		variableSoundEventAddress,a1
+
+	move.b		1(a1),$03(a0)																; set start address high byte
+	move.b		2(a1),$05(a0)																; set start address middle byte
+	move.b		3(a1),$07(a0)																; set start address low byte
+
+	moveq		#0,d0
+	move.w		variableSoundEventLength,d0
+	add.l		d0,variableSoundEventAddress
+
+	move.b		1(a1),$0f(a0)																; set end address high byte
+	move.b		2(a1),$11(a0)																; set end address middle byte
+	move.b		3(a1),$13(a0)																; set end address low byte
+	move.b		#1,$01(a0)																	; start dma	
+
+	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
+
+	bra			labelFinishedSoundMixing
+
+label1PlayerSound
 	lea.l		addressAudioCurrentStart,a1
 	move.b		9(a1),$03(a0)																; set start address high byte
-	move.b		10(a1),$05(a0)																; set start address middle byte (of buffer a)
+	move.b		10(a1),$05(a0)																; set start address middle byte
 	move.b		11(a1),$07(a0)																; set start address low byte
 	move.b		13(a1),$0f(a0)																; set end address high byte
-	move.b		14(a1),$11(a0)																; set end address middle byte (of buffer a)
+	move.b		14(a1),$11(a0)																; set end address middle byte
 	move.b		15(a1),$13(a0)																; set end address low byte
 	move.b		#1,$01(a0)																	; (re)start dma
 
@@ -63,6 +91,7 @@ labelFinishedVolumeCheck
 
 	move.l		d0,a2																		; copy start address of work buffer for mixing routines
 
+labelMixEngineAndSoundEvent
 	move.w		variableEngineEffectPosition,d0											; current step into engine effect
 	move.l		tableSoundEvents,a0															; first entry in table contains base address of engine sound effect
 	lea.l		(a0,d0.w),a0																; offset current engine effect position into engine sound effect base address
@@ -82,17 +111,6 @@ labelFinishedVolumeCheck
 	move.w		variableSoundEventPosition,d2												; offset into sample data
 	lea.l		(a1,d2),a1																	; adjust address
 
-;	tst.w		$7cd62																		; test if 1 player (0) or 2 player (1) game
-;	beq			labelMixEngineAndSoundEvent
-
-;labelMixSoundEventOnly
-;	rept		250
-;	move.b		(a1)+,(a2)+																	; add sound event sample to mix
-;	endr
-
-;	bra			labelFinishedMixingSoundEvent
-
-;labelMixEngineAndSoundEvent
 	rept		250
 	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
 	swap		d0																			; effectively multiply offset by 65536
