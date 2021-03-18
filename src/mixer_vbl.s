@@ -1,6 +1,6 @@
 ; --- variable + fixed frequency 2-channel mixer. ideally put near the top of the vbl
 mixer_vbl:
-	movem.l		d0-d3/a0-a3,-(sp)
+	movem.l		d0-d3/a0-a2,-(sp)
 
 ; --- conditions:
 ; --- 7cce6 = 1					play intro sample (to do later...)
@@ -45,7 +45,7 @@ labelFinishedVolumeCheck
 	lea.l		$ffff8900.w,a0																; dma audio registers base address
 
 	tst.w		$7cd62																		; test if 1 or 2 player game (0 = 1 player, 1 = 2 player)
-	beq			label1PlayerSound
+	beq.s			label1PlayerSound
 
 label2PlayerSound
 	tst.w		variableSoundEventLatch
@@ -68,7 +68,7 @@ label2PlayerSound
 
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
 
-	bra			labelFinishedSoundMixing
+	bra			labelFinishedAudio
 
 label1PlayerSound
 	lea.l		addressAudioCurrentStart,a1
@@ -147,5 +147,5 @@ labelFinishedSoundMixing
 
 labelFinishedAudio
 
-	movem.l		(sp)+,d0-d3/a0-a3
+	movem.l		(sp)+,d0-d3/a0-a2
 	rts

@@ -9,13 +9,6 @@ mixer_init:
 	lea.l		250(a0),a0
 	move.l		a0,(a1)
 
-;	moveq		#0,d0																		; value to write to buffer
-;	lea.l		bufferAudioMixer,a0															; base address of both buffers
-
-;	rept		125																			; buffer size in bytes / 4
-;	move.l		d0,(a0)+																	; wipe it
-;	endr
-
 	move.w		#1000,$7cc3c					; force revs to 1000rpm - not needed now
 
 	movem.l		d0/a0,-(sp)						; is this needed?
@@ -25,7 +18,7 @@ microwire_init:
 	jsr			write_microwire
     move.w		#%10001000110,d0       			; bass = +0dB
 	jsr			write_microwire
-    move.w		#%10010000011,d0				; treble = -6dB (to be close to Amiga lowpass filter
+    move.w		#%10010000110,d0				; treble = +0dB
 	jsr			write_microwire
     move.w		#%10011101000,d0				; master volume = +0dB
 	jsr			write_microwire

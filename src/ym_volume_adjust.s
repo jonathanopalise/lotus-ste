@@ -1,8 +1,11 @@
 YMChannelAVolumeAdjust:
-    tst.b   d0
-    beq.s   labelFinishedChannelAVolumeCheck
-    subq.b  #1,d0
-labelFinishedChannelAVolumeCheck:
+    cmp.b   #2,d0
+    bls.s   labelClampChannelAVolume
+    subq.b  #2,d0
+    bra.s   labelFinishedChannelAVolumeCheck
+labelClampChannelAVolume
+    moveq   #0,d0
+labelFinishedChannelAVolumeCheck
 ; --- restore instructions that were replaced by jsr
     move.b  d0,(a1)
     move.b  #$9,(a0)
@@ -11,10 +14,13 @@ labelFinishedChannelAVolumeCheck:
     rts
 
 YMChannelBVolumeAdjust:
-    tst.b d0
-    beq.s labelFinishedChannelBVolumeCheck
-    subq.b #1,d0
-labelFinishedChannelBVolumeCheck:
+    cmp.b   #2,d0
+    bls.s   labelClampChannelBVolume
+    subq.b  #2,d0
+    bra.s   labelFinishedChannelBVolumeCheck
+labelClampChannelBVolume
+    moveq   #0,d0
+labelFinishedChannelBVolumeCheck
 ; --- restore instructions that were replaced by jsr
     move.b  d0,(a1)
     move.b  #$a,(a0)
@@ -23,10 +29,13 @@ labelFinishedChannelBVolumeCheck:
     rts
 
 YMChannelCVolumeAdjust:
-    tst.b d0
-    beq.s labelFinishedChannelCVolumeCheck
-    subq.b #1,d0
-labelFinishedChannelCVolumeCheck:
+    cmp.b   #2,d0
+    bls.s   labelClampChannelCVolume
+    subq.b  #2,d0
+    bra.s   labelFinishedChannelCVolumeCheck
+labelClampChannelCVolume
+    moveq   #0,d0
+labelFinishedChannelCVolumeCheck
 ; --- restore instructions that were replaced by jsr
     move.b  d0,(a1)
     tst.b   6(a2)
