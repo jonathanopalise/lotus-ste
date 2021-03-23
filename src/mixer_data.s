@@ -27,30 +27,30 @@ tableSoundEvents					dc.l    dataSounds+8473+5144+7927+6351+2354+4647+10481					
 									dc.w	10231															; length
 									dc.w	24*250															; Amiga retrig time * STE sample frame
 
-table12517HzScaler					dc.l	18278
+table12517HzScaler							dc.l	18278
 									dc.l	18314
 									dc.l	18332
 									dc.l	18350
-									dc.l	18368
-									dc.l	18386
+									dc.l	18369
+									dc.l	18387
 									dc.l	18405
 									dc.l	18423
-									dc.l	18441
-									dc.l	18459
+									dc.l	18442
+									dc.l	18460
 									dc.l	18478
-									dc.l	18496
+									dc.l	18497
 									dc.l	18515
-									dc.l	18533
+									dc.l	18534
 									dc.l	18552
-									dc.l	18570
-									dc.l	18570
+									dc.l	18571
+									dc.l	18571
 									dc.l	18589
-									dc.l	18607
-									dc.l	18626
+									dc.l	18608
+									dc.l	18627
 									dc.l	18645
 									dc.l	18664
-									dc.l	18682
-									dc.l	18701
+									dc.l	18683
+									dc.l	18702
 									dc.l	18720
 									dc.l	18739
 									dc.l	18758
@@ -59,24 +59,24 @@ table12517HzScaler					dc.l	18278
 									dc.l	18815
 									dc.l	18834
 									dc.l	18853
-									dc.l	18872
-									dc.l	18891
+									dc.l	18873
+									dc.l	18892
 									dc.l	18911
 									dc.l	18930
-									dc.l	18949
+									dc.l	18950
 									dc.l	18969
 									dc.l	18988
-									dc.l	19007
+									dc.l	19008
 									dc.l	19027
-									dc.l	19046
-									dc.l	19046
+									dc.l	19047
+									dc.l	19047
 									dc.l	19066
 									dc.l	19086
-									dc.l	19105
+									dc.l	19106
 									dc.l	19125
 									dc.l	19145
-									dc.l	19164
-									dc.l	19184
+									dc.l	19165
+									dc.l	19185
 									dc.l	19204
 									dc.l	19224
 									dc.l	19244
@@ -86,23 +86,23 @@ table12517HzScaler					dc.l	18278
 									dc.l	19304
 									dc.l	19324
 									dc.l	19344
-									dc.l	19364
-									dc.l	19384
+									dc.l	19365
+									dc.l	19385
 									dc.l	19405
 									dc.l	19425
-									dc.l	19445
+									dc.l	19446
 									dc.l	19466
-									dc.l	19486
-									dc.l	19486
+									dc.l	19487
+									dc.l	19487
 									dc.l	19507
-									dc.l	19527
+									dc.l	19528
 									dc.l	19548
-									dc.l	19568
+									dc.l	19569
 									dc.l	19589
 									dc.l	19610
-									dc.l	19630
-									dc.l	19651
-									dc.l	19651
+									dc.l	19631
+									dc.l	19652
+									dc.l	19652
 									dc.l	19672
 									dc.l	19693
 									dc.l	19714
@@ -113,46 +113,46 @@ table12517HzScaler					dc.l	18278
 									dc.l	19798
 									dc.l	19819
 									dc.l	19840
-									dc.l	19861
-									dc.l	19882
+									dc.l	19862
+									dc.l	19883
 									dc.l	19904
-									dc.l	19925
-									dc.l	19925
+									dc.l	19926
+									dc.l	19926
 									dc.l	19947
 									dc.l	19968
-									dc.l	19989
-									dc.l	20011
+									dc.l	19990
+									dc.l	20012
 									dc.l	20033
 									dc.l	20033
-									dc.l	20054
+									dc.l	20055
 									dc.l	20076
 									dc.l	20098
-									dc.l	20119
-									dc.l	20141
-									dc.l	20163
-									dc.l	20163
-									dc.l	20185
+									dc.l	20120
+									dc.l	20142
+									dc.l	20164
+									dc.l	20164
+									dc.l	20186
 									dc.l	20207
-									dc.l	20229
-									dc.l	20251
-									dc.l	20273
-									dc.l	20273
-									dc.l	20295
+									dc.l	20230
+									dc.l	20252
+									dc.l	20274
+									dc.l	20274
+									dc.l	20296
 									dc.l	20318
 									dc.l	20340
-									dc.l	20362
-									dc.l	20362
-									dc.l	20384
+									dc.l	20363
+									dc.l	20363
+									dc.l	20385
 									dc.l	20407
-									dc.l	20429
+									dc.l	20430
 									dc.l	20452
-									dc.l	20474
-									dc.l	20474
+									dc.l	20475
+									dc.l	20475
 									dc.l	20497
 									dc.l	20520
-									dc.l	20542
-									dc.l	20565
-									dc.l	20565
+									dc.l	20543
+									dc.l	20566
+									dc.l	20566
 									dc.l	20588
 									dc.l	20611
 									dc.l	20634
@@ -163,20 +163,20 @@ table12517HzScaler					dc.l	18278
 									dc.l	20726
 									dc.l	20749
 									dc.l	20749
-									dc.l	20772
-									dc.l	20795
+									dc.l	20773
+									dc.l	20796
 									dc.l	20819
 									dc.l	20819
-									dc.l	20842
-									dc.l	20865
+									dc.l	20843
+									dc.l	20866
 									dc.l	20889
-									dc.l	20912
-									dc.l	20912
-									dc.l	20936
+									dc.l	20913
+									dc.l	20913
+									dc.l	20937
 									dc.l	20960
-									dc.l	20983
-									dc.l	20983
-									dc.l	21007
+									dc.l	20984
+									dc.l	20984
+									dc.l	21008
 									dc.l	21031
 									dc.l	21055
 									dc.l	21079
@@ -187,43 +187,43 @@ table12517HzScaler					dc.l	18278
 									dc.l	21151
 									dc.l	21175
 									dc.l	21199
-									dc.l	21223
-									dc.l	21223
-									dc.l	21247
+									dc.l	21224
+									dc.l	21224
+									dc.l	21248
 									dc.l	21272
-									dc.l	21296
-									dc.l	21296
+									dc.l	21297
+									dc.l	21297
 									dc.l	21321
-									dc.l	21345
+									dc.l	21346
 									dc.l	21370
 									dc.l	21370
-									dc.l	21394
+									dc.l	21395
 									dc.l	21419
 									dc.l	21444
 									dc.l	21444
 									dc.l	21469
-									dc.l	21493
-									dc.l	21518
-									dc.l	21518
-									dc.l	21543
-									dc.l	21568
-									dc.l	21568
-									dc.l	21593
-									dc.l	21618
+									dc.l	21494
+									dc.l	21519
+									dc.l	21519
+									dc.l	21544
+									dc.l	21569
+									dc.l	21569
+									dc.l	21594
+									dc.l	21619
 									dc.l	21644
 									dc.l	21644
 									dc.l	21669
-									dc.l	21694
+									dc.l	21695
 									dc.l	21720
 									dc.l	21720
-									dc.l	21745
+									dc.l	21746
 									dc.l	21771
 									dc.l	21771
-									dc.l	21796
+									dc.l	21797
 									dc.l	21822
-									dc.l	21847
-									dc.l	21847
-									dc.l	21873
+									dc.l	21848
+									dc.l	21848
+									dc.l	21874
 									dc.l	21899
 									dc.l	21899
 									dc.l	21925
@@ -234,21 +234,21 @@ table12517HzScaler					dc.l	18278
 									dc.l	22029
 									dc.l	22029
 									dc.l	22055
-									dc.l	22081
-									dc.l	22081
-									dc.l	22107
+									dc.l	22082
+									dc.l	22082
+									dc.l	22108
 									dc.l	22134
-									dc.l	22160
-									dc.l	22160
+									dc.l	22161
+									dc.l	22161
 									dc.l	22187
-									dc.l	22213
-									dc.l	22213
+									dc.l	22214
+									dc.l	22214
 									dc.l	22240
 									dc.l	22267
 									dc.l	22267
-									dc.l	22293
-									dc.l	22320
-									dc.l	22320
+									dc.l	22294
+									dc.l	22321
+									dc.l	22321
 									dc.l	22347
 									dc.l	22374
 									dc.l	22374
@@ -256,20 +256,20 @@ table12517HzScaler					dc.l	18278
 									dc.l	22428
 									dc.l	22428
 									dc.l	22455
-									dc.l	22482
-									dc.l	22482
-									dc.l	22509
+									dc.l	22483
+									dc.l	22483
+									dc.l	22510
 									dc.l	22537
 									dc.l	22537
-									dc.l	22564
+									dc.l	22565
 									dc.l	22592
 									dc.l	22592
-									dc.l	22619
+									dc.l	22620
 									dc.l	22647
 									dc.l	22647
-									dc.l	22674
-									dc.l	22702
-									dc.l	22702
+									dc.l	22675
+									dc.l	22703
+									dc.l	22703
 									dc.l	22730
 									dc.l	22758
 									dc.l	22758
@@ -279,62 +279,62 @@ table12517HzScaler					dc.l	18278
 									dc.l	22842
 									dc.l	22870
 									dc.l	22870
-									dc.l	22898
-									dc.l	22926
-									dc.l	22926
+									dc.l	22899
+									dc.l	22927
+									dc.l	22927
 									dc.l	22955
-									dc.l	22983
-									dc.l	22983
+									dc.l	22984
+									dc.l	22984
 									dc.l	23012
-									dc.l	23040
-									dc.l	23040
+									dc.l	23041
+									dc.l	23041
 									dc.l	23069
 									dc.l	23069
-									dc.l	23097
-									dc.l	23126
-									dc.l	23126
+									dc.l	23098
+									dc.l	23127
+									dc.l	23127
 									dc.l	23155
 									dc.l	23184
 									dc.l	23184
 									dc.l	23213
 									dc.l	23213
 									dc.l	23242
-									dc.l	23271
-									dc.l	23271
-									dc.l	23300
+									dc.l	23272
+									dc.l	23272
+									dc.l	23301
 									dc.l	23330
 									dc.l	23330
 									dc.l	23359
-									dc.l	23388
-									dc.l	23388
+									dc.l	23389
+									dc.l	23389
 									dc.l	23418
 									dc.l	23418
-									dc.l	23447
+									dc.l	23448
 									dc.l	23477
 									dc.l	23477
 									dc.l	23507
 									dc.l	23507
-									dc.l	23536
-									dc.l	23566
-									dc.l	23566
-									dc.l	23596
-									dc.l	23626
-									dc.l	23626
-									dc.l	23656
-									dc.l	23656
+									dc.l	23537
+									dc.l	23567
+									dc.l	23567
+									dc.l	23597
+									dc.l	23627
+									dc.l	23627
+									dc.l	23657
+									dc.l	23657
 									dc.l	23687
 									dc.l	23717
 									dc.l	23717
-									dc.l	23747
-									dc.l	23747
+									dc.l	23748
+									dc.l	23748
 									dc.l	23778
-									dc.l	23808
-									dc.l	23808
+									dc.l	23809
+									dc.l	23809
 									dc.l	23839
 									dc.l	23839
-									dc.l	23869
-									dc.l	23900
-									dc.l	23900
+									dc.l	23870
+									dc.l	23901
+									dc.l	23901
 									dc.l	23931
 									dc.l	23931
 									dc.l	23962
@@ -345,76 +345,76 @@ table12517HzScaler					dc.l	18278
 									dc.l	24055
 									dc.l	24055
 									dc.l	24086
-									dc.l	24117
-									dc.l	24117
+									dc.l	24118
+									dc.l	24118
 									dc.l	24149
 									dc.l	24149
-									dc.l	24180
+									dc.l	24181
 									dc.l	24212
 									dc.l	24212
-									dc.l	24243
-									dc.l	24243
+									dc.l	24244
+									dc.l	24244
 									dc.l	24275
 									dc.l	24275
 									dc.l	24307
 									dc.l	24339
 									dc.l	24339
-									dc.l	24370
-									dc.l	24370
+									dc.l	24371
+									dc.l	24371
 									dc.l	24403
 									dc.l	24403
 									dc.l	24435
 									dc.l	24467
 									dc.l	24467
-									dc.l	24499
-									dc.l	24499
-									dc.l	24531
-									dc.l	24531
+									dc.l	24500
+									dc.l	24500
+									dc.l	24532
+									dc.l	24532
 									dc.l	24564
-									dc.l	24596
-									dc.l	24596
-									dc.l	24629
-									dc.l	24629
+									dc.l	24597
+									dc.l	24597
+									dc.l	24630
+									dc.l	24630
 									dc.l	24662
 									dc.l	24662
 									dc.l	24695
 									dc.l	24695
-									dc.l	24727
-									dc.l	24760
-									dc.l	24760
-									dc.l	24793
-									dc.l	24793
+									dc.l	24728
+									dc.l	24761
+									dc.l	24761
+									dc.l	24794
+									dc.l	24794
 									dc.l	24827
 									dc.l	24827
 									dc.l	24860
 									dc.l	24860
-									dc.l	24893
+									dc.l	24894
 									dc.l	24927
 									dc.l	24927
-									dc.l	24960
-									dc.l	24960
+									dc.l	24961
+									dc.l	24961
 									dc.l	24994
 									dc.l	24994
-									dc.l	25027
-									dc.l	25027
-									dc.l	25061
-									dc.l	25061
-									dc.l	25095
+									dc.l	25028
+									dc.l	25028
+									dc.l	25062
+									dc.l	25062
+									dc.l	25096
 									dc.l	25129
 									dc.l	25129
-									dc.l	25163
-									dc.l	25163
-									dc.l	25197
-									dc.l	25197
-									dc.l	25231
-									dc.l	25231
+									dc.l	25164
+									dc.l	25164
+									dc.l	25198
+									dc.l	25198
+									dc.l	25232
+									dc.l	25232
 									dc.l	25266
 									dc.l	25266
-									dc.l	25300
-									dc.l	25300
+									dc.l	25301
+									dc.l	25301
 									dc.l	25335
 									dc.l	25335
-									dc.l	25369
+									dc.l	25370
 									dc.l	25404
 									dc.l	25404
 									dc.l	25439
@@ -427,73 +427,73 @@ table12517HzScaler					dc.l	18278
 									dc.l	25544
 									dc.l	25579
 									dc.l	25579
-									dc.l	25614
-									dc.l	25614
+									dc.l	25615
+									dc.l	25615
 									dc.l	25650
 									dc.l	25650
-									dc.l	25685
-									dc.l	25685
+									dc.l	25686
+									dc.l	25686
 									dc.l	25721
 									dc.l	25721
-									dc.l	25756
-									dc.l	25756
-									dc.l	25792
-									dc.l	25792
+									dc.l	25757
+									dc.l	25757
+									dc.l	25793
+									dc.l	25793
 									dc.l	25828
 									dc.l	25828
 									dc.l	25864
 									dc.l	25864
-									dc.l	25900
-									dc.l	25900
-									dc.l	25936
-									dc.l	25972
-									dc.l	25972
+									dc.l	25901
+									dc.l	25901
+									dc.l	25937
+									dc.l	25973
+									dc.l	25973
 									dc.l	26009
 									dc.l	26009
-									dc.l	26045
-									dc.l	26045
+									dc.l	26046
+									dc.l	26046
 									dc.l	26082
 									dc.l	26082
 									dc.l	26119
 									dc.l	26119
-									dc.l	26155
-									dc.l	26155
-									dc.l	26192
-									dc.l	26192
-									dc.l	26192
-									dc.l	26229
-									dc.l	26229
-									dc.l	26266
-									dc.l	26266
+									dc.l	26156
+									dc.l	26156
+									dc.l	26193
+									dc.l	26193
+									dc.l	26193
+									dc.l	26230
+									dc.l	26230
+									dc.l	26267
+									dc.l	26267
 									dc.l	26304
 									dc.l	26304
 									dc.l	26341
 									dc.l	26341
-									dc.l	26378
-									dc.l	26378
+									dc.l	26379
+									dc.l	26379
 									dc.l	26416
 									dc.l	26416
-									dc.l	26453
-									dc.l	26453
-									dc.l	26491
-									dc.l	26491
-									dc.l	26529
-									dc.l	26529
-									dc.l	26567
-									dc.l	26567
-									dc.l	26605
-									dc.l	26605
-									dc.l	26643
-									dc.l	26643
+									dc.l	26454
+									dc.l	26454
+									dc.l	26492
+									dc.l	26492
+									dc.l	26530
+									dc.l	26530
+									dc.l	26568
+									dc.l	26568
+									dc.l	26606
+									dc.l	26606
+									dc.l	26644
+									dc.l	26644
 									dc.l	26682
 									dc.l	26682
 									dc.l	26720
 									dc.l	26720
-									dc.l	26758
-									dc.l	26758
-									dc.l	26797
-									dc.l	26797
-									dc.l	26797
+									dc.l	26759
+									dc.l	26759
+									dc.l	26798
+									dc.l	26798
+									dc.l	26798
 									dc.l	26836
 									dc.l	26836
 									dc.l	26875
@@ -504,88 +504,88 @@ table12517HzScaler					dc.l	18278
 									dc.l	26953
 									dc.l	26992
 									dc.l	26992
-									dc.l	27031
-									dc.l	27031
-									dc.l	27070
-									dc.l	27070
-									dc.l	27070
+									dc.l	27032
+									dc.l	27032
+									dc.l	27071
+									dc.l	27071
+									dc.l	27071
 									dc.l	27110
 									dc.l	27110
 									dc.l	27150
 									dc.l	27150
-									dc.l	27189
-									dc.l	27189
-									dc.l	27229
-									dc.l	27229
-									dc.l	27269
-									dc.l	27269
-									dc.l	27309
-									dc.l	27309
-									dc.l	27309
+									dc.l	27190
+									dc.l	27190
+									dc.l	27230
+									dc.l	27230
+									dc.l	27270
+									dc.l	27270
+									dc.l	27310
+									dc.l	27310
+									dc.l	27310
 									dc.l	27350
 									dc.l	27350
 									dc.l	27390
 									dc.l	27390
-									dc.l	27430
-									dc.l	27430
+									dc.l	27431
+									dc.l	27431
 									dc.l	27471
 									dc.l	27471
 									dc.l	27512
 									dc.l	27512
 									dc.l	27512
-									dc.l	27552
-									dc.l	27552
-									dc.l	27593
-									dc.l	27593
-									dc.l	27634
-									dc.l	27634
+									dc.l	27553
+									dc.l	27553
+									dc.l	27594
+									dc.l	27594
+									dc.l	27635
+									dc.l	27635
 									dc.l	27676
 									dc.l	27676
 									dc.l	27676
 									dc.l	27717
 									dc.l	27717
-									dc.l	27758
-									dc.l	27758
+									dc.l	27759
+									dc.l	27759
 									dc.l	27800
 									dc.l	27800
 									dc.l	27842
 									dc.l	27842
 									dc.l	27842
-									dc.l	27883
-									dc.l	27883
-									dc.l	27925
-									dc.l	27925
-									dc.l	27967
-									dc.l	27967
-									dc.l	27967
+									dc.l	27884
+									dc.l	27884
+									dc.l	27926
+									dc.l	27926
+									dc.l	27968
+									dc.l	27968
+									dc.l	27968
 									dc.l	28010
 									dc.l	28010
 									dc.l	28052
 									dc.l	28052
-									dc.l	28094
-									dc.l	28094
-									dc.l	28094
+									dc.l	28095
+									dc.l	28095
+									dc.l	28095
 									dc.l	28137
 									dc.l	28137
 									dc.l	28180
 									dc.l	28180
-									dc.l	28222
-									dc.l	28222
-									dc.l	28222
-									dc.l	28265
-									dc.l	28265
-									dc.l	28308
-									dc.l	28308
+									dc.l	28223
+									dc.l	28223
+									dc.l	28223
+									dc.l	28266
+									dc.l	28266
+									dc.l	28309
+									dc.l	28309
 									dc.l	28352
 									dc.l	28352
 									dc.l	28352
-									dc.l	28395
-									dc.l	28395
+									dc.l	28396
+									dc.l	28396
 									dc.l	28439
 									dc.l	28439
-									dc.l	28482
-									dc.l	28482
-									dc.l	28482
+									dc.l	28483
+									dc.l	28483
+									dc.l	28483
 									dc.l	28526
 									dc.l	28526
 									dc.l	28570
@@ -595,14 +595,14 @@ table12517HzScaler					dc.l	18278
 									dc.l	28614
 									dc.l	28658
 									dc.l	28658
-									dc.l	28702
-									dc.l	28702
-									dc.l	28702
+									dc.l	28703
+									dc.l	28703
+									dc.l	28703
 									dc.l	28747
 									dc.l	28747
-									dc.l	28791
-									dc.l	28791
-									dc.l	28791
+									dc.l	28792
+									dc.l	28792
+									dc.l	28792
 									dc.l	28836
 									dc.l	28836
 									dc.l	28881
@@ -613,13 +613,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	28971
 									dc.l	28971
 									dc.l	28971
-									dc.l	29016
-									dc.l	29016
+									dc.l	29017
+									dc.l	29017
 									dc.l	29062
 									dc.l	29062
-									dc.l	29107
-									dc.l	29107
-									dc.l	29107
+									dc.l	29108
+									dc.l	29108
+									dc.l	29108
 									dc.l	29153
 									dc.l	29153
 									dc.l	29199
@@ -630,14 +630,14 @@ table12517HzScaler					dc.l	18278
 									dc.l	29245
 									dc.l	29291
 									dc.l	29291
-									dc.l	29337
-									dc.l	29337
-									dc.l	29337
+									dc.l	29338
+									dc.l	29338
+									dc.l	29338
 									dc.l	29384
 									dc.l	29384
-									dc.l	29430
-									dc.l	29430
-									dc.l	29430
+									dc.l	29431
+									dc.l	29431
+									dc.l	29431
 									dc.l	29477
 									dc.l	29477
 									dc.l	29524
@@ -648,14 +648,14 @@ table12517HzScaler					dc.l	18278
 									dc.l	29618
 									dc.l	29618
 									dc.l	29618
-									dc.l	29665
-									dc.l	29665
-									dc.l	29665
+									dc.l	29666
+									dc.l	29666
+									dc.l	29666
 									dc.l	29713
 									dc.l	29713
-									dc.l	29760
-									dc.l	29760
-									dc.l	29760
+									dc.l	29761
+									dc.l	29761
+									dc.l	29761
 									dc.l	29808
 									dc.l	29808
 									dc.l	29856
@@ -664,14 +664,14 @@ table12517HzScaler					dc.l	18278
 									dc.l	29904
 									dc.l	29904
 									dc.l	29904
-									dc.l	29952
-									dc.l	29952
+									dc.l	29953
+									dc.l	29953
 									dc.l	30001
 									dc.l	30001
 									dc.l	30001
-									dc.l	30049
-									dc.l	30049
-									dc.l	30049
+									dc.l	30050
+									dc.l	30050
+									dc.l	30050
 									dc.l	30098
 									dc.l	30098
 									dc.l	30147
@@ -682,28 +682,28 @@ table12517HzScaler					dc.l	18278
 									dc.l	30196
 									dc.l	30245
 									dc.l	30245
-									dc.l	30294
-									dc.l	30294
-									dc.l	30294
+									dc.l	30295
+									dc.l	30295
+									dc.l	30295
 									dc.l	30344
 									dc.l	30344
 									dc.l	30344
-									dc.l	30393
-									dc.l	30393
-									dc.l	30443
-									dc.l	30443
-									dc.l	30443
-									dc.l	30493
-									dc.l	30493
-									dc.l	30493
-									dc.l	30543
-									dc.l	30543
-									dc.l	30543
+									dc.l	30394
+									dc.l	30394
+									dc.l	30444
+									dc.l	30444
+									dc.l	30444
+									dc.l	30494
+									dc.l	30494
+									dc.l	30494
+									dc.l	30544
+									dc.l	30544
+									dc.l	30544
 									dc.l	30594
 									dc.l	30594
-									dc.l	30644
-									dc.l	30644
-									dc.l	30644
+									dc.l	30645
+									dc.l	30645
+									dc.l	30645
 									dc.l	30695
 									dc.l	30695
 									dc.l	30695
@@ -715,61 +715,61 @@ table12517HzScaler					dc.l	18278
 									dc.l	30848
 									dc.l	30848
 									dc.l	30848
-									dc.l	30899
-									dc.l	30899
-									dc.l	30899
+									dc.l	30900
+									dc.l	30900
+									dc.l	30900
 									dc.l	30951
 									dc.l	30951
 									dc.l	30951
-									dc.l	31002
-									dc.l	31002
-									dc.l	31002
-									dc.l	31054
-									dc.l	31054
-									dc.l	31106
-									dc.l	31106
-									dc.l	31106
-									dc.l	31158
-									dc.l	31158
-									dc.l	31158
+									dc.l	31003
+									dc.l	31003
+									dc.l	31003
+									dc.l	31055
+									dc.l	31055
+									dc.l	31107
+									dc.l	31107
+									dc.l	31107
+									dc.l	31159
+									dc.l	31159
+									dc.l	31159
 									dc.l	31211
 									dc.l	31211
 									dc.l	31211
-									dc.l	31263
-									dc.l	31263
-									dc.l	31263
-									dc.l	31316
-									dc.l	31316
-									dc.l	31316
+									dc.l	31264
+									dc.l	31264
+									dc.l	31264
+									dc.l	31317
+									dc.l	31317
+									dc.l	31317
 									dc.l	31369
 									dc.l	31369
 									dc.l	31369
 									dc.l	31422
 									dc.l	31422
 									dc.l	31422
-									dc.l	31475
-									dc.l	31475
-									dc.l	31475
+									dc.l	31476
+									dc.l	31476
+									dc.l	31476
 									dc.l	31529
 									dc.l	31529
-									dc.l	31582
-									dc.l	31582
-									dc.l	31582
-									dc.l	31636
-									dc.l	31636
-									dc.l	31636
-									dc.l	31690
-									dc.l	31690
-									dc.l	31690
-									dc.l	31744
-									dc.l	31744
-									dc.l	31744
+									dc.l	31583
+									dc.l	31583
+									dc.l	31583
+									dc.l	31637
+									dc.l	31637
+									dc.l	31637
+									dc.l	31691
+									dc.l	31691
+									dc.l	31691
+									dc.l	31745
+									dc.l	31745
+									dc.l	31745
 									dc.l	31799
 									dc.l	31799
 									dc.l	31799
-									dc.l	31853
-									dc.l	31853
-									dc.l	31853
+									dc.l	31854
+									dc.l	31854
+									dc.l	31854
 									dc.l	31908
 									dc.l	31908
 									dc.l	31908
@@ -779,28 +779,28 @@ table12517HzScaler					dc.l	18278
 									dc.l	32018
 									dc.l	32018
 									dc.l	32018
-									dc.l	32073
-									dc.l	32073
-									dc.l	32073
+									dc.l	32074
+									dc.l	32074
+									dc.l	32074
 									dc.l	32129
 									dc.l	32129
 									dc.l	32129
-									dc.l	32184
-									dc.l	32184
-									dc.l	32184
-									dc.l	32240
-									dc.l	32240
-									dc.l	32240
-									dc.l	32296
-									dc.l	32296
-									dc.l	32296
+									dc.l	32185
+									dc.l	32185
+									dc.l	32185
+									dc.l	32241
+									dc.l	32241
+									dc.l	32241
+									dc.l	32297
+									dc.l	32297
+									dc.l	32297
 									dc.l	32353
 									dc.l	32353
 									dc.l	32353
 									dc.l	32353
-									dc.l	32409
-									dc.l	32409
-									dc.l	32409
+									dc.l	32410
+									dc.l	32410
+									dc.l	32410
 									dc.l	32466
 									dc.l	32466
 									dc.l	32466
@@ -813,12 +813,12 @@ table12517HzScaler					dc.l	18278
 									dc.l	32637
 									dc.l	32637
 									dc.l	32637
-									dc.l	32694
-									dc.l	32694
-									dc.l	32694
-									dc.l	32752
-									dc.l	32752
-									dc.l	32752
+									dc.l	32695
+									dc.l	32695
+									dc.l	32695
+									dc.l	32753
+									dc.l	32753
+									dc.l	32753
 									dc.l	32810
 									dc.l	32810
 									dc.l	32810
@@ -826,55 +826,55 @@ table12517HzScaler					dc.l	18278
 									dc.l	32868
 									dc.l	32868
 									dc.l	32868
-									dc.l	32926
-									dc.l	32926
-									dc.l	32926
+									dc.l	32927
+									dc.l	32927
+									dc.l	32927
 									dc.l	32985
 									dc.l	32985
 									dc.l	32985
-									dc.l	33043
-									dc.l	33043
-									dc.l	33043
-									dc.l	33102
-									dc.l	33102
-									dc.l	33102
-									dc.l	33102
-									dc.l	33161
-									dc.l	33161
-									dc.l	33161
+									dc.l	33044
+									dc.l	33044
+									dc.l	33044
+									dc.l	33103
+									dc.l	33103
+									dc.l	33103
+									dc.l	33103
+									dc.l	33162
+									dc.l	33162
+									dc.l	33162
 									dc.l	33221
 									dc.l	33221
 									dc.l	33221
-									dc.l	33280
-									dc.l	33280
-									dc.l	33280
-									dc.l	33340
-									dc.l	33340
-									dc.l	33340
-									dc.l	33340
-									dc.l	33400
-									dc.l	33400
-									dc.l	33400
-									dc.l	33460
-									dc.l	33460
-									dc.l	33460
+									dc.l	33281
+									dc.l	33281
+									dc.l	33281
+									dc.l	33341
+									dc.l	33341
+									dc.l	33341
+									dc.l	33341
+									dc.l	33401
+									dc.l	33401
+									dc.l	33401
+									dc.l	33461
+									dc.l	33461
+									dc.l	33461
 									dc.l	33521
 									dc.l	33521
 									dc.l	33521
-									dc.l	33581
-									dc.l	33581
-									dc.l	33581
-									dc.l	33581
-									dc.l	33642
-									dc.l	33642
-									dc.l	33642
-									dc.l	33703
-									dc.l	33703
-									dc.l	33703
-									dc.l	33764
-									dc.l	33764
-									dc.l	33764
-									dc.l	33764
+									dc.l	33582
+									dc.l	33582
+									dc.l	33582
+									dc.l	33582
+									dc.l	33643
+									dc.l	33643
+									dc.l	33643
+									dc.l	33704
+									dc.l	33704
+									dc.l	33704
+									dc.l	33765
+									dc.l	33765
+									dc.l	33765
+									dc.l	33765
 									dc.l	33826
 									dc.l	33826
 									dc.l	33826
@@ -888,10 +888,10 @@ table12517HzScaler					dc.l	18278
 									dc.l	34012
 									dc.l	34012
 									dc.l	34012
-									dc.l	34074
-									dc.l	34074
-									dc.l	34074
-									dc.l	34074
+									dc.l	34075
+									dc.l	34075
+									dc.l	34075
+									dc.l	34075
 									dc.l	34137
 									dc.l	34137
 									dc.l	34137
@@ -902,16 +902,16 @@ table12517HzScaler					dc.l	18278
 									dc.l	34263
 									dc.l	34263
 									dc.l	34263
-									dc.l	34326
-									dc.l	34326
-									dc.l	34326
-									dc.l	34326
+									dc.l	34327
+									dc.l	34327
+									dc.l	34327
+									dc.l	34327
 									dc.l	34390
 									dc.l	34390
 									dc.l	34390
-									dc.l	34453
-									dc.l	34453
-									dc.l	34453
+									dc.l	34454
+									dc.l	34454
+									dc.l	34454
 									dc.l	34518
 									dc.l	34518
 									dc.l	34518
@@ -919,21 +919,21 @@ table12517HzScaler					dc.l	18278
 									dc.l	34582
 									dc.l	34582
 									dc.l	34582
-									dc.l	34646
-									dc.l	34646
-									dc.l	34646
-									dc.l	34646
-									dc.l	34711
-									dc.l	34711
-									dc.l	34711
-									dc.l	34711
-									dc.l	34776
-									dc.l	34776
-									dc.l	34776
-									dc.l	34841
-									dc.l	34841
-									dc.l	34841
-									dc.l	34841
+									dc.l	34647
+									dc.l	34647
+									dc.l	34647
+									dc.l	34647
+									dc.l	34712
+									dc.l	34712
+									dc.l	34712
+									dc.l	34712
+									dc.l	34777
+									dc.l	34777
+									dc.l	34777
+									dc.l	34842
+									dc.l	34842
+									dc.l	34842
+									dc.l	34842
 									dc.l	34907
 									dc.l	34907
 									dc.l	34907
@@ -948,10 +948,10 @@ table12517HzScaler					dc.l	18278
 									dc.l	35105
 									dc.l	35105
 									dc.l	35105
-									dc.l	35171
-									dc.l	35171
-									dc.l	35171
-									dc.l	35171
+									dc.l	35172
+									dc.l	35172
+									dc.l	35172
+									dc.l	35172
 									dc.l	35238
 									dc.l	35238
 									dc.l	35238
@@ -959,10 +959,10 @@ table12517HzScaler					dc.l	18278
 									dc.l	35305
 									dc.l	35305
 									dc.l	35305
-									dc.l	35372
-									dc.l	35372
-									dc.l	35372
-									dc.l	35372
+									dc.l	35373
+									dc.l	35373
+									dc.l	35373
+									dc.l	35373
 									dc.l	35440
 									dc.l	35440
 									dc.l	35440
@@ -978,75 +978,75 @@ table12517HzScaler					dc.l	18278
 									dc.l	35644
 									dc.l	35644
 									dc.l	35644
-									dc.l	35712
-									dc.l	35712
-									dc.l	35712
-									dc.l	35781
-									dc.l	35781
-									dc.l	35781
-									dc.l	35781
-									dc.l	35850
-									dc.l	35850
-									dc.l	35850
-									dc.l	35850
+									dc.l	35713
+									dc.l	35713
+									dc.l	35713
+									dc.l	35782
+									dc.l	35782
+									dc.l	35782
+									dc.l	35782
+									dc.l	35851
+									dc.l	35851
+									dc.l	35851
+									dc.l	35851
 									dc.l	35920
 									dc.l	35920
 									dc.l	35920
 									dc.l	35920
-									dc.l	35989
-									dc.l	35989
-									dc.l	35989
-									dc.l	36059
-									dc.l	36059
-									dc.l	36059
-									dc.l	36059
-									dc.l	36129
-									dc.l	36129
-									dc.l	36129
-									dc.l	36129
+									dc.l	35990
+									dc.l	35990
+									dc.l	35990
+									dc.l	36060
+									dc.l	36060
+									dc.l	36060
+									dc.l	36060
+									dc.l	36130
+									dc.l	36130
+									dc.l	36130
+									dc.l	36130
 									dc.l	36200
 									dc.l	36200
 									dc.l	36200
 									dc.l	36200
-									dc.l	36270
-									dc.l	36270
-									dc.l	36270
-									dc.l	36270
-									dc.l	36341
-									dc.l	36341
-									dc.l	36341
-									dc.l	36341
+									dc.l	36271
+									dc.l	36271
+									dc.l	36271
+									dc.l	36271
+									dc.l	36342
+									dc.l	36342
+									dc.l	36342
+									dc.l	36342
 									dc.l	36413
 									dc.l	36413
 									dc.l	36413
 									dc.l	36413
-									dc.l	36484
-									dc.l	36484
-									dc.l	36484
-									dc.l	36484
+									dc.l	36485
+									dc.l	36485
+									dc.l	36485
+									dc.l	36485
 									dc.l	36556
 									dc.l	36556
 									dc.l	36556
 									dc.l	36556
-									dc.l	36628
-									dc.l	36628
-									dc.l	36628
-									dc.l	36700
-									dc.l	36700
-									dc.l	36700
-									dc.l	36700
-									dc.l	36773
-									dc.l	36773
-									dc.l	36773
-									dc.l	36773
-									dc.l	36846
-									dc.l	36846
-									dc.l	36846
-									dc.l	36846
-									dc.l	36919
-									dc.l	36919
-									dc.l	36919
-									dc.l	36919
+									dc.l	36629
+									dc.l	36629
+									dc.l	36629
+									dc.l	36701
+									dc.l	36701
+									dc.l	36701
+									dc.l	36701
+									dc.l	36774
+									dc.l	36774
+									dc.l	36774
+									dc.l	36774
+									dc.l	36847
+									dc.l	36847
+									dc.l	36847
+									dc.l	36847
+									dc.l	36920
+									dc.l	36920
+									dc.l	36920
+									dc.l	36920
 									dc.l	36993
 									dc.l	36993
 									dc.l	36993
@@ -1060,34 +1060,34 @@ table12517HzScaler					dc.l	18278
 									dc.l	37141
 									dc.l	37141
 									dc.l	37141
-									dc.l	37215
-									dc.l	37215
-									dc.l	37215
-									dc.l	37215
-									dc.l	37290
-									dc.l	37290
-									dc.l	37290
-									dc.l	37290
-									dc.l	37365
-									dc.l	37365
-									dc.l	37365
-									dc.l	37365
-									dc.l	37440
-									dc.l	37440
-									dc.l	37440
-									dc.l	37440
-									dc.l	37516
-									dc.l	37516
-									dc.l	37516
-									dc.l	37516
+									dc.l	37216
+									dc.l	37216
+									dc.l	37216
+									dc.l	37216
+									dc.l	37291
+									dc.l	37291
+									dc.l	37291
+									dc.l	37291
+									dc.l	37366
+									dc.l	37366
+									dc.l	37366
+									dc.l	37366
+									dc.l	37441
+									dc.l	37441
+									dc.l	37441
+									dc.l	37441
+									dc.l	37517
+									dc.l	37517
+									dc.l	37517
+									dc.l	37517
 									dc.l	37592
 									dc.l	37592
 									dc.l	37592
 									dc.l	37592
-									dc.l	37668
-									dc.l	37668
-									dc.l	37668
-									dc.l	37668
+									dc.l	37669
+									dc.l	37669
+									dc.l	37669
+									dc.l	37669
 									dc.l	37745
 									dc.l	37745
 									dc.l	37745
@@ -1101,19 +1101,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	37899
 									dc.l	37899
 									dc.l	37899
-									dc.l	37976
-									dc.l	37976
-									dc.l	37976
-									dc.l	37976
-									dc.l	38054
-									dc.l	38054
-									dc.l	38054
-									dc.l	38054
-									dc.l	38132
-									dc.l	38132
-									dc.l	38132
-									dc.l	38132
-									dc.l	38132
+									dc.l	37977
+									dc.l	37977
+									dc.l	37977
+									dc.l	37977
+									dc.l	38055
+									dc.l	38055
+									dc.l	38055
+									dc.l	38055
+									dc.l	38133
+									dc.l	38133
+									dc.l	38133
+									dc.l	38133
+									dc.l	38133
 									dc.l	38211
 									dc.l	38211
 									dc.l	38211
@@ -1127,32 +1127,32 @@ table12517HzScaler					dc.l	18278
 									dc.l	38369
 									dc.l	38369
 									dc.l	38369
-									dc.l	38448
-									dc.l	38448
-									dc.l	38448
-									dc.l	38448
+									dc.l	38449
+									dc.l	38449
+									dc.l	38449
+									dc.l	38449
 									dc.l	38528
 									dc.l	38528
 									dc.l	38528
 									dc.l	38528
-									dc.l	38608
-									dc.l	38608
-									dc.l	38608
-									dc.l	38608
-									dc.l	38608
-									dc.l	38688
-									dc.l	38688
-									dc.l	38688
-									dc.l	38688
-									dc.l	38769
-									dc.l	38769
-									dc.l	38769
-									dc.l	38769
-									dc.l	38769
-									dc.l	38850
-									dc.l	38850
-									dc.l	38850
-									dc.l	38850
+									dc.l	38609
+									dc.l	38609
+									dc.l	38609
+									dc.l	38609
+									dc.l	38609
+									dc.l	38689
+									dc.l	38689
+									dc.l	38689
+									dc.l	38689
+									dc.l	38770
+									dc.l	38770
+									dc.l	38770
+									dc.l	38770
+									dc.l	38770
+									dc.l	38851
+									dc.l	38851
+									dc.l	38851
+									dc.l	38851
 									dc.l	38932
 									dc.l	38932
 									dc.l	38932
@@ -1166,20 +1166,20 @@ table12517HzScaler					dc.l	18278
 									dc.l	39096
 									dc.l	39096
 									dc.l	39096
-									dc.l	39178
-									dc.l	39178
-									dc.l	39178
-									dc.l	39178
-									dc.l	39178
+									dc.l	39179
+									dc.l	39179
+									dc.l	39179
+									dc.l	39179
+									dc.l	39179
 									dc.l	39261
 									dc.l	39261
 									dc.l	39261
 									dc.l	39261
-									dc.l	39344
-									dc.l	39344
-									dc.l	39344
-									dc.l	39344
-									dc.l	39344
+									dc.l	39345
+									dc.l	39345
+									dc.l	39345
+									dc.l	39345
+									dc.l	39345
 									dc.l	39428
 									dc.l	39428
 									dc.l	39428
@@ -1194,24 +1194,24 @@ table12517HzScaler					dc.l	18278
 									dc.l	39596
 									dc.l	39596
 									dc.l	39596
-									dc.l	39680
-									dc.l	39680
-									dc.l	39680
-									dc.l	39680
-									dc.l	39765
-									dc.l	39765
-									dc.l	39765
-									dc.l	39765
-									dc.l	39765
+									dc.l	39681
+									dc.l	39681
+									dc.l	39681
+									dc.l	39681
+									dc.l	39766
+									dc.l	39766
+									dc.l	39766
+									dc.l	39766
+									dc.l	39766
 									dc.l	39851
 									dc.l	39851
 									dc.l	39851
 									dc.l	39851
 									dc.l	39851
-									dc.l	39936
-									dc.l	39936
-									dc.l	39936
-									dc.l	39936
+									dc.l	39937
+									dc.l	39937
+									dc.l	39937
+									dc.l	39937
 									dc.l	40023
 									dc.l	40023
 									dc.l	40023
@@ -1256,30 +1256,30 @@ table12517HzScaler					dc.l	18278
 									dc.l	40725
 									dc.l	40725
 									dc.l	40725
-									dc.l	40814
-									dc.l	40814
-									dc.l	40814
-									dc.l	40814
-									dc.l	40904
-									dc.l	40904
-									dc.l	40904
-									dc.l	40904
-									dc.l	40904
-									dc.l	40994
-									dc.l	40994
-									dc.l	40994
-									dc.l	40994
-									dc.l	40994
-									dc.l	41085
-									dc.l	41085
-									dc.l	41085
-									dc.l	41085
-									dc.l	41085
-									dc.l	41176
-									dc.l	41176
-									dc.l	41176
-									dc.l	41176
-									dc.l	41176
+									dc.l	40815
+									dc.l	40815
+									dc.l	40815
+									dc.l	40815
+									dc.l	40905
+									dc.l	40905
+									dc.l	40905
+									dc.l	40905
+									dc.l	40905
+									dc.l	40995
+									dc.l	40995
+									dc.l	40995
+									dc.l	40995
+									dc.l	40995
+									dc.l	41086
+									dc.l	41086
+									dc.l	41086
+									dc.l	41086
+									dc.l	41086
+									dc.l	41177
+									dc.l	41177
+									dc.l	41177
+									dc.l	41177
+									dc.l	41177
 									dc.l	41268
 									dc.l	41268
 									dc.l	41268
@@ -1306,16 +1306,16 @@ table12517HzScaler					dc.l	18278
 									dc.l	41638
 									dc.l	41638
 									dc.l	41638
-									dc.l	41731
-									dc.l	41731
-									dc.l	41731
-									dc.l	41731
-									dc.l	41731
-									dc.l	41825
-									dc.l	41825
-									dc.l	41825
-									dc.l	41825
-									dc.l	41825
+									dc.l	41732
+									dc.l	41732
+									dc.l	41732
+									dc.l	41732
+									dc.l	41732
+									dc.l	41826
+									dc.l	41826
+									dc.l	41826
+									dc.l	41826
+									dc.l	41826
 									dc.l	41920
 									dc.l	41920
 									dc.l	41920
@@ -1342,16 +1342,16 @@ table12517HzScaler					dc.l	18278
 									dc.l	42302
 									dc.l	42302
 									dc.l	42302
-									dc.l	42398
-									dc.l	42398
-									dc.l	42398
-									dc.l	42398
-									dc.l	42398
-									dc.l	42495
-									dc.l	42495
-									dc.l	42495
-									dc.l	42495
-									dc.l	42495
+									dc.l	42399
+									dc.l	42399
+									dc.l	42399
+									dc.l	42399
+									dc.l	42399
+									dc.l	42496
+									dc.l	42496
+									dc.l	42496
+									dc.l	42496
+									dc.l	42496
 									dc.l	42593
 									dc.l	42593
 									dc.l	42593
@@ -1363,33 +1363,33 @@ table12517HzScaler					dc.l	18278
 									dc.l	42691
 									dc.l	42691
 									dc.l	42691
-									dc.l	42789
-									dc.l	42789
-									dc.l	42789
-									dc.l	42789
-									dc.l	42789
-									dc.l	42789
+									dc.l	42790
+									dc.l	42790
+									dc.l	42790
+									dc.l	42790
+									dc.l	42790
+									dc.l	42790
 									dc.l	42888
 									dc.l	42888
 									dc.l	42888
 									dc.l	42888
 									dc.l	42888
-									dc.l	42987
-									dc.l	42987
-									dc.l	42987
-									dc.l	42987
-									dc.l	42987
+									dc.l	42988
+									dc.l	42988
+									dc.l	42988
+									dc.l	42988
+									dc.l	42988
 									dc.l	43087
 									dc.l	43087
 									dc.l	43087
 									dc.l	43087
 									dc.l	43087
 									dc.l	43087
-									dc.l	43187
-									dc.l	43187
-									dc.l	43187
-									dc.l	43187
-									dc.l	43187
+									dc.l	43188
+									dc.l	43188
+									dc.l	43188
+									dc.l	43188
+									dc.l	43188
 									dc.l	43288
 									dc.l	43288
 									dc.l	43288
@@ -1412,18 +1412,18 @@ table12517HzScaler					dc.l	18278
 									dc.l	43593
 									dc.l	43593
 									dc.l	43593
-									dc.l	43695
-									dc.l	43695
-									dc.l	43695
-									dc.l	43695
-									dc.l	43695
-									dc.l	43695
-									dc.l	43798
-									dc.l	43798
-									dc.l	43798
-									dc.l	43798
-									dc.l	43798
-									dc.l	43798
+									dc.l	43696
+									dc.l	43696
+									dc.l	43696
+									dc.l	43696
+									dc.l	43696
+									dc.l	43696
+									dc.l	43799
+									dc.l	43799
+									dc.l	43799
+									dc.l	43799
+									dc.l	43799
+									dc.l	43799
 									dc.l	43902
 									dc.l	43902
 									dc.l	43902
@@ -1435,18 +1435,18 @@ table12517HzScaler					dc.l	18278
 									dc.l	44006
 									dc.l	44006
 									dc.l	44006
-									dc.l	44110
-									dc.l	44110
-									dc.l	44110
-									dc.l	44110
-									dc.l	44110
-									dc.l	44110
-									dc.l	44215
-									dc.l	44215
-									dc.l	44215
-									dc.l	44215
-									dc.l	44215
-									dc.l	44215
+									dc.l	44111
+									dc.l	44111
+									dc.l	44111
+									dc.l	44111
+									dc.l	44111
+									dc.l	44111
+									dc.l	44216
+									dc.l	44216
+									dc.l	44216
+									dc.l	44216
+									dc.l	44216
+									dc.l	44216
 									dc.l	44321
 									dc.l	44321
 									dc.l	44321
@@ -1470,18 +1470,18 @@ table12517HzScaler					dc.l	18278
 									dc.l	44641
 									dc.l	44641
 									dc.l	44641
-									dc.l	44748
-									dc.l	44748
-									dc.l	44748
-									dc.l	44748
-									dc.l	44748
-									dc.l	44748
-									dc.l	44856
-									dc.l	44856
-									dc.l	44856
-									dc.l	44856
-									dc.l	44856
-									dc.l	44856
+									dc.l	44749
+									dc.l	44749
+									dc.l	44749
+									dc.l	44749
+									dc.l	44749
+									dc.l	44749
+									dc.l	44857
+									dc.l	44857
+									dc.l	44857
+									dc.l	44857
+									dc.l	44857
+									dc.l	44857
 									dc.l	44965
 									dc.l	44965
 									dc.l	44965
@@ -1524,18 +1524,18 @@ table12517HzScaler					dc.l	18278
 									dc.l	45628
 									dc.l	45628
 									dc.l	45628
-									dc.l	45740
-									dc.l	45740
-									dc.l	45740
-									dc.l	45740
-									dc.l	45740
-									dc.l	45740
-									dc.l	45853
-									dc.l	45853
-									dc.l	45853
-									dc.l	45853
-									dc.l	45853
-									dc.l	45853
+									dc.l	45741
+									dc.l	45741
+									dc.l	45741
+									dc.l	45741
+									dc.l	45741
+									dc.l	45741
+									dc.l	45854
+									dc.l	45854
+									dc.l	45854
+									dc.l	45854
+									dc.l	45854
+									dc.l	45854
 									dc.l	45967
 									dc.l	45967
 									dc.l	45967
@@ -1549,25 +1549,25 @@ table12517HzScaler					dc.l	18278
 									dc.l	46081
 									dc.l	46081
 									dc.l	46081
-									dc.l	46195
-									dc.l	46195
-									dc.l	46195
-									dc.l	46195
-									dc.l	46195
-									dc.l	46195
-									dc.l	46310
-									dc.l	46310
-									dc.l	46310
-									dc.l	46310
-									dc.l	46310
-									dc.l	46310
-									dc.l	46426
-									dc.l	46426
-									dc.l	46426
-									dc.l	46426
-									dc.l	46426
-									dc.l	46426
-									dc.l	46426
+									dc.l	46196
+									dc.l	46196
+									dc.l	46196
+									dc.l	46196
+									dc.l	46196
+									dc.l	46196
+									dc.l	46311
+									dc.l	46311
+									dc.l	46311
+									dc.l	46311
+									dc.l	46311
+									dc.l	46311
+									dc.l	46427
+									dc.l	46427
+									dc.l	46427
+									dc.l	46427
+									dc.l	46427
+									dc.l	46427
+									dc.l	46427
 									dc.l	46543
 									dc.l	46543
 									dc.l	46543
@@ -1580,19 +1580,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	46660
 									dc.l	46660
 									dc.l	46660
-									dc.l	46777
-									dc.l	46777
-									dc.l	46777
-									dc.l	46777
-									dc.l	46777
-									dc.l	46777
-									dc.l	46777
-									dc.l	46895
-									dc.l	46895
-									dc.l	46895
-									dc.l	46895
-									dc.l	46895
-									dc.l	46895
+									dc.l	46778
+									dc.l	46778
+									dc.l	46778
+									dc.l	46778
+									dc.l	46778
+									dc.l	46778
+									dc.l	46778
+									dc.l	46896
+									dc.l	46896
+									dc.l	46896
+									dc.l	46896
+									dc.l	46896
+									dc.l	46896
 									dc.l	47014
 									dc.l	47014
 									dc.l	47014
@@ -1600,19 +1600,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	47014
 									dc.l	47014
 									dc.l	47014
-									dc.l	47133
-									dc.l	47133
-									dc.l	47133
-									dc.l	47133
-									dc.l	47133
-									dc.l	47133
-									dc.l	47253
-									dc.l	47253
-									dc.l	47253
-									dc.l	47253
-									dc.l	47253
-									dc.l	47253
-									dc.l	47253
+									dc.l	47134
+									dc.l	47134
+									dc.l	47134
+									dc.l	47134
+									dc.l	47134
+									dc.l	47134
+									dc.l	47254
+									dc.l	47254
+									dc.l	47254
+									dc.l	47254
+									dc.l	47254
+									dc.l	47254
+									dc.l	47254
 									dc.l	47374
 									dc.l	47374
 									dc.l	47374
@@ -1633,19 +1633,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	47617
 									dc.l	47617
 									dc.l	47617
-									dc.l	47739
-									dc.l	47739
-									dc.l	47739
-									dc.l	47739
-									dc.l	47739
-									dc.l	47739
-									dc.l	47862
-									dc.l	47862
-									dc.l	47862
-									dc.l	47862
-									dc.l	47862
-									dc.l	47862
-									dc.l	47862
+									dc.l	47740
+									dc.l	47740
+									dc.l	47740
+									dc.l	47740
+									dc.l	47740
+									dc.l	47740
+									dc.l	47863
+									dc.l	47863
+									dc.l	47863
+									dc.l	47863
+									dc.l	47863
+									dc.l	47863
+									dc.l	47863
 									dc.l	47986
 									dc.l	47986
 									dc.l	47986
@@ -1653,19 +1653,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	47986
 									dc.l	47986
 									dc.l	47986
-									dc.l	48110
-									dc.l	48110
-									dc.l	48110
-									dc.l	48110
-									dc.l	48110
-									dc.l	48110
-									dc.l	48110
-									dc.l	48235
-									dc.l	48235
-									dc.l	48235
-									dc.l	48235
-									dc.l	48235
-									dc.l	48235
+									dc.l	48111
+									dc.l	48111
+									dc.l	48111
+									dc.l	48111
+									dc.l	48111
+									dc.l	48111
+									dc.l	48111
+									dc.l	48236
+									dc.l	48236
+									dc.l	48236
+									dc.l	48236
+									dc.l	48236
+									dc.l	48236
 									dc.l	48361
 									dc.l	48361
 									dc.l	48361
@@ -1687,13 +1687,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	48614
 									dc.l	48614
 									dc.l	48614
-									dc.l	48741
-									dc.l	48741
-									dc.l	48741
-									dc.l	48741
-									dc.l	48741
-									dc.l	48741
-									dc.l	48741
+									dc.l	48742
+									dc.l	48742
+									dc.l	48742
+									dc.l	48742
+									dc.l	48742
+									dc.l	48742
+									dc.l	48742
 									dc.l	48870
 									dc.l	48870
 									dc.l	48870
@@ -1708,13 +1708,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	48999
 									dc.l	48999
 									dc.l	48999
-									dc.l	49128
-									dc.l	49128
-									dc.l	49128
-									dc.l	49128
-									dc.l	49128
-									dc.l	49128
-									dc.l	49128
+									dc.l	49129
+									dc.l	49129
+									dc.l	49129
+									dc.l	49129
+									dc.l	49129
+									dc.l	49129
+									dc.l	49129
 									dc.l	49259
 									dc.l	49259
 									dc.l	49259
@@ -1730,13 +1730,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	49390
 									dc.l	49390
 									dc.l	49390
-									dc.l	49521
-									dc.l	49521
-									dc.l	49521
-									dc.l	49521
-									dc.l	49521
-									dc.l	49521
-									dc.l	49521
+									dc.l	49522
+									dc.l	49522
+									dc.l	49522
+									dc.l	49522
+									dc.l	49522
+									dc.l	49522
+									dc.l	49522
 									dc.l	49654
 									dc.l	49654
 									dc.l	49654
@@ -1759,13 +1759,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	49921
 									dc.l	49921
 									dc.l	49921
-									dc.l	50055
-									dc.l	50055
-									dc.l	50055
-									dc.l	50055
-									dc.l	50055
-									dc.l	50055
-									dc.l	50055
+									dc.l	50056
+									dc.l	50056
+									dc.l	50056
+									dc.l	50056
+									dc.l	50056
+									dc.l	50056
+									dc.l	50056
 									dc.l	50191
 									dc.l	50191
 									dc.l	50191
@@ -1781,13 +1781,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	50327
 									dc.l	50327
 									dc.l	50327
-									dc.l	50463
-									dc.l	50463
-									dc.l	50463
-									dc.l	50463
-									dc.l	50463
-									dc.l	50463
-									dc.l	50463
+									dc.l	50464
+									dc.l	50464
+									dc.l	50464
+									dc.l	50464
+									dc.l	50464
+									dc.l	50464
+									dc.l	50464
 									dc.l	50601
 									dc.l	50601
 									dc.l	50601
@@ -1796,21 +1796,21 @@ table12517HzScaler					dc.l	18278
 									dc.l	50601
 									dc.l	50601
 									dc.l	50601
-									dc.l	50739
-									dc.l	50739
-									dc.l	50739
-									dc.l	50739
-									dc.l	50739
-									dc.l	50739
-									dc.l	50739
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
-									dc.l	50878
+									dc.l	50740
+									dc.l	50740
+									dc.l	50740
+									dc.l	50740
+									dc.l	50740
+									dc.l	50740
+									dc.l	50740
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
+									dc.l	50879
 									dc.l	51018
 									dc.l	51018
 									dc.l	51018
@@ -1819,13 +1819,13 @@ table12517HzScaler					dc.l	18278
 									dc.l	51018
 									dc.l	51018
 									dc.l	51018
-									dc.l	51158
-									dc.l	51158
-									dc.l	51158
-									dc.l	51158
-									dc.l	51158
-									dc.l	51158
-									dc.l	51158
+									dc.l	51159
+									dc.l	51159
+									dc.l	51159
+									dc.l	51159
+									dc.l	51159
+									dc.l	51159
+									dc.l	51159
 									dc.l	51300
 									dc.l	51300
 									dc.l	51300
@@ -1850,14 +1850,14 @@ table12517HzScaler					dc.l	18278
 									dc.l	51585
 									dc.l	51585
 									dc.l	51585
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
-									dc.l	51728
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
+									dc.l	51729
 									dc.l	51873
 									dc.l	51873
 									dc.l	51873
@@ -1865,39 +1865,39 @@ table12517HzScaler					dc.l	18278
 									dc.l	51873
 									dc.l	51873
 									dc.l	51873
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52018
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52164
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52311
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
-									dc.l	52459
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52019
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52165
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52312
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
+									dc.l	52460
 									dc.l	52608
 									dc.l	52608
 									dc.l	52608
@@ -1906,22 +1906,22 @@ table12517HzScaler					dc.l	18278
 									dc.l	52608
 									dc.l	52608
 									dc.l	52608
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52757
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
-									dc.l	52907
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52758
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
+									dc.l	52908
 									dc.l	53059
 									dc.l	53059
 									dc.l	53059
@@ -1947,23 +1947,23 @@ table12517HzScaler					dc.l	18278
 									dc.l	53364
 									dc.l	53364
 									dc.l	53364
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53517
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
-									dc.l	53672
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53518
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
+									dc.l	53673
 									dc.l	53828
 									dc.l	53828
 									dc.l	53828
@@ -1972,24 +1972,24 @@ table12517HzScaler					dc.l	18278
 									dc.l	53828
 									dc.l	53828
 									dc.l	53828
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	53984
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
-									dc.l	54141
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	53985
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
+									dc.l	54142
 									dc.l	54300
 									dc.l	54300
 									dc.l	54300
@@ -2007,124 +2007,124 @@ table12517HzScaler					dc.l	18278
 									dc.l	54459
 									dc.l	54459
 									dc.l	54459
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54619
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54780
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	54942
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55105
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55269
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55434
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55600
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55767
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	55935
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56104
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56274
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56445
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
-									dc.l	56617
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54620
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54781
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	54943
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55106
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55270
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55435
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55601
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55768
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	55936
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56105
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56275
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56446
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
+									dc.l	56618
 									dc.l	56791
 									dc.l	56791
 									dc.l	56791
@@ -2144,25 +2144,25 @@ table12517HzScaler					dc.l	18278
 									dc.l	56965
 									dc.l	56965
 									dc.l	56965
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57140
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
-									dc.l	57316
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57141
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
+									dc.l	57317
 									dc.l	57494
 									dc.l	57494
 									dc.l	57494
@@ -2173,26 +2173,26 @@ table12517HzScaler					dc.l	18278
 									dc.l	57494
 									dc.l	57494
 									dc.l	57494
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57672
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
-									dc.l	57852
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57673
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
+									dc.l	57853
 									dc.l	58033
 									dc.l	58033
 									dc.l	58033
@@ -2222,17 +2222,17 @@ table12517HzScaler					dc.l	18278
 									dc.l	58398
 									dc.l	58398
 									dc.l	58398
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
-									dc.l	58582
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
+									dc.l	58583
 									dc.l	58768
 									dc.l	58768
 									dc.l	58768
@@ -2243,16 +2243,16 @@ table12517HzScaler					dc.l	18278
 									dc.l	58768
 									dc.l	58768
 									dc.l	58768
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
-									dc.l	58954
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
+									dc.l	58955
 									dc.l	59142
 									dc.l	59142
 									dc.l	59142
@@ -2284,16 +2284,16 @@ table12517HzScaler					dc.l	18278
 									dc.l	59521
 									dc.l	59521
 									dc.l	59521
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
-									dc.l	59712
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
+									dc.l	59713
 									dc.l	59905
 									dc.l	59905
 									dc.l	59905
@@ -2326,50 +2326,50 @@ table12517HzScaler					dc.l	18278
 									dc.l	60294
 									dc.l	60294
 									dc.l	60294
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60490
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60688
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	60887
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
-									dc.l	61087
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60491
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60689
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	60888
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
+									dc.l	61088
 									dc.l	61289
 									dc.l	61289
 									dc.l	61289
@@ -2392,17 +2392,17 @@ table12517HzScaler					dc.l	18278
 									dc.l	61492
 									dc.l	61492
 									dc.l	61492
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
-									dc.l	61696
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
+									dc.l	61697
 									dc.l	61902
 									dc.l	61902
 									dc.l	61902
@@ -2425,41 +2425,41 @@ table12517HzScaler					dc.l	18278
 									dc.l	62109
 									dc.l	62109
 									dc.l	62109
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62317
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62527
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
-									dc.l	62738
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62318
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62528
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
+									dc.l	62739
 									dc.l	62951
 									dc.l	62951
 									dc.l	62951
@@ -2472,17 +2472,17 @@ table12517HzScaler					dc.l	18278
 									dc.l	62951
 									dc.l	62951
 									dc.l	62951
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
-									dc.l	63165
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
+									dc.l	63166
 									dc.l	63381
 									dc.l	63381
 									dc.l	63381
@@ -2507,30 +2507,30 @@ table12517HzScaler					dc.l	18278
 									dc.l	63598
 									dc.l	63598
 									dc.l	63598
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	63816
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
-									dc.l	64036
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	63817
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
+									dc.l	64037
 									dc.l	64258
 									dc.l	64258
 									dc.l	64258
@@ -2543,18 +2543,18 @@ table12517HzScaler					dc.l	18278
 									dc.l	64258
 									dc.l	64258
 									dc.l	64258
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
-									dc.l	64481
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
+									dc.l	64482
 									dc.l	64706
 									dc.l	64706
 									dc.l	64706
@@ -2592,83 +2592,83 @@ table12517HzScaler					dc.l	18278
 									dc.l	65160
 									dc.l	65160
 									dc.l	65160
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65389
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65620
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	65853
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66087
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66323
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
-									dc.l	66561
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65390
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65621
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	65854
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66088
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66324
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
+									dc.l	66562
 									dc.l	66801
 									dc.l	66801
 									dc.l	66801
@@ -2709,19 +2709,19 @@ table12517HzScaler					dc.l	18278
 									dc.l	67285
 									dc.l	67285
 									dc.l	67285
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
-									dc.l	67529
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
+									dc.l	67530
 									dc.l	67776
 									dc.l	67776
 									dc.l	67776
@@ -2736,47 +2736,47 @@ table12517HzScaler					dc.l	18278
 									dc.l	67776
 									dc.l	67776
 									dc.l	67776
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68024
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68274
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
-									dc.l	68526
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68025
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68275
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
+									dc.l	68527
 									dc.l	68780
 									dc.l	68780
 									dc.l	68780
@@ -2804,21 +2804,21 @@ table12517HzScaler					dc.l	18278
 									dc.l	69036
 									dc.l	69036
 									dc.l	69036
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
-									dc.l	69293
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
+									dc.l	69294
 									dc.l	69553
 									dc.l	69553
 									dc.l	69553
@@ -2833,20 +2833,20 @@ table12517HzScaler					dc.l	18278
 									dc.l	69553
 									dc.l	69553
 									dc.l	69553
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
-									dc.l	69814
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
+									dc.l	69815
 									dc.l	70078
 									dc.l	70078
 									dc.l	70078
@@ -2861,36 +2861,36 @@ table12517HzScaler					dc.l	18278
 									dc.l	70078
 									dc.l	70078
 									dc.l	70078
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70343
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
-									dc.l	70610
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70344
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
+									dc.l	70611
 									dc.l	70880
 									dc.l	70880
 									dc.l	70880
@@ -2920,36 +2920,36 @@ table12517HzScaler					dc.l	18278
 									dc.l	71152
 									dc.l	71152
 									dc.l	71152
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71425
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
-									dc.l	71701
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71426
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
+									dc.l	71702
 									dc.l	71979
 									dc.l	71979
 									dc.l	71979
@@ -2981,21 +2981,21 @@ table12517HzScaler					dc.l	18278
 									dc.l	72259
 									dc.l	72259
 									dc.l	72259
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
-									dc.l	72541
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
+									dc.l	72542
 									dc.l	72826
 									dc.l	72826
 									dc.l	72826
@@ -3012,37 +3012,37 @@ table12517HzScaler					dc.l	18278
 									dc.l	72826
 									dc.l	72826
 									dc.l	72826
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73112
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
-									dc.l	73401
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73113
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
+									dc.l	73402
 									dc.l	73693
 									dc.l	73693
 									dc.l	73693
@@ -3059,39 +3059,39 @@ table12517HzScaler					dc.l	18278
 									dc.l	73693
 									dc.l	73693
 									dc.l	73693
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	73986
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
-									dc.l	74282
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	73987
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
+									dc.l	74283
 									dc.l	74581
 									dc.l	74581
 									dc.l	74581
@@ -3108,72 +3108,72 @@ table12517HzScaler					dc.l	18278
 									dc.l	74581
 									dc.l	74581
 									dc.l	74581
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	74881
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75184
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75490
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
-									dc.l	75798
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	74882
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75185
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75491
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
+									dc.l	75799
 									dc.l	76109
 									dc.l	76109
 									dc.l	76109
@@ -3191,24 +3191,24 @@ table12517HzScaler					dc.l	18278
 									dc.l	76109
 									dc.l	76109
 									dc.l	76109
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
-									dc.l	76422
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
+									dc.l	76423
 									dc.l	76738
 									dc.l	76738
 									dc.l	76738
@@ -3226,59 +3226,59 @@ table12517HzScaler					dc.l	18278
 									dc.l	76738
 									dc.l	76738
 									dc.l	76738
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77056
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77377
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
-									dc.l	77701
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77057
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77378
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
+									dc.l	77702
 									dc.l	78028
 									dc.l	78028
 									dc.l	78028
@@ -3351,43 +3351,43 @@ table12517HzScaler					dc.l	18278
 									dc.l	79024
 									dc.l	79024
 									dc.l	79024
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79361
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
-									dc.l	79702
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79362
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
+									dc.l	79703
 									dc.l	80046
 									dc.l	80046
 									dc.l	80046
@@ -3407,25 +3407,25 @@ table12517HzScaler					dc.l	18278
 									dc.l	80046
 									dc.l	80046
 									dc.l	80046
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
-									dc.l	80392
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
+									dc.l	80393
 									dc.l	80742
 									dc.l	80742
 									dc.l	80742
@@ -3445,25 +3445,25 @@ table12517HzScaler					dc.l	18278
 									dc.l	80742
 									dc.l	80742
 									dc.l	80742
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
-									dc.l	81094
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
+									dc.l	81095
 									dc.l	81450
 									dc.l	81450
 									dc.l	81450
@@ -3543,67 +3543,67 @@ table12517HzScaler					dc.l	18278
 									dc.l	82536
 									dc.l	82536
 									dc.l	82536
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	82904
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83276
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
-									dc.l	83651
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	82905
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83277
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
+									dc.l	83652
 									dc.l	84030
 									dc.l	84030
 									dc.l	84030
@@ -3646,48 +3646,48 @@ table12517HzScaler					dc.l	18278
 									dc.l	84412
 									dc.l	84412
 									dc.l	84412
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	84797
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
-									dc.l	85186
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	84798
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
+									dc.l	85187
 									dc.l	85579
 									dc.l	85579
 									dc.l	85579
@@ -3753,28 +3753,28 @@ table12517HzScaler					dc.l	18278
 									dc.l	86375
 									dc.l	86375
 									dc.l	86375
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
-									dc.l	86778
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
+									dc.l	86779
 									dc.l	87186
 									dc.l	87186
 									dc.l	87186
@@ -3797,98 +3797,98 @@ table12517HzScaler					dc.l	18278
 									dc.l	87186
 									dc.l	87186
 									dc.l	87186
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	87597
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88012
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88431
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
-									dc.l	88854
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	87598
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88013
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88432
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
+									dc.l	88855
 									dc.l	89282
 									dc.l	89282
 									dc.l	89282
@@ -3936,78 +3936,78 @@ table12517HzScaler					dc.l	18278
 									dc.l	89713
 									dc.l	89713
 									dc.l	89713
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90148
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	90588
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
-									dc.l	91032
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90149
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	90589
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
+									dc.l	91033
 									dc.l	91481
 									dc.l	91481
 									dc.l	91481
@@ -4319,34 +4319,34 @@ table12517HzScaler					dc.l	18278
 									dc.l	96722
 									dc.l	96722
 									dc.l	96722
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
-									dc.l	97228
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
+									dc.l	97229
 									dc.l	97740
 									dc.l	97740
 									dc.l	97740
@@ -4375,34 +4375,34 @@ table12517HzScaler					dc.l	18278
 									dc.l	97740
 									dc.l	97740
 									dc.l	97740
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
-									dc.l	98257
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
+									dc.l	98258
 									dc.l	98780
 									dc.l	98780
 									dc.l	98780
@@ -4519,36 +4519,36 @@ table12517HzScaler					dc.l	18278
 									dc.l	100382
 									dc.l	100382
 									dc.l	100382
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
-									dc.l	100927
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
+									dc.l	100928
 									dc.l	101479
 									dc.l	101479
 									dc.l	101479
@@ -4579,37 +4579,37 @@ table12517HzScaler					dc.l	18278
 									dc.l	101479
 									dc.l	101479
 									dc.l	101479
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
-									dc.l	102036
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
+									dc.l	102037
 									dc.l	102600
 									dc.l	102600
 									dc.l	102600
@@ -4672,69 +4672,69 @@ table12517HzScaler					dc.l	18278
 									dc.l	103170
 									dc.l	103170
 									dc.l	103170
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	103746
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
-									dc.l	104329
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	103747
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
+									dc.l	104330
 									dc.l	104919
 									dc.l	104919
 									dc.l	104919
@@ -4934,41 +4934,41 @@ table12517HzScaler					dc.l	18278
 									dc.l	107969
 									dc.l	107969
 									dc.l	107969
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
-									dc.l	108600
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
+									dc.l	108601
 									dc.l	109239
 									dc.l	109239
 									dc.l	109239
@@ -5004,419 +5004,419 @@ table12517HzScaler					dc.l	18278
 									dc.l	109239
 									dc.l	109239
 									dc.l	109239
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	109885
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	110539
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111201
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	111871
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	112549
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113235
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	113930
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	114633
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	115345
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116066
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
-									dc.l	116796
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	109886
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	110540
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111202
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	111872
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	112550
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113236
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	113931
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	114634
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	115346
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116067
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
+									dc.l	116797
 									dc.l	117536
 									dc.l	117536
 									dc.l	117536
@@ -5458,173 +5458,173 @@ table12517HzScaler					dc.l	18278
 									dc.l	117536
 									dc.l	117536
 									dc.l	117536
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	118284
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119042
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	119810
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
-									dc.l	120588
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	118285
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119043
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	119811
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
+									dc.l	120589
 									dc.l	121377
 									dc.l	121377
 									dc.l	121377
@@ -5668,139 +5668,139 @@ table12517HzScaler					dc.l	18278
 									dc.l	121377
 									dc.l	121377
 									dc.l	121377
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122175
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	122984
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
-									dc.l	123804
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122176
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	122985
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
+									dc.l	123805
 									dc.l	124635
 									dc.l	124635
 									dc.l	124635
@@ -5846,52 +5846,52 @@ table12517HzScaler					dc.l	18278
 									dc.l	124635
 									dc.l	124635
 									dc.l	124635
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
-									dc.l	125477
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
+									dc.l	125478
 									dc.l	126331
 									dc.l	126331
 									dc.l	126331
@@ -5986,54 +5986,54 @@ table12517HzScaler					dc.l	18278
 									dc.l	127196
 									dc.l	127196
 									dc.l	127196
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
-									dc.l	128073
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
+									dc.l	128074
 									dc.l	128963
 									dc.l	128963
 									dc.l	128963
@@ -6083,55 +6083,55 @@ table12517HzScaler					dc.l	18278
 									dc.l	128963
 									dc.l	128963
 									dc.l	128963
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
-									dc.l	129864
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
+									dc.l	129865
 									dc.l	130779
 									dc.l	130779
 									dc.l	130779
@@ -6233,58 +6233,58 @@ table12517HzScaler					dc.l	18278
 									dc.l	131707
 									dc.l	131707
 									dc.l	131707
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
-									dc.l	132647
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
+									dc.l	132648
 									dc.l	133602
 									dc.l	133602
 									dc.l	133602
@@ -6498,61 +6498,61 @@ table12517HzScaler					dc.l	18278
 									dc.l	136549
 									dc.l	136549
 									dc.l	136549
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
-									dc.l	137560
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
+									dc.l	137561
 									dc.l	138587
 									dc.l	138587
 									dc.l	138587
@@ -6724,65 +6724,65 @@ table12517HzScaler					dc.l	18278
 									dc.l	140687
 									dc.l	140687
 									dc.l	140687
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
-									dc.l	141760
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
+									dc.l	141761
 									dc.l	142851
 									dc.l	142851
 									dc.l	142851
@@ -6843,188 +6843,188 @@ table12517HzScaler					dc.l	18278
 									dc.l	142851
 									dc.l	142851
 									dc.l	142851
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	143958
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	145083
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
-									dc.l	146225
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	143959
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	145084
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
+									dc.l	146226
 

@@ -10,25 +10,36 @@ mixer_vbl:
 ; --- anything else				master volume to +0dB, skip audio buffer
 
 	move.w		#%10011101000,d0															; master volume = +0dB
+
 	tst.w		$707c4																		; check game state flag
-	beq.s		labelDMAAudioOn															; if not zero, then in game
+	beq.s		labelDMAAudioOn																; if not zero, then race in progress
 
-	move.w		$7cce6,d1																	; otherwise not in game, so fetch out of game state machine
+	tst.w		$7d33a																		; otherwise, check screen palette fade counter
+	bne.s		labelClearSoundEventLatchFalse
 
-;	cmp.w		#1,d1																		; check if on Magnetic Fields intro screen (to do later)
+	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
+	bra			labelFinishedAudio
+
+labelClearSoundEventLatchFalse
+	move.w		$7cce6,d1																	; fetch state machine value
+
+;	cmp.w		#1,d1																		; check if on Magnetic Fields intro screen (to do later if possible)
 ;	bne.s		labelCheckIfAudioInStereoScreen or similar...
 
 	cmp.w		#$29,d1																		; check if on stereo screen
 	bne.s		labelDMAAudioOff															; if not, then set master volume to +0dB and don't mix any dma sound
 
 	tst.w		$7cd56																		; otherwise check if engine sound (0) or music track (1-4) is selected
-	beq.s		labelDMAAudioOn															; if track is engine, then use dma sound
+	beq.s		labelDMAAudioOn																; if track is engine, then use dma sound
 
 labelDMAAudioOff
-	jsr			write_microwire																; otherwise set master volume to +0dB
+	jsr			write_microwire																; set master volume to +0dB
 	bra			labelFinishedAudio															; and end
 
 labelDMAAudioOn
+	tst.w		$7cd62																		; test if 1 or 2 player game (0 = 1 player, 1 = 2 player)
+	bne.s		labelFinishedVolumeCheck													; if 2 player then don't fade sound
+
 	move.w		$72002,d1																	; fetch ausevol
 	cmp.w		#63,d1																		; is it at full volume? if so then no need to change master volume
 	beq.s		labelFinishedVolumeCheck
@@ -44,8 +55,12 @@ labelFinishedVolumeCheck
 
 	lea.l		$ffff8900.w,a0																; dma audio registers base address
 
+	move.w		$7cce6,d1																	; fetch state machine value
+	cmp.w		#$0b,d1
+	beq.s		label2PlayerSound															; if race in progress and 'car close-up' was the most recent state, then do 2P sounds
+
 	tst.w		$7cd62																		; test if 1 or 2 player game (0 = 1 player, 1 = 2 player)
-	beq.s			label1PlayerSound
+	beq.s		label1PlayerSound
 
 label2PlayerSound
 	tst.w		variableSoundEventLatch
