@@ -1521,3 +1521,8 @@ can we nop this out?
 nopping this out seems to disable all engine sound and fx!
 (but maybe that's what we want in the long run?)
 (this seems not to break the YM music - bonus!)
+
+- we have two entry points into gameplay
+1) the car
+1) the demo
+

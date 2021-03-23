@@ -1,6 +1,8 @@
 
     ORG $80000
 
+    include "lz4_decode.s"
+    include "load_samples.s"
     include "generated/road.s"
     include "init_draw_road.s"
     include "blitter_sprites.s"

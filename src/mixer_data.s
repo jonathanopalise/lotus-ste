@@ -1,5 +1,5 @@
 ; --- data and tables
-dataSounds							incbin		samples/lotus-sounds.snd								
+dataSounds							incbin		samples/lotus-intro.snd								
 
     align 1
 tableSoundEvents					dc.l    dataSounds+8473+5144+7927+6351+2354+4647+10481					; 'engine' address
