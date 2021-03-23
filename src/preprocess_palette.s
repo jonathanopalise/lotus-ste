@@ -11,6 +11,10 @@ map_palette_data:
 
 preprocess_palette:
 
+    movem.l d0-d7/a0-a6,-(sp)
+    jsr load_samples
+    movem.l	(sp)+,d0-d7/a0-a6
+
     ; these first two lines were previously located at $744ba and have been displaced
     ; by the jsr instruction to this routine
     move.w    (a0)+,d7
