@@ -23,9 +23,6 @@ mixer_vbl:
 labelClearSoundEventLatchFalse
 	move.w		$7cce6,d1																	; fetch state machine value
 
-;	cmp.w		#1,d1																		; check if on Magnetic Fields intro screen (to do later if possible)
-;	bne.s		labelCheckIfAudioInStereoScreen or similar...
-
 	cmp.w		#$29,d1																		; check if on stereo screen
 	bne.s		labelDMAAudioOff															; if not, then set master volume to +0dB and don't mix any dma sound
 

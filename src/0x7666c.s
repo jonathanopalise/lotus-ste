@@ -158,7 +158,7 @@ init_lotus:
 
 
     ; needs to be replaced with the init call for junosix mixer
-    jsr mixer_init
+;    jsr mixer_init
 
     ; existing lotus code
 

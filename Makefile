@@ -25,6 +25,7 @@ GENERIC_CARS_REL_PATCHES =\
 	$(BIN_DIR)0x70896.bin\
 	$(BIN_DIR)0x709b2.bin\
 	$(BIN_DIR)0x70be2.bin\
+	$(BIN_DIR)0x70d6c.bin\
 	$(BIN_DIR)0x71938.bin\
 	$(BIN_DIR)0x71ce6.bin\
 	$(BIN_DIR)0x72abc.bin\
