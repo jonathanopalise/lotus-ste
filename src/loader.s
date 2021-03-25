@@ -21,7 +21,7 @@
 	trap	#1
 	addq.l	#8,sp	; Handle in d0
 
-	move.l	#$70400,-(sp)	; Load address
+	move.l	#$23b00,-(sp)	; Load address
 	move.l	#61800,-(sp)	; Length
 	move.w	d0,-(sp)
 	move.w	#$3f,-(sp)	; Read
@@ -31,6 +31,11 @@
     ; grazey code START
 
     ;bclr #5,$fffffa09.w
+
+    ; decompress
+    move.l #$23b00,a0
+    lea $70400,a1
+    jsr lz4_decode
 
     ; grazey code END
 
@@ -47,7 +52,7 @@
 
 	jmp	$70400	; Do it!
 
-filename	dc.b	"cars.rel",0
+filename	dc.b	"cars.lz4",0
 
     align 2
 
@@ -166,6 +171,8 @@ end_graphics_loop:
 
 endless_loop:
     bra endless_loop
+
+    include "lz4_decode.s"
 
 system_check_graphics:
     include "generated/system_check_graphics.s"
