@@ -1,3 +1,3 @@
-    move.w	(a0)+,d7
+    moveq.l	#5,d0
 
 

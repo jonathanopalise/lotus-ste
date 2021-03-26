@@ -11,15 +11,15 @@ const COLOUR_DARK_ASPHALT = 15;   // 1111
 const COLOUR_GRASS_2 = 14;        // 1110
 
 
-$rumbleStripColour = COLOUR_WHITE;        // 0110
-$roadLinesColour = COLOUR_WHITE;          // 0110
-$asphaltColour = COLOUR_LIGHT_ASPHALT;    // 1101
-$grassColour = COLOUR_GRASS_1;            // 1100
+$rumbleStripColour = COLOUR_WHITE;        // 0110 -> 1101
+$roadLinesColour = COLOUR_WHITE;          // 0110 -> 1101
+$asphaltColour = COLOUR_LIGHT_ASPHALT;    // 1101 -> 1101
+$grassColour = COLOUR_GRASS_1;            // 1100 -> 1100
 
-$rumbleStripColour = COLOUR_RED;          // 0010
-$roadLinesColour = COLOUR_DARK_ASPHALT;   // 1111
-$asphaltColour = COLOUR_DARK_ASPHALT;     // 1111
-$grassColour = COLOUR_GRASS_2;            // 1110
+$rumbleStripColour = COLOUR_RED;          // 0010 -> 1111
+$roadLinesColour = COLOUR_DARK_ASPHALT;   // 1111 -> 1111
+$asphaltColour = COLOUR_DARK_ASPHALT;     // 1111 -> 1111
+$grassColour = COLOUR_GRASS_2;            // 1110 -> 1110
 
 function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneIndex) {
     $bitplanes = [
