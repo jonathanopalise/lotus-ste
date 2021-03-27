@@ -1526,3 +1526,13 @@ nopping this out seems to disable all engine sound and fx!
 1) the car
 1) the demo
 
+
+cheat flag: 7d3d8
+
+is this the code for alaska/australia?
+		cmp.w	#$2,whichdiff
+		bne.s	.oknow
+		cmp.w	#$3,whichraceno
+		beq	.skipbumps
+		cmp.w	#$c,whichraceno
+		beq	.skipbumps

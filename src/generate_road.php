@@ -15,11 +15,19 @@ $rumbleStripColour = COLOUR_WHITE;        // 0110 -> 1101
 $roadLinesColour = COLOUR_WHITE;          // 0110 -> 1101
 $asphaltColour = COLOUR_LIGHT_ASPHALT;    // 1101 -> 1101
 $grassColour = COLOUR_GRASS_1;            // 1100 -> 1100
+// bitplane 0: hardcode to 1
+// bitplane 1: hardcode to 1
+// bitplane 2: hardcode to 0
+// bitplane 3: copy
 
 $rumbleStripColour = COLOUR_RED;          // 0010 -> 1111
 $roadLinesColour = COLOUR_DARK_ASPHALT;   // 1111 -> 1111
 $asphaltColour = COLOUR_DARK_ASPHALT;     // 1111 -> 1111
 $grassColour = COLOUR_GRASS_2;            // 1110 -> 1110
+// bitplane 0: hardcode to 1
+// bitplane 1: hardcode to 1
+// bitplane 2: hardcode to 1
+// bitplane 3: copy
 
 function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneIndex) {
     $bitplanes = [

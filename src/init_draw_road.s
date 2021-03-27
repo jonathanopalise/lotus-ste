@@ -1,3 +1,6 @@
+show_road_markings:
+    dc.w 0
+
 initdrawroad:
     lea $ffff8a20.w,a5
     move.w d4,$76688
@@ -22,6 +25,7 @@ initdrawroad:
     move.l a0,usp
     lea.l gfx_data,a0
     move.l a0,d6
+    move.w #0,show_road_markings
     rts
 
 
