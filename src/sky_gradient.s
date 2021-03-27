@@ -50,7 +50,7 @@ solid_lines_required_zero_or_less:
 
     ; $initialGradientRgb = $gradientLookup[$gradientYAtScreenTop >> 2];
     lsr.w #2,d0
-    lsl.w #1,d0
+    add.w d0,d0
     ext.l d0
     add.l #gradient_rgb_values,d0 ; d0 is now start gradient address
 
@@ -83,8 +83,8 @@ lines_remaining_greater_than_4:
     move.l d0,current_gradient_address
     move.l d0,a0
 
-    move.l    (a0),a0 ; there must be a better way than all this indirection
-    move.w    a0,$ffff825e.w
+    ;move.l    (a0),a0 ; there must be a better way than all this indirection
+    move.w    (a0),$ffff825e.w
 
     move.b    #0,$fffffa1b.w
     move.b    d1,$fffffa21.w ; new routine after
@@ -168,10 +168,11 @@ new_raster_routine:
     move.w    #$2700,sr
     move.l    a0,-(sp)
     add.l     #2,current_gradient_address
-    lea.l     current_gradient_address,a0
-    move.l    (a0),a0
-    move.w    (a0),a0
-    move.w    a0,$ffff825e.w
+    ;lea.l     current_gradient_address,a0
+    ;move.l    (a0),a0
+    move.l    current_gradient_address,a0
+    ;move.w    (a0),a0
+    move.w    (a0),$ffff825e.w
     move.l    (sp)+,a0
     move.w    #$2300,sr
     move.b    #0,$fffffa1b.w
