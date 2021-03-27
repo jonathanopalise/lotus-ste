@@ -83,6 +83,8 @@ line_type_2:
 
 not_the_pits_2:
 
+    ; this is the codepath for the spans with the white lines
+
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
     move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
@@ -202,22 +204,25 @@ alt_not_the_pits_2:
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
-    move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    ; this is the codepath for the stripes containing white road lines
 
-    move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
-
-    move.w #$f,$ffff8a3a.w   ; third bitplane is always all 1's so no read required
-    move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
-    move.w #$203,$ffff8a3a.w ; restore read/write mode
-
-    addq.l #6,a0
+    addq.l #4,a0
     move.l a0,(a3)           ; advance source address to final bitplane
+    move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d4,(a6)           ; start blitter for one bitplane
+
+    move.w #$0,$ffff8a3a.w   ; third bitplane all zeroes
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d4,(a6)           ; start blitter for one bitplane
+
+    move.w #$f,$ffff8a3a.w ; restore read/write mode
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d4,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
+    move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
 
     lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter

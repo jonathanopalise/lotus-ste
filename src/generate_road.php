@@ -13,6 +13,7 @@ const COLOUR_GRASS_2 = 14;        // 1110
 
 $rumbleStripColour = COLOUR_WHITE;        // 0110 -> 1101
 $roadLinesColour = COLOUR_WHITE;          // 0110 -> 1101
+$roadLinesColour = COLOUR_GREY;           // 0101 -> 1101
 $asphaltColour = COLOUR_LIGHT_ASPHALT;    // 1101 -> 1101
 $grassColour = COLOUR_GRASS_1;            // 1100 -> 1100
 // bitplane 0: hardcode to 1
@@ -38,6 +39,8 @@ function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneInd
     ];
 
     foreach ($pixel_colours as $pixel_colour) {
+        $pixel_colour = transformPixelColour($pixel_colour);
+
         $bitplanes[3][] = ($pixel_colour & 8) ? 1: 0;
         $bitplanes[2][] = ($pixel_colour & 4) ? 1: 0;
         $bitplanes[1][] = ($pixel_colour & 2) ? 1: 0;
@@ -54,34 +57,25 @@ function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneInd
         }
     }
 
-
-    /*$planar_pixels=array();
-	for ($span_pixel_x=0; $span_pixel_x<8; $span_pixel_x++) {
-		$planar_pixels[$span_pixel_x]=0;
-	}
-
-	$planar_representation=0;
-	for ($span_pixel_x=0; $span_pixel_x<16; $span_pixel_x++) {
-		if ($span_pixel_x>7) {
-			$start_offset=0;
-		} else {
-			$start_offset=1;
-		}
-		$shift=$span_pixel_x&7;
-
-		$pixel_colour=$pixel_colours[15-$span_pixel_x];
-		$plane_0=$pixel_colour&1;
-		$plane_1=($pixel_colour&2)>>1;
-		$plane_2=($pixel_colour&4)>>2;
-		$plane_3=($pixel_colour&8)>>3;
-
-		$planar_pixels[$start_offset]|=($plane_0<<$shift);
-		$planar_pixels[$start_offset+2]|=($plane_1<<$shift);
-		$planar_pixels[$start_offset+4]|=($plane_2<<$shift);
-		$planar_pixels[$start_offset+6]|=($plane_3<<$shift);
-    }*/
-
     return $planar_pixels;
+}
+
+function transformPixelColour($colour) {
+    $transformations = [
+        COLOUR_WHITE => COLOUR_WHITE,
+        COLOUR_GREY => COLOUR_GREY,
+        COLOUR_LIGHT_ASPHALT => COLOUR_LIGHT_ASPHALT,
+        COLOUR_GRASS_1 => (COLOUR_GRASS_1 & 11),
+        COLOUR_RED => COLOUR_RED,
+        COLOUR_DARK_ASPHALT => COLOUR_DARK_ASPHALT,
+        COLOUR_GRASS_2 => (COLOUR_GRASS_2 & 13),
+    ];
+
+    if (!isset($transformations[$colour])) {
+        throw new \Exception('Transformation not defined for colour '.$colour);
+    }
+
+    return $transformations[$colour];
 }
 
 function convertPixelColoursToOutputBytes(array $pixelColours, $ignoreBitplaneIndex) {
