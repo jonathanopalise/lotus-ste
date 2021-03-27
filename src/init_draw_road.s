@@ -1,3 +1,6 @@
+show_road_markings:
+    dc.w 0
+
 initdrawroad:
     lea $ffff8a20.w,a5
     move.w d4,$76688
