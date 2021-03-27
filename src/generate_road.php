@@ -190,6 +190,14 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
     }
 }
 
+$pixelColours = array_fill(0, 16, COLOUR_GRASS_2);
+for ($index = 0; $index < 11; $index++) {
+    $outputBytes = array_merge(
+        $outputBytes,
+        convertPixelColoursToOutputBytes($pixelColours, $ignoreBitplaneIndex)
+    );
+}
+
 echo("byte_offsets:\n");
 foreach ($byteOffsets as $byteOffset) {
     echo("    dc.l " . $byteOffset . "\n");
