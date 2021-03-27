@@ -11,6 +11,8 @@ map_palette_data:
 
 preprocess_palette:
 
+    jsr determine_road_markings
+
     movem.l d0-d7/a0-a6,-(sp)
     jsr load_samples
     movem.l	(sp)+,d0-d7/a0-a6
@@ -60,4 +62,17 @@ convert_palette_entry:
     or.w d1,d0
     rts
 
+determine_road_markings:
+    move.w #1,show_road_markings
+    cmp.w #2,$7cd5a ; whichdiff
+    bne.s end_determine_road_markings
+    cmp.w #3,$7d07e ; race number
+    beq.s disable_road_markings
+    cmp.w #$c,$7d07e ; race number
+    beq.s disable_road_markings
+    bra.s end_determine_road_markings
+disable_road_markings:
+    clr.w show_road_markings
+end_determine_road_markings:
+    rts
 

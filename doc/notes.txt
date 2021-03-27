@@ -1536,3 +1536,37 @@ is this the code for alaska/australia?
 		beq	.skipbumps
 		cmp.w	#$c,whichraceno
 		beq	.skipbumps
+
+is this code around 71e70 on st?
+
+$00071e64 : 0c79 0003 0007 d07e                cmpi.w    #3,$7d07e
+$00071e6c : 6700 00f6                          beq       $71f64
+$00071e70 : 0c79 000c 0007 d07e                cmpi.w    #$c,$7d07e
+$00071e78 : 6700 00ea                          beq       $71f64
+
+possible candidates for whichdiff:
+
+$00075e4c : 0c79 0002 0007 5dea                cmpi.w    #2,$75dea
+$00075eac : 0c79 0002 0007 5dea                cmpi.w    #2,$75dea
+
+possible candidates for whichdiff:
+- 75dea
+- 7cd58 - appears to be the currently selected line on the game options screen
+- 7cd5a - this looks to be whichdiff
+
+so we need something like this:
+
+; road markings by default
+determine_road_markings:
+    move.w #1,show_road_markings
+    cmp.w #2,$7cd5a ; whichdiff
+    bne.s end_determine_road_markings
+    cmp.w #3,$7d07e ; race number
+    beq.s disable_road_markings
+    cmp.w #$c,$7d07e ; race number
+    beq.s disable_road_markings
+    bra.s end_determine_road_markings
+disable_road_markings:
+    clr.w show_road_markings
+end_determine_road_markings:
+    rts
