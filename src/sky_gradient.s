@@ -83,7 +83,6 @@ lines_remaining_greater_than_4:
     move.l d0,current_gradient_address
     move.l d0,a0
 
-    ;move.l    (a0),a0 ; there must be a better way than all this indirection
     move.w    (a0),$ffff825e.w
 
     move.b    #0,$fffffa1b.w
@@ -127,7 +126,7 @@ solid_lines_required_greater_than_zero:
     lea gradient_rgb_values,a0
     move.l a0,current_gradient_address
 
-    move.b    #0,$fffffa1b.w
+    clr.b     $fffffa1b.w
     move.b    d1,$fffffa21.w ; new routine after
     move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,$0120.w
@@ -141,7 +140,7 @@ legacy:
 
     ; this is the old code
 
-    move.b    #0,$fffffa1b.w
+    clr.b    $fffffa1b.w
 post_vbl_timer_b_lines_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
@@ -168,14 +167,11 @@ new_raster_routine:
     move.w    #$2700,sr
     move.l    a0,-(sp)
     add.l     #2,current_gradient_address
-    ;lea.l     current_gradient_address,a0
-    ;move.l    (a0),a0
     move.l    current_gradient_address,a0
-    ;move.w    (a0),a0
     move.w    (a0),$ffff825e.w
     move.l    (sp)+,a0
     move.w    #$2300,sr
-    move.b    #0,$fffffa1b.w
+    clr.b     $fffffa1b.w
     move.b    #4,$fffffa21.w
     move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,$0120.w
@@ -184,7 +180,7 @@ new_raster_routine:
 
 final_bar:
 
-    move.b    #0,$fffffa1b.w
+    clr.b     $fffffa1b.w
 final_bar_line_count_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
