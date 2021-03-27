@@ -155,22 +155,22 @@ alt_not_the_pits_1:
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
+    addq.l #2,a0
+    move.l a0,(a3)           ; advance source address to final bitplane
+    move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
 
-    move.w #$f,$ffff8a3a.w   ; second bitplane is always all 1's so no read required
+    move.w #$f,$ffff8a3a.w   ; third bitplane all zeroes
     move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
-    move.w #$203,$ffff8a3a.w ; restore read/write mode
 
-    addq.l #4,a0
-    move.l a0,(a3)           ; advance source address to third bitplane
-
-    move.w d5,(a5)           ; ycount
+    move.w d5,(a5)           ; set ycount in blitter
     move.w d4,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; ycount
     move.w d4,(a6)           ; start blitter for one bitplane
+    move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
 
     lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
