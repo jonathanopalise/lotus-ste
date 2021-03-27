@@ -25,7 +25,7 @@ preprocess_palette:
     move.l a0,-(a7)            ; back up a0
 
     move.w #15,d6
-    add.l #26,a0
+    add.l #24,a0
     lea solid_sky_rgb_value,a1
 
 transfer_gradient_step:

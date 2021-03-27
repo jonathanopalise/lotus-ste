@@ -16,6 +16,10 @@ gradient_rgb_values:
     dc.w $ff9
     dc.w $ff9
     dc.w $ff9
+    dc.w $555
+    dc.w $555
+    dc.w $555
+    dc.w $555
 
 bars_lookup:
     dc.b 4
