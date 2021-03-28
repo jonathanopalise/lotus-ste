@@ -11,19 +11,16 @@
 
     include generated/symbols_0x80000.inc
 
-    movem.l     d0/a0,-(sp)
+    movem.l     d0-d1/a0,-(sp)
 
     move.w      $7097c,d0                                           ; fetch new sound event ID
     and.w       #7,d0                                               ; mask off garbage bits - ID is now between 1 and 7
     cmp.w       variableSoundEventLatch,d0                        ; compare with current sound event ID (either between 1 and 7, or $ffff (no current sound event))
     blo.s       labelCreateNewSoundEvent                            ; if new sound event ID value is lower (i.e. higher priority) then create new sound event
 
-    move.w      variableSoundEventPosition,d0                     ; otherwise, check current sound event position
-    cmp.w       variableSoundEventRetrigPeriod,d0                 ; check position against sound event retrig period
+    move.w      variableSoundEventPosition,d1                     ; otherwise, check current sound event position
+    cmp.w       variableSoundEventRetrigPeriod,d1                 ; check position against sound event retrig period
     blo.s       labelFinishedSoundEventCheck                        ; if current sound event position is lower than retrig period then don't retrigger the sound
-
-    move.w      #0,variableSoundEventPosition                     ; otherwise, reset sample offset position
-    bra.s       labelFinishedSoundEventCheck                        ; job done
 
 labelCreateNewSoundEvent
     move.w      d0,variableSoundEventLatch                        ; store sound event ID
@@ -38,6 +35,6 @@ labelFinishedSoundEventCheck
 
     move.w      #$ffff,$7097c					    ; null the sound effect
 
-    movem.l     (sp)+,d0/a0
+    movem.l     (sp)+,d0-d1/a0
     rts
 
