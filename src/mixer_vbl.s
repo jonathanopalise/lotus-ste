@@ -17,8 +17,9 @@ mixer_vbl:
 	tst.w		$7d33a																		; otherwise, check screen palette fade counter
 	bne.s		labelClearSoundEventLatchFalse
 
+	move.w		#2000,$7cc3c																; set revs to 2000rpm
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
-	bra			labelFinishedAudio
+	bra.s		labelDMAAudioOff
 
 labelClearSoundEventLatchFalse
 	move.w		$7cce6,d1																	; fetch state machine value
