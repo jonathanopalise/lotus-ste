@@ -90,15 +90,16 @@ clean:
 	rm $(BIN_DIR)*.o || true
 	rm $(RELEASE_DISK_IMAGE) || true
 
-$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.LZ4 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SAMPLES.LZ4 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG
+$(RELEASE_DISK_IMAGE): $(GAMEFILES_DESTINATION_DIR)CARS.LZ4 $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4 $(GAMEFILES_DESTINATION_DIR)SAMPLES.LZ4 $(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG $(BIN_DIR)boot_sector.bin
 	rm $(RELEASE_DISK_IMAGE) || true
 	$(ZIP2ST) $(GAMEFILES_DESTINATION_DIR) $@
+	$(PHP) $(SOURCE_DIR)apply_boot_sector.php $(BIN_DIR)boot_sector.bin $@
 	@echo "*************************************************************"
 	@echo "Build complete. See $(RELEASE_DISK_IMAGE) for the disk image."
 	@echo "*************************************************************"
 
 $(GAMEFILES_DESTINATION_DIR)CARS.LZ4: $(CARS_REL_PATCHES) $(GAMEFILES_DESTINATION_DIR)
-	php $(SOURCE_DIR)generate_cars_rel.php $(GAMEFILES_DESTINATION_DIR)CARS.REL $(CARS_REL_PATCHES)
+	$(PHP) $(SOURCE_DIR)generate_cars_rel.php $(GAMEFILES_DESTINATION_DIR)CARS.REL $(CARS_REL_PATCHES)
 	$(LZ4) -9 $(GAMEFILES_DESTINATION_DIR)CARS.REL $@
 	rm $(GAMEFILES_DESTINATION_DIR)CARS.REL
 
@@ -143,19 +144,22 @@ $(BIN_DIR)0x80000.bin: $(SOURCE_DIR)0x80000.s $(0X80000_DEPENDENCIES)
 $(BIN_DIR)0x80000.o: $(SOURCE_DIR)0x80000.s $(0X80000_DEPENDENCIES) 
 	$(VASM) $< -Felf -o $@
 
+$(BIN_DIR)boot_sector.bin: $(SOURCE_DIR)boot_sector.s
+	$(VASM) $< -Fbin -o $@
+
 $(GENERATED_SOURCE_DIR)symbols_0x80000.inc: $(BIN_DIR)0x80000.o $(SOURCE_DIR)process_symbols.php
 	@echo "Process symbols..."
 	$(NM) $< > $(GENERATED_SOURCE_DIR)symbols_0x80000.txt
 	$(PHP) $(SOURCE_DIR)process_symbols.php $(GENERATED_SOURCE_DIR)symbols_0x80000.txt > $(GENERATED_SOURCE_DIR)symbols_0x80000.inc
 
 $(GENERATED_SOURCE_DIR)road.s: $(SOURCE_DIR)generate_road.php $(GENERATED_SOURCE_DIR)
-	php $< > $@
+	$(PHP) $< > $@
 
 $(GENERATED_SOURCE_DIR)system_check_palette.s: $(SOURCE_DIR)generate_palette.php $(SOURCE_DIR)system_check.raw.pal $(GENERATED_SOURCE_DIR)
-	php $< $(SOURCE_DIR)system_check.raw.pal > $@
+	$(PHP) $< $(SOURCE_DIR)system_check.raw.pal > $@
 
 $(GENERATED_SOURCE_DIR)system_check_graphics.s: $(SOURCE_DIR)generate_planar.php $(SOURCE_DIR)system_check.raw $(GENERATED_SOURCE_DIR)
-	php $< $(SOURCE_DIR)system_check.raw > $@
+	$(PHP) $< $(SOURCE_DIR)system_check.raw > $@
 
 $(GENERATED_SOURCE_DIR):
 	mkdir -p $@
