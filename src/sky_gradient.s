@@ -192,4 +192,26 @@ final_bar_line_count_instruction:
     bclr      #0,$fffffa0f.w
     rte
 
+p2_sky_line_count:
+    dc.b $0
+    dc.b $0 ; for padding
 
+p2_initialise_sky:
+    move.l #$70754,$70742 ; default normal codepath
+    cmp.w #8,d0
+    ble.s p2_sky_not_visible
+    move.l #p2_raster_routine,$70742 ; go to the new p2 sky routine if more than 8 lines
+    move.b d0,d1
+    sub.b #8,d1
+    move.b d1,p2_sky_line_count
+p2_sky_not_visible:
+    rts
+
+p2_raster_routine:
+    move.w #$ff0,$ffff825e.w
+    move.b #0,$fffffa1b.w
+    move.b p2_sky_line_count,$fffffa21.w ; number of lines
+    move.b #8,$fffffa1b.w
+    move.l #$70754,$0120.w
+    bclr #0,$fffffa0f.w
+    rte
