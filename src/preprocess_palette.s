@@ -32,6 +32,16 @@ transfer_gradient_step:
     jsr $74584
     dbra d6,transfer_gradient_step
 
+    ; copy the last colour a few more times to account for the sky gradient lag
+    subq.l #2,a0
+    jsr $74584
+    subq.l #2,a0
+    jsr $74584
+    subq.l #2,a0
+    jsr $74584
+    subq.l #2,a0
+    jsr $74584
+
     ; now transfer the road and roadside colours
 
     move.l (a7)+,a0            ; restore a0
