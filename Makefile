@@ -20,9 +20,11 @@ BIN_DIR = bin/
 GENERIC_CARS_REL_PATCHES =\
 	$(BIN_DIR)0x70572.bin\
 	$(BIN_DIR)0x70660.bin\
+	$(BIN_DIR)0x70734.bin\
 	$(BIN_DIR)0x7086e.bin\
 	$(BIN_DIR)0x70880.bin\
 	$(BIN_DIR)0x70896.bin\
+	$(BIN_DIR)0x708ba.bin\
 	$(BIN_DIR)0x709b2.bin\
 	$(BIN_DIR)0x70be2.bin\
 	$(BIN_DIR)0x70d6c.bin\
