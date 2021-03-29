@@ -12,7 +12,7 @@ This project is under development and no builds are currently available to end u
 * **Sound enhancements**: Junosix/AF (Jamie Hamshere)
 * **Loader and other technical assistance**: Grazey/PHF
 
-**Thanks to**: metalages/AF, masteries/AF
+**Thanks to**: masteries/AF (for providing the original sound mixer code, without which we might not have digital sound in this project), and metalages/AF (for ideas and discussion around the idea of a YM-based engine sound)
 
 _(AF = Atari-Forum - https://www.atari-forum.com/)_
 
@@ -43,7 +43,7 @@ Directory layout is as follows:
 
 ## How to build
 
-The build process is controlled by a `Makefile`. The `Makefile` is confirmed to work with Linux and OSX (thanks to [Rajesh Singh](https://github.com/shockdesign) for help with getting the build working on OSX). It could possibly be repurposed for Windows some changes - please get in touch if you can help. Before attempting to run the `Makefile`, you'll need to obtain the "Empire" crack of Lotus, which needs to obtained separately from the usual channels. The filename of this disk image is `Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Empire][a].st` and the md5sum is `942911068dd0a82debfba6d45d3370c4`.
+The build process is controlled by a `Makefile`. The `Makefile` is confirmed to work with Linux and OSX (thanks to [Rajesh Singh](https://github.com/shockdesign) for help with getting the build working on OSX). It could possibly be repurposed for Windows with some changes - please get in touch if you can help. Before attempting to run the `Makefile`, you'll need to obtain the "Empire" crack of Lotus, which needs to obtained separately from the usual channels. The filename of this disk image is `Lotus Esprit Turbo Challenge (1990)(Gremlin)[cr Empire][a].st` and the md5sum is `942911068dd0a82debfba6d45d3370c4`.
 
 Once the disk image has been obtained, the `gamefiles/source` directory needs to be populated with the contents of the root directory of the above disk image. This can be done by using the Hatari emulator (https://hatari.tuxfamily.org/) to map a Gemdos hard drive to a directory on the host machine, entering the GEM environment on the Atari ST, and copying the files from drive A: to drive C:, at which point they should appear on the filesystem of the host machine, within the directory assigned to the Gemdos hard drive. The files will then need to be copied from this location to the `gamefiles/source` directory.
 
