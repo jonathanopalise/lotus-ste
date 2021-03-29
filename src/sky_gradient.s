@@ -37,6 +37,8 @@ gradient_init:
     cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
     bne legacy
 
+    move.l #$70684,final_bar_vector_instruction+2
+
     move.w $7c59c,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
     add.w #21,d0
@@ -248,7 +250,7 @@ p2_initialise_sky_variables:
     movem.l d0-d4/a0,-(sp)
 
     move.l #$70754,p2_final_bar_vector_instruction_plus_2
-    move.w $7c59c,d0 ; gradient_y_at_screen_top
+    move.w $7c652,d0 ; gradient_y_at_screen_top
     asr.w #1,d0
     add.w #21,d0
 
