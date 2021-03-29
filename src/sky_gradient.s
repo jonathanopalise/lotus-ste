@@ -188,6 +188,7 @@ final_bar:
 final_bar_line_count_instruction:
     move.b    #$68,$fffffa21.w
     move.b    #8,$fffffa1b.w
+final_bar_vector_instruction:
     move.l    #$70684,$0120.w
     bclr      #0,$fffffa0f.w
     rte
@@ -365,10 +366,15 @@ p2_endvbl:
 ;----- END OF NEW CODE
 
 p2_raster_routine:
-    move.w #$ff0,$ffff825e.w
+    move.l p2_final_bar_vector_instruction_plus_2,final_bar_vector_instruction+2
+    move.b p2_final_bar_line_count_instruction_plus_3,final_bar_line_count_instruction+3
+    move.l p2_current_gradient_address,current_gradient_address
+    move.b p2_raster_count,raster_count
+
+    ;move.w #$ff0,$ffff825e.w
     move.b #0,$fffffa1b.w
-    move.b p2_sky_line_count,$fffffa21.w ; number of lines
+    move.b p2_new_routine_after_lines,$fffffa21.w ; number of lines
     move.b #8,$fffffa1b.w
-    move.l #$70754,$0120.w
+    move.l p2_new_routine_after_vector,$0120.w
     bclr #0,$fffffa0f.w
     rte
