@@ -299,9 +299,8 @@ p2_lines_remaining_greater_than_4:
     move.b d2,p2_final_bar_line_count_instruction_plus_3
     move.l d0,p2_current_gradient_address
     ; TODO: don't forget these lines below in the new handler
-    ;move.l d0,a0
-
-    ;move.w    (a0),$ffff825e.w
+    move.l d0,a0
+    move.w    (a0),p2_gradient_start_colour
 
     ;move.b    #0,$fffffa1b.w
     move.b    d1,p2_new_routine_after_lines ; new routine after
@@ -318,8 +317,7 @@ p2_lines_remaining_less_than_or_equal_to_4:
 
 p2_solid_lines_required_greater_than_zero:
 
-    ;lea solid_sky_rgb_value,a0
-    ;move.w (a0),$ffff825e.w
+    move.w solid_sky_rgb_value,p2_gradient_start_colour
 
     ; d1 is solidlinesrequired
     moveq.l #0,d2
@@ -372,8 +370,8 @@ p2_raster_routine:
     move.b p2_final_bar_line_count_instruction_plus_3,final_bar_line_count_instruction+3
     move.l p2_current_gradient_address,current_gradient_address
     move.b p2_raster_count,raster_count
+    move.w p2_gradient_start_colour,$ffff825e.w
 
-    ;move.w #$ff0,$ffff825e.w
     move.b #0,$fffffa1b.w
     move.b p2_new_routine_after_lines,$fffffa21.w ; number of lines
     move.b #8,$fffffa1b.w
