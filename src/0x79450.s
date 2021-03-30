@@ -30,14 +30,14 @@
 ;--------------------------------------------------------------------------------------------
 ; preshifting logic - shouldn't be necessary for blitter
 
-    andi.w    #$f,d0          ; preshift logic? redundant?
-    eori.w    #$f,d0          ; preshift logic? redundant?
-    lsr.w     #2,d0           ; preshift logic? redundant?
-    move.w    d0,d1           ; preshift logic 1 - redundant?
-    asl.w     #4,d1           ; preshift logic 2 - redundant?
-    sub.w     d0,d1           ; preshift logic 3 - redundant?
-    asl.w     #8,d1           ; preshift logic 4 - redundant?
-    adda.w    d1,a1           ; update source address (set preshifted version)
+    ;andi.w    #$f,d0          ; preshift logic? redundant?
+    ;eori.w    #$f,d0          ; preshift logic? redundant?
+    ;lsr.w     #2,d0           ; preshift logic? redundant?
+    ;move.w    d0,d1           ; preshift logic 1 - redundant?
+    ;asl.w     #4,d1           ; preshift logic 2 - redundant?
+    ;sub.w     d0,d1           ; preshift logic 3 - redundant?
+    ;asl.w     #8,d1           ; preshift logic 4 - redundant?
+    ;adda.w    d1,a1           ; update source address (set preshifted version)
 
 ;----------------------------------------------------------------------------------------------
 ; remainder of rendering code
