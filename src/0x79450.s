@@ -58,9 +58,10 @@
 
     move.w    $7c(a2),-(sp)   ; push the existing instruction onto the stack
     move.w    #$4e75,$7c(a2)  ; replace it with an rts
+label_794a8:
     jsr       (a2)            ; draw one line
     adda.w    #$78,a1         ; update source
-    dbra      d7,$794a8       ; next line
+    dbra      d7,label_794a8  ; next line
     move.w    (sp)+,$7c(a2)   ; restore previous instruction
 
     ; this final instruction should be at 0x794b6
