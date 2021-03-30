@@ -14,8 +14,8 @@
 ; -------------------------------------------------------------
 ; this block shouldn't be necessary when blitter code is put in
 
-    lea       $794ba,a2       ; base address of unrolled looop
-    adda.w    d1,a2           ; add starting point within unrolled loop
+    ;lea       $794ba,a2       ; base address of unrolled looop
+    ;adda.w    d1,a2           ; add starting point within unrolled loop
 
 ; ------------------------------------------
 ; update source address - y position (line)
@@ -56,48 +56,37 @@
 ;----------------------------------------------------------------------------------------------
 ; this is where we can start putting blitter support in
 
-    ;move.l    #060606060,a3
-    ;move.l    #060606060,a4
-    ;move.l #40404040,d2
-    ;move.l #40404040,d3
-
 mountain_blitter_init:
-    ;move.b #$c0,d2           ; linenum value
-    lea $ffff8a2e.w,a3       ; dest x increment address
-    move.w #8,(a3)+          ; dest x increment 8a2e
-    move.w #-150,(a3)+        ; dest y increment 8a30
-    move.l a3,a2             ; backup destination address 8a32
-    addq.l #4,a3
-    move.w #20,(a3)+         ; xcount 8a36
-    move.l a3,a4             ; a4 is now address of ycount (8a38)
-    addq.l #2,a3             ; a3 is now address of hop/op (8a3a)
-    move.w #$f,(a3)+         ; hop/op 8a3a, advance a3 to linenum 8a3c
-    ; a3 is now 8a3c
+    ;movem.l d0-d7/a0-a6,-(sp)
 
-    ;move.w    $7c(a2),-(sp)   ; push the existing instruction onto the stack
-    ;move.w    #$4e75,$7c(a2)  ; replace it with an rts
+    lea $ffff8a2e.w,a5       ; dest x increment address
+    move.w #8,(a5)+          ; dest x increment 8a2e
+    move.w #-150,(a5)+        ; dest y increment 8a30
+    move.l a5,a2             ; backup destination address 8a32
+    addq.l #4,a5
+    move.w #20,(a5)+         ; xcount 8a36
+    move.l a5,a4             ; a4 is now address of ycount (8a38)
+    addq.l #2,a5             ; a3 is now address of hop/op (8a3a)
+    move.w #$f,(a5)+         ; hop/op 8a3a, advance a3 to linenum 8a3c
+    ; a5 is now 8a3c
+
 label_794a8:
-    ;jsr       (a2)            ; draw one line
-
     move.l a0,(a2)           ; destination ffff8a36
-    move.w #1,(a4)           ; ycount ffff8a38 = 1 
-    move.b #$c0,(a3)         ; control 8a3c
+    move.w #1,(a4)           ; ycount ffff8a38 = 1 should be (a4)
+    move.b #$c0,(a5)         ; control 8a3c should be (a3)
     move.w #1,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a3)         ; control 8a3c
+    move.b #$c0,(a5)         ; control 8a3c
     move.w #1,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a3)         ; control 8a3c
+    move.b #$c0,(a5)         ; control 8a3c
     move.w #1,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a3)         ; control 8a3c
+    move.b #$c0,(a5)         ; control 8a3c
 
     ;adda.w    #$78,a1         ; update source
     adda.w    #160,a0         ; update destination
     dbra      d7,label_794a8  ; next line
-    ;move.w    (sp)+,$7c(a2)   ; restore previous instruction
 
     ; this final instruction should be at 0x794b6
+    ;movem.l (sp)+,d0-d7/a0-a6
     bra       $795aa          ; go to code after the unrolled loop (which will go on to render the sky)
-
-
-
 
 
