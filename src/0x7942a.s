@@ -1,8 +1,23 @@
 
-    ORG $79450
+    ORG $7942a
 
     include generated/symbols_0x80000.inc
 
+    beq       jump_to_795aa
+    movea.l   #$27800,a1
+    move.w    $58(a6),d1
+    andi.w    #$fff,d1
+    move.w    d1,d0
+    asl.w     #4,d1
+    sub.w     d0,d1
+    lsr.w     #6,d1
+label_79444:
+    cmp.w     #$140,d1
+    bcs.s     label_79450
+    subi.w    #$140,d1
+    bra.s     label_79444
+
+label_79450:
     move.w    d1,d0           ; this is the 0-319 value!
     lsr.w     #4,d1
     move.w    d1,d2
@@ -59,9 +74,13 @@
 mountain_blitter_init:
     ;movem.l d0-d7/a0-a6,-(sp)
 
-    lea $ffff8a2e.w,a5       ; dest x increment address
+    lea $ffff8a20.w,a5       ; source x increment 8a20
+    move.w #6,(a5)+          ; source x increment 8a20
+    move.w #-110,(a5)+       ; source y increment 8a22
+    ;move.l a5,a6             ; back up source address 8a24
+    lea 10(a5),a5
     move.w #8,(a5)+          ; dest x increment 8a2e
-    move.w #-150,(a5)+        ; dest y increment 8a30
+    move.w #-150,(a5)+       ; dest y increment 8a30
     move.l a5,a2             ; backup destination address 8a32
     addq.l #4,a5
     move.w #20,(a5)+         ; xcount 8a36
@@ -72,21 +91,30 @@ mountain_blitter_init:
 
 label_794a8:
     move.l a0,(a2)           ; destination ffff8a36
+    move.l a1,$ffff8a24.w      ; source
+    move.w #$0203,$ffff8a3a.w
+
     move.w #1,(a4)           ; ycount ffff8a38 = 1 should be (a4)
     move.b #$c0,(a5)         ; control 8a3c should be (a3)
-    move.w #1,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a5)         ; control 8a3c
-    move.w #1,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a5)         ; control 8a3c
+
     move.w #1,(a4)           ; ycount ffff8a38= 1
     move.b #$c0,(a5)         ; control 8a3c
 
-    ;adda.w    #$78,a1         ; update source
+    move.w #$f,$ffff8a3a.w
+    move.w #1,(a4)           ; ycount ffff8a38= 1
+    move.b #$c0,(a5)         ; control 8a3c
+
+    move.w #$0203,$ffff8a3a.w
+    move.w #1,(a4)           ; ycount ffff8a38= 1
+    move.b #$c0,(a5)         ; control 8a3c
+
+    adda.w    #120,a1         ; update source
     adda.w    #160,a0         ; update destination
     dbra      d7,label_794a8  ; next line
 
     ; this final instruction should be at 0x794b6
     ;movem.l (sp)+,d0-d7/a0-a6
+jump_to_795aa:
     bra       $795aa          ; go to code after the unrolled loop (which will go on to render the sky)
 
 
