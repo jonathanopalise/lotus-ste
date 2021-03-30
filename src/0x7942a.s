@@ -19,6 +19,10 @@ label_79444:
 
 label_79450:
     move.w    d1,d0           ; this is the 0-319 value!
+    move.w    d1,d3
+    neg.w     d3
+    subq.w    #1,d3
+    and.w     #15,d3
     lsr.w     #4,d1
     move.w    d1,d2
     add.w     d1,d1
@@ -89,6 +93,8 @@ mountain_blitter_init:
     move.w #$f,(a5)+         ; hop/op 8a3a, advance a3 to linenum 8a3c
     ; a5 is now 8a3c
 
+    ;temporarily kill skew
+    move.b d3,$ffff8a3d.w
 label_794a8:
     move.l a0,(a2)           ; destination ffff8a36
     move.l a1,$ffff8a24.w      ; source
