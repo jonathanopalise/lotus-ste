@@ -231,40 +231,7 @@ alt_not_the_pits_2:
 
     rts
 
-filename:
-    dc.b "A:0x80000.LZ4"
-    dc.b 0
-
-fhandle:
-    dc.w 0
-
 init_lotus:
-    ; 0x80000 - open file
-	move.w	#0,-(sp)
-	pea filename	 ; Pointer to Filename
-	move.w	#$3d,-(sp) 
-	trap	#1
-	addq.l	#8,sp
-	move.w	d0,fhandle
-
-    ; read file
-    move.l #$321c0,-(sp)
-    move.l    #200000,-(sp)   ; Offset 4
-    move.w    fhandle,-(sp)  ; Offset 2
-    move.w    #63,-(sp)     ; Offset 0
-    trap      #1            ; GEMDOS
-    lea       $C(sp),sp     ; Correct stack
-
-    ; close file
-	move.w	fhandle,-(sp)
-	move.w	#$3e,-(sp)
-	trap	#1
-	addq.l	#4,sp
-
-    ; decompress
-    move.l #$321c0,a0
-    move.l #$80000,a1
-    jsr bootstrap_lz4_decode
 
     ; needs to be replaced with the init call for junosix mixer
 ;    jsr mixer_init
