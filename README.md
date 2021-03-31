@@ -20,9 +20,10 @@ _(AF = Atari-Forum - https://www.atari-forum.com/)_
 
 * The road is rendered by the Blitter and features graphical details resembling those of the Amiga version;
 * All roadside scenery and cars are rendered by the blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
-* The background features a gradient of raster bars resembling those of the Amiga version (currently player 1 only);
+* The background mountains are rendered by the Blitter and scroll at single-pixel horizontal accuracy (as opposed to at 4 pixel intervals on the standard ST version);
+* The sky features a gradient of raster bars resembling those of the Amiga version;
 * The road and roadside colours are refined to leverage the enhanced STE colour palette;
-* Sampled sound effects and engine noise are present (currently player 1 only).
+* Sampled sound effects and engine noise are present.
 
 Possible forthcoming objectives for this project are as follows:
 
