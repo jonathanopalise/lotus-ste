@@ -228,7 +228,7 @@ this seems to change the source offset to the correct preshifted version
 $00079486 : d2c1                               adda.w    d1,a1
 examples of d1 at this location:
 - 0x0 (absolute 0x27800)
-- 0x0F00 (absolute 0x27800)
+- 0x0F00 (absolute 0x28700)
 - 0x1E00 (absolute 0x29600)
 - 0x2D00 (absolute 0x2a500)
 How much storage?
@@ -254,3 +254,145 @@ Questions:
 
 
 b ($7c59e).w ! ($7c59e).w :trace
+
+this gets called once
+$00073c4e : 23fc 0002 3b00 0007 d3+            move.l    #$23b00,$7d33e
+
+
+$00073de2 : b07c 0092                          cmp.w     #$92,d0
+(this corresponds to line 5240 in lotus1.s)
+
+
+this is called much later in the loading process
+$00073ad2 : 30e9 0a00                          move.w    $a00(a1),(a0)+
+it looks like it might belong to the mountain preshifting routine!
+
+$00073ad2 : 30e9 0a00                          move.w    $a00(a1),(a0)+
+$00073ad6 : d2fc 0002                          adda.w    #2,a1
+$00073ada : 51ce fff0                          dbra      d6,$73acc
+$00073ade : 3a3c 0003                          move.w    #3,d5
+$00073ae2 : 2279 0007 ccda                     movea.l   $7ccda,a1
+$00073ae8 : 3c3c 005f                          move.w    #$5f,d6
+$00073aec : 3029 0026                          move.w    $26(a1),d0
+$00073af0 : e248                               lsr.w     #1,d0
+$00073af2 : e4d9                               roxr      (a1)+
+$00073af4 : e4d9                               roxr      (a1)+
+$00073af6 : e4d9                               roxr      (a1)+
+$00073af8 : e4d9                               roxr      (a1)+
+$00073afa : e4d9                               roxr      (a1)+
+$00073afc : e4d9                               roxr      (a1)+
+$00073afe : e4d9                               roxr      (a1)+
+$00073b00 : e4d9                               roxr      (a1)+
+$00073b02 : e4d9                               roxr      (a1)+
+$00073b04 : e4d9                               roxr      (a1)+
+$00073b06 : e4d9                               roxr      (a1)+
+$00073b08 : e4d9                               roxr      (a1)+
+$00073b0a : e4d9                               roxr      (a1)+
+$00073b0c : e4d9                               roxr      (a1)+
+$00073b0e : e4d9                               roxr      (a1)+
+$00073b10 : e4d9                               roxr      (a1)+
+$00073b12 : e4d9                               roxr      (a1)+
+$00073b14 : e4d9                               roxr      (a1)+
+$00073b16 : e4d9                               roxr      (a1)+
+$00073b18 : e4d9                               roxr      (a1)+
+$00073b1a : 51ce ffd0                          dbra      d6,$73aec
+$00073b1e : 51cd ffc2                          dbra      d5,$73ae2
+$00073b22 : 51cf ff9e                          dbra      d7,$73ac2
+$00073b26 : 4e75                               rts       
+
+Is this the call to the mountains preshifting routine?
+$0007160a : 6100 244e                          bsr       $73a5a
+
+-----------------------------------------------------------------
+I think this sets up the mountain graphics:
+
+$00073a5a : 303c 0060                          move.w    #$60,d0
+$00073a5e : 2239 0007 ccda                     move.l    $7ccda,d1
+$00073a64 : 6100 0b6c                          bsr       $745d2
+$00073a68 : 2079 0007 ccda                     movea.l   $7ccda,a0
+$00073a6e : 227c 0002 3b00                     movea.l   #$23b00,a1
+$00073a74 : 45f9 0001 0000                     lea       $10000,a2
+$00073a7a : 6100 10b0                          bsr       $74b2c
+$00073a7e : 303c 0001                          move.w    #1,d0
+$00073a82 : c0fc 0500                          mulu.w    #$500,d0
+$00073a86 : 227c 0002 3b00                     movea.l   #$23b00,a1
+$00073a8c : d2c0                               adda.w    d0,a1
+$00073a8e : 2079 0007 ccda                     movea.l   $7ccda,a0
+$00073a94 : 7a02                               moveq     #2,d5
+$00073a96 : 7c1f                               moveq     #$1f,d6         ; 32 lines
+$00073a98 : 20d9                               move.l    (a1)+,(a0)+
+$00073a9a : 20d9                               move.l    (a1)+,(a0)+
+$00073a9c : 20d9                               move.l    (a1)+,(a0)+
+$00073a9e : 20d9                               move.l    (a1)+,(a0)+
+$00073aa0 : 20d9                               move.l    (a1)+,(a0)+
+$00073aa2 : 20d9                               move.l    (a1)+,(a0)+
+$00073aa4 : 20d9                               move.l    (a1)+,(a0)+
+$00073aa6 : 20d9                               move.l    (a1)+,(a0)+
+$00073aa8 : 20d9                               move.l    (a1)+,(a0)+
+$00073aaa : 20d9                               move.l    (a1)+,(a0)+     ; 10 long words, 20 words, 1 bitplane of 1 line
+$00073aac : 51ce ffea                          dbra      d6,$73a98
+$00073ab0 : d2fc 2d00                          adda.w    #$2d00,a1       ; this is the relative address of the last preshifted version from the base data
+$00073ab4 : 51cd ffe0                          dbra      d5,$73a96
+$00073ab8 : 3e3c 0003                          move.w    #3,d7
+$00073abc : 41f9 0002 7800                     lea       $27800,a0       ; this is the address of the base data
+$00073ac2 : 2279 0007 ccda                     movea.l   $7ccda,a1
+$00073ac8 : 3c3c 027f                          move.w    #$27f,d6
+$00073acc : 30d1                               move.w    (a1),(a0)+
+$00073ace : 30e9 0500                          move.w    $500(a1),(a0)+
+$00073ad2 : 30e9 0a00                          move.w    $a00(a1),(a0)+
+$00073ad6 : d2fc 0002                          adda.w    #2,a1
+$00073ada : 51ce fff0                          dbra      d6,$73acc
+$00073ade : 3a3c 0003                          move.w    #3,d5
+$00073ae2 : 2279 0007 ccda                     movea.l   $7ccda,a1
+$00073ae8 : 3c3c 005f                          move.w    #$5f,d6
+$00073aec : 3029 0026                          move.w    $26(a1),d0
+$00073af0 : e248                               lsr.w     #1,d0
+$00073af2 : e4d9                               roxr      (a1)+
+$00073af4 : e4d9                               roxr      (a1)+
+$00073af6 : e4d9                               roxr      (a1)+
+$00073af8 : e4d9                               roxr      (a1)+
+$00073afa : e4d9                               roxr      (a1)+
+$00073afc : e4d9                               roxr      (a1)+
+$00073afe : e4d9                               roxr      (a1)+
+$00073b00 : e4d9                               roxr      (a1)+
+$00073b02 : e4d9                               roxr      (a1)+
+$00073b04 : e4d9                               roxr      (a1)+
+$00073b06 : e4d9                               roxr      (a1)+
+$00073b08 : e4d9                               roxr      (a1)+
+$00073b0a : e4d9                               roxr      (a1)+
+$00073b0c : e4d9                               roxr      (a1)+
+$00073b0e : e4d9                               roxr      (a1)+
+$00073b10 : e4d9                               roxr      (a1)+
+$00073b12 : e4d9                               roxr      (a1)+
+$00073b14 : e4d9                               roxr      (a1)+
+$00073b16 : e4d9                               roxr      (a1)+
+$00073b18 : e4d9                               roxr      (a1)+
+$00073b1a : 51ce ffd0                          dbra      d6,$73aec
+$00073b1e : 51cd ffc2                          dbra      d5,$73ae2
+$00073b22 : 51cf ff9e                          dbra      d7,$73ac2
+$00073b26 : 4e75                               rts       
+
+
+- we currently have 4 320x32 images laid out after each other
+- we want to create a single 1280x32 image by repeating the first 320x32 image horizontally 4 times
+
+- first call 73a5a
+- start by copying (320x32/2) bytes from 27800 to 23b00
+- then:
+    - a0 is the running source
+    - a1 is the destination
+    - a2 is the base source
+
+base source = 23b00
+destination = 27800
+do this 32 times
+    a0 (running source) = a2 (base source)
+    copy 160 bytes from a0 to a2
+    a0 (running source) = a2 (base source)
+    copy 160 bytes from a0 to a2
+    a0 (running source) = a2 (base source)
+    copy 160 bytes from a0 to a2
+    a0 (running source) = a2 (base source)
+    copy 160 bytes from a0 to a2
+    a2+=160
+
