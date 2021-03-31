@@ -43,7 +43,7 @@ label_79450:
     move.w    d4,d1           ; copy to d1
     asl.w     #4,d4           ; multiply by 16
     sub.w     d1,d4           ; (multiply by 15)
-    asl.w     #3,d4           ; (multiply by 120)
+    asl.w     #5,d4           ; (multiply by 360)
     adda.w    d4,a1           ; update source address (y position - line)
 
 ;--------------------------------------------------------------------------------------------
