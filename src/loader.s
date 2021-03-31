@@ -125,7 +125,7 @@ end_pal_loop:
     moveq.l #0,d5 ; number of tests failed
 
     move.l #(32000/4),d6
-    jsr copy_graphics
+    bsr copy_graphics
 
 	move.l 	$42E,d0
 	swap 	d0
@@ -187,13 +187,14 @@ verdict_ok:
 
     ; draw verdict message
     move.l a5,a1 ; restore physbase from earlier
-    add.l #(160*187),a1
+    lea 160*187(a1),a1
+    ;add.l #(160*187),a1
     move.l a4,a0
     move.l #(160*7/4),d6
-    jsr copy_graphics
+    bsr copy_graphics
 
     tst.l d5
-    bne endless_loop
+    bne.s endless_loop
 
     rts
 

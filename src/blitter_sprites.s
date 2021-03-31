@@ -51,7 +51,7 @@ nonfsr:
     beq.s nofxsr
 
     sub.w #10,d7
-    sub.w #10,a0
+    lea -10(a0),a0
     or.b #$80,d1
 
     cmp.w #1,d4
@@ -82,7 +82,7 @@ nofxsr:
     add.l d0,d0                         ; byte offset in mask lookup table
     move.w #-1,($ffff8a2a).w            ; endmask2
 
-    move.w leftclipped,d1
+    move.w leftclipped(pc),d1
     bne.s nocalcendmask1                ; branch if zero flag not set
 
     lea.l leftendmasks(pc),a3
@@ -91,7 +91,7 @@ nofxsr:
 nocalcendmask1:
     move.w d1,($ffff8a28).w             ; endmask1
 
-    move.w rightclipped,d1
+    move.w rightclipped(pc),d1
     bne.s nocalcendmask3                ; branch if zero flag not set
 
     lea.l rightendmasks(pc),a3
@@ -211,7 +211,7 @@ nofxsr_3bpp:
     add.l d0,d0                         ; byte offset in mask lookup table
     move.w #-1,($ffff8a2a).w            ; endmask2
 
-    move.w leftclipped,d1
+    move.w leftclipped(pc),d1
     bne.s nocalcendmask1_3bpp                ; branch if zero flag not set
 
     lea.l leftendmasks(pc),a3
@@ -220,7 +220,7 @@ nofxsr_3bpp:
 nocalcendmask1_3bpp:
     move.w d1,($ffff8a28).w             ; endmask1
 
-    move.w rightclipped,d1
+    move.w rightclipped(pc),d1
     bne.s nocalcendmask3_3bpp                ; branch if zero flag not set
 
     lea.l rightendmasks(pc),a3

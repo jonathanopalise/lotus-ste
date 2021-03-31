@@ -23,13 +23,13 @@ end_first_plane_to_buffer:
     bra.s end_rearrange_mountain
 loop_rearrange_mountain:
     move.l a2,a0
-    jsr copy_mountain_line
+    bsr copy_mountain_line
     move.l a2,a0
-    jsr copy_mountain_line
+    bsr copy_mountain_line
     move.l a2,a0
-    jsr copy_mountain_line
+    bsr copy_mountain_line
     move.l a2,a0
-    jsr copy_mountain_line
+    bsr copy_mountain_line
     lea 120(a2),a2
 end_rearrange_mountain:
     dbra d7,loop_rearrange_mountain

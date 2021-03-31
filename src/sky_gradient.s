@@ -34,7 +34,7 @@ bars_lookup:
 gradient_init:
 
     move.w #$684,d2
-    cmp.w post_vbl_timer_b_vector_instruction+4,d2 ; we only want to run the gradient code if the vector points to 70684
+    cmp.w post_vbl_timer_b_vector_instruction+4(pc),d2 ; we only want to run the gradient code if the vector points to 70684
     bne legacy
 
     move.l #$70684,final_bar_vector_instruction+2
@@ -62,7 +62,7 @@ solid_lines_required_zero_or_less:
 
     ; is lines remaining > 3?
     moveq.l #0,d2
-    move.b post_vbl_timer_b_lines_instruction+3,d2 ; lines remaining
+    move.b post_vbl_timer_b_lines_instruction+3(pc),d2 ; lines remaining
     cmp.b #4,d2
     bls.s lines_remaining_less_than_or_equal_to_4
     ; we want to branch if lines remaining <=4
@@ -82,7 +82,7 @@ lines_remaining_greater_than_4:
     sub.w d2,d4
     sub.w d1,d4
     lsr.w #2,d4
-    add.w #1,d4
+    addq.w #1,d4
 
     move.b d4,raster_count
     move.b d2,final_bar_line_count_instruction+3
@@ -97,7 +97,7 @@ lines_remaining_greater_than_4:
     move.l    #new_raster_routine,$0120.w
     bclr      #0,$fffffa0f.w
 
-    bra endvbl
+    bra.s endvbl
 
 lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
@@ -111,15 +111,15 @@ solid_lines_required_greater_than_zero:
 
     ; d1 is solidlinesrequired
     moveq.l #0,d2
-    move.b post_vbl_timer_b_lines_instruction+3,d2 ; put lines remaining into d2
+    move.b post_vbl_timer_b_lines_instruction+3(pc),d2 ; put lines remaining into d2
 
     sub.w d1,d2 ; d2 = lines remaining - solid lines required
-    ble legacy ; no gradient visible
+    ble.s legacy ; no gradient visible
 
     move.w d2,d3 ; copy linesRemainingMinusSolidLinesRequired into d3
 
     ; now calculate raster count
-    add.w #3,d2
+    addq.w #3,d2
     lsr.w #2,d2
 
     ; now calculate final bar size
@@ -138,7 +138,7 @@ solid_lines_required_greater_than_zero:
     move.l    #new_raster_routine,$0120.w
     bclr      #0,$fffffa0f.w
 
-    bra endvbl
+    bra.s endvbl
     ; $solidLinesRequired > 0
     ; special case, not yet worked out, so just use default code
 
@@ -168,12 +168,12 @@ current_gradient_address:
 new_raster_routine:
 
     subq.b #1,raster_count
-    beq final_bar
+    beq.s final_bar
 
     move.w    #$2700,sr
     move.l    a0,-(sp)
-    add.l     #2,current_gradient_address
-    move.l    current_gradient_address,a0
+    addq.l    #2,current_gradient_address
+    move.l    current_gradient_address(pc),a0
     move.w    (a0),$ffff825e.w
     move.l    (sp)+,a0
     move.w    #$2300,sr
@@ -240,9 +240,9 @@ p2_initialise_sky:
 
     move.l #p2_raster_routine,$70742 ; go to the new p2 sky routine if more than 8 lines
     move.b d0,d1
-    sub.b #8,d1
+    subq.b #8,d1
     move.b d1,p2_sky_line_count
-    jsr p2_initialise_sky_variables
+    bsr.s p2_initialise_sky_variables
 p2_sky_not_visible:
     rts
 
@@ -261,7 +261,7 @@ p2_initialise_sky_variables:
     ; d1 is now solidLinesRequired
 
     tst.w d1 ; test solidLinesRequired
-    bgt p2_solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
+    bgt.s p2_solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
 
 p2_solid_lines_required_zero_or_less:
 
@@ -273,7 +273,7 @@ p2_solid_lines_required_zero_or_less:
 
     ; is lines remaining > 3?
     moveq.l #0,d2
-    move.b p2_sky_line_count,d2 ; lines remaining
+    move.b p2_sky_line_count(pc),d2 ; lines remaining
     cmp.b #4,d2
     bls.s p2_lines_remaining_less_than_or_equal_to_4
     ; we want to branch if lines remaining <=4
@@ -293,7 +293,7 @@ p2_lines_remaining_greater_than_4:
     sub.w d2,d4
     sub.w d1,d4
     lsr.w #2,d4
-    add.w #1,d4
+    addq.w #1,d4
 
     move.b d4,p2_raster_count
     move.b d2,p2_final_bar_line_count_instruction_plus_3
@@ -308,28 +308,28 @@ p2_lines_remaining_greater_than_4:
     move.l    #new_raster_routine,p2_new_routine_after_vector
     ;bclr      #0,$fffffa0f.w
 
-    bra p2_endvbl
+    bra.s p2_endvbl
 
 p2_lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
 
-    bra p2_legacy
+    bra.s p2_legacy
 
 p2_solid_lines_required_greater_than_zero:
 
-    move.w solid_sky_rgb_value,p2_gradient_start_colour
+    move.w solid_sky_rgb_value(pc),p2_gradient_start_colour
 
     ; d1 is solidlinesrequired
     moveq.l #0,d2
-    move.b p2_sky_line_count,d2 ; put lines remaining into d2
+    move.b p2_sky_line_count(pc),d2 ; put lines remaining into d2
 
     sub.w d1,d2 ; d2 = lines remaining - solid lines required
-    ble p2_legacy ; no gradient visible
+    ble.s p2_legacy ; no gradient visible
 
     move.w d2,d3 ; copy linesRemainingMinusSolidLinesRequired into d3
 
     ; now calculate raster count
-    add.w #3,d2
+    addq.w #3,d2
     lsr.w #2,d2
 
     ; now calculate final bar size
@@ -349,13 +349,13 @@ p2_solid_lines_required_greater_than_zero:
     move.l    #new_raster_routine,p2_new_routine_after_vector
     ;bclr      #0,$fffffa0f.w
 
-    bra p2_endvbl
+    bra.s p2_endvbl
     ; $solidLinesRequired > 0
     ; special case, not yet worked out, so just use default code
 
 p2_legacy:
     ;move.b #0,$fffffa1b.w
-    move.b p2_sky_line_count,p2_new_routine_after_lines ; number of lines
+    move.b p2_sky_line_count(pc),p2_new_routine_after_lines ; number of lines
     ;move.b #8,$fffffa1b.w
     move.l #$70754,p2_new_routine_after_vector
     ;bclr #0,$fffffa0f.w
@@ -366,15 +366,15 @@ p2_endvbl:
 ;----- END OF NEW CODE
 
 p2_raster_routine:
-    move.l p2_final_bar_vector_instruction_plus_2,final_bar_vector_instruction+2
-    move.b p2_final_bar_line_count_instruction_plus_3,final_bar_line_count_instruction+3
-    move.l p2_current_gradient_address,current_gradient_address
-    move.b p2_raster_count,raster_count
-    move.w p2_gradient_start_colour,$ffff825e.w
+    move.l p2_final_bar_vector_instruction_plus_2(pc),final_bar_vector_instruction+2
+    move.b p2_final_bar_line_count_instruction_plus_3(pc),final_bar_line_count_instruction+3
+    move.l p2_current_gradient_address(pc),current_gradient_address
+    move.b p2_raster_count(pc),raster_count
+    move.w p2_gradient_start_colour(pc),$ffff825e.w
 
     move.b #0,$fffffa1b.w
-    move.b p2_new_routine_after_lines,$fffffa21.w ; number of lines
+    move.b p2_new_routine_after_lines(pc),$fffffa21.w ; number of lines
     move.b #8,$fffffa1b.w
-    move.l p2_new_routine_after_vector,$0120.w
+    move.l p2_new_routine_after_vector(pc),$0120.w
     bclr #0,$fffffa0f.w
     rte

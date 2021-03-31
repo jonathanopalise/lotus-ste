@@ -11,7 +11,7 @@ map_palette_data:
 
 preprocess_palette:
 
-    jsr determine_road_markings
+    bsr determine_road_markings
 
     movem.l d0-d7/a0-a6,-(sp)
     jsr load_samples
@@ -25,8 +25,8 @@ preprocess_palette:
     move.l a0,-(a7)            ; back up a0
 
     move.w #15,d6
-    add.l #24,a0
-    lea solid_sky_rgb_value,a1
+    lea 24(a0),a0
+    lea solid_sky_rgb_value(pc),a1
 
 transfer_gradient_step:
     jsr $74584
