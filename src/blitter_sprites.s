@@ -66,7 +66,7 @@ nonfsr:
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (one pass per bitplane)
     move.b d1,($ffff8a3d).w
 
-    lea.l rightendmasks,a3
+    lea.l rightendmasks(pc),a3
     add.l d0,d0                         ; byte offset in mask lookup table
     move.w (a3,d0.w),d1
     move.w d1,($ffff8a28).w             ; endmask1
@@ -85,7 +85,7 @@ nofxsr:
     move.w leftclipped,d1
     bne.s nocalcendmask1                ; branch if zero flag not set
 
-    lea.l leftendmasks,a3
+    lea.l leftendmasks(pc),a3
     move.w (a3,d0.w),d1                 ; fetch value of endmask1
 
 nocalcendmask1:
@@ -94,7 +94,7 @@ nocalcendmask1:
     move.w rightclipped,d1
     bne.s nocalcendmask3                ; branch if zero flag not set
 
-    lea.l rightendmasks,a3
+    lea.l rightendmasks(pc),a3
     move.w (a3,d0.w),d1
 
 nocalcendmask3:
@@ -196,7 +196,7 @@ nonfsr_3bpp:
     move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
     move.b d1,($ffff8a3d).w
 
-    lea.l rightendmasks,a3
+    lea.l rightendmasks(pc),a3
     add.l d0,d0                         ; byte offset in mask lookup table
     move.w (a3,d0.w),d1
     move.w d1,($ffff8a28).w             ; endmask1
@@ -214,7 +214,7 @@ nofxsr_3bpp:
     move.w leftclipped,d1
     bne.s nocalcendmask1_3bpp                ; branch if zero flag not set
 
-    lea.l leftendmasks,a3
+    lea.l leftendmasks(pc),a3
     move.w (a3,d0.w),d1
 
 nocalcendmask1_3bpp:
@@ -223,7 +223,7 @@ nocalcendmask1_3bpp:
     move.w rightclipped,d1
     bne.s nocalcendmask3_3bpp                ; branch if zero flag not set
 
-    lea.l rightendmasks,a3
+    lea.l rightendmasks(pc),a3
     move.w (a3,d0.w),d1
 
 nocalcendmask3_3bpp:

@@ -3,9 +3,9 @@
 
     include "lz4_decode.s"
     include "load_samples.s"
-    include "generated/road.s"
     include "init_mountains.s"
     include "init_draw_road.s"
+    include "generated/road.s"
     include "blitter_sprites.s"
     include "sky_gradient.s"
     include "preprocess_palette.s"

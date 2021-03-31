@@ -50,7 +50,7 @@ gradient_init:
     ; d1 is now solidLinesRequired
 
     tst.w d1 ; test solidLinesRequired
-    bgt solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
+    bgt.s solid_lines_required_greater_than_zero ; if solid lines required less than or equal to zero, branch
 
 solid_lines_required_zero_or_less:
 
@@ -69,7 +69,7 @@ solid_lines_required_zero_or_less:
 
 lines_remaining_greater_than_4:
 
-    lea bars_lookup,a0
+    lea bars_lookup(pc),a0
     and.w #3,d1 ; solid_lines_required &=3
     move.b (a0,d1.w),d1 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
 
@@ -102,11 +102,11 @@ lines_remaining_greater_than_4:
 lines_remaining_less_than_or_equal_to_4:
     ; special case, not yet worked out, so just use default code
 
-    bra legacy
+    bra.s legacy
 
 solid_lines_required_greater_than_zero:
 
-    lea solid_sky_rgb_value,a0
+    lea solid_sky_rgb_value(pc),a0
     move.w (a0),$ffff825e.w
 
     ; d1 is solidlinesrequired
@@ -124,12 +124,12 @@ solid_lines_required_greater_than_zero:
 
     ; now calculate final bar size
     and.w #3,d3
-    lea bars_lookup,a0
+    lea bars_lookup(pc),a0
     move.b (a0,d3.w),d3 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
  
     move.b d2,raster_count
     move.b d3,final_bar_line_count_instruction+3
-    lea gradient_rgb_values,a0
+    lea gradient_rgb_values(pc),a0
     move.l a0,current_gradient_address
 
     clr.b     $fffffa1b.w
@@ -280,7 +280,7 @@ p2_solid_lines_required_zero_or_less:
 
 p2_lines_remaining_greater_than_4:
 
-    lea bars_lookup,a0
+    lea bars_lookup(pc),a0
     and.w #3,d1 ; solid_lines_required &=3
     move.b (a0,d1.w),d1 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
 
@@ -334,13 +334,13 @@ p2_solid_lines_required_greater_than_zero:
 
     ; now calculate final bar size
     and.w #3,d3
-    lea bars_lookup,a0
+    lea bars_lookup(pc),a0
     move.b (a0,d3.w),d3 ; new_routine_after: d1 = bars_lookup[$solidLinesRequired & 3];
  
     move.b d2,p2_raster_count
     move.b d3,p2_final_bar_line_count_instruction_plus_3
 
-    lea gradient_rgb_values,a0
+    lea gradient_rgb_values(pc),a0
     move.l a0,p2_current_gradient_address
 
     ;clr.b     $fffffa1b.w
