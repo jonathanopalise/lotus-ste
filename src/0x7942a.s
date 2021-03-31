@@ -80,7 +80,7 @@ mountain_blitter_init:
 
     lea $ffff8a20.w,a5       ; source x increment 8a20
     move.w #6,(a5)+          ; source x increment 8a20
-    move.w #-118+(3*120),(a5)+       ; source y increment 8a22
+    move.w #-118,(a5)+       ; source y increment 8a22
     ;move.l a5,a6             ; back up source address 8a24
     lea 10(a5),a5
     move.w #8,(a5)+          ; dest x increment 8a2e
