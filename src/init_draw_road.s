@@ -22,7 +22,7 @@ initdrawroad:
     lea $ffff8a3c.w,a6      ; linenum (to start blitter)
     moveq.l #1,d5 ; d5 is now free for use
     lea.l byte_offsets(pc),a0
-    move.l a0,usp
+    ;move.l a0,usp
     ;lea.l gfx_data(pc),a0
     ;move.l a0,d6
     rts

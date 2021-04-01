@@ -42,14 +42,14 @@ not_the_pits_1:
 
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
-    move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
-    move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
+    ;move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
+    move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
     ;add.l d6,a0              ; a0 now contains memory location of central source
 
-    sub.l d1,a0              ; d1 now contains adjusted source
+    sub.l d1,d6              ; d1 now contains adjusted source
 
     or.w #$c080,d3           ; hog mode
-    move.l a0,(a3)           ; set source address
+    move.l d6,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
     move.w d5,(a5)           ; set ycount in blitter
@@ -60,8 +60,8 @@ not_the_pits_1:
     move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w ; restore read/write mode
 
-    addq.l #4,a0
-    move.l a0,(a3)           ; advance source address to third bitplane
+    addq.l #4,d6
+    move.l d6,(a3)           ; advance source address to third bitplane
 
     move.w d5,(a5)           ; ycount
     move.w d3,(a6)           ; start blitter for one bitplane
@@ -87,14 +87,14 @@ not_the_pits_2:
 
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
-    move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
-    move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
+    ;move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
+    move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
     ;add.l d6,a0              ; a0 now contains memory location of central source
 
-    sub.l d1,a0              ; d1 now contains adjusted source
+    sub.l d1,d6              ; d1 now contains adjusted source
 
     or.w #$c080,d3           ; hog mode
-    move.l a0,(a3)           ; set source address
+    move.l d6,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
     move.w d5,(a5)           ; set ycount in blitter
@@ -108,8 +108,8 @@ not_the_pits_2:
     move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w ; restore read/write mode
 
-    addq.l #6,a0
-    move.l a0,(a3)           ; advance source address to final bitplane
+    addq.l #6,d6
+    move.l d6,(a3)           ; advance source address to final bitplane
 
     move.w d5,(a5)           ; ycount
     move.w d3,(a6)           ; start blitter for one bitplane
@@ -134,18 +134,18 @@ alt_not_the_pits_1:
 
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
-    move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
-    move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
+    ;move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
+    move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
     ;add.l d6,a0              ; a0 now contains memory location of central source
 
-    sub.l d1,a0              ; d1 now contains adjusted source
+    sub.l d1,d6              ; d1 now contains adjusted source
 
     or.w #$c080,d3           ; hog mode
-    move.l a0,(a3)           ; set source address
+    move.l d6,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
-    addq.l #2,a0
-    move.l a0,(a3)           ; advance source address to final bitplane
+    addq.l #2,d6
+    move.l d6,(a3)           ; advance source address to final bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
     move.w d3,(a6)           ; start blitter for one bitplane
@@ -177,20 +177,20 @@ alt_not_the_pits_2:
 
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
 
-    move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
-    move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
+    ;move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
+    move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
     ;add.l d6,a0              ; a0 now contains memory location of central source
 
-    sub.l d1,a0              ; d1 now contains adjusted source
+    sub.l d1,a6              ; d1 now contains adjusted source
 
     or.w #$c080,d3           ; hog mode
-    move.l a0,(a3)           ; set source address
+    move.l d6,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
     ; this is the codepath for the stripes containing white road lines
 
-    addq.l #4,a0
-    move.l a0,(a3)           ; advance source address to final bitplane
+    addq.l #4,d6
+    move.l d6,(a3)           ; advance source address to final bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
     move.w d3,(a6)           ; start blitter for one bitplane
