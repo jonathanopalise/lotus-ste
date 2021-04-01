@@ -1,13 +1,10 @@
-    ORG $7160a
+    ORG $7c01c
 
     ; **************************************************************************
     ; * Lotus STE                                                              *
     ; *                                                                        *
-    ; * Call to init_mountains_game                                            *
+    ; * High level high score table modification                             *
     ; **************************************************************************
     
-	include generated/symbols_0x80000.inc
+    dc.b "ataricrypt.co.uk"
 
-	jsr	init_mountains_game
-    nop
-    nop

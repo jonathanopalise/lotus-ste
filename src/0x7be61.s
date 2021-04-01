@@ -1,13 +1,10 @@
-    ORG $7160a
+    ORG $7be61
 
     ; **************************************************************************
     ; * Lotus STE                                                              *
     ; *                                                                        *
-    ; * Call to init_mountains_game                                            *
+    ; * Medium level high score table modification                             *
     ; **************************************************************************
     
-	include generated/symbols_0x80000.inc
+    dc.b "jamie hamshere/"
 
-	jsr	init_mountains_game
-    nop
-    nop

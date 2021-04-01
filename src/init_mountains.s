@@ -1,3 +1,13 @@
+init_mountains_game:
+    bsr init_mountains
+    tst.w     $7cca4 ; this was displaced by the jsr to init_mountains_game
+    rts
+
+init_mountains_demo:
+    bsr init_mountains
+    tst.w     $7ccfc ; this was displaced by the jsr to init_mountains_demo
+    rts
+
 init_mountains:
     jsr       $73a5a ; displaced by the jsr to init_mountains
 
@@ -34,7 +44,6 @@ loop_rearrange_mountain:
 end_rearrange_mountain:
     dbra d7,loop_rearrange_mountain
 
-    tst.w     $7cca4 ; this was displaced by the jsr to init_mountains
     rts
 
 copy_mountain_line:

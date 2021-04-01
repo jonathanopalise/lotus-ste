@@ -1,13 +1,10 @@
-    ORG $7160a
+    ORG $7bcc7
 
     ; **************************************************************************
     ; * Lotus STE                                                              *
     ; *                                                                        *
-    ; * Call to init_mountains_game                                            *
+    ; * Easy level high score table modification                               *
     ; **************************************************************************
     
-	include generated/symbols_0x80000.inc
+    dc.b "jonathan thomas"
 
-	jsr	init_mountains_game
-    nop
-    nop
