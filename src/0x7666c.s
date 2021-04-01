@@ -17,6 +17,11 @@ label_76672:                 ; the following code is a replacement for the origi
     muls.w    d3,d1          ; this and the following two instructions derive the displayed width of this road line
     swap      d1
     neg.w     d1
+    ext.l d1                 ; d1 is the shift value for the current line
+    move.l d1,d3             ; copy to d3
+    and.b #15,d3             ; convert to skew value
+    asr.w d5,d1              ; shift the source data pointer to the correct start point
+    and.b #$f8,d1
 
     lsr.w #2,d0              ; bring the road width value into a 0-255 range
     and.w #$3fc,d0           ; bring the road width value into a 0-255 range
@@ -41,33 +46,28 @@ not_the_pits_1:
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l d6,a0              ; a0 now contains memory location of central source
 
-    ext.l d1                 ; d1 is the shift value for the current line
-    move.l d1,d4             ; copy to d4
-    and.b #15,d4             ; convert to skew value
-    asr.w d5,d1              ; shift the source data pointer to the correct start point
-    and.b #$f8,d1
     sub.l d1,a0              ; d1 now contains adjusted source
 
-    or.w #$c080,d4           ; hog mode
+    or.w #$c080,d3           ; hog mode
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w #$f,$ffff8a3a.w   ; second bitplane is always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w ; restore read/write mode
 
     addq.l #4,a0
     move.l a0,(a3)           ; advance source address to third bitplane
 
     move.w d5,(a5)           ; ycount
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; ycount
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
@@ -91,34 +91,28 @@ not_the_pits_2:
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l d6,a0              ; a0 now contains memory location of central source
 
-    ext.l d1                 ; d1 is the shift value for the current line
-    move.l d1,d4             ; copy to d4
-    and.b #15,d4             ; convert to skew value
-    asr.w d5,d1              ; shift the source data pointer to the correct start point
-    and.b #$f8,d1
-
     sub.l d1,a0              ; d1 now contains adjusted source
 
-    or.w #$c080,d4           ; hog mode
+    or.w #$c080,d3           ; hog mode
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w #$f,$ffff8a3a.w   ; third bitplane is always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w ; restore read/write mode
 
     addq.l #6,a0
     move.l a0,(a3)           ; advance source address to final bitplane
 
     move.w d5,(a5)           ; ycount
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
@@ -144,14 +138,9 @@ alt_not_the_pits_1:
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l d6,a0              ; a0 now contains memory location of central source
 
-    ext.l d1                 ; d1 is the shift value for the current line
-    move.l d1,d4             ; copy to d4
-    and.b #15,d4             ; convert to skew value
-    asr.w d5,d1              ; shift the source data pointer to the correct start point
-    and.b #$f8,d1
     sub.l d1,a0              ; d1 now contains adjusted source
 
-    or.w #$c080,d4           ; hog mode
+    or.w #$c080,d3           ; hog mode
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
@@ -159,17 +148,17 @@ alt_not_the_pits_1:
     move.l a0,(a3)           ; advance source address to final bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w #$f,$ffff8a3a.w   ; third bitplane all zeroes
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; ycount
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
 
     lea 160(a1),a1           ; advance destination to next line
@@ -192,15 +181,9 @@ alt_not_the_pits_2:
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
     add.l d6,a0              ; a0 now contains memory location of central source
 
-    ext.l d1                 ; d1 is the shift value for the current line
-    move.l d1,d4             ; copy to d4
-    and.b #15,d4             ; convert to skew value
-    asr.w d5,d1              ; shift the source data pointer to the correct start point
-    and.b #$f8,d1
-
     sub.l d1,a0              ; d1 now contains adjusted source
 
-    or.w #$c080,d4           ; hog mode
+    or.w #$c080,d3           ; hog mode
     move.l a0,(a3)           ; set source address
     move.l a1,(a2)           ; set destination
 
@@ -210,18 +193,18 @@ alt_not_the_pits_2:
     move.l a0,(a3)           ; advance source address to final bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w #$0,$ffff8a3a.w   ; third bitplane all zeroes
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w #$f,$ffff8a3a.w ; restore read/write mode
     move.w d5,(a5)           ; set ycount in blitter
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
 
     move.w d5,(a5)           ; ycount
-    move.w d4,(a6)           ; start blitter for one bitplane
+    move.w d3,(a6)           ; start blitter for one bitplane
     move.w #$203,$ffff8a3a.w   ; first 2 bitplanes are always all 1's so no read required
 
     lea 160(a1),a1           ; advance destination to next line
