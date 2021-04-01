@@ -42,7 +42,7 @@ line_type_1:
 
 check_for_start_line_1:
     btst #1,d4
-    bne solid_2
+    bne solid_2_adjust
 
 not_the_pits_1:
 
@@ -160,6 +160,9 @@ not_the_pits_2:
     cmp.w #$60,d7            ; have we drawn all the lines?
     bne label_76672
     rts
+
+solid_2_adjust:
+    sub.w #$400,d2
 
 solid_2:
     add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
