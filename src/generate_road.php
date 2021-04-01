@@ -145,12 +145,12 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
         for ($index = 0; $index < 255; $index++) {
             $actualPixelWidth = (int)$actualPixelWidthFloat;
 
-            $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+            $computedRoadLinesColour = COLOUR_LIGHT_ASPHALT;
             if ($roadLinesColour == COLOUR_WHITE) {
                 $computedRoadLinesColour = COLOUR_WHITE;
 
                 if ($actualPixelWidth < 60) {
-                    $computedRoadLinesColour = COLOUR_DARK_ASPHALT;
+                    $computedRoadLinesColour = COLOUR_LIGHT_ASPHALT;
                 } elseif ($actualPixelWidth < 120) {
                     $computedRoadLinesColour = COLOUR_GREY;
                 }
