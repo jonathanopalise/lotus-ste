@@ -30,13 +30,19 @@ label_76672:                 ; the following code is a replacement for the origi
     beq no_road_markings
 
     andi.w #$400,d2          ; go to the start of the appropriate list of source data pointers
-    beq.s line_type_2
+    beq line_type_2
 
 line_type_1:
     btst #0,d4               ; is this line in the pits?
-    beq.s not_the_pits_1
+    beq.s check_for_start_line_1     ; jump to not_the_pits_1 if we are not the pits
 
+    ; we are the pits then
     add.w #$800,d2           ; use the pits variant of the road graphics
+    bra.s not_the_pits_1
+
+check_for_start_line_1:
+    btst #1,d4
+    bne solid_2_adjust
 
 not_the_pits_1:
 
@@ -73,9 +79,19 @@ not_the_pits_1:
 
 line_type_2:
     btst #0,d4               ; is this line in the pits?
-    beq not_the_pits_2
+    beq.s check_for_start_line_2     ; jump to not_the_pits_1 if we are not the pits
 
+    ; we are the pits then
     add.w #$800,d2           ; use the pits variant of the road graphics
+    bra.s not_the_pits_2
+
+check_for_start_line_2:
+    btst #1,d4
+    bne.s solid_2
+    ;btst #0,d4               ; is this line in the pits?
+    ;beq not_the_pits_2
+
+    ;add.w #$800,d2           ; use the pits variant of the road graphics
 
 not_the_pits_2:
 
@@ -105,6 +121,43 @@ not_the_pits_2:
 
     move.w d5,(a5)           ; ycount
     move.w d3,(a6)           ; start blitter for one bitplane
+
+    lea 160(a1),a1           ; advance destination to next line
+    addq.w #1,d7             ; advance line counter
+    cmp.w #$60,d7            ; have we drawn all the lines?
+    bne label_76672
+    rts
+
+solid_2_adjust:
+    sub.w #$400,d2
+
+solid_2:
+    add.w d2,d0              ; derive the offset of the appropriate pointer within the source data pointers
+    move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
+    sub.l d1,d6              ; d1 now contains adjusted source
+
+    or.w #$c080,d3           ; hog mode
+    move.l a1,$ffff8a32.w    ; set destination
+
+    clr.w (a2)          ; solid zero
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d3,(a6)           ; start blitter for one bitplane
+
+    move.w #$203,(a2)        ; copy mode
+    addq.l #4,d6 
+    move.l d6,(a3)           ; advance source address to bitplane 2
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d3,(a6)           ; start blitter for one bitplane
+
+    move.w #$f,(a2)          ; third bitplane is always all 1's so no read required
+    move.w d5,(a5)           ; set ycount in blitter
+    move.w d3,(a6)           ; start blitter for one bitplane
+
+    move.l d6,(a3)           ; source address to bitplane 2
+    move.w #$20c,(a2)        ; inverse copy mode
+    move.w d5,(a5)           ; ycount
+    move.w d3,(a6)           ; start blitter for one bitplane
+    move.w #$203,(a2)        ; restore read/write mode
 
     lea 160(a1),a1           ; advance destination to next line
     addq.w #1,d7             ; advance line counter
@@ -169,7 +222,7 @@ alt_not_the_pits_2:
     move.l (a0,d0.w),d6      ; a0 now contains the pointer to the road graphics data offset for the current line
     ;add.l d6,a0              ; a0 now contains memory location of central source
 
-    sub.l d1,a6              ; d1 now contains adjusted source
+    sub.l d1,d6              ; d1 now contains adjusted source
 
     or.w #$c080,d3           ; hog mode
     move.l d6,(a3)           ; set source address

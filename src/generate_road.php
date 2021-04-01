@@ -1,15 +1,14 @@
 <?php
 
-const COLOUR_RED = 2;             // 0010
-const COLOUR_WHITE = 6;           // 0110
-const COLOUR_GREY = 5;            // 0101
+const COLOUR_RED = 2;             // 0010 -> 0010
+const COLOUR_WHITE = 6;           // 0110 -> 0110
+const COLOUR_GREY = 5;            // 0101 -> 0101
 
-const COLOUR_LIGHT_ASPHALT = 13;  // 1101
-const COLOUR_GRASS_1 = 12;        // 1100
+const COLOUR_LIGHT_ASPHALT = 13;  // 1101 -> 1101
+const COLOUR_GRASS_1 = 12;        // 1100 -> 1000
 
-const COLOUR_DARK_ASPHALT = 15;   // 1111
-const COLOUR_GRASS_2 = 14;        // 1110
-
+const COLOUR_DARK_ASPHALT = 15;   // 1111 -> 1111
+const COLOUR_GRASS_2 = 14;        // 1110 -> 1100
 
 $rumbleStripColour = COLOUR_WHITE;        // 0110 -> 1101
 $roadLinesColour = COLOUR_WHITE;          // 0110 -> 1101
@@ -29,6 +28,29 @@ $grassColour = COLOUR_GRASS_2;            // 1110 -> 1110
 // bitplane 1: hardcode to 1
 // bitplane 2: hardcode to 1
 // bitplane 3: copy
+
+
+// leave grass_2 and red alone, transform dark asphalt to white
+//
+// red (unchanged)                = 0010 -> 0010
+// grass_2 (unchanged)            = 1110 -> 1110
+// dark_asphalt (change to white) = 1111 -> 0110
+//
+// could we use a "not source" (12) copy to copy bitplane 1 to bitplane 3?
+// - bitplane 0 - solid 0
+// - bitplane 1 - direct copy of source bitplane 1
+// - bitplane 2 - direct copy of source bitplane 2
+// - bitplane 3 - inverse copy of source bitplane 3
+//
+// white         = 0110 -> 0110
+// light asphalt = 1101 -> 0110
+// grass_1       = 1000 -> 1000
+//
+// method HERE:
+// - bitplane 0 - solid 0
+// - bitplane 1 - copy from source bitplane 2
+// - bitplane 2 - copy from source bitplane 2
+// - bitplane 3 - inverst copy of source bitplane 2
 
 function convertPixelColourArrayToPlanarArray($pixel_colours, $ignoreBitplaneIndex) {
     $bitplanes = [
