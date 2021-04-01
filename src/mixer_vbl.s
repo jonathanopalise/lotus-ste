@@ -2,54 +2,45 @@
 mixer_vbl:
 	movem.l		d0-d3/a0-a2,-(sp)
 
-; --- conditions:
-; --- 7cce6 = 1					play intro sample (to do later...)
-; --- 7cce6 = 29 & 7cd56 = 0	master volume to +0dB, play audio buffer
-; --- 7cce6 = 29 & 7cd56 != 0	master volume to +0dB, skip audio buffer
-; --- 7cd56 != 0				don't fade
-; --- anything else				master volume to +0dB, skip audio buffer
-
-	move.w		#%10011101000,d0															; master volume = +0dB
+	move.w		#%10011101000,d0															; start master volume at +0dB
 
 	tst.w		$707c4																		; check game state flag
-	beq.s		labelDMAAudioOn																; if not zero, then race in progress
+	beq.s		labelDMAAudioOn																; if zero, then race in progress
 
-	tst.w		$7d33a																		; otherwise, check screen palette fade counter
-	bne.s		labelClearSoundEventLatchFalse
+	tst.w		$7d33a																		; otherwise, race not in progress, so check screen palette fade counter
+	bne.s		labelClearSoundEventLatchFalse												; if not zero, then don't clear sound event latch
 
-	move.w		#2000,$7cc3c																; set revs to 2000rpm
-	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
-	bra.s		labelDMAAudioOff
+	move.w		#2000,$7cc3c																; otherwise, (re)set revs to 2000rpm
+	move.w		#$ffff,variableSoundEventLatch												; and set sound event latch to null
+	bra.s		labelDMAAudioOff															; and don't mix any dma sound
 
 labelClearSoundEventLatchFalse
 	move.w		$7cce6,d1																	; fetch state machine value
-
 	cmp.w		#$29,d1																		; check if on stereo screen
 	bne.s		labelDMAAudioOff															; if not, then set master volume to +0dB and don't mix any dma sound
 
-	tst.w		$7cd56																		; otherwise check if engine sound (0) or music track (1-4) is selected
-	beq.s		labelDMAAudioOn																; if track is engine, then use dma sound
+	tst.w		$7cd56																		; otherwise, on stereo, so check if engine sound (0) or music track (1-4) is selected
+	beq.s		labelDMAAudioOn																; if track is engine, then mix dma sound
 
 labelDMAAudioOff
-	jsr			write_microwire																; set master volume to +0dB
+	bsr			write_microwire																; set master volume to +0dB
 	bra			labelFinishedAudio															; and end
 
 labelDMAAudioOn
-	tst.w		$7cd62																		; test if 1 or 2 player game (0 = 1 player, 1 = 2 player)
-	bne.s		labelFinishedVolumeCheck													; if 2 player then don't fade sound
+	move.w		$7cd56,d1																	; fetch music track value
+	add.w		$7cd62,d1																	; add 1/2 player game type flag
+	bne.s		labelFinishedVolumeCheck													; if either are not zero, then don't fade sound
 
-	move.w		$72002,d1																	; fetch ausevol
+	move.w		$72002,d1																	; otherwise, fetch ausevol
 	cmp.w		#63,d1																		; is it at full volume? if so then no need to change master volume
 	beq.s		labelFinishedVolumeCheck
-	tst.w		$7cd56																		; if no music track selected, then don't fade out
-	bne.s		labelFinishedVolumeCheck
-	lsr.w		#1,d1																		; otherwise divide volume by 2
+	lsr.w		#1,d1																		; otherwise, divide volume by 2
 	sub.w		#31,d1																		; subtract maximum value
 	neg			d1																			; invert the value
 	sub.w		d1,d0																		; subtract result from master volume centre position
 		
 labelFinishedVolumeCheck
-	jsr			write_microwire																; use value in d0 to write master volume data to microwire
+	bsr			write_microwire																; and use value in d0 to write master volume data to microwire
 
 	lea.l		$ffff8900.w,a0																; dma audio registers base address
 
@@ -61,10 +52,13 @@ labelFinishedVolumeCheck
 	beq.s		label1PlayerSound
 
 label2PlayerSound
-	tst.w		variableSoundEventLatch
-	bmi			labelFinishedAudio
+	tst.w		variableSoundEventLatch														; check sound event latch
+	bmi			labelFinishedAudio															; if null then nothing to do
 
-	lea.l		variableSoundEventAddress,a1
+	tst.w		variableSoundEventPosition													; check sound event position
+	bne.s		label2PlayerSoundPosition													; if it's not zero then the sound has already been started
+
+	lea.l		variableSoundEventAddress,a1												; otherwise, fetch sound address
 
 	move.b		1(a1),$03(a0)																; set start address high byte
 	move.b		2(a1),$05(a0)																; set start address middle byte
@@ -77,10 +71,15 @@ label2PlayerSound
 	move.b		1(a1),$0f(a0)																; set end address high byte
 	move.b		2(a1),$11(a0)																; set end address middle byte
 	move.b		3(a1),$13(a0)																; set end address low byte
+	move.b		#0,$01(a0)																	; stop dma
 	move.b		#1,$01(a0)																	; start dma	
 
+label2PlayerSoundPosition
+	add.w		#250,variableSoundEventPosition												; store current position of sound event effect
+	move.w		variableSoundEventLength,d1													; fetch sound event length
+	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
+	bhi			labelFinishedAudio															; if sound event length is higher than current position then nothing to do
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
-
 	bra			labelFinishedAudio
 
 label1PlayerSound
@@ -104,7 +103,6 @@ label1PlayerSound
 
 	move.l		d0,a2																		; copy start address of work buffer for mixing routines
 
-labelMixEngineAndSoundEvent
 	move.w		variableEngineEffectPosition,d0											; current step into engine effect
 	move.l		tableSoundEvents,a0															; first entry in table contains base address of engine sound effect
 	lea.l		(a0,d0.w),a0																; offset current engine effect position into engine sound effect base address
@@ -133,7 +131,6 @@ labelMixEngineAndSoundEvent
 	move.b		d2,(a2)+																	; put accumulated sample value into dma buffer
 	endr
 
-labelFinishedMixingSoundEvent
 	add.w		#250,variableSoundEventPosition											; store current position of sound event effect
 	move.w		variableSoundEventLength,d1												; fetch sound event length
 	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
