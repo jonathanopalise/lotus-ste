@@ -23,8 +23,8 @@ initdrawroad:
     moveq.l #1,d5 ; d5 is now free for use
     lea.l byte_offsets(pc),a0
     move.l a0,usp
-    lea.l gfx_data(pc),a0
-    move.l a0,d6
+    ;lea.l gfx_data(pc),a0
+    ;move.l a0,d6
     rts
 
 

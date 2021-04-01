@@ -44,7 +44,7 @@ not_the_pits_1:
 
     move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
-    add.l d6,a0              ; a0 now contains memory location of central source
+    ;add.l d6,a0              ; a0 now contains memory location of central source
 
     sub.l d1,a0              ; d1 now contains adjusted source
 
@@ -89,7 +89,7 @@ not_the_pits_2:
 
     move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
-    add.l d6,a0              ; a0 now contains memory location of central source
+    ;add.l d6,a0              ; a0 now contains memory location of central source
 
     sub.l d1,a0              ; d1 now contains adjusted source
 
@@ -136,7 +136,7 @@ alt_not_the_pits_1:
 
     move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
-    add.l d6,a0              ; a0 now contains memory location of central source
+    ;add.l d6,a0              ; a0 now contains memory location of central source
 
     sub.l d1,a0              ; d1 now contains adjusted source
 
@@ -179,7 +179,7 @@ alt_not_the_pits_2:
 
     move.l usp,a0            ; get the base address of the pointers to road graphics data (see "initdrawroad")
     move.l (a0,d0.w),a0      ; a0 now contains the pointer to the road graphics data offset for the current line
-    add.l d6,a0              ; a0 now contains memory location of central source
+    ;add.l d6,a0              ; a0 now contains memory location of central source
 
     sub.l d1,a0              ; d1 now contains adjusted source
 
