@@ -18,7 +18,7 @@ initdrawroad:
     move.w #$0203,(a5)        ; hop/op 8a3a
     lea $ffff8a38.w,a5      ; ycount
     lea $ffff8a24.w,a3      ; source
-    lea $ffff8a32.w,a2      ; destination
+    lea $ffff8a3a.w,a2      ; hop/op
     lea $ffff8a3c.w,a6      ; linenum (to start blitter)
     moveq.l #1,d5 ; d5 is now free for use
     lea.l byte_offsets(pc),a0

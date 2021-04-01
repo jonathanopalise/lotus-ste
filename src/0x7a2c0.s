@@ -17,7 +17,7 @@
     ; * non-preshifted version of a given sprite is always used.               *
     ; **************************************************************************
 
-    move.l #$7abf6,a3
+    lea $7abf6,a3
     move.w d4,(a3)+
     move.w d1,(a3)+
     move.w d7,(a3)+
