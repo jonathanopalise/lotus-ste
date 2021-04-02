@@ -92,18 +92,14 @@ label1PlayerSound
 	move.b		15(a1),$13(a0)																; set end address low byte
 	move.b		#1,$01(a0)																	; (re)start dma
 
-	move.l		(a1),d0																		; these lines swap the current/working audio buffers
-	move.l		4(a1),d1
-	move.l		8(a1),d2
-	move.l		12(a1),d3
-	move.l		d0,8(a1)
-	move.l		d1,12(a1)
-	move.l		d2,(a1)
-	move.l		d3,4(a1)
+	movem.l		(a1),d0-d3																	; thanks to Defence Force for pointing out movem as being quicker here!
+	exg.l		d0,d2																		; I think this also saves some time in combination with another movem...
+	exg.l		d1,d3
+	movem.l		d0-d3,(a1)
 
-	move.l		d0,a2																		; copy start address of work buffer for mixing routines
+	move.l		d2,a2																		; copy start address of work buffer for mixing routines
 
-	move.w		variableEngineEffectPosition,d0											; current step into engine effect
+	move.w		variableEngineEffectPosition,d0												; current step into engine effect
 	move.l		tableSoundEvents,a0															; first entry in table contains base address of engine sound effect
 	lea.l		(a0,d0.w),a0																; offset current engine effect position into engine sound effect base address
 
@@ -122,7 +118,7 @@ label1PlayerSound
 	move.w		variableSoundEventPosition,d2												; offset into sample data
 	lea.l		(a1,d2),a1																	; adjust address
 
-	rept		250
+	rept		249
 	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
 	swap		d0																			; effectively multiply offset by 65536
 	add.l		d1,d0																		; add scaler to offset
@@ -130,30 +126,39 @@ label1PlayerSound
 	add.b		(a1)+,d2																	; add sound event sample to mix
 	move.b		d2,(a2)+																	; put accumulated sample value into dma buffer
 	endr
-
-	add.w		#250,variableSoundEventPosition											; store current position of sound event effect
-	move.w		variableSoundEventLength,d1												; fetch sound event length
-	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
-	bhi			labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
-	move.w		#$ffff,variableSoundEventLatch											; set sound event latch to null
-
-	bra			labelFinishedSoundMixing													; finished
-
-labelMixEngineOnly
-	rept		250
 	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
 	swap		d0																			; effectively multiply offset by 65536
 	add.l		d1,d0																		; add scaler to offset
 	swap		d0																			; effectively divide offset by 65536
-	move.b		d2,(a2)+																	; put accumulated sample value into dma buffer
+	add.b		(a1),d2																		; add sound event sample to mix
+	move.b		d2,(a2)																		; put accumulated sample value into dma buffer
+
+	add.w		#250,variableSoundEventPosition												; store current position of sound event effect
+	move.w		variableSoundEventLength,d1													; fetch sound event length
+	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
+	bhi			labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
+	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
+
+	bra			labelFinishedSoundMixing													; finished
+
+labelMixEngineOnly
+	rept		249
+	move.b		(a0,d0.w),(a2)+																; thanks to Defence Force for noticing the unnecessary use of d2 for this!
+	swap		d0																			; effectively multiply offset by 65536
+	add.l		d1,d0																		; add scaler to offset
+	swap		d0																			; effectively divide offset by 65536
 	endr
+	move.b		(a0,d0.w),(a2)
+	swap		d0																			; effectively multiply offset by 65536
+	add.l		d1,d0																		; add scaler to offset
+	swap		d0																			; effectively divide offset by 65536
 
 labelFinishedSoundMixing
 
-	add.w		d0,variableEngineEffectPosition											; store current position of engine sound effect
-	cmp.w		#3116,variableEngineEffectPosition										; compare engine sound effect length with current position
+	add.w		d0,variableEngineEffectPosition												; store current position of engine sound effect
+	cmp.w		#3116,variableEngineEffectPosition											; compare engine sound effect length with current position
 	blo.s		labelFinishedAudio															; if current position is less than length then nothing to do
-	sub.w		#3116,variableEngineEffectPosition										; otherwise adjust position
+	sub.w		#3116,variableEngineEffectPosition											; otherwise adjust position
 
 labelFinishedAudio
 
