@@ -1,0 +1,57 @@
+$0007910a : 3e3c 005f                          move.w    #$5f,d7
+
+$0007910e : 3018                               move.w    (a0)+,d0       ; load something into d0
+$00079110 : 3200                               move.w    d0,d1          ; copy something into d1
+$00079112 : 4840                               swap      d0             ; swap d0
+$00079114 : 3001                               move.w    d1,d0          ; low word and high word of d0 now contain the same
+$00079116 : c191                               and.l     d0,(a1)        ; apply mask to two consecutive words
+$00079118 : 2218                               move.l    (a0)+,d1       ; get next value from source data
+$0007911a : 8399                               or.l      d1,(a1)+
+$0007911c : c199                               and.l     d0,(a1)+       ; write mask to positions 4 and 6
+$0007911e : 3218                               move.w    (a0)+,d1       ; get another value from source data
+$00079120 : 8369 fffc                          or.w      d1,$fffc(a1)
+$00079124 : d2fc 0080                          adda.w    #$80,a1
+
+$00079128 : 3018                               move.w    (a0)+,d0
+$0007912a : 3200                               move.w    d0,d1
+$0007912c : 4840                               swap      d0
+$0007912e : 3001                               move.w    d1,d0
+$00079130 : c191                               and.l     d0,(a1)
+$00079132 : 2218                               move.l    (a0)+,d1
+$00079134 : 8399                               or.l      d1,(a1)+
+$00079136 : c199                               and.l     d0,(a1)+
+$00079138 : 3218                               move.w    (a0)+,d1
+$0007913a : 8369 fffc                          or.w      d1,$fffc(a1)
+$0007913e : 3018                               move.w    (a0)+,d0
+$00079140 : 3200                               move.w    d0,d1
+$00079142 : 4840                               swap      d0
+$00079144 : 3001                               move.w    d1,d0
+$00079146 : c191                               and.l     d0,(a1)
+$00079148 : 2218                               move.l    (a0)+,d1
+$0007914a : 8399                               or.l      d1,(a1)+
+$0007914c : c199                               and.l     d0,(a1)+
+$0007914e : 3218                               move.w    (a0)+,d1
+$00079150 : 8369 fffc                          or.w      d1,$fffc(a1)
+$00079154 : 3018                               move.w    (a0)+,d0
+$00079156 : 3200                               move.w    d0,d1
+$00079158 : 4840                               swap      d0
+$0007915a : 3001                               move.w    d1,d0
+$0007915c : c191                               and.l     d0,(a1)
+$0007915e : 2218                               move.l    (a0)+,d1
+$00079160 : 8399                               or.l      d1,(a1)+
+$00079162 : c199                               and.l     d0,(a1)+
+$00079164 : 3218                               move.w    (a0)+,d1
+$00079166 : 8369 fffc                          or.w      d1,$fffc(a1)
+$0007916a : 51cf ffa2                          dbra      d7,$7910e
+$0007916e : 4e75                               rts       
+
+data layout
+7910e - 79120:
+    - 1 word of mask at source pos 0       anded to dest position 0
+                                           anded to dest position 2
+                                           anded to dest position 4
+                                           anded to dest position 6
+    - 1 word of colour at source pos 2     ored to dest position 0
+    - 1 word of colour at source pos 4     ored to dest position 2
+- 1 word of colour at source pos 6     ored to dest position 4
+
