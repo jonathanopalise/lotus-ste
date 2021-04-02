@@ -18,3 +18,4 @@
     include "mixer_vbl.s"
     include "write_microwire.s"
     include "do_sound_events.s"
+    include "status_panel.s"

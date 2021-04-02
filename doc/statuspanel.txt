@@ -10,6 +10,7 @@ $0007911a : 8399                               or.l      d1,(a1)+
 $0007911c : c199                               and.l     d0,(a1)+       ; write mask to positions 4 and 6
 $0007911e : 3218                               move.w    (a0)+,d1       ; get another value from source data
 $00079120 : 8369 fffc                          or.w      d1,$fffc(a1)
+
 $00079124 : d2fc 0080                          adda.w    #$80,a1
 
 $00079128 : 3018                               move.w    (a0)+,d0
@@ -22,6 +23,7 @@ $00079134 : 8399                               or.l      d1,(a1)+
 $00079136 : c199                               and.l     d0,(a1)+
 $00079138 : 3218                               move.w    (a0)+,d1
 $0007913a : 8369 fffc                          or.w      d1,$fffc(a1)
+
 $0007913e : 3018                               move.w    (a0)+,d0
 $00079140 : 3200                               move.w    d0,d1
 $00079142 : 4840                               swap      d0
@@ -32,6 +34,7 @@ $0007914a : 8399                               or.l      d1,(a1)+
 $0007914c : c199                               and.l     d0,(a1)+
 $0007914e : 3218                               move.w    (a0)+,d1
 $00079150 : 8369 fffc                          or.w      d1,$fffc(a1)
+
 $00079154 : 3018                               move.w    (a0)+,d0
 $00079156 : 3200                               move.w    d0,d1
 $00079158 : 4840                               swap      d0
@@ -42,6 +45,7 @@ $00079160 : 8399                               or.l      d1,(a1)+
 $00079162 : c199                               and.l     d0,(a1)+
 $00079164 : 3218                               move.w    (a0)+,d1
 $00079166 : 8369 fffc                          or.w      d1,$fffc(a1)
+
 $0007916a : 51cf ffa2                          dbra      d7,$7910e
 $0007916e : 4e75                               rts       
 
@@ -55,3 +59,4 @@ data layout
     - 1 word of colour at source pos 4     ored to dest position 2
 - 1 word of colour at source pos 6     ored to dest position 4
 
+do this 4 times
