@@ -59,4 +59,11 @@ data layout
     - 1 word of colour at source pos 4     ored to dest position 2
 - 1 word of colour at source pos 6     ored to dest position 4
 
+- 8 bytes (4 words) per 16 pixels
+- 4 times 16 pixels
+- 64 pixels
+- 32 bytes per line
+- so y should increase by 32 each line
+
+
 do this 4 times

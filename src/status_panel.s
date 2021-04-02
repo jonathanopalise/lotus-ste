@@ -17,14 +17,18 @@
 render_status_panel:
     lea $ffff8a20.w,a5       ; source x increment 8a20
     move.w #8,(a5)+          ; source x increment 8a20
-    move.w #-6,(a5)+       ; source y increment 8a22
-    ;move.l a5,a6             ; back up source address 8a24
-    lea 10(a5),a5
+    move.w #0,(a5)+          ; source y increment 8a22
+    move.l a5,a6             ; back up source address 8a24
+    ;lea 10(a5),a5
+    addq.l #4,a5
+    move.w #-1,(a5)+         ; endmask1 8a28
+    move.w #-1,(a5)+         ; endmask2 8a2a
+    move.w #-1,(a5)+         ; endmask2 8a2c
     move.w #8,(a5)+          ; dest x increment 8a2e
-    move.w #152-16,(a5)+       ; dest y increment 8a30
+    move.w #152-16,(a5)+     ; dest y increment 8a30
     move.l a5,a2             ; backup destination address 8a32
     addq.l #4,a5
-    move.w #4,(a5)+         ; xcount 8a36
+    move.w #4,(a5)+          ; xcount 8a36
     move.l a5,a4             ; a4 is now address of ycount (8a38)
     addq.l #2,a5             ; a3 is now address of hop/op (8a3a)
     move.w #$f,(a5)+         ; hop/op 8a3a, advance a3 to linenum 8a3c
@@ -85,7 +89,7 @@ drawstatusplane:
     move.l a0,($ffff8a24).w    ; source
     move.l a1,($ffff8a32).w    ; destination
 
-    rept 20
+    rept 92
     move.w #1,($ffff8a38).w             ; ycount
     move.w #$c080,($ffff8a3c).w         ; control
     endr
