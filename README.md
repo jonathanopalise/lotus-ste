@@ -12,7 +12,11 @@ This project is under development and no builds are currently available to end u
 * **Sound enhancements**: Junosix/AF (Jamie Hamshere)
 * **Loader and other technical assistance**: Grazey/PHF
 
-**Thanks to**: masteries/AF (for providing the original sound mixer code, without which we might not have digital sound in this project), and metalages/AF (for ideas and discussion around the idea of a YM-based engine sound)
+**Thanks to**:
+
+* **masteries/AF** - for providing the original sound mixer code, without which we might not have digital sound in this project
+* **Defence Force/Dbug** - for code review and suggestions around performance optimisation
+* **metalages/AF** - for ideas and discussion around the idea of a YM-based engine sound
 
 _(AF = Atari-Forum - https://www.atari-forum.com/)_
 
