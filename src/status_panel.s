@@ -21,7 +21,7 @@ render_status_panel:
     move.w d2,(a5)+         ; endmask1 8a28
     move.w d2,(a5)+         ; endmask2 8a2a
     move.w d2,(a5)+         ; endmask2 8a2c
-    moveq.l #1,d2
+    moveq.l #5,d2
     move.w #8,(a5)+          ; dest x increment 8a2e
     move.w #160,(a5)+        ; dest y increment 8a30
     move.l a5,a2             ; backup destination address 8a32
@@ -45,7 +45,7 @@ status_panel:
     move.l (sp)+,a1
     move.l (sp)+,a0
 
-    add.l #16*8,a1
+    add.l #17*8,a1
     move.w #8,($ffff8a22).w   ; source y increment
     move.w #3,($ffff8a36).w   ; x count
     move.w #144,($ffff8a30).w ; dest y increment
@@ -79,7 +79,7 @@ drawstatusplane:
     move.l a1,(a2)    ; destination
 
     ; might be able to exploit the fact that there are empty lines in the status display
-    rept $5f
+    rept 19
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     endr
