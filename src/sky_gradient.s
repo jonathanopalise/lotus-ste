@@ -170,22 +170,18 @@ new_raster_routine:
     subq.b #1,raster_count
     beq.s final_bar
 
-    move.w    #$2700,sr
-    move.l    a0,-(sp)
+    move.l    a0,usp
     addq.l    #2,current_gradient_address
     move.l    current_gradient_address(pc),a0
     move.w    (a0),$ffff825e.w
-    move.l    (sp)+,a0
-    move.w    #$2300,sr
+    move.l    usp,a0
     clr.b     $fffffa1b.w
     move.b    #4,$fffffa21.w
     move.b    #8,$fffffa1b.w
-    move.l    #new_raster_routine,$0120.w
     bclr      #0,$fffffa0f.w
     rte
 
 final_bar:
-
     clr.b     $fffffa1b.w
 final_bar_line_count_instruction:
     move.b    #$68,$fffffa21.w
