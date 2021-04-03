@@ -13,7 +13,7 @@ $00079120 : 8369 fffc                          or.w      d1,$fffc(a1)
 
 $00079124 : d2fc 0080                          adda.w    #$80,a1
 
-$00079128 : 3018                               move.w    (a0)+,d0
+$00079128 : 3018                               move.w    (a0)+,d0       ; what's the value of a0 and a1 here
 $0007912a : 3200                               move.w    d0,d1
 $0007912c : 4840                               swap      d0
 $0007912e : 3001                               move.w    d1,d0
@@ -67,3 +67,19 @@ data layout
 
 
 do this 4 times
+
+
+Lotus ST registers at 79128:
+
+  D0 FFFFFFFF   D1 00000000   D2 FFFF0020   D3 FFFF0000 
+  D4 13E20014   D5 FFFFFFFF   D6 00010000   D7 0000005F 
+  A0 0004CB7C   A1 0001FB88   A2 00000000   A3 00030F40 
+  A4 0001FB00   A5 0002FA60   A6 0007C546   A7 0007FFF4 
+
+Lotus STE registers at eeb7a (the same?!):
+
+  D0 FFFFFFFF   D1 00000000   D2 00000001   D3 FFFFC080 
+  D4 13E20014   D5 FFFFFFFF   D6 00010000   D7 0000FFFF 
+  A0 0004CB7C   A1 0001FB88   A2 FFFF8A32   A3 FFFF8A3A 
+  A4 FFFF8A38   A5 FFFF8A3C   A6 FFFF8A24   A7 0007FFF8 
+
