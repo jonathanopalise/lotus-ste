@@ -142,21 +142,21 @@ draw_grey_7_row_block:
     move.w #$0201,(a3) ; source & destination
 
     rept 3
-    bsr draw_7_row_plane
+    bsr draw_7_row_and_plane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    bsr draw_7_row_plane
+    bsr draw_7_row_and_plane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_5_row_plane
+    bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_5_row_plane
+    bsr draw_5_row_or_plane
 
     ; a1 is +4 at this point
     ; a0 is +4 at this point
@@ -168,21 +168,21 @@ draw_white_7_row_block:
     move.w #$0201,(a3) ; source & destination
 
     rept 3
-    bsr draw_7_row_plane
+    bsr draw_7_row_and_plane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    bsr draw_7_row_plane
+    bsr draw_7_row_and_plane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_7_row_plane
+    bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_7_row_plane
+    bsr draw_5_row_or_plane
 
     ; a1 is +4 at this point
     ; a0 is +4 at this point
@@ -190,7 +190,29 @@ draw_white_7_row_block:
     subq.l #4,a1
     rts
 
-draw_5_row_plane:
+draw_3_row_or_plane:
+    lea 160(a1),a1
+    lea 32(a0),a0
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+    lea -160(a1),a1
+    lea -32(a0),a0
+
+    ; might be able to exploit the fact that there are empty lines in the status display
+    move.w #3,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    rts
+
+draw_5_row_and_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    ; might be able to exploit the fact that there are empty lines in the status display
+    move.w #5,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    rts
+
+draw_5_row_or_plane:
     lea 160(a1),a1
     lea 32(a0),a0
     move.l a0,(a6)    ; source
@@ -203,7 +225,7 @@ draw_5_row_plane:
     move.w d3,(a5)         ; control
     rts
 
-draw_7_row_plane:
+draw_7_row_and_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
