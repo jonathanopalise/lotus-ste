@@ -196,13 +196,17 @@ draw_white_7_row_block:
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    rept 2
+    addq.l #2,a0
+    addq.l #2,a1
+
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
+    ;addq.l #2,a1                        ; move destination to next bitplane
+    ;addq.l #2,a0                        ; move source to next bitplane
+    ;bsr draw_5_row_or_plane
 
     ; a1 is +4 at this point
     ; a0 is +4 at this point
