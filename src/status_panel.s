@@ -39,7 +39,7 @@ lap_counter:
     move.l a1,-(sp)
 
     suba.w    #$8,a0
-    bsr drawstatusblock
+    bsr draw_lap_block
 
 status_panel:
     move.l (sp)+,a1
@@ -50,31 +50,62 @@ status_panel:
     move.w #3,($ffff8a36).w   ; x count
     move.w #144,($ffff8a30).w ; dest y increment
 
-    bsr drawstatusblock
+    bsr draw_status_block
 
     rts
 
-drawstatusblock:
+draw_lap_block:
     move.w #$0201,(a3) ; source & destination
 
     rept 3
-    bsr drawstatusplane
+    bsr draw_lap_plane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    bsr drawstatusplane
+    bsr draw_lap_plane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawstatusplane
+    bsr draw_lap_plane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawstatusplane
+    bsr draw_lap_plane
 
-drawstatusplane:
+draw_lap_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    ; might be able to exploit the fact that there are empty lines in the lap display
+    rept 19
+    move.w d2,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    endr
+    rts
+
+draw_status_block:
+    move.w #$0201,(a3) ; source & destination
+
+    rept 3
+    bsr draw_status_plane
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    bsr draw_status_plane
+
+    subq.l #6,a1                        ; move destination back to initial bitplane
+    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+
+    rept 2
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_status_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    endr
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_status_plane
+
+draw_status_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 

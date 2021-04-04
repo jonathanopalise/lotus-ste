@@ -74,6 +74,7 @@ SAMPLES_DIR = $(SOURCE_DIR)samples/
 	$(SOURCE_DIR)mixer_variables.s\
 	$(SOURCE_DIR)mixer_vbl.s\
 	$(SOURCE_DIR)do_sound_events.s\
+	$(SOURCE_DIR)status_panel.s\
 	$(SAMPLES_DIR)lotus-intro.snd
 
 default: check_dependencies $(RELEASE_DISK_IMAGE)
