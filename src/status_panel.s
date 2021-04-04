@@ -51,7 +51,10 @@ status_panel:
     move.w #144,($ffff8a30).w ; dest y increment
     moveq.l #3,d2             ; ycount - 2 rows at a time for status panel
 
-    bsr draw_status_block
+    lea 64(a0),a0
+    lea 320(a1),a1
+
+    bsr draw_grey_7_row_block
 
     rts
 
@@ -102,6 +105,38 @@ draw_status_block:
     endr
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_status_plane
+    rts
+
+draw_grey_7_row_block:
+    move.w #$0201,(a3) ; source & destination
+
+    rept 3
+    bsr draw_grey_7_row_plane
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    bsr draw_grey_7_row_plane
+
+    subq.l #6,a1                        ; move destination back to initial bitplane
+    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+
+    rept 2
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_grey_7_row_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    endr
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_grey_7_row_plane
+    rts
+
+draw_grey_7_row_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    ; might be able to exploit the fact that there are empty lines in the status display
+    move.w #3,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    move.w #4,(a4)             ; ycount
+    move.w d3,(a5)         ; control
     rts
 
 draw_status_plane:
