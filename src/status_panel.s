@@ -204,26 +204,18 @@ draw_white_7_row_block:
     endr
     bsr draw_7_row_and_plane
 
-    subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    lea 160(a1),a1
-    lea 32(a0),a0
+    lea 156(a1),a1
+    lea 36(a0),a0
 
-    addq.l #4,a0
-    addq.l #2,a1
     bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
 
-    lea -160(a1),a1
-    lea -32(a0),a0
-
-    ; a1 is +4 at this point
-    ; a0 is +4 at this point
-    subq.l #6,a0
-    subq.l #4,a1
+    lea -(160+4)(a1),a1
+    lea -(32+6)(a0),a0
     rts
 
 draw_metre_block:
