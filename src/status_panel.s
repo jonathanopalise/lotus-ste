@@ -1,16 +1,3 @@
-    macro status_panel_cpu_blit
-    move.w    (a0)+,d0       ; load something into d0
-    move.w    d0,d1          ; copy something into d1
-    swap      d0             ; swap d0
-    move.w    d1,d0          ; low word and high word of d0 now contain the same
-    and.l     d0,(a1)        ; apply mask to two consecutive words
-    move.l    (a0)+,d1       ; get next value from source data
-    or.l      d1,(a1)+
-    and.l     d0,(a1)+       ; write mask to positions 4 and 6
-    move.w    (a0)+,d1       ; get another value from source data
-    or.w      d1,-4(a1)
-    endm
-
 render_status_panel:
     lea $ffff8a20.w,a5       ; source x increment 8a20
     move.w #8,(a5)+          ; source x increment 8a20
@@ -33,7 +20,6 @@ render_status_panel:
     move.w #$c080,d3
 
 lap_counter:
-    ; this shouldn't be necessary - understand why
     move.l a0,-(sp)
     move.l a1,-(sp)
 
@@ -49,9 +35,56 @@ status_panel:
     move.w #8,($ffff8a22).w   ; source y increment
     move.w #3,($ffff8a36).w   ; x count
     move.w #144,($ffff8a30).w ; dest y increment
-    moveq.l #3,d2             ; ycount - 2 rows at a time for status panel
 
-    bsr draw_status_block
+    lea 32*2(a0),a0
+    lea 160*2(a1),a1
+
+    bsr draw_grey_7_row_block
+
+    lea 32*8(a0),a0
+    lea 160*8(a1),a1
+
+    bsr draw_white_7_row_block
+
+    lea 32*8(a0),a0
+    lea 160*8(a1),a1
+
+    bsr draw_grey_7_row_block
+
+    lea 32*8(a0),a0
+    lea 160*8(a1),a1
+
+    bsr draw_white_7_row_block
+
+    lea 32*9(a0),a0
+    lea 160*9(a1),a1
+
+    bsr draw_grey_7_row_block
+
+    lea 32*8(a0),a0
+    lea 160*8(a1),a1
+
+    bsr draw_metre_block
+
+    lea 32*6(a0),a0
+    lea 160*6(a1),a1
+
+    bsr draw_grey_7_row_block
+
+    lea 32*8(a0),a0
+    lea 160*8(a1),a1
+
+    bsr draw_metre_block
+
+    lea 32*6(a0),a0
+    lea 160*6(a1),a1
+
+    bsr draw_grey_7_row_block
+
+    lea 32*9(a0),a0
+    lea 160*9(a1),a1
+
+    bsr draw_position_block
 
     rts
 
@@ -68,7 +101,6 @@ draw_lap_block:
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     addq.l #4,a0                        ; move source to next bitplane
-    ;addq.l #2,a1                        ; move destination to next bitplane
     bsr draw_lap_plane
     rts
 
@@ -76,42 +108,150 @@ draw_lap_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
-    ; might be able to exploit the fact that there are empty lines in the lap display
     rept 19
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     endr
     rts
 
-draw_status_block:
+draw_position_block:
     move.w #$0201,(a3) ; source & destination
+    moveq.l #2,d2
 
-    rept 3
-    bsr draw_status_plane
+    bsr draw_position_and_plane
     addq.l #2,a1                        ; move to next bitplane
-    endr
-    bsr draw_status_plane
+    bsr draw_position_and_plane
+    addq.l #2,a1                        ; move to next bitplane
+    bsr draw_position_and_plane
+    addq.l #2,a1                        ; move to next bitplane
+    bsr draw_position_and_plane
 
-    subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    moveq.l #5,d2
 
-    rept 2
-    addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_status_plane
+    lea 156(a1),a1
+    lea 36(a0),a0
+    bsr draw_position_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_status_plane
+    bsr draw_position_or_plane
+    lea -160(a1),a1
+    lea -32(a0),a0
     rts
 
-draw_status_plane:
+draw_position_and_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
-    ; might be able to exploit the fact that there are empty lines in the status display
-    rept 31
+    rept 11
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     endr
+    rts
+
+draw_position_or_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    rept 4
+    move.w d2,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    endr
+    rts
+
+draw_grey_7_row_block:
+    move.w #$0201,(a3) ; source & destination
+
+    rept 3
+    bsr draw_7_row_and_plane
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    bsr draw_7_row_and_plane
+
+    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+
+    lea 154(a1),a1
+    lea 34(a0),a0
+
+    moveq.l #5,d2
+    bsr draw_standard_plane
+    addq.l #4,a1                        ; move destination to next bitplane
+    addq.l #4,a0                        ; move source to next bitplane
+    bsr draw_standard_plane
+
+    lea -164(a1),a1
+    lea -38(a0),a0
+
+    rts
+
+draw_white_7_row_block:
+    move.w #$0201,(a3) ; source & destination
+
+    rept 3
+    bsr draw_7_row_and_plane
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    bsr draw_7_row_and_plane
+
+    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+
+    lea 156(a1),a1
+    lea 36(a0),a0
+
+    moveq.l #5,d2
+    bsr draw_standard_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_standard_plane
+
+    lea -(160+4)(a1),a1
+    lea -(32+6)(a0),a0
+    rts
+
+draw_metre_block:
+    move.w #$0201,(a3) ; source & destination
+
+    moveq.l #5,d2
+    rept 3
+    bsr draw_standard_plane
+    addq.l #2,a1                        ; move to next bitplane
+    endr
+    bsr draw_standard_plane
+
+    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+
+    lea 154(a1),a1
+    lea 32(a0),a0
+    moveq.l #3,d2
+
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_standard_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_standard_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_standard_plane
+
+    lea -164(a1),a1
+    lea -38(a0),a0
+    rts
+
+draw_standard_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    move.w d2,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    rts
+
+draw_7_row_and_plane:
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+
+    move.w #3,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    move.w #4,(a4)             ; ycount
+    move.w d3,(a5)         ; control
     rts
 
