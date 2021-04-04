@@ -21,7 +21,6 @@ render_status_panel:
     move.w d2,(a5)+         ; endmask1 8a28
     move.w d2,(a5)+         ; endmask2 8a2a
     move.w d2,(a5)+         ; endmask2 8a2c
-    moveq.l #5,d2
     move.w #8,(a5)+          ; dest x increment 8a2e
     move.w #160,(a5)+        ; dest y increment 8a30
     move.l a5,a2             ; backup destination address 8a32
@@ -39,6 +38,7 @@ lap_counter:
     move.l a1,-(sp)
 
     suba.w    #$8,a0
+    moveq.l #5,d2             ; 5 rows at a time for lap counter
     bsr draw_lap_block
 
 status_panel:
@@ -49,6 +49,7 @@ status_panel:
     move.w #8,($ffff8a22).w   ; source y increment
     move.w #3,($ffff8a36).w   ; x count
     move.w #144,($ffff8a30).w ; dest y increment
+    moveq.l #3,d2             ; ycount - 2 rows at a time for status panel
 
     bsr draw_status_block
 
@@ -110,7 +111,7 @@ draw_status_plane:
     move.l a1,(a2)    ; destination
 
     ; might be able to exploit the fact that there are empty lines in the status display
-    rept 19
+    rept 31
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     endr
