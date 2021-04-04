@@ -1,16 +1,3 @@
-    macro status_panel_cpu_blit
-    move.w    (a0)+,d0       ; load something into d0
-    move.w    d0,d1          ; copy something into d1
-    swap      d0             ; swap d0
-    move.w    d1,d0          ; low word and high word of d0 now contain the same
-    and.l     d0,(a1)        ; apply mask to two consecutive words
-    move.l    (a0)+,d1       ; get next value from source data
-    or.l      d1,(a1)+
-    and.l     d0,(a1)+       ; write mask to positions 4 and 6
-    move.w    (a0)+,d1       ; get another value from source data
-    or.w      d1,-4(a1)
-    endm
-
 render_status_panel:
     lea $ffff8a20.w,a5       ; source x increment 8a20
     move.w #8,(a5)+          ; source x increment 8a20
@@ -33,7 +20,6 @@ render_status_panel:
     move.w #$c080,d3
 
 lap_counter:
-    ; this shouldn't be necessary - understand why
     move.l a0,-(sp)
     move.l a1,-(sp)
 
@@ -116,7 +102,6 @@ draw_lap_block:
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     addq.l #4,a0                        ; move source to next bitplane
-    ;addq.l #2,a1                        ; move destination to next bitplane
     bsr draw_lap_plane
     rts
 
@@ -134,10 +119,12 @@ draw_position_block:
     move.w #$0201,(a3) ; source & destination
     moveq.l #2,d2
 
-    rept 3
     bsr draw_position_and_plane
     addq.l #2,a1                        ; move to next bitplane
-    endr
+    bsr draw_position_and_plane
+    addq.l #2,a1                        ; move to next bitplane
+    bsr draw_position_and_plane
+    addq.l #2,a1                        ; move to next bitplane
     bsr draw_position_and_plane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
@@ -251,13 +238,20 @@ draw_metre_block:
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    rept 2
+    lea 160(a1),a1
+    lea 32(a0),a0
+
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_3_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_3_row_or_plane
+    addq.l #2,a1                        ; move destination to next bitplane
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr draw_3_row_or_plane
+
+    lea -160(a1),a1
+    lea -32(a0),a0
 
     ; a1 is +4 at this point
     ; a0 is +4 at this point
@@ -266,12 +260,8 @@ draw_metre_block:
     rts
 
 draw_3_row_or_plane:
-    lea 160(a1),a1
-    lea 32(a0),a0
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
-    lea -160(a1),a1
-    lea -32(a0),a0
 
     move.w #3,(a4)             ; ycount
     move.w d3,(a5)         ; control
@@ -286,12 +276,8 @@ draw_5_row_and_plane:
     rts
 
 draw_5_row_or_plane:
-    ;lea 160(a1),a1
-    ;lea 32(a0),a0
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
-    ;lea -160(a1),a1
-    ;lea -32(a0),a0
 
     move.w #5,(a4)             ; ycount
     move.w d3,(a5)         ; control
