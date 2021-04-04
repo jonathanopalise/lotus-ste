@@ -37,7 +37,7 @@ lap_counter:
     move.l a0,-(sp)
     move.l a1,-(sp)
 
-    suba.w    #$8,a0
+    subq.l    #$8,a0
     moveq.l #5,d2             ; 5 rows at a time for lap counter
     bsr draw_lap_block
 
@@ -64,15 +64,12 @@ draw_lap_block:
     endr
     bsr draw_lap_plane
 
-    subq.l #6,a1                        ; move destination back to initial bitplane
+    subq.l #4,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     addq.l #4,a0                        ; move source to next bitplane
-    addq.l #2,a1                        ; move destination to next bitplane
+    ;addq.l #2,a1                        ; move destination to next bitplane
     bsr draw_lap_plane
-    addq.l #2,a1                        ; move destination to next bitplane
-    addq.l #2,a0                        ; move source to next bitplane
-    ;bsr draw_lap_plane
     rts
 
 draw_lap_plane:
