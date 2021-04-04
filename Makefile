@@ -60,6 +60,8 @@ SAMPLES_DIR = $(SOURCE_DIR)samples/
 0X80000_DEPENDENCIES =\
 	$(GENERATED_SOURCE_DIR)road.s\
 	$(SOURCE_DIR)lz4_decode.s\
+	$(SOURCE_DIR)load_samples.s\
+	$(SOURCE_DIR)init_mountains.s\
 	$(SOURCE_DIR)init_draw_road.s\
 	$(SOURCE_DIR)blitter_sprites.s\
 	$(SOURCE_DIR)sky_gradient.s\
@@ -71,7 +73,6 @@ SAMPLES_DIR = $(SOURCE_DIR)samples/
 	$(SOURCE_DIR)mixer_data.s\
 	$(SOURCE_DIR)mixer_variables.s\
 	$(SOURCE_DIR)mixer_vbl.s\
-	$(SOURCE_DIR)write_microwire.s\
 	$(SOURCE_DIR)do_sound_events.s\
 	$(SAMPLES_DIR)lotus-intro.snd
 

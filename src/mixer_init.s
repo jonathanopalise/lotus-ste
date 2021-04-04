@@ -2,20 +2,20 @@
 mixer_init:
 	movem.l		d0/a0-a1,-(sp)							; is this needed?
 
-    move.w		#%10000000001,d0       					; ym+dma mix (doesn't actually make a difference thanks to a hardware design error!)
-	jsr			write_microwire
-    move.w		#%10001000110,d0       					; bass = +0dB
-	jsr			write_microwire
-    move.w		#%10010000110,d0						; treble = +0dB
-	jsr			write_microwire
-	move.w		#%10011101000,d0						; master volume = +0dB				(10011100101 for mf intro, then return to +0dB?)
-	jsr			write_microwire
-    move.w		#%10100010100,d0						; right balance = +0dB
-	jsr			write_microwire
-    move.w		#%10101010100,d0						; left balance = +0dB
-	jsr			write_microwire
+	lea.l		$ffff8900.w,a0							; dma audio base address
 
-; --- a0 already contains base of dma soundchip
+    move.w		#%10000000001,d0       					; ym+dma mix (doesn't actually make a difference thanks to a hardware design error!)
+	bsr			write_microwire
+    move.w		#%10001000110,d0       					; bass = +0dB
+	bsr			write_microwire
+    move.w		#%10010000110,d0						; treble = +0dB
+	bsr			write_microwire
+	move.w		#%10011101000,d0						; master volume = +0dB				(10011100101 for mf intro, then return to +0dB?)
+	bsr			write_microwire
+    move.w		#%10100010100,d0						; right balance = +0dB
+	bsr			write_microwire
+    move.w		#%10101010100,d0						; left balance = +0dB
+	bsr			write_microwire
 
 	move.l		#dataSounds,addressAudioCurrentStart
 	lea.l		addressAudioCurrentStart,a1
@@ -42,12 +42,15 @@ mixer_init:
 	lea.l		250(a0),a0								; add size of second half of buffer
 	move.l		a0,(a1)									; store end address of second half of buffer
 
-;	move.w		#1000,$7cc3c							; force revs to 1000rpm - not needed now
-
     movem.l		(sp)+,d0/a0-a1							; is this needed?
 	
     clr.w		$7ccfa									; replaces instruction overwritten by jump to this routine
     move.w		#$1ea,$7ccf6							; but uses longer delay...
     move.w		#$1f4,$7ccf8							; ... to make sure all of intro sample plays
 
+	rts
+
+write_microwire
+	move.w		#%0000011111111111,$24(a0)				; write microwire mask
+	move.w		d0,$22(a0)								; write data to microwire
 	rts

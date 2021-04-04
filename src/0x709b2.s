@@ -38,3 +38,6 @@ labelFinishedSoundEventCheck
     movem.l     (sp)+,d0-d1/a0
     rts
 
+    rept        9
+    nop
+    endr

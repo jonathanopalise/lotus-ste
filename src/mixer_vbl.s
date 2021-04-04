@@ -3,6 +3,8 @@ mixer_vbl:
 	movem.l		d0-d3/a0-a2,-(sp)
 
 	move.w		#%10011101000,d0															; start master volume at +0dB
+	lea.l		$ffff8900.w,a0																; dma audio base address								
+	move.w		#%0000011111111111,$24(a0)													; write microwire mask
 
 	tst.w		$707c4																		; check game state flag
 	beq.s		labelDMAAudioOn																; if zero, then race in progress
@@ -23,7 +25,7 @@ labelClearSoundEventLatchFalse
 	beq.s		labelDMAAudioOn																; if track is engine, then mix dma sound
 
 labelDMAAudioOff
-	bsr			write_microwire																; set master volume to +0dB
+	move.w		d0,$22(a0)																	; set master volume to +0dB
 	bra			labelFinishedAudio															; and end
 
 labelDMAAudioOn
@@ -40,9 +42,7 @@ labelDMAAudioOn
 	sub.w		d1,d0																		; subtract result from master volume centre position
 		
 labelFinishedVolumeCheck
-	bsr			write_microwire																; and use value in d0 to write master volume data to microwire
-
-	lea.l		$ffff8900.w,a0																; dma audio registers base address
+	move.w		d0,$22(a0)																	; set master volume depending on fade
 
 	move.w		$7cce6,d1																	; fetch state machine value
 	cmp.w		#$0b,d1
@@ -110,48 +110,31 @@ label1PlayerSound
 	move.l		(a1,d0.w),d1																; fetch value from scaler table offset
 
 	moveq		#0,d0																		; clear it for use as engine offset
+	swap		d1
+
+	rept		250
+	move.b		(a0,d0.w),(a2)+
+	addx.l		d1,d0																			; effectively divide offset by 65536
+	endr
 
 	tst.w		variableSoundEventLatch														; is there a sound event?
-	bmi			labelMixEngineOnly															; if not then just mix the engine sound
+	bmi			labelFinishedSoundMixing													; if not then just mix the engine sound
 
 	move.l		variableSoundEventAddress,a1												; current sound event sample base address											
 	move.w		variableSoundEventPosition,d2												; offset into sample data
 	lea.l		(a1,d2),a1																	; adjust address
 
-	rept		249
-	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
-	swap		d0																			; effectively multiply offset by 65536
-	add.l		d1,d0																		; add scaler to offset
-	swap		d0																			; effectively divide offset by 65536
-	add.b		(a1)+,d2																	; add sound event sample to mix
-	move.b		d2,(a2)+																	; put accumulated sample value into dma buffer
+	lea.l		-250(a2),a2
+	rept		250
+	move.b		(a1)+,d2
+	add.b		d2,(a2)+																	; put accumulated sample value into dma buffer
 	endr
-	move.b		(a0,d0.w),d2																; fetch sample cycle at engine effect current address + new offset
-	swap		d0																			; effectively multiply offset by 65536
-	add.l		d1,d0																		; add scaler to offset
-	swap		d0																			; effectively divide offset by 65536
-	add.b		(a1),d2																		; add sound event sample to mix
-	move.b		d2,(a2)																		; put accumulated sample value into dma buffer
 
 	add.w		#250,variableSoundEventPosition												; store current position of sound event effect
 	move.w		variableSoundEventLength,d1													; fetch sound event length
 	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
-	bhi			labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
+	bhi.s		labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
-
-	bra			labelFinishedSoundMixing													; finished
-
-labelMixEngineOnly
-	rept		249
-	move.b		(a0,d0.w),(a2)+																; thanks to Defence Force for noticing the unnecessary use of d2 for this!
-	swap		d0																			; effectively multiply offset by 65536
-	add.l		d1,d0																		; add scaler to offset
-	swap		d0																			; effectively divide offset by 65536
-	endr
-	move.b		(a0,d0.w),(a2)
-	swap		d0																			; effectively multiply offset by 65536
-	add.l		d1,d0																		; add scaler to offset
-	swap		d0																			; effectively divide offset by 65536
 
 labelFinishedSoundMixing
 
