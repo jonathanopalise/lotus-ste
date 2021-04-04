@@ -221,10 +221,9 @@ draw_metre_block:
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
     lea 154(a1),a1
-    lea 32(a0),a0
+    lea 34(a0),a0
     moveq.l #3,d2
 
-    addq.l #2,a0                        ; move source to next bitplane
     bsr draw_standard_plane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
@@ -240,7 +239,6 @@ draw_metre_block:
 draw_standard_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
-
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     rts
@@ -248,7 +246,6 @@ draw_standard_plane:
 draw_7_row_and_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
-
     move.w #3,(a4)             ; ycount
     move.w d3,(a5)         ; control
     move.w #4,(a4)             ; ycount
