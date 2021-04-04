@@ -127,16 +127,17 @@ draw_position_block:
     addq.l #2,a1                        ; move to next bitplane
     bsr draw_position_and_plane
 
-    subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
     moveq.l #5,d2
 
-    addq.l #4,a0
-    addq.l #2,a1
+    lea 156(a1),a1
+    lea 36(a0),a0
     bsr draw_position_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_position_or_plane
+    lea -160(a1),a1
+    lea -32(a0),a0
     rts
 
 draw_position_and_plane:
@@ -150,12 +151,8 @@ draw_position_and_plane:
     rts
 
 draw_position_or_plane:
-    lea 160(a1),a1
-    lea 32(a0),a0
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
-    lea -160(a1),a1
-    lea -32(a0),a0
 
     rept 4
     move.w d2,(a4)             ; ycount
