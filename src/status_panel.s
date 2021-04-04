@@ -96,6 +96,11 @@ status_panel:
 
     bsr draw_grey_7_row_block
 
+    lea 32*9(a0),a0
+    lea 160*9(a1),a1
+
+    bsr draw_position_block
+
     rts
 
 draw_lap_block:
@@ -126,33 +131,49 @@ draw_lap_plane:
     endr
     rts
 
-draw_status_block:
+draw_position_block:
     move.w #$0201,(a3) ; source & destination
+    moveq.l #2,d2
 
     rept 3
-    bsr draw_status_plane
+    bsr draw_position_and_plane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    bsr draw_status_plane
+    bsr draw_position_and_plane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
+    moveq.l #5,d2
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_status_plane
+    bsr draw_position_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_status_plane
+    bsr draw_position_or_plane
     rts
 
-draw_status_plane:
+draw_position_and_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
     ; might be able to exploit the fact that there are empty lines in the status display
-    rept 31
+    rept 11
+    move.w d2,(a4)             ; ycount
+    move.w d3,(a5)         ; control
+    endr
+    rts
+
+draw_position_or_plane:
+    lea 160(a1),a1
+    lea 32(a0),a0
+    move.l a0,(a6)    ; source
+    move.l a1,(a2)    ; destination
+    lea -160(a1),a1
+    lea -32(a0),a0
+
+    rept 4
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
     endr
