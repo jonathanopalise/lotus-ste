@@ -124,7 +124,6 @@ draw_lap_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
-    ; might be able to exploit the fact that there are empty lines in the lap display
     rept 19
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
@@ -143,13 +142,12 @@ draw_position_block:
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
-
     moveq.l #5,d2
-    rept 2
-    addq.l #2,a0                        ; move source to next bitplane
+
+    addq.l #4,a0
+    addq.l #2,a1
     bsr draw_position_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_position_or_plane
     rts
@@ -158,7 +156,6 @@ draw_position_and_plane:
     move.l a0,(a6)    ; source
     move.l a1,(a2)    ; destination
 
-    ; might be able to exploit the fact that there are empty lines in the status display
     rept 11
     move.w d2,(a4)             ; ycount
     move.w d3,(a5)         ; control
@@ -217,17 +214,12 @@ draw_white_7_row_block:
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    addq.l #2,a0
+    addq.l #4,a0
     addq.l #2,a1
-
-    addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
-    ;addq.l #2,a1                        ; move destination to next bitplane
-    ;addq.l #2,a0                        ; move source to next bitplane
-    ;bsr draw_5_row_or_plane
 
     ; a1 is +4 at this point
     ; a0 is +4 at this point
@@ -269,7 +261,6 @@ draw_3_row_or_plane:
     lea -160(a1),a1
     lea -32(a0),a0
 
-    ; might be able to exploit the fact that there are empty lines in the status display
     move.w #3,(a4)             ; ycount
     move.w d3,(a5)         ; control
     rts
