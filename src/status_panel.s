@@ -175,11 +175,12 @@ draw_grey_7_row_block:
     lea 160(a1),a1
     lea 32(a0),a0
 
-    rept 2
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
+    addq.l #2,a0                        ; move source to next bitplane
+    ;bsr draw_5_row_or_plane
+    addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_5_row_or_plane
 
