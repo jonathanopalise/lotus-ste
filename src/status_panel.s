@@ -67,14 +67,13 @@ draw_lap_block:
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    addq.l #2,a0                        ; move source to next bitplane
-    ;bsr draw_lap_plane
+    addq.l #4,a0                        ; move source to next bitplane
     addq.l #2,a1                        ; move destination to next bitplane
-    addq.l #2,a0                        ; move source to next bitplane
     bsr draw_lap_plane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     ;bsr draw_lap_plane
+    rts
 
 draw_lap_plane:
     move.l a0,(a6)    ; source
@@ -106,6 +105,7 @@ draw_status_block:
     endr
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_status_plane
+    rts
 
 draw_status_plane:
     move.l a0,(a6)    ; source
