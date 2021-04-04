@@ -182,8 +182,6 @@ draw_grey_7_row_block:
     lea -164(a1),a1
     lea -38(a0),a0
 
-    ; a1 is +4 at this point
-    ; a0 is +4 at this point
     rts
 
 draw_white_7_row_block:
@@ -220,13 +218,12 @@ draw_metre_block:
     endr
     bsr draw_standard_plane
 
-    subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,(a3)         ; hop/op: read from source, source | destination
 
-    lea 160(a1),a1
+    lea 154(a1),a1
     lea 32(a0),a0
-
     moveq.l #3,d2
+
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_standard_plane
     addq.l #2,a1                        ; move destination to next bitplane
@@ -236,13 +233,8 @@ draw_metre_block:
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_standard_plane
 
-    lea -160(a1),a1
-    lea -32(a0),a0
-
-    ; a1 is +4 at this point
-    ; a0 is +4 at this point
-    subq.l #6,a0
-    subq.l #4,a1
+    lea -164(a1),a1
+    lea -38(a0),a0
     rts
 
 draw_standard_plane:
@@ -262,5 +254,4 @@ draw_7_row_and_plane:
     move.w #4,(a4)             ; ycount
     move.w d3,(a5)         ; control
     rts
-
 
