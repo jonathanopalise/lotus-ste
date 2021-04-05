@@ -228,12 +228,9 @@ draw_metre_block:
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr draw_standard_plane
-    addq.l #2,a1                        ; move destination to next bitplane
-    addq.l #2,a0                        ; move source to next bitplane
-    bsr draw_standard_plane
 
-    lea -164(a1),a1
-    lea -38(a0),a0
+    lea -162(a1),a1
+    lea -36(a0),a0
     rts
 
 draw_standard_plane:
