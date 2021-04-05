@@ -191,21 +191,6 @@ final_bar_vector_instruction:
     bclr      #0,$fffffa0f.w
     rte
 
-;p2_sky_line_count:
-;    dc.b $0
-;    dc.b $0 ; for padding
-
-;p2_initialise_sky:
-;    move.l #$70754,$70742 ; default normal codepath
-;    cmp.w #8,d0
-;    ble.s p2_sky_not_visible
-;    move.l #p2_raster_routine,$70742 ; go to the new p2 sky routine if more than 8 lines
-;    move.b d0,d1
-;    sub.b #8,d1
-;    move.b d1,p2_sky_line_count
-;p2_sky_not_visible:
-;    rts
-
 p2_sky_line_count:
     dc.b $0
     dc.b $0 ; for padding
@@ -226,8 +211,6 @@ p2_new_routine_after_lines:
     dc.b $0 ; for padding
 p2_new_routine_after_vector:
     dc.l $0
-
-;---- NEW CODE FROM OTHER APPROACH
 
 p2_initialise_sky:
     move.l #$70754,$70742 ; default normal codepath
@@ -298,11 +281,8 @@ p2_lines_remaining_greater_than_4:
     move.l d0,a0
     move.w    (a0),p2_gradient_start_colour
 
-    ;move.b    #0,$fffffa1b.w
     move.b    d1,p2_new_routine_after_lines ; new routine after
-    ;move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,p2_new_routine_after_vector
-    ;bclr      #0,$fffffa0f.w
 
     bra.s p2_endvbl
 
@@ -339,22 +319,16 @@ p2_solid_lines_required_greater_than_zero:
     lea gradient_rgb_values(pc),a0
     move.l a0,p2_current_gradient_address
 
-    ;clr.b     $fffffa1b.w
     move.b    d1,p2_new_routine_after_lines ; new routine after
-    ;move.b    #8,$fffffa1b.w
     move.l    #new_raster_routine,p2_new_routine_after_vector
-    ;bclr      #0,$fffffa0f.w
 
     bra.s p2_endvbl
     ; $solidLinesRequired > 0
     ; special case, not yet worked out, so just use default code
 
 p2_legacy:
-    ;move.b #0,$fffffa1b.w
     move.b p2_sky_line_count(pc),p2_new_routine_after_lines ; number of lines
-    ;move.b #8,$fffffa1b.w
     move.l #$70754,p2_new_routine_after_vector
-    ;bclr #0,$fffffa0f.w
 p2_endvbl:
     movem.l (sp)+,d0-d4/a0
     rts
