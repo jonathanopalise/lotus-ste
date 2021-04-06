@@ -6,6 +6,8 @@
 
 	opt	x-,o+
 
+    include generated/symbols_for_loader.inc
+
 	clr.l	-(sp)
 	move.w	#$20,-(sp)
 	trap	#1
@@ -66,6 +68,7 @@
     move.l #$80000,a1
     jsr lz4_decode
 
+    move.w is_ste,hasDmaSound
 
     ; empire code START
 
@@ -80,11 +83,13 @@
 
 	jmp	$70400	; Do it!
 
+is_ste:
+    dc.w 0
+
 fhandle:
     dc.w 0
 
 cars_filename	dc.b	"cars.lz4",0
-
     align 1
 
 ext_filename:
@@ -163,9 +168,17 @@ memory_ok:
     ; OK, dbasell holds its value: you're an STe.
 
 memSTE:
-    bra verdict
+    move.w #1,is_ste
+    bra.s verdict
 
 memST:				; for ST
+    clr.w is_ste
+    move.w    #-1,-(sp)   ; Offset 2
+    move.w    #64,-(sp)    ; Offset 0
+    trap      #14          ; Call XBIOS
+    addq.l    #4,sp        ; Correct stack
+    btst      #1,d0
+    bne.s verdict
 
     add.l #(7*160),a3
     addq.l #1,d5 ; increment tests failed

@@ -91,7 +91,7 @@ check_dependencies:
 
 clean:
 	rm $(GENERATED_SOURCE_DIR)* || true
-	rmdir $(GENERATED_SOURCE_DIR)
+	rmdir $(GENERATED_SOURCE_DIR) || true
 	rm $(BIN_DIR)*.bin || true
 	rm $(BIN_DIR)*.o || true
 	rm $(RELEASE_DISK_IMAGE) || true
@@ -115,10 +115,11 @@ $(GAMEFILES_DESTINATION_DIR)0x80000.LZ4: $(BIN_DIR)0x80000.bin $(GAMEFILES_DESTI
 $(GAMEFILES_DESTINATION_DIR)SAMPLES.LZ4: $(SAMPLES_DIR)lotus-sounds.snd $(GAMEFILES_DESTINATION_DIR)
 	$(LZ4) -9 $< $@
 
-$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: $(SOURCE_DIR)loader.s $(GENERATED_SOURCE_DIR)system_check_graphics.s $(GENERATED_SOURCE_DIR)system_check_palette.s $(GAMEFILES_DESTINATION_DIR)
+$(GAMEFILES_DESTINATION_DIR)AUTO/LOADER.PRG: $(SOURCE_DIR)loader.s $(GENERATED_SOURCE_DIR)system_check_graphics.s $(GENERATED_SOURCE_DIR)system_check_palette.s $(GAMEFILES_DESTINATION_DIR) $(GENERATED_SOURCE_DIR)symbols_0x80000.inc 
+	grep hasDmaSound $(GENERATED_SOURCE_DIR)symbols_0x80000.inc > $(GENERATED_SOURCE_DIR)symbols_for_loader.inc
 	$(VASM) $(SOURCE_DIR)loader.s -Felf -o $(BIN_DIR)loader.o
 	mkdir -p $(GAMEFILES_DESTINATION_DIR)AUTO
-	vlink -s -S -x -b ataritos $(BIN_DIR)loader.o -o $@
+	$(VLINK) -s -S -x -b ataritos $(BIN_DIR)loader.o -o $@
 	$(UPX) -9 $@
 
 $(GAMEFILES_DESTINATION_DIR):
