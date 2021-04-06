@@ -107,7 +107,7 @@ label_7a374:
     tst.w     d4
     beq       nothingtodraw
     
-    jmp drawscenery
+    jmp drawscenery_4bpp
 
 nothingtodraw:
 
