@@ -241,21 +241,21 @@ blitterstart_3bpp:
     move.b #$c0,d6                      ; blitter start instruction
 
     rept 3
-    jsr drawsceneryplane
+    bsr drawsceneryplane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    jsr drawsceneryplane
+    bsr drawsceneryplane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
     rept 2
     addq.l #2,a0                        ; move source to next bitplane
-    jsr drawsceneryplane
+    bsr drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
     endr
     addq.l #2,a0                        ; move source to next bitplane
-    jsr drawsceneryplane
+    bsr drawsceneryplane
 
     movem.l (a7)+,a2-a6
 
