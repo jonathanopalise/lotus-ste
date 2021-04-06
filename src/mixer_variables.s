@@ -13,3 +13,5 @@ variableSoundEventAddress			ds.l		1
 variableSoundEventLength			ds.w		1
 variableSoundEventRetrigPeriod		ds.w		1
 variableSoundEventPosition			ds.w		1
+
+hasDmaSound                         ds.w        0
