@@ -50,7 +50,7 @@ label_71cf6
 	adda.w		d0,a0
 	move.w		(a0),d0
 	cmp.w		$70a24,d0
-	beq.s		label_709d6
+;	beq.s		label_709d6												; silly!
 	bcc.s		label_709e6
 label_709d6
 	move.w		$70a2e,d0
@@ -73,10 +73,12 @@ label_709e6
 label_70a16
 	move.w		#$ffff,$7097c
 label_71d02
-	tst.w		$71ffe
+;	tst.w		$71ffe													; inefficient
+	move.w		$71ffe,d2
 	beq.s		label_71d2c
 	move.l		#$f80c0,d0
-	divu		$71ffe,d0
+;	divu		$71ffe,d0												; inefficient
+	divu		d2,d0
 	swap		d0
 	move.w		$72002,d0
 	swap		d0
@@ -89,10 +91,12 @@ label_71d02
 label_71d2c
 	move.l		#$3f8,d0
 label_71d32
-	tst.w		$72000
+;	tst.w		$72000													; inefficient
+	move.w		$72000,d2
 	beq.s		label_71d5c
 	move.l		#$f80c0,d1
-	divu		$72000,d1
+;	divu		$72000,d1												; inefficient
+	divu		d2,d1
 	swap		d1
 	move.w		$72004,d1
 	swap		d1
