@@ -4,9 +4,6 @@ leftclipped:
 rightclipped:
     dc.w 0
 
-source_skip:
-    dc.l 0
-
 sprite_jump_table:
     dc.l 0 ; should never be used
     dc.l draw_eight_line_chunks    ; 16 wide
@@ -14,11 +11,11 @@ sprite_jump_table:
     dc.l draw_two_line_chunks    ; 48 wide
 
 drawscenery_3bpp:
-    move.w #8,source_skip+2
+    moveq.l #8,d5
     bra.s drawscenery
 
 drawscenery_4bpp:
-    move.w #10,source_skip+2
+    moveq.l #10,d5
 
 drawscenery:
 
@@ -37,9 +34,9 @@ drawscenery:
     lea $ffff8a3c.w,a6
 
     addq.l #8,d6               ; convert to value suitable for blitter
-    add.w source_skip+2(pc),d7               ; convert to value suitable for blitter | TODO: #10 for 4bpp and #8 for 3bpp
+    add.w d5,d7               ; convert to value suitable for blitter | TODO: #10 for 4bpp and #8 for 3bpp
 
-    move.w source_skip+2(pc),($ffff8a20).w   ; source x increment | TODO: #10 for 4bpp and #8 for 3bpp
+    move.w d5,($ffff8a20).w   ; source x increment | TODO: #10 for 4bpp and #8 for 3bpp
     move.w #8,($ffff8a2e).w    ; dest x increment
     move.w #$201,($ffff8a3a).w ; hop/op: read from source, source & destination
 
@@ -55,7 +52,7 @@ drawscenery:
     tst.w rightclipped
     bne.s nonfsr
 
-    add.w source_skip+2(pc),d7               ; TODO: #10 for 4bpp, #8 for 3bpp
+    add.w d5,d7               ; TODO: #10 for 4bpp, #8 for 3bpp
     or.b #$40,d1
 
 nonfsr:
@@ -63,8 +60,8 @@ nonfsr:
     tst.w leftclipped
     beq.s nofxsr
 
-    sub.w source_skip+2(pc),d7     ; TODO: #10 for 4bpp, #8 for 3bpp
-    sub.l source_skip(pc),a0
+    sub.w d5,d7     ; TODO: #10 for 4bpp, #8 for 3bpp
+    sub.l d5,a0
 
     or.b #$80,d1
 
@@ -230,7 +227,7 @@ draw_now:
     addq.l #2,a0                        ; move source to next bitplane
     bsr.s drawsceneryplane
 
-    cmp.w #10,source_skip+2
+    cmp.w #10,d5
     bne.s alldone
 
     ; stop here if 3bpp
