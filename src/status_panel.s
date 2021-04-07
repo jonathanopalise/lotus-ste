@@ -18,6 +18,8 @@ render_status_panel:
     move.l a5,a3             ; copy hop/op 8a3a into a3 reg
     addq.l #2,a5             ; a5 is now blitter control 8a3c
     move.w #$c080,d3
+    move.w #$0201,d4
+    move.w #$0207,d5
 
 lap_counter:
     move.l a0,-(sp)
@@ -26,7 +28,7 @@ lap_counter:
     subq.l    #$8,a0
     moveq.l #5,d2             ; 5 rows at a time for lap counter
 
-    move.w #$0201,(a3) ; source & destination
+    move.w d4,(a3) ; source & destination
 
     rept 3
     bsr.s draw_lap_plane
@@ -35,7 +37,7 @@ lap_counter:
     bsr.s draw_lap_plane
 
     subq.l #4,a1                        ; move destination back to initial bitplane
-    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    move.w d5,(a3)         ; hop/op: read from source, source | destination
 
     addq.l #4,a0                        ; move source to next bitplane
     bsr.s draw_lap_plane
@@ -113,7 +115,7 @@ status_panel:
     rts
 
 draw_grey_7_row_block:
-    move.w #$0201,(a3) ; source & destination
+    move.w d4,(a3) ; source & destination
 
     rept 3
     bsr.s draw_7_row_and_plane
@@ -121,7 +123,7 @@ draw_grey_7_row_block:
     endr
     bsr.s draw_7_row_and_plane
 
-    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    move.w d5,(a3)         ; hop/op: read from source, source | destination
 
     lea 154(a1),a1
     lea 34(a0),a0
@@ -155,7 +157,7 @@ draw_7_row_and_plane:
     rts
 
 draw_white_7_row_block:
-    move.w #$0201,(a3) ; source & destination
+    move.w d4,(a3) ; source & destination
 
     rept 3
     bsr.s draw_7_row_and_plane
@@ -163,7 +165,7 @@ draw_white_7_row_block:
     endr
     bsr.s draw_7_row_and_plane
 
-    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    move.w d5,(a3)         ; hop/op: read from source, source | destination
 
     lea 156(a1),a1
     lea 36(a0),a0
@@ -179,7 +181,7 @@ draw_white_7_row_block:
     rts
 
 draw_metre_block:
-    move.w #$0201,(a3) ; source & destination
+    move.w d4,(a3) ; source & destination
 
     moveq.l #5,d2
     rept 3
@@ -188,7 +190,7 @@ draw_metre_block:
     endr
     bsr.s draw_standard_plane
 
-    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    move.w d5,(a3)         ; hop/op: read from source, source | destination
 
     lea 154(a1),a1
     lea 34(a0),a0
@@ -204,7 +206,7 @@ draw_metre_block:
     rts
 
 draw_position_block:
-    move.w #$0201,(a3) ; source & destination
+    move.w d4,(a3) ; source & destination
     moveq.l #2,d2
 
     bsr.s draw_position_and_plane
@@ -215,7 +217,7 @@ draw_position_block:
     addq.l #2,a1                        ; move to next bitplane
     bsr.s draw_position_and_plane
 
-    move.w #$0207,(a3)         ; hop/op: read from source, source | destination
+    move.w d5,(a3)         ; hop/op: read from source, source | destination
     moveq.l #5,d2
 
     lea 156(a1),a1
