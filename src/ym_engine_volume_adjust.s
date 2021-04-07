@@ -20,4 +20,4 @@ labelClampChannelBEngineVolume
 	clr.b	d2
 labelFinishedChannelBEngineVolumeCheck:
 	movep.w	d2,0(a0)
-	rts
+	jmp		$70be8

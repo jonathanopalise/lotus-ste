@@ -24,6 +24,7 @@ CARS_REL_PATCHES =\
 	$(BIN_DIR)0x7086e.bin\
 	$(BIN_DIR)0x708ba.bin\
 	$(BIN_DIR)0x709b2.bin\
+	$(BIN_DIR)0x70ba6.bin\
 	$(BIN_DIR)0x70be2.bin\
 	$(BIN_DIR)0x70d6c.bin\
 	$(BIN_DIR)0x7133e.bin\

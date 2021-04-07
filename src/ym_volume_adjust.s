@@ -12,7 +12,7 @@ labelFinishedChannelAVolumeCheck
     move.b  #$9,(a0)
 ; --------------------------------------------------
     move.b  $7db70,d0				; was PC-relative
-    rts
+    jmp     $7de3c
 
 YMChannelBVolumeAdjust:
     cmp.b   d2,d0
@@ -27,7 +27,7 @@ labelFinishedChannelBVolumeCheck
     move.b  #$a,(a0)
 ; --------------------------------------------------
     move.b  $7db92,d0				; was PC-relative
-    rts
+    jmp     $7de56
 
 YMChannelCVolumeAdjust:
     cmp.b   d2,d0
@@ -41,4 +41,4 @@ labelFinishedChannelCVolumeCheck
     move.b  d0,(a1)
     tst.b   6(a2)
 ; --------------------------------------------------
-    rts
+    jmp     $7de70

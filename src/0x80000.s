@@ -11,6 +11,7 @@
     include "preprocess_palette.s"
     include "ym_volume_adjust.s"
     include "ym_engine_volume_adjust.s"
+    include "ym_effect_volume_adjust.s"
     include "vbl_start_intercept.s"
     include "mixer_init.s"
     include "mixer_data.s"
