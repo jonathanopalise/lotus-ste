@@ -170,24 +170,45 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 $pitsOffset = 0;
             }
 
+            $leftRumbleStripLeft = ($midpointTexturePosition + 0.46 + $pitsOffset);
+            $leftRumbleStripRight = ($midpointTexturePosition + 0.54 + $pitsOffset);
+            $rightRumbleStripLeft = ($midpointTexturePosition - 0.54);
+            $rightRumbleStripRight = ($midpointTexturePosition - 0.46);
+
+            $whiteLine1Left = ($midpointTexturePosition + 0.42);
+            $whiteLine1Right = ($midpointTexturePosition + 0.44);
+            $whiteLine2Left = ($midpointTexturePosition + 0.46);
+            $whiteLine2Right = ($midpointTexturePosition + 0.48);
+            $whiteLine3Left = ($midpointTexturePosition - 0.44);
+            $whiteLine3Right = ($midpointTexturePosition - 0.42);
+            $whiteLine4Left = ($midpointTexturePosition - 0.24);
+            $whiteLine4Right = ($midpointTexturePosition - 0.22);
+            $whiteLine5Left = ($midpointTexturePosition + 0.22);
+            $whiteLine5Right = ($midpointTexturePosition + 0.24);
+            $whiteLine6Left = ($midpointTexturePosition - 0.01);
+            $whiteLine6Right = ($midpointTexturePosition + 0.01);
+
+            $asphaltLeft = ($midpointTexturePosition - 0.5);
+            $asphaltRight = ($midpointTexturePosition + 0.5 + $pitsOffset);
+
             for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
-                if (($texturePosition > ($midpointTexturePosition + 0.46 + $pitsOffset)) && ($texturePosition < ($midpointTexturePosition + 0.54 + $pitsOffset))) {
+                if (($texturePosition > $leftRumbleStripLeft) && ($texturePosition < $leftRumbleStripRight)) {
                     $pixelColour = $rumbleStripColour; // left rumble strip
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.54)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
+                } elseif (($texturePosition > $rightRumbleStripLeft) && ($texturePosition < $rightRumbleStripRight)) {
                     $pixelColour = $rumbleStripColour; // right rumble strip
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
+                } elseif (($texturePosition > $whiteLine1Left) && ($texturePosition < $whiteLine1Right)) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.48)) && $thePits) {
+                } elseif (($texturePosition > $whiteLine2Left) && ($texturePosition < $whiteLine2Right) && $thePits) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
+                } elseif (($texturePosition > $whiteLine3Left) && ($texturePosition < $whiteLine3Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
+                } elseif (($texturePosition > $whiteLine4Left) && ($texturePosition < $whiteLine4Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
+                } elseif (($texturePosition > $whiteLine5Left) && ($texturePosition < $whiteLine5Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
+                } elseif (($texturePosition > $whiteLine6Left) && ($texturePosition < $whiteLine6Right)) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5 + $pitsOffset))) {
+                } elseif (($texturePosition > $asphaltLeft) && ($texturePosition < $asphaltRight)) {
                     $pixelColour = $asphaltColour;
                 } else {
                     $pixelColour = $grassColour;
