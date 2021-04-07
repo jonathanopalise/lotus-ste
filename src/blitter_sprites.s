@@ -1,10 +1,24 @@
 leftclipped:
-
     dc.w 0
 
 rightclipped:
-
     dc.w 0
+
+source_skip:
+    dc.l 0
+
+sprite_jump_table:
+    dc.l 0 ; should never be used
+    dc.l draw_eight_line_chunks    ; 16 wide
+    dc.l draw_four_line_chunks    ; 32 wide
+    dc.l draw_two_line_chunks    ; 48 wide
+
+drawscenery_3bpp:
+    move.w #8,source_skip+2
+    bra.s drawscenery
+
+drawscenery_4bpp:
+    move.w #10,source_skip+2
 
 drawscenery:
 
@@ -24,9 +38,9 @@ drawscenery:
     lea $ffff8a3c.w,a6
 
     addq.l #8,d6               ; convert to value suitable for blitter
-    add.w #10,d7               ; convert to value suitable for blitter
+    add.w source_skip+2(pc),d7               ; convert to value suitable for blitter | TODO: #10 for 4bpp and #8 for 3bpp
 
-    move.w #10,($ffff8a20).w   ; source x increment
+    move.w source_skip+2(pc),($ffff8a20).w   ; source x increment | TODO: #10 for 4bpp and #8 for 3bpp
     move.w #8,($ffff8a2e).w    ; dest x increment
     move.w #$201,($ffff8a3a).w ; hop/op: read from source, source & destination
 
@@ -42,7 +56,7 @@ drawscenery:
     tst.w rightclipped
     bne.s nonfsr
 
-    add.w #10,d7
+    add.w source_skip+2,d7               ; TODO: #10 for 4bpp, #8 for 3bpp
     or.b #$40,d1
 
 nonfsr:
@@ -50,8 +64,9 @@ nonfsr:
     tst.w leftclipped
     beq.s nofxsr
 
-    sub.w #10,d7
-    lea -10(a0),a0
+    sub.w source_skip+2,d7     ; TODO: #10 for 4bpp, #8 for 3bpp
+    sub.l source_skip,a0
+
     or.b #$80,d1
 
     cmp.w #1,d4
@@ -104,11 +119,98 @@ nocalcendmask3:
     ; looks like d0, d1 and d2 are also available to us
 
 blitterstart:
-    move.w #802,d1
-    lsl.w #2,d3
+
+    cmp.w #3,d4
+    bgt draw_one_line_chunks
+
+    lea sprite_jump_table(pc),a3
+    move.w d4,d2
+    add.w d2,d2
+    add.w d2,d2
+    move.l (a3,d2.w),a3
+    jmp (a3)
+
+;draw_all:
+;    move.w #798,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
+;    move.w d3,finalblit+2                 ; ycount
+;    bra.s draw_now
+
+draw_eight_line_chunks:
+    lea eight_line_chunks_lookup(pc),a3
+    move.w d3,d2
+    and.w #7,d2
+    move.b (a3,d2.w),d2
+    move.w d2,finalblit+2
+
+    move.w #798,d1
+    subq.w #1,d3
+    and.w #$f8,d3
+    lsr.w #1,d3
     sub.w d3,d1
     move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
+    moveq.l #8,d1                       ; ycount
+    bra.s draw_now
+
+eight_line_chunks_lookup:
+    dc.b 8
+    dc.b 1
+    dc.b 2
+    dc.b 3
+    dc.b 4
+    dc.b 5
+    dc.b 6
+    dc.b 7
+
+draw_four_line_chunks:
+    lea four_line_chunks_lookup(pc),a3
+    move.w d3,d2
+    and.w #3,d2
+    move.b (a3,d2.w),d2
+    move.w d2,finalblit+2
+
+    move.w #798,d1
+    subq.w #1,d3
+    and.w #$fc,d3
+    sub.w d3,d1
+    move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
+    moveq.l #4,d1                       ; ycount
+    bra.s draw_now
+
+four_line_chunks_lookup:
+    dc.b 4
+    dc.b 1
+    dc.b 2
+    dc.b 3
+
+draw_two_line_chunks:
+    lea two_line_chunks_lookup(pc),a3
+    move.w d3,d2
+    and.w #1,d2
+    move.b (a3,d2.w),d2
+    move.w d2,finalblit+2
+
+    move.w #798,d1
+    subq.w #1,d3
+    and.w #$fe,d3
+    add.w d3,d3
+    sub.w d3,d1
+    move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
+    moveq.l #2,d1                       ; ycount
+    bra.s draw_now
+
+two_line_chunks_lookup:
+    dc.b 2
+    dc.b 1
+
+draw_one_line_chunks:
+    move.w #802,d1                      ; size of unrolled blitter calling table plus 2
+    lsl.w #2,d3                         ; one entry in the table is 4 bytes
+    sub.w d3,d1                         ; generate value to be placed within modified bra instruction
+    move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
     moveq.l #1,d1                       ; ycount
+    move.w d1,finalblit+2
+
+draw_now:
     move.b #$c0,d6                      ; blitter start instruction
 
     rept 3
@@ -120,16 +222,25 @@ blitterstart:
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
-    rept 3
     addq.l #2,a0                        ; move source to next bitplane
     bsr drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
-    endr
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr drawsceneryplane
+    addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
     bsr drawsceneryplane
 
-    movem.l (a7)+,a2-a6
+    cmp.w #10,source_skip+2
+    bne.s alldone
 
+    ; stop here if 3bpp
+    addq.l #2,a1                        ; move destination to next bitplane
+    addq.l #2,a0                        ; move source to next bitplane
+    bsr drawsceneryplane
+
+alldone:
+    movem.l (a7)+,a2-a6
     rts
 
 drawsceneryplane:
@@ -138,127 +249,14 @@ drawsceneryplane:
 
 drawsceneryplane_jsr:
     bra drawsceneryplane_aft
-    rept 200
+    rept 199
     move.w d1,(a2)             ; ycount
     move.b d6,(a6)
     endr
+finalblit:
+    move.w #1,(a2)
+    move.b d6,(a6)
 drawsceneryplane_aft:
-    rts
-
-drawscenery_3bpp:
-
-    movem.l a2-a6,-(a7)
-    lea $ffff8a38.w,a2
-    lea $ffff8a24.w,a4
-    lea $ffff8a32.w,a5
-    lea $ffff8a3c.w,a6
-
-    moveq.l #8,d0
-    add.l d0,d6                        ; convert to value suitable for blitter
-    add.w d0,d7                        ; convert to value suitable for blitter
-
-    move.w d0,($ffff8a20).w            ; source x increment
-    move.w d0,($ffff8a2e).w             ; dest x increment
-    move.w #$0201,($ffff8a3a).w         ; hop/op: read from source, source & destination
-
-    move.l a3,d0                        ; get desired xpos of scenery object
-    and.w #$f,d0                        ; convert to skew value for blitter
-    move.w d0,d1
-    beq.s nonfsr_3bpp                        ; if skew is zero, we can't use nfsr
-
-    cmp.w #1,d4
-    beq.s nonfsr_3bpp
-
-    tst.w rightclipped
-    bne.s nonfsr_3bpp
-
-    add.w #8,d7
-    or.b #$40,d1
-
-nonfsr_3bpp:
-
-    tst.w leftclipped
-    beq.s nofxsr_3bpp
-
-    sub.w #8,d7 ; d7 is source bytes to skip after each line - might need to be tuned
-    sub.w #8,a0 ; blitter source
-    or.b #$80,d1
-
-    cmp.w #1,d4
-    bne.s nofxsr_3bpp
-
-    ; when words to draw = 4 and leftclipped != 0, we need to set endmask1 from rightendmasks
-    ; In the case of a one word line ENDMASK 1 is used (http://www.atari-wiki.com/index.php/Blitter_manual)
-    ; this is a special case and could do with tidying up
-
-    move.w d7,($ffff8a22).w             ; source y increment
-    move.w d6,($ffff8a30).w             ; dest y increment
-    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
-    move.b d1,($ffff8a3d).w
-
-    lea.l rightendmasks(pc),a3
-    add.l d0,d0                         ; byte offset in mask lookup table
-    move.w (a3,d0.w),d1
-    move.w d1,($ffff8a28).w             ; endmask1
-    bra.s blitterstart_3bpp
-
-nofxsr_3bpp:
-    move.w d7,($ffff8a22).w             ; source y increment
-    move.w d6,($ffff8a30).w             ; dest y increment
-    move.w d4,($ffff8a36).w             ; xcount = number of 16 pixel blocks (once pass per bitplane)
-    move.b d1,($ffff8a3d).w
-
-    add.l d0,d0                         ; byte offset in mask lookup table
-    move.w #-1,($ffff8a2a).w            ; endmask2
-
-    move.w leftclipped(pc),d1
-    bne.s nocalcendmask1_3bpp                ; branch if zero flag not set
-
-    lea.l leftendmasks(pc),a3
-    move.w (a3,d0.w),d1
-
-nocalcendmask1_3bpp:
-    move.w d1,($ffff8a28).w             ; endmask1
-
-    move.w rightclipped(pc),d1
-    bne.s nocalcendmask3_3bpp                ; branch if zero flag not set
-
-    lea.l rightendmasks(pc),a3
-    move.w (a3,d0.w),d1
-
-nocalcendmask3_3bpp:
-    move.w d1,($ffff8a2c).w            ; endmask3
-
-    ; we are now free to use d0, d6 and d4 for our own purposes
-    ; looks like d0, d1 and d2 are also available to us
-
-blitterstart_3bpp:
-    move.w #802,d1                      ; size of unrolled blitter calling table plus 2
-    lsl.w #2,d3                         ; one entry in the table is 4 bytes
-    sub.w d3,d1                         ; generate value to be placed within modified bra instruction
-    move.w d1,2+drawsceneryplane_jsr    ; jump address in unrolled blitter calling table
-    moveq.l #1,d1                       ; ycount
-    move.b #$c0,d6                      ; blitter start instruction
-
-    rept 3
-    bsr drawsceneryplane
-    addq.l #2,a1                        ; move to next bitplane
-    endr
-    bsr drawsceneryplane
-
-    subq.l #6,a1                        ; move destination back to initial bitplane
-    move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
-
-    rept 2
-    addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
-    addq.l #2,a1                        ; move destination to next bitplane
-    endr
-    addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
-
-    movem.l (a7)+,a2-a6
-
     rts
 
 leftendmasks:
