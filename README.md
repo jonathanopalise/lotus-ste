@@ -23,7 +23,7 @@ _(AF = Atari-Forum - https://www.atari-forum.com/)_
 ## What STE enhancements have been made?
 
 * The road is rendered by the Blitter and features graphical details resembling those of the Amiga version;
-* All roadside scenery and cars are rendered by the blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
+* All roadside scenery and cars are rendered by the Blitter at single-pixel horizontal accuracy (as opposed to at 16 pixel intervals on the standard ST version);
 * The background mountains are rendered by the Blitter and scroll at single-pixel horizontal accuracy (as opposed to at 4 pixel intervals on the standard ST version);
 * The sky features a gradient of raster bars resembling those of the Amiga version;
 * The road and roadside colours are refined to leverage the enhanced STE colour palette;
@@ -34,6 +34,14 @@ Possible forthcoming objectives for this project are as follows:
 * Fullscreen mode for player 1;
 * New tracks, or modification to existing tracks;
 * Modified trackside objects, or additional zoom levels for trackside objects.
+
+## Does the enhanced game work on non-STE models?
+
+The game will work on STF, STM, STFM and Mega ST models, but only if the machine has a Blitter chip fitted. In this case, only a subset of the full set of STE enhancements will be available:
+
+* The sky gradient will feature less colours than on the STE;
+* The road and roadside colours will be less refined than those on the STE;
+* No sampled sound effects and engine noise will be available.
 
 ## Directory layout
 
