@@ -31,7 +31,6 @@ drawscenery:
     ; d6 is destination bytes to skip after each line
     ; d7 is source bytes to skip after each line
 
-    movem.l a2-a6,-(a7)
     lea $ffff8a38.w,a2
     lea $ffff8a24.w,a4
     lea $ffff8a32.w,a5
@@ -240,7 +239,6 @@ draw_now:
     bsr drawsceneryplane
 
 alldone:
-    movem.l (a7)+,a2-a6
     rts
 
 drawsceneryplane:
