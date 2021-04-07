@@ -81,23 +81,24 @@ mountain_blitter_init:
     lea $ffff8a3a.w,a3
     move.w #$0203,(a3)
     moveq.l #1,d2
+    move.b #$c0,d5
 label_794a8:
     move.l a0,(a2)           ; destination ffff8a36
     move.l a1,$ffff8a24.w      ; source
 
     move.w d2,(a4)           ; ycount ffff8a38 = 1 should be (a4)
-    move.b #$c0,(a5)         ; control 8a3c should be (a3)
+    move.b d5,(a5)         ; control 8a3c should be (a3)
 
     move.w d2,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a5)         ; control 8a3c
+    move.b d5,(a5)         ; control 8a3c
 
     move.w #$f,(a3)
     move.w d2,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a5)         ; control 8a3c
+    move.b d5,(a5)         ; control 8a3c
 
     move.w #$0203,(a3)
     move.w d2,(a4)           ; ycount ffff8a38= 1
-    move.b #$c0,(a5)         ; control 8a3c
+    move.b d5,(a5)         ; control 8a3c
 
     adda.w    #120*4,a1         ; update source
     adda.w    #160,a0         ; update destination
