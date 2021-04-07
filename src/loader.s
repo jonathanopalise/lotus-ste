@@ -168,7 +168,7 @@ memory_ok:
     ; OK, dbasell holds its value: you're an STe.
 
 memSTE:
-    move.w #1,is_ste
+    move.w #%10011101000,is_ste
     bra.s verdict
 
 memST:				; for ST
