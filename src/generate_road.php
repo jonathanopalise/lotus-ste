@@ -170,26 +170,28 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 $pitsOffset = 0;
             }
 
-            $leftRumbleStripLeft = ($midpointTexturePosition + 0.46 + $pitsOffset);
-            $leftRumbleStripRight = ($midpointTexturePosition + 0.54 + $pitsOffset);
-            $rightRumbleStripLeft = ($midpointTexturePosition - 0.54);
-            $rightRumbleStripRight = ($midpointTexturePosition - 0.46);
+            $roadMultiplier = 1.2;
 
-            $whiteLine1Left = ($midpointTexturePosition + 0.42);
-            $whiteLine1Right = ($midpointTexturePosition + 0.44);
-            $whiteLine2Left = ($midpointTexturePosition + 0.46);
-            $whiteLine2Right = ($midpointTexturePosition + 0.48);
-            $whiteLine3Left = ($midpointTexturePosition - 0.44);
-            $whiteLine3Right = ($midpointTexturePosition - 0.42);
-            $whiteLine4Left = ($midpointTexturePosition - 0.24);
-            $whiteLine4Right = ($midpointTexturePosition - 0.22);
-            $whiteLine5Left = ($midpointTexturePosition + 0.22);
-            $whiteLine5Right = ($midpointTexturePosition + 0.24);
-            $whiteLine6Left = ($midpointTexturePosition - 0.01);
-            $whiteLine6Right = ($midpointTexturePosition + 0.01);
+            $leftRumbleStripLeft = ($midpointTexturePosition + (0.46 + $pitsOffset) * $roadMultiplier);
+            $leftRumbleStripRight = ($midpointTexturePosition + (0.54 + $pitsOffset) * $roadMultiplier);
+            $rightRumbleStripLeft = ($midpointTexturePosition - 0.54 * $roadMultiplier);
+            $rightRumbleStripRight = ($midpointTexturePosition - 0.46 * $roadMultiplier);
 
-            $asphaltLeft = ($midpointTexturePosition - 0.5);
-            $asphaltRight = ($midpointTexturePosition + 0.5 + $pitsOffset);
+            $whiteLine1Left = ($midpointTexturePosition + 0.42 * $roadMultiplier);
+            $whiteLine1Right = ($midpointTexturePosition + 0.44 * $roadMultiplier);
+            $whiteLine2Left = ($midpointTexturePosition + 0.46 * $roadMultiplier);
+            $whiteLine2Right = ($midpointTexturePosition + 0.48 * $roadMultiplier);
+            $whiteLine3Left = ($midpointTexturePosition - 0.44 * $roadMultiplier);
+            $whiteLine3Right = ($midpointTexturePosition - 0.42 * $roadMultiplier);
+            $whiteLine4Left = ($midpointTexturePosition - 0.24 * $roadMultiplier);
+            $whiteLine4Right = ($midpointTexturePosition - 0.22 * $roadMultiplier);
+            $whiteLine5Left = ($midpointTexturePosition + 0.22 * $roadMultiplier);
+            $whiteLine5Right = ($midpointTexturePosition + 0.24 * $roadMultiplier);
+            $whiteLine6Left = ($midpointTexturePosition - 0.01 * $roadMultiplier);
+            $whiteLine6Right = ($midpointTexturePosition + 0.01 * $roadMultiplier);
+
+            $asphaltLeft = ($midpointTexturePosition - 0.5 * $roadMultiplier);
+            $asphaltRight = ($midpointTexturePosition + (0.5 + $pitsOffset) * $roadMultiplier);
 
             for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
                 if (($texturePosition > $leftRumbleStripLeft) && ($texturePosition < $leftRumbleStripRight)) {
