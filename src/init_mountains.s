@@ -1,10 +1,10 @@
 init_mountains_game:
-    bsr init_mountains
+    bsr.s init_mountains
     tst.w     $7cca4 ; this was displaced by the jsr to init_mountains_game
     rts
 
 init_mountains_demo:
-    bsr init_mountains
+    bsr.s init_mountains
     tst.w     $7ccfc ; this was displaced by the jsr to init_mountains_demo
     rts
 
@@ -33,13 +33,13 @@ end_first_plane_to_buffer:
     bra.s end_rearrange_mountain
 loop_rearrange_mountain:
     move.l a2,a0
-    bsr copy_mountain_line
+    bsr.s copy_mountain_line
     move.l a2,a0
-    bsr copy_mountain_line
+    bsr.s copy_mountain_line
     move.l a2,a0
-    bsr copy_mountain_line
+    bsr.s copy_mountain_line
     move.l a2,a0
-    bsr copy_mountain_line
+    bsr.s copy_mountain_line
     lea 120(a2),a2
 end_rearrange_mountain:
     dbra d7,loop_rearrange_mountain
