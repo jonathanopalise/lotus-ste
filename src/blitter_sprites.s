@@ -56,7 +56,7 @@ drawscenery:
     tst.w rightclipped
     bne.s nonfsr
 
-    add.w source_skip+2,d7               ; TODO: #10 for 4bpp, #8 for 3bpp
+    add.w source_skip+2(pc),d7               ; TODO: #10 for 4bpp, #8 for 3bpp
     or.b #$40,d1
 
 nonfsr:
@@ -64,8 +64,8 @@ nonfsr:
     tst.w leftclipped
     beq.s nofxsr
 
-    sub.w source_skip+2,d7     ; TODO: #10 for 4bpp, #8 for 3bpp
-    sub.l source_skip,a0
+    sub.w source_skip+2(pc),d7     ; TODO: #10 for 4bpp, #8 for 3bpp
+    sub.l source_skip(pc),a0
 
     or.b #$80,d1
 
@@ -214,22 +214,22 @@ draw_now:
     move.b #$c0,d6                      ; blitter start instruction
 
     rept 3
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
     addq.l #2,a1                        ; move to next bitplane
     endr
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
 
     subq.l #6,a1                        ; move destination back to initial bitplane
     move.w #$0207,($ffff8a3a).w         ; hop/op: read from source, source | destination
 
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
 
     cmp.w #10,source_skip+2
     bne.s alldone

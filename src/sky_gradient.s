@@ -112,7 +112,7 @@ p1_initialise_sky:
     move.w d0,$70668 ; number of lines between top of screen and first interrupt trigger!
     move.b d0,d1
     move.b d1,p1_sky_line_count
-    bsr p1_initialise_sky_variables
+    bsr.s p1_initialise_sky_variables
     move.w #1,p1_sky_initialised
     rts
 

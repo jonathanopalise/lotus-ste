@@ -55,7 +55,7 @@ status_panel:
     move.l (sp)+,a1
     move.l (sp)+,a0
 
-    add.l #17*8,a1
+    lea 17*8(a1),a1
     move.w #8,($ffff8a22).w   ; source y increment
     move.w #3,($ffff8a36).w   ; x count
     move.w #144,($ffff8a30).w ; dest y increment
