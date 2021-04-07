@@ -30,12 +30,6 @@ label_79450:
     add.w     d1,d1
     adda.w    d1,a1           ; update source address (x position - offset within line)
 
-; -------------------------------------------------------------
-; this block shouldn't be necessary when blitter code is put in
-
-    ;lea       $794ba,a2       ; base address of unrolled looop
-    ;adda.w    d1,a2           ; add starting point within unrolled loop
-
 ; ------------------------------------------
 ; update source address - y position (line)
 
@@ -45,18 +39,6 @@ label_79450:
     sub.w     d1,d4           ; (multiply by 15)
     asl.w     #5,d4           ; (multiply by 360)
     adda.w    d4,a1           ; update source address (y position - line)
-
-;--------------------------------------------------------------------------------------------
-; preshifting logic - shouldn't be necessary for blitter
-
-    ;andi.w    #$f,d0          ; preshift logic? redundant?
-    ;eori.w    #$f,d0          ; preshift logic? redundant?
-    ;lsr.w     #2,d0           ; preshift logic? redundant?
-    ;move.w    d0,d1           ; preshift logic 1 - redundant?
-    ;asl.w     #4,d1           ; preshift logic 2 - redundant?
-    ;sub.w     d0,d1           ; preshift logic 3 - redundant?
-    ;asl.w     #8,d1           ; preshift logic 4 - redundant?
-    ;adda.w    d1,a1           ; update source address (set preshifted version)
 
 ;----------------------------------------------------------------------------------------------
 ; remainder of rendering code
@@ -96,23 +78,25 @@ mountain_blitter_init:
     ;temporarily kill skew
     or.b #$80,d3              ; enable fxsr
     move.b d3,$ffff8a3d.w
+    lea $ffff8a3a.w,a3
+    move.w #$0203,(a3)
+    moveq.l #1,d2
 label_794a8:
     move.l a0,(a2)           ; destination ffff8a36
     move.l a1,$ffff8a24.w      ; source
-    move.w #$0203,$ffff8a3a.w
 
-    move.w #1,(a4)           ; ycount ffff8a38 = 1 should be (a4)
+    move.w d2,(a4)           ; ycount ffff8a38 = 1 should be (a4)
     move.b #$c0,(a5)         ; control 8a3c should be (a3)
 
-    move.w #1,(a4)           ; ycount ffff8a38= 1
+    move.w d2,(a4)           ; ycount ffff8a38= 1
     move.b #$c0,(a5)         ; control 8a3c
 
-    move.w #$f,$ffff8a3a.w
-    move.w #1,(a4)           ; ycount ffff8a38= 1
+    move.w #$f,(a3)
+    move.w d2,(a4)           ; ycount ffff8a38= 1
     move.b #$c0,(a5)         ; control 8a3c
 
-    move.w #$0203,$ffff8a3a.w
-    move.w #1,(a4)           ; ycount ffff8a38= 1
+    move.w #$0203,(a3)
+    move.w d2,(a4)           ; ycount ffff8a38= 1
     move.b #$c0,(a5)         ; control 8a3c
 
     adda.w    #120*4,a1         ; update source
