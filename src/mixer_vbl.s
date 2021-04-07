@@ -2,7 +2,9 @@
 mixer_vbl:
 	movem.l		d0-d3/a0-a2,-(sp)
 
-	move.w		#%10011101000,d0															; start master volume at +0dB
+	move.w		hasDmaSound(pc),d0															; start master volume at +0dB
+	beq			labelFinishedAudio
+
 	lea.l		$ffff8900.w,a0																; dma audio base address								
 	move.w		#%0000011111111111,$24(a0)													; write microwire mask
 
@@ -58,14 +60,14 @@ label2PlayerSound
 	tst.w		variableSoundEventPosition													; check sound event position
 	bne.s		label2PlayerSoundPosition													; if it's not zero then the sound has already been started
 
-	lea.l		variableSoundEventAddress,a1												; otherwise, fetch sound address
+	lea.l		variableSoundEventAddress(pc),a1												; otherwise, fetch sound address
 
 	move.b		1(a1),$03(a0)																; set start address high byte
 	move.b		2(a1),$05(a0)																; set start address middle byte
 	move.b		3(a1),$07(a0)																; set start address low byte
 
 	moveq		#0,d0
-	move.w		variableSoundEventLength,d0
+	move.w		variableSoundEventLength(pc),d0
 	add.l		d0,variableSoundEventAddress
 
 	move.b		1(a1),$0f(a0)																; set end address high byte
@@ -76,14 +78,14 @@ label2PlayerSound
 
 label2PlayerSoundPosition
 	add.w		#250,variableSoundEventPosition												; store current position of sound event effect
-	move.w		variableSoundEventLength,d1													; fetch sound event length
-	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
+	move.w		variableSoundEventLength(pc),d1													; fetch sound event length
+	cmp.w		variableSoundEventPosition(pc),d1												; compare current sound event position with sound event length
 	bhi			labelFinishedAudio															; if sound event length is higher than current position then nothing to do
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
 	bra			labelFinishedAudio
 
 label1PlayerSound
-	lea.l		addressAudioCurrentStart,a1
+	lea.l		addressAudioCurrentStart(pc),a1
 	move.b		9(a1),$03(a0)																; set start address high byte
 	move.b		10(a1),$05(a0)																; set start address middle byte
 	move.b		11(a1),$07(a0)																; set start address low byte
@@ -99,14 +101,14 @@ label1PlayerSound
 
 	move.l		d2,a2																		; copy start address of work buffer for mixing routines
 
-	move.w		variableEngineEffectPosition,d0												; current step into engine effect
-	move.l		tableSoundEvents,a0															; first entry in table contains base address of engine sound effect
+	move.w		variableEngineEffectPosition(pc),d0												; current step into engine effect
+	move.l		tableSoundEvents(pc),a0															; first entry in table contains base address of engine sound effect
 	lea.l		(a0,d0.w),a0																; offset current engine effect position into engine sound effect base address
 
 	move.w		$7cc3c,d0																	; fetch 'auserevs' (player 1 ingame revs)
 	sub.w		#1000,d0																	; subtract 1000rpm
 	lsl.w		#2,d0																		; multiply revs by 4 to get scaler table offset
-	lea.l		table12517HzScaler,a1														; scaler table base address
+	lea.l		table12517HzScaler(pc),a1														; scaler table base address
 	move.l		(a1,d0.w),d1																; fetch value from scaler table offset
 
 	moveq		#0,d0																		; clear it for use as engine offset
@@ -120,8 +122,8 @@ label1PlayerSound
 	tst.w		variableSoundEventLatch														; is there a sound event?
 	bmi			labelFinishedSoundMixing													; if not then just mix the engine sound
 
-	move.l		variableSoundEventAddress,a1												; current sound event sample base address											
-	move.w		variableSoundEventPosition,d2												; offset into sample data
+	move.l		variableSoundEventAddress(pc),a1												; current sound event sample base address											
+	move.w		variableSoundEventPosition(pc),d2												; offset into sample data
 	lea.l		(a1,d2),a1																	; adjust address
 
 	lea.l		-250(a2),a2
@@ -131,8 +133,8 @@ label1PlayerSound
 	endr
 
 	add.w		#250,variableSoundEventPosition												; store current position of sound event effect
-	move.w		variableSoundEventLength,d1													; fetch sound event length
-	cmp.w		variableSoundEventPosition,d1												; compare current sound event position with sound event length
+	move.w		variableSoundEventLength(pc),d1													; fetch sound event length
+	cmp.w		variableSoundEventPosition(pc),d1												; compare current sound event position with sound event length
 	bhi.s		labelFinishedSoundMixing													; if sound event length is higher than current position then nothing to do
 	move.w		#$ffff,variableSoundEventLatch												; set sound event latch to null
 
@@ -146,4 +148,5 @@ labelFinishedSoundMixing
 labelFinishedAudio
 
 	movem.l		(sp)+,d0-d3/a0-a2
+
 	rts

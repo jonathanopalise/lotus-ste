@@ -1,5 +1,6 @@
 YMChannelAVolumeAdjust:
-    cmp.b   #2,d0
+    moveq   #2,d2
+    cmp.b   d2,d0
     bls.s   labelClampChannelAVolume
     subq.b  #2,d0
     bra.s   labelFinishedChannelAVolumeCheck
@@ -14,7 +15,7 @@ labelFinishedChannelAVolumeCheck
     rts
 
 YMChannelBVolumeAdjust:
-    cmp.b   #2,d0
+    cmp.b   d2,d0
     bls.s   labelClampChannelBVolume
     subq.b  #2,d0
     bra.s   labelFinishedChannelBVolumeCheck
@@ -29,7 +30,7 @@ labelFinishedChannelBVolumeCheck
     rts
 
 YMChannelCVolumeAdjust:
-    cmp.b   #2,d0
+    cmp.b   d2,d0
     bls.s   labelClampChannelCVolume
     subq.b  #2,d0
     bra.s   labelFinishedChannelCVolumeCheck

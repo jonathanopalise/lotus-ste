@@ -1,7 +1,8 @@
 ym_engine_volume_adjust:
 	move.w	d4,d2
+	moveq	#4,d4
 	or.w	#$800,d2
-	cmp.b	#4,d2
+	cmp.b	d4,d2
     bls.s   labelClampChannelAEngineVolume
     subq.b  #4,d2
     bra.s	labelFinishedChannelAEngineVolumeCheck
@@ -11,7 +12,7 @@ labelFinishedChannelAEngineVolumeCheck:
 	movep.w	d2,0(a0)
 	move.w	d5,d2
 	or.w	#$900,d2
-	cmp.b	#4,d2
+	cmp.b	d4,d2
     bls.s   labelClampChannelBEngineVolume
     subq.b  #4,d2
     bra.s	labelFinishedChannelBEngineVolumeCheck

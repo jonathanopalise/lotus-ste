@@ -1,5 +1,8 @@
 ; --- audio buffer address initialisation. only needs to be done once
 mixer_init:
+	tst.w		hasDmaSound
+	beq			mixer_init_end
+
 	movem.l		d0/a0-a1,-(sp)							; is this needed?
 
 	lea.l		$ffff8900.w,a0							; dma audio base address
@@ -43,6 +46,8 @@ mixer_init:
 	move.l		a0,(a1)									; store end address of second half of buffer
 
     movem.l		(sp)+,d0/a0-a1							; is this needed?
+
+mixer_init_end
 	
     clr.w		$7ccfa									; replaces instruction overwritten by jump to this routine
     move.w		#$1ea,$7ccf6							; but uses longer delay...
