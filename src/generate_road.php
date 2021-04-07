@@ -141,7 +141,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
         }
         $ignoreBitplaneIndex=15;
 
-        $actualPixelWidthFloat = 10;
+        $actualPixelWidthFloat = 1;
         for ($index = 0; $index < 255; $index++) {
             $actualPixelWidth = (int)$actualPixelWidthFloat;
 
@@ -149,9 +149,9 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
             if ($roadLinesColour == COLOUR_WHITE) {
                 $computedRoadLinesColour = COLOUR_WHITE;
 
-                if ($actualPixelWidth < 60) {
+                if ($actualPixelWidth < 30) {
                     $computedRoadLinesColour = COLOUR_LIGHT_ASPHALT;
-                } elseif ($actualPixelWidth < 120) {
+                } elseif ($actualPixelWidth < 60) {
                     $computedRoadLinesColour = COLOUR_GREY;
                 }
             }
@@ -170,24 +170,47 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 $pitsOffset = 0;
             }
 
+            $roadMultiplier = 1.2;
+
+            $leftRumbleStripLeft = ($midpointTexturePosition + (0.46 + $pitsOffset) * $roadMultiplier);
+            $leftRumbleStripRight = ($midpointTexturePosition + (0.54 + $pitsOffset) * $roadMultiplier);
+            $rightRumbleStripLeft = ($midpointTexturePosition - 0.54 * $roadMultiplier);
+            $rightRumbleStripRight = ($midpointTexturePosition - 0.46 * $roadMultiplier);
+
+            $whiteLine1Left = ($midpointTexturePosition + 0.42 * $roadMultiplier);
+            $whiteLine1Right = ($midpointTexturePosition + 0.44 * $roadMultiplier);
+            $whiteLine2Left = ($midpointTexturePosition + 0.46 * $roadMultiplier);
+            $whiteLine2Right = ($midpointTexturePosition + 0.48 * $roadMultiplier);
+            $whiteLine3Left = ($midpointTexturePosition - 0.44 * $roadMultiplier);
+            $whiteLine3Right = ($midpointTexturePosition - 0.42 * $roadMultiplier);
+            $whiteLine4Left = ($midpointTexturePosition - 0.24 * $roadMultiplier);
+            $whiteLine4Right = ($midpointTexturePosition - 0.22 * $roadMultiplier);
+            $whiteLine5Left = ($midpointTexturePosition + 0.22 * $roadMultiplier);
+            $whiteLine5Right = ($midpointTexturePosition + 0.24 * $roadMultiplier);
+            $whiteLine6Left = ($midpointTexturePosition - 0.01 * $roadMultiplier);
+            $whiteLine6Right = ($midpointTexturePosition + 0.01 * $roadMultiplier);
+
+            $asphaltLeft = ($midpointTexturePosition - 0.5 * $roadMultiplier);
+            $asphaltRight = ($midpointTexturePosition + (0.5 + $pitsOffset) * $roadMultiplier);
+
             for ($xpos = 0; $xpos < $roundedPixelWidth; $xpos++) {
-                if (($texturePosition > ($midpointTexturePosition + 0.46 + $pitsOffset)) && ($texturePosition < ($midpointTexturePosition + 0.54 + $pitsOffset))) {
+                if (($texturePosition > $leftRumbleStripLeft) && ($texturePosition < $leftRumbleStripRight)) {
                     $pixelColour = $rumbleStripColour; // left rumble strip
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.54)) && ($texturePosition < ($midpointTexturePosition - 0.46))) {
+                } elseif (($texturePosition > $rightRumbleStripLeft) && ($texturePosition < $rightRumbleStripRight)) {
                     $pixelColour = $rumbleStripColour; // right rumble strip
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.42)) && ($texturePosition < ($midpointTexturePosition + 0.44))) {
+                } elseif (($texturePosition > $whiteLine1Left) && ($texturePosition < $whiteLine1Right)) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.46)) && ($texturePosition < ($midpointTexturePosition + 0.48)) && $thePits) {
+                } elseif (($texturePosition > $whiteLine2Left) && ($texturePosition < $whiteLine2Right) && $thePits) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.44)) && ($texturePosition < ($midpointTexturePosition - 0.42))) {
+                } elseif (($texturePosition > $whiteLine3Left) && ($texturePosition < $whiteLine3Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.24)) && ($texturePosition < ($midpointTexturePosition - 0.22))) {
+                } elseif (($texturePosition > $whiteLine4Left) && ($texturePosition < $whiteLine4Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition + 0.22)) && ($texturePosition < ($midpointTexturePosition + 0.24))) {
+                } elseif (($texturePosition > $whiteLine5Left) && ($texturePosition < $whiteLine5Right)) {
                    $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.01)) && ($texturePosition < ($midpointTexturePosition + 0.01))) {
+                } elseif (($texturePosition > $whiteLine6Left) && ($texturePosition < $whiteLine6Right)) {
                     $pixelColour = $computedRoadLinesColour;
-                } elseif (($texturePosition > ($midpointTexturePosition - 0.5)) && ($texturePosition < ($midpointTexturePosition + 0.5 + $pitsOffset))) {
+                } elseif (($texturePosition > $asphaltLeft) && ($texturePosition < $asphaltRight)) {
                     $pixelColour = $asphaltColour;
                 } else {
                     $pixelColour = $grassColour;
@@ -207,7 +230,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 convertPixelColoursToOutputBytes($pixelColours, $ignoreBitplaneIndex)
             );
 
-            $actualPixelWidthFloat+=1.5;
+            $actualPixelWidthFloat+=1.515;
         }
     }
 }
