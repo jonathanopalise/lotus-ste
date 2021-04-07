@@ -141,7 +141,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
         }
         $ignoreBitplaneIndex=15;
 
-        $actualPixelWidthFloat = 10;
+        $actualPixelWidthFloat = 1;
         for ($index = 0; $index < 255; $index++) {
             $actualPixelWidth = (int)$actualPixelWidthFloat;
 
@@ -149,9 +149,9 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
             if ($roadLinesColour == COLOUR_WHITE) {
                 $computedRoadLinesColour = COLOUR_WHITE;
 
-                if ($actualPixelWidth < 60) {
+                if ($actualPixelWidth < 30) {
                     $computedRoadLinesColour = COLOUR_LIGHT_ASPHALT;
-                } elseif ($actualPixelWidth < 120) {
+                } elseif ($actualPixelWidth < 60) {
                     $computedRoadLinesColour = COLOUR_GREY;
                 }
             }
@@ -230,7 +230,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 convertPixelColoursToOutputBytes($pixelColours, $ignoreBitplaneIndex)
             );
 
-            $actualPixelWidthFloat+=1.5;
+            $actualPixelWidthFloat+=1.515;
         }
     }
 }
