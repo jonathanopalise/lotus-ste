@@ -6,9 +6,8 @@ do_sound_events:
 	bmi.s		labelCheckForSoundEvent									; $ffff if music is stopped
 	jsr			$7098e													; deal with YM music
 labelCheckForSoundEvent
-	tst.w		$7097c													; check sound event ID
+	move.w		$7097c,d0													; check sound event ID
 	bmi.s		labelNoSoundEvent										; $ffff if no sound event
-    move.w      $7097c,d0                                          	 	; fetch new sound event ID
     and.w       #7,d0                                              	 	; mask off garbage bits - ID is now between 1 and 7
     cmp.w       variableSoundEventLatch(pc),d0                     		; compare with current sound event ID (either between 1 and 7, or $ffff (no current sound event))
     blo.s       labelCreateNewSoundEvent                            	; if new sound event ID value is lower (i.e. higher priority) then create new sound event
