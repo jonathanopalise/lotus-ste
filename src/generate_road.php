@@ -170,7 +170,7 @@ for ($thePits = 0; $thePits < 2; $thePits++) {
                 $pitsOffset = 0;
             }
 
-            $roadMultiplier = 1.2;
+            $roadMultiplier = 1.15;
 
             $leftRumbleStripLeft = ($midpointTexturePosition + (0.46 + $pitsOffset) * $roadMultiplier);
             $leftRumbleStripRight = ($midpointTexturePosition + (0.54 + $pitsOffset) * $roadMultiplier);
