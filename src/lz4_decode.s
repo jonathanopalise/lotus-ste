@@ -4,7 +4,7 @@
 
 lz4_decode:
 	addq.l    #7,a0
-	lea       little_endian+4,a2
+	lea       little_endian+4(pc),a2
 	moveq     #0,d2
 	move.w    #$f,d4
 

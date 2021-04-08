@@ -10,7 +10,7 @@
     move.l a3,d0                       ; get desired xpos of scenery object
     and.l #$f,d0                       ; convert to skew value for blitter
 
-    beq zeroskew
+    beq.s zeroskew
 
     move.w d2,d0                       ; get starting position in blocks of 16 pixels
     add.w d4,d0                        ; add number of 16 pixel blocks to be drawn
@@ -18,7 +18,7 @@
     cmp.w #$14,d0                      ; will part of sprite be off right side if we add 16 pixels?
     bpl.s setrightclipped              ; if yes, don't add 16 pixels to the right side
 
-    add.w #1,d4                        ; add another 16 pixel block to account for skew
+    addq.w #1,d4                        ; add another 16 pixel block to account for skew
     bra.s zeroskew
 
 setrightclipped:
@@ -46,7 +46,7 @@ label_7a4ae:
     tst.w     d5
     bpl.s     label_7a4c8
     tst.w     d7
-    bmi       nothingtodraw
+    bmi.s       nothingtodraw
     move.w    d5,d0
     moveq     #0,d5
     add.w     d0,d3
@@ -59,7 +59,7 @@ label_7a4c8:
     cmp.w     #$14,d6
     bmi.s     label_7a4de
     cmp.w     #$14,d2
-    bpl       nothingtodraw
+    bpl.s       nothingtodraw
     move.w    d6,d0
     subi.w    #$14,d0
     sub.w     d0,d4
@@ -68,12 +68,12 @@ label_7a4c8:
     ; sprite has been clipped on right edge
     ; so endmask3 needs to be $ffff
 label_7a4de:
-    cmp.w     $7ad6e,d7
+    cmp.w     $7ad6e(pc),d7
     bls.s     label_7a4f4
-    sub.w     $7ad6e,d7
+    sub.w     $7ad6e(pc),d7
     addq.w    #1,d7
     sub.w     d7,d3
-    bls       nothingtodraw
+    bls.s       nothingtodraw
 label_7a4f4:
     move.w    d4,d6
     add.w     d6,d6
@@ -94,13 +94,13 @@ label_7a4f4:
     add.w     d5,d2
     asl.w     #2,d2
     adda.w    d2,a2
-    adda.l    $7c504,a2
+    adda.l    $7c504(pc),a2
     movea.l   a2,a1
     tst.w     d4
-    beq       nothingtodraw
+    beq.s       nothingtodraw
 
     jmp drawscenery_3bpp
 
 nothingtodraw:
 
-    jmp $7a63a
+    bra     $7a63a

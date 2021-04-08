@@ -30,7 +30,7 @@ label_76672:                 ; the following code is a replacement for the origi
     beq no_road_markings
 
     andi.w #$400,d2          ; go to the start of the appropriate list of source data pointers
-    beq line_type_2
+    beq.s line_type_2
 
 line_type_1:
     btst #0,d4               ; is this line in the pits?
@@ -210,7 +210,7 @@ alt_not_the_pits_1:
 
 alt_line_type_2:
     btst #0,d4               ; is this line in the pits?
-    beq alt_not_the_pits_2
+    beq.s alt_not_the_pits_2
 
     add.w #$800,d2           ; use the pits variant of the road graphics
 

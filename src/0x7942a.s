@@ -100,8 +100,8 @@ label_794a8:
     move.w d2,(a4)           ; ycount ffff8a38= 1
     move.b d5,(a5)         ; control 8a3c
 
-    adda.w    #120*4,a1         ; update source
-    adda.w    #160,a0         ; update destination
+    lea.l    120*4(a1),a1         ; update source
+    lea.l    160(a0),a0         ; update destination
     dbra      d7,label_794a8  ; next line
 
     ; this final instruction should be at 0x794b6

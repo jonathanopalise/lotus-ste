@@ -9,7 +9,7 @@
     move.l a3,d0                       ; get desired xpos of scenery object
     and.l #$f,d0                       ; convert to skew value for blitter
 
-    beq zeroskew
+    beq.s zeroskew
 
     move.w d2,d0                       ; get starting position in blocks of 16 pixels
     add.w d4,d0                        ; add number of 16 pixel blocks to be drawn
@@ -17,7 +17,7 @@
     cmp.w #$14,d0                      ; will part of sprite be off right side if we add 16 pixels?
     bpl.s setrightclipped              ; if yes, don't add 16 pixels to the right side
 
-    add.w #1,d4                        ; add another 16 pixel block to account for skew
+    addq.w #1,d4                        ; add another 16 pixel block to account for skew
     bra.s zeroskew
 
 setrightclipped:
@@ -45,7 +45,7 @@ label_7a32c:
     tst.w     d5                       ; do we need to clip the top of the sprite?
     bpl.s     label_7a348              ; if we take the jump, no need to clip the top
     tst.w     d7                       ; is the bottom of the sprite off screen too?
-    bmi       nothingtodraw
+    bmi.s       nothingtodraw
     move.w    d5,d0
     moveq     #0,d5
     add.w     d0,d3
@@ -60,7 +60,7 @@ label_7a348:
     cmp.w     #$14,d6
     bmi.s     label_7a35e              ; something to do with clipping against right side of screen
     cmp.w     #$14,d2                  ; does sprite need clipping on right edge?
-    bpl       nothingtodraw            ; something to do with clipping - if sprite is entirely off screen?
+    bpl.s       nothingtodraw            ; something to do with clipping - if sprite is entirely off screen?
     move.w    d6,d0
     subi.w    #$14,d0
     sub.w     d0,d4                    ; this is chopping off the sprite on the right edge
@@ -70,12 +70,12 @@ label_7a348:
     ; so endmask3 needs to be $ffff
 
 label_7a35e:
-    cmp.w     $7ad6e,d7
+    cmp.w     $7ad6e(pc),d7
     bls.s     label_7a374
-    sub.w     $7ad6e,d7
+    sub.w     $7ad6e(pc),d7
     addq.w    #1,d7
     sub.w     d7,d3
-    bls       nothingtodraw
+    bls.s       nothingtodraw
 
 label_7a374:
     move.w    d4,d6
@@ -102,13 +102,13 @@ label_7a374:
     add.w     d2,d2            ; ...
     adda.w    d2,a2            ; ... d2 = (d2 * 8 [see 7a38c]) + d5 (d5 must the start of a line within logbase, so a multiple of 160)
                                                                               ; we set d5 to 0 and everything renders at the top line of the screen
-    adda.l    $7c504,a2        ; add buffer location into a2?
+    adda.l    $7c504(pc),a2        ; add buffer location into a2?
     movea.l   a2,a1            ; transfer destination address into a1
     tst.w     d4
-    beq       nothingtodraw
+    beq.s       nothingtodraw
     
     jmp drawscenery_4bpp
 
 nothingtodraw:
 
-    jmp $7a63a
+    bra $7a63a 

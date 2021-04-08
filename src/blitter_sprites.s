@@ -233,7 +233,7 @@ draw_now:
     ; stop here if 3bpp
     addq.l #2,a1                        ; move destination to next bitplane
     addq.l #2,a0                        ; move source to next bitplane
-    bsr drawsceneryplane
+    bsr.s drawsceneryplane
 
 alldone:
     rts

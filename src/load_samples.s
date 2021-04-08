@@ -9,7 +9,7 @@ samples_need_loading:
     dc.w 1
 
 load_samples_from_0x73968:
-    jsr load_samples
+    bsr.s load_samples
 
     ; this is existing code from lotus
     move.w    #$fa,d0
@@ -28,7 +28,7 @@ load_samples:
 
     ; open file
     move.w  #0,-(sp)
-    pea samples_filename     ; Pointer to Filename
+    pea samples_filename(pc)     ; Pointer to Filename
     move.w  #$3d,-(sp) 
     trap    #1
     addq.l  #8,sp
@@ -37,13 +37,13 @@ load_samples:
     ; read file
     move.l #$23b00,-(sp)
     move.l    #200000,-(sp)   ; Offset 4
-    move.w    samples_fhandle,-(sp)  ; Offset 2
+    move.w    samples_fhandle(pc),-(sp)  ; Offset 2
     move.w    #63,-(sp)     ; Offset 0
     trap      #1            ; GEMDOS
     lea       $C(sp),sp     ; Correct stack
 
     ; close file
-    move.w  samples_fhandle,-(sp)
+    move.w  samples_fhandle(pc),-(sp)
     move.w  #$3e,-(sp)
     trap    #1
     addq.l  #4,sp
@@ -51,7 +51,7 @@ load_samples:
     ; decompress
     move.l #$23b00,a0
     lea dataSounds,a1
-    jsr lz4_decode
+    bsr lz4_decode
 
     clr.w samples_need_loading
 
