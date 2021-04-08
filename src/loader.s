@@ -148,7 +148,7 @@ memory_ok:
     lea.l 160*165(a1),a1
     move.l a2,a0
     move.l #(160*7/4),d6
-    bsr.s copy_graphics
+    bsr copy_graphics
 
     ; now test machine type
 
@@ -168,6 +168,14 @@ memory_ok:
     ; OK, dbasell holds its value: you're an STe.
 
 memSTE:
+    move.b      $fffffc00.w,d0
+    beq.s       alternate_not_held                                                   ; if it's zero then it's neither a packet from the joystick or keyboard
+    move.b      $fffffc02.w,d0
+    cmp.b       #$38,d0
+    bne.s       alternate_not_held
+    clr.w       is_ste
+    bra.s       verdict
+alternate_not_held
     move.w #%10011101000,is_ste
     bra.s verdict
 
