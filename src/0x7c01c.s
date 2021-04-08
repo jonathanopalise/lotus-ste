@@ -6,5 +6,5 @@
     ; * High level high score table modification                             *
     ; **************************************************************************
     
-    dc.b "ataricrypt.co.uk"
+    dc.b "ataricrypt////"
 
