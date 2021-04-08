@@ -168,15 +168,19 @@ memory_ok:
     ; OK, dbasell holds its value: you're an STe.
 
 memSTE:
-    move.b      $fffffc00.w,d0
-    beq.s       alternate_not_held                                                   ; if it's zero then it's neither a packet from the joystick or keyboard
-    move.b      $fffffc02.w,d0
-    cmp.b       #$38,d0
+    move.b      $fffffc00.w,d0                              ; is ikbd buffer empty?
+    beq.s       finished_keyboard_check                                                   ; if it's zero then it's neither a packet from the joystick or keyboard
+    move.b      $fffffc02.w,d0                              ; if not, fetch scancode
+    cmp.b       #$38,d0                                     ; is it 'Alternate'?                
     bne.s       alternate_not_held
-    clr.w       is_ste
+    clr.w       is_ste                                      ; in which case, force disable DMA sound
     bra.s       verdict
 alternate_not_held
-    move.w #%10011101000,is_ste
+    cmp.b       #$2a,d0                                     ; is it 'Left Shift'?
+    bne.s       finished_keyboard_check
+    move.b      #1,$ffff8e21.w                              ; set Mega STE to 16MHz/no cache
+finished_keyboard_check
+    move.w #%10011101000,is_ste                             ; this value is used for later as 'master volume = +0dB'
     bra.s verdict
 
 memST:				; for ST
