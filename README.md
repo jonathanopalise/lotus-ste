@@ -4,8 +4,6 @@ _Enhancements to the Atari ST version of Lotus Esprit Turbo Challenge to support
 
 ![Screenshot of current progress](https://github.com/jonathanopalise/lotus-ste/blob/master/screenshot.png)
 
-This project is under development and no builds are currently available to end users.
-
 ## Credits
 
 * **Graphics enhancements**: Chicane/AF (Jonathan Thomas)
