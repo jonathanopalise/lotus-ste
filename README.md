@@ -9,6 +9,7 @@ _Enhancements to the Atari ST version of Lotus Esprit Turbo Challenge to support
 * **Graphics enhancements**: Chicane/AF (Jonathan Thomas)
 * **Sound enhancements**: Junosix/AF (Jamie Hamshere)
 * **Loader and other technical assistance**: Grazey/PHF
+* **LZ4 decoder**: Anima
 
 **Thanks to**:
 
